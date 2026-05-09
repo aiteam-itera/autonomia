@@ -1,0 +1,17 @@
+{
+  "name": "autonomia-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AutonomIA recommendation-engine Worker (POST /api/submit, GET /api/confirm).",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "kv:create": "wrangler kv:namespace create AUTONOMIA_KV"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260101.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^3.80.0"
+  }
+}

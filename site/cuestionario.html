@@ -9,6 +9,11 @@
       content="Diagnostica el nivel de madurez de IA de tu empresa en 5 minutos y recibe un plan de siguientes pasos personalizado."
     />
     <link rel="stylesheet" href="/assets/style.css" />
+    <!--
+      Set this to the deployed Worker URL once it exists, e.g.:
+        <meta name="autonomia-api-base" content="https://autonomia-api.example.workers.dev" />
+      Until then, the form falls back to a mailto: draft.
+    -->
   </head>
   <body>
     <header class="hero hero--compact">
@@ -300,9 +305,12 @@
               placeholder="tu@empresa.com"
               required
             />
-            <p class="quiz__hint">No spam. Te enviamos el plan y nada más. Validación y envío
-              llegan en una fase posterior — por ahora se guarda localmente y se prepara un
-              borrador.</p>
+            <p class="quiz__hint">No spam. Te enviamos un email para confirmar la dirección y, tras
+              tu confirmación, un único correo con tu plan personalizado.</p>
+            <p class="quiz__hint quiz__hint--privacy">
+              Al enviar aceptas que procesemos tus respuestas para generar una recomendación.
+              Las almacenamos un máximo de 90 días y puedes pedir su borrado en cualquier momento.
+            </p>
           </div>
         </fieldset>
 
@@ -564,10 +572,73 @@
           renderResult();
         });
 
-        // CTA: prepare a mailto draft as a placeholder until the backend exists.
+        // CTA: when the backend is configured (window.AUTONOMIA_API_BASE or
+        // <meta name="autonomia-api-base">), POST to /api/submit (double opt-in flow).
+        // Otherwise, fall back to a mailto: draft so the page still works pre-deploy.
+        function getApiBase() {
+          if (typeof window.AUTONOMIA_API_BASE === "string" && window.AUTONOMIA_API_BASE) {
+            return window.AUTONOMIA_API_BASE.replace(/\/$/, "");
+          }
+          const meta = document.querySelector('meta[name="autonomia-api-base"]');
+          if (meta && meta.content) return meta.content.replace(/\/$/, "");
+          return null;
+        }
+
+        async function submitToBackend(apiBase, payload) {
+          const hint = document.getElementById("cta-hint");
+          const button = document.getElementById("cta-email");
+          button.disabled = true;
+          button.textContent = "Enviando…";
+          hint.hidden = false;
+          hint.innerHTML = "Estamos enviando un email para verificar tu dirección…";
+          try {
+            const res = await fetch(apiBase + "/api/submit", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (res.ok) {
+              hint.innerHTML =
+                "<strong>Revisa tu email.</strong> Te hemos enviado un enlace de confirmación. " +
+                "Cuando lo pulses, generaremos tu plan personalizado y te lo mandaremos en el siguiente correo.";
+              button.textContent = "Email enviado";
+            } else if (res.status === 429) {
+              hint.innerHTML =
+                "Has solicitado el plan demasiadas veces. Inténtalo de nuevo en una hora.";
+              button.disabled = false;
+              button.textContent = "Volver a intentar";
+            } else {
+              hint.innerHTML =
+                "No hemos podido enviar el email (" +
+                (data.error || res.status) +
+                "). Inténtalo más tarde.";
+              button.disabled = false;
+              button.textContent = "Volver a intentar";
+            }
+          } catch (err) {
+            hint.innerHTML =
+              "Error de red. Inténtalo más tarde o escríbenos a hola@autonomia.local.";
+            button.disabled = false;
+            button.textContent = "Volver a intentar";
+          }
+        }
+
         document.getElementById("cta-email").addEventListener("click", () => {
           const data = collectAnswers();
           const { overall, dims } = scoreAnswers(data);
+          const apiBase = getApiBase();
+          if (apiBase && data.open_email) {
+            const payload = {
+              email: data.open_email,
+              answers: data,
+              score: { overall, dims },
+              level: levelFor(overall).name,
+            };
+            submitToBackend(apiBase, payload);
+            return;
+          }
+          // Fallback: backend not yet wired → mailto draft.
           const subject = encodeURIComponent("Mi diagnóstico AutonomIA: " + overall + "/100");
           const body = encodeURIComponent(
             "Quiero recibir el plan personalizado.\n\n" +
@@ -584,7 +655,6 @@
               (data.open_email || "(añadir)") +
               "\n"
           );
-          // TODO: replace with POST /api/responses (motor de recomendaciones)
           window.location.href = "mailto:hola@autonomia.local?subject=" + subject + "&body=" + body;
           document.getElementById("cta-hint").hidden = false;
         });

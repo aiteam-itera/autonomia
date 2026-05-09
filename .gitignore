@@ -6,3 +6,6 @@ node_modules/
 !.env.example
 .playwright/
 artifacts/
+# Cloudflare Worker build/runtime
+.wrangler/
+worker/dist/
