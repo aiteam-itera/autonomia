@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cuestionario de madurez de IA — AutonomIA</title>
+    <meta
+      name="description"
+      content="Diagnostica el nivel de madurez de IA de tu empresa en 5 minutos y recibe un plan de siguientes pasos personalizado."
+    />
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <header class="hero hero--compact">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <a class="cta" href="/">Volver a la home</a>
+      </nav>
+      <div class="hero__content">
+        <h1>¿En qué punto está tu empresa con la IA?</h1>
+        <p>
+          Responde a este cuestionario (5 minutos) y recibirás un diagnóstico de madurez de IA y un
+          plan de siguientes pasos adaptado a tu sector y tamaño.
+        </p>
+      </div>
+    </header>
+
+    <main class="section">
+      <form id="quiz" class="quiz" novalidate aria-label="Cuestionario de madurez de IA">
+        <div class="quiz__progress" aria-hidden="true">
+          <div class="quiz__progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="quiz__step-indicator" id="step-indicator" aria-live="polite">Paso 1 de 6</p>
+
+        <!-- STEP 1: Clasificación (sector + tamaño) -->
+        <fieldset class="quiz__step" data-step="1" data-step-title="Tu empresa">
+          <legend>1. Tu empresa</legend>
+          <p class="quiz__intro">
+            Para adaptar las recomendaciones a tu contexto. Estas respuestas no puntúan, solo
+            clasifican.
+          </p>
+
+          <div class="quiz__question" data-classify="sector">
+            <p class="quiz__q">¿En qué sector opera tu empresa?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="sector" value="servicios" required /><span>Servicios profesionales (consultoría, asesoría, despacho)</span></label>
+              <label><input type="radio" name="sector" value="comercio" /><span>Comercio / retail / ecommerce</span></label>
+              <label><input type="radio" name="sector" value="industria" /><span>Industria / fabricación / construcción</span></label>
+              <label><input type="radio" name="sector" value="tecnologia" /><span>Tecnología / software</span></label>
+              <label><input type="radio" name="sector" value="salud" /><span>Salud / bienestar / educación</span></label>
+              <label><input type="radio" name="sector" value="otro" /><span>Otro</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-classify="tamano">
+            <p class="quiz__q">¿Cuántas personas trabajan en tu empresa?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="tamano" value="micro" required /><span>1–4 personas</span></label>
+              <label><input type="radio" name="tamano" value="pequena" /><span>5–20 personas</span></label>
+              <label><input type="radio" name="tamano" value="mediana" /><span>21–50 personas</span></label>
+              <label><input type="radio" name="tamano" value="grande" /><span>Más de 50 personas</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- STEP 2: Uso actual de IA -->
+        <fieldset class="quiz__step" data-step="2" data-step-title="Uso actual de IA" hidden>
+          <legend>2. ¿Cómo usáis la IA hoy?</legend>
+
+          <div class="quiz__question" data-dim="uso" data-weight="1">
+            <p class="quiz__q">¿Con qué frecuencia tu equipo usa chats de IA (ChatGPT, Gemini, Claude…)?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="uso_frecuencia" value="0" required /><span>Nunca o casi nunca</span></label>
+              <label><input type="radio" name="uso_frecuencia" value="1" /><span>De forma esporádica</span></label>
+              <label><input type="radio" name="uso_frecuencia" value="2" /><span>A diario, individualmente</span></label>
+              <label><input type="radio" name="uso_frecuencia" value="3" /><span>A diario, integrado en el trabajo del equipo</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="uso" data-weight="1">
+            <p class="quiz__q">¿Cuántas personas en tu empresa usan IA al menos una vez por semana?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="uso_personas" value="0" required /><span>Ninguna</span></label>
+              <label><input type="radio" name="uso_personas" value="1" /><span>1–2 personas</span></label>
+              <label><input type="radio" name="uso_personas" value="2" /><span>Una parte del equipo (3–10)</span></label>
+              <label><input type="radio" name="uso_personas" value="3" /><span>La mayoría del equipo</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="uso" data-weight="1">
+            <p class="quiz__q">¿Tenéis cuentas de IA empresariales o cada persona usa la suya personal?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="uso_cuentas" value="0" required /><span>Nadie usa IA</span></label>
+              <label><input type="radio" name="uso_cuentas" value="1" /><span>Solo cuentas personales</span></label>
+              <label><input type="radio" name="uso_cuentas" value="2" /><span>Algunas cuentas empresariales</span></label>
+              <label><input type="radio" name="uso_cuentas" value="3" /><span>Todo el equipo en cuentas empresariales gobernadas</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="uso" data-weight="1">
+            <p class="quiz__q">¿Hay políticas internas sobre qué se puede subir a una IA externa?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="uso_politicas" value="0" required /><span>No existen</span></label>
+              <label><input type="radio" name="uso_politicas" value="1" /><span>Acuerdos informales</span></label>
+              <label><input type="radio" name="uso_politicas" value="2" /><span>Política escrita pero sin auditar</span></label>
+              <label><input type="radio" name="uso_politicas" value="3" /><span>Política escrita y revisada periódicamente</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- STEP 3: Automatizaciones -->
+        <fieldset class="quiz__step" data-step="3" data-step-title="Automatizaciones" hidden>
+          <legend>3. Automatizaciones</legend>
+
+          <div class="quiz__question" data-dim="auto" data-weight="1">
+            <p class="quiz__q">¿Qué automatizaciones tenéis funcionando hoy (Zapier, Make, n8n, scripts)?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="auto_nivel" value="0" required /><span>Ninguna</span></label>
+              <label><input type="radio" name="auto_nivel" value="1" /><span>Básicas y puntuales (1–3 flujos)</span></label>
+              <label><input type="radio" name="auto_nivel" value="2" /><span>Intermedias, varios sistemas conectados</span></label>
+              <label><input type="radio" name="auto_nivel" value="3" /><span>Avanzadas, con humanos validando puntos clave</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="auto" data-weight="1">
+            <p class="quiz__q">¿Las automatizaciones están documentadas y monitorizadas?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="auto_docs" value="0" required /><span>No tenemos automatizaciones</span></label>
+              <label><input type="radio" name="auto_docs" value="1" /><span>Existen, pero sin documentación</span></label>
+              <label><input type="radio" name="auto_docs" value="2" /><span>Documentadas a medias</span></label>
+              <label><input type="radio" name="auto_docs" value="3" /><span>Documentadas y con alertas si fallan</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="auto" data-weight="1">
+            <p class="quiz__q">¿Quién mantiene las automatizaciones cuando algo se rompe?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="auto_mantenimiento" value="0" required /><span>No aplica / nadie</span></label>
+              <label><input type="radio" name="auto_mantenimiento" value="1" /><span>Una sola persona, sin respaldo</span></label>
+              <label><input type="radio" name="auto_mantenimiento" value="2" /><span>Un equipo o proveedor externo</span></label>
+              <label><input type="radio" name="auto_mantenimiento" value="3" /><span>Equipo dedicado con SLA y procedimientos</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="auto" data-weight="1">
+            <p class="quiz__q">¿Habéis medido cuánto tiempo o coste ahorran vuestras automatizaciones?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="auto_roi" value="0" required /><span>No, o no aplica</span></label>
+              <label><input type="radio" name="auto_roi" value="1" /><span>Tenemos una estimación informal</span></label>
+              <label><input type="radio" name="auto_roi" value="2" /><span>Lo medimos en algunos flujos</span></label>
+              <label><input type="radio" name="auto_roi" value="3" /><span>Lo medimos en todos y revisamos métricas</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- STEP 4: Agentes -->
+        <fieldset class="quiz__step" data-step="4" data-step-title="Agentes" hidden>
+          <legend>4. Agentes de IA</legend>
+          <p class="quiz__intro">
+            Un "agente" es un programa que toma decisiones y ejecuta tareas por su cuenta usando IA
+            (no solo responde preguntas).
+          </p>
+
+          <div class="quiz__question" data-dim="agentes" data-weight="1">
+            <p class="quiz__q">¿Sabes qué es un agente de IA?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="ag_conoce" value="0" required /><span>No, es la primera vez que oigo el término</span></label>
+              <label><input type="radio" name="ag_conoce" value="1" /><span>Tengo una idea general</span></label>
+              <label><input type="radio" name="ag_conoce" value="2" /><span>Lo he probado en alguna herramienta</span></label>
+              <label><input type="radio" name="ag_conoce" value="3" /><span>Lo uso habitualmente y entiendo cómo funciona por dentro</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="agentes" data-weight="1">
+            <p class="quiz__q">¿Habéis integrado algún agente en un flujo de trabajo real?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="ag_uso" value="0" required /><span>No</span></label>
+              <label><input type="radio" name="ag_uso" value="1" /><span>Solo en demos o pruebas</span></label>
+              <label><input type="radio" name="ag_uso" value="2" /><span>En piloto interno con un caso de uso</span></label>
+              <label><input type="radio" name="ag_uso" value="3" /><span>En producción con clientes / operaciones</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="agentes" data-weight="1">
+            <p class="quiz__q">¿Habéis formado a alguien del equipo en cómo trabajan los LLM y los agentes?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="ag_formacion" value="0" required /><span>No</span></label>
+              <label><input type="radio" name="ag_formacion" value="1" /><span>Lectura informal, vídeos sueltos</span></label>
+              <label><input type="radio" name="ag_formacion" value="2" /><span>Curso o taller básico</span></label>
+              <label><input type="radio" name="ag_formacion" value="3" /><span>Formación continua + experimentos internos</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="agentes" data-weight="1">
+            <p class="quiz__q">¿Medís el ROI o impacto de los agentes que tenéis en marcha?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="ag_roi" value="0" required /><span>No aplica todavía</span></label>
+              <label><input type="radio" name="ag_roi" value="1" /><span>No, pero deberíamos</span></label>
+              <label><input type="radio" name="ag_roi" value="2" /><span>Sí, de forma cualitativa</span></label>
+              <label><input type="radio" name="ag_roi" value="3" /><span>Sí, con métricas concretas (€, horas, NPS…)</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- STEP 5: Gobernanza & datos -->
+        <fieldset class="quiz__step" data-step="5" data-step-title="Gobernanza y datos" hidden>
+          <legend>5. Gobernanza y datos</legend>
+
+          <div class="quiz__question" data-dim="gobernanza" data-weight="1">
+            <p class="quiz__q">¿Tenéis algún sistema para coordinar varios agentes o automatizaciones a la vez?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="gov_orq" value="0" required /><span>No, ni nos lo planteamos</span></label>
+              <label><input type="radio" name="gov_orq" value="1" /><span>Curiosidad, estamos investigando</span></label>
+              <label><input type="radio" name="gov_orq" value="2" /><span>Piloto con un orquestador (Paperclip, n8n agentes…)</span></label>
+              <label><input type="radio" name="gov_orq" value="3" /><span>Producción gobernada con auditoría</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="gobernanza" data-weight="1">
+            <p class="quiz__q">¿Hay logs o auditoría de lo que hacen vuestros agentes / automatizaciones?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="gov_logs" value="0" required /><span>No</span></label>
+              <label><input type="radio" name="gov_logs" value="1" /><span>Logs parciales, los miramos cuando algo falla</span></label>
+              <label><input type="radio" name="gov_logs" value="2" /><span>Logs completos y revisados periódicamente</span></label>
+              <label><input type="radio" name="gov_logs" value="3" /><span>Logs + alertas + revisión humana sistemática</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="gobernanza" data-weight="1">
+            <p class="quiz__q">¿Existe un responsable formal de "operaciones de IA" en la empresa?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="gov_owner" value="0" required /><span>No</span></label>
+              <label><input type="radio" name="gov_owner" value="1" /><span>De forma informal, alguien lo lleva</span></label>
+              <label><input type="radio" name="gov_owner" value="2" /><span>Es parte del rol formal de alguien</span></label>
+              <label><input type="radio" name="gov_owner" value="3" /><span>Hay un rol dedicado (CIO/AI Lead/responsable de IA)</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="datos" data-weight="1">
+            <p class="quiz__q">¿Tus procesos clave están documentados?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="dat_proc" value="0" required /><span>No, viven en cabezas de personas</span></label>
+              <label><input type="radio" name="dat_proc" value="1" /><span>Algunos sí, otros no</span></label>
+              <label><input type="radio" name="dat_proc" value="2" /><span>La mayoría está documentada</span></label>
+              <label><input type="radio" name="dat_proc" value="3" /><span>SOPs formales, mantenidos al día</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="datos" data-weight="1">
+            <p class="quiz__q">¿Vuestros datos (clientes, ventas, operaciones) están centralizados y accesibles?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="dat_centr" value="0" required /><span>Silos, hojas de cálculo dispersas</span></label>
+              <label><input type="radio" name="dat_centr" value="1" /><span>Centralizado a medias</span></label>
+              <label><input type="radio" name="dat_centr" value="2" /><span>CRM/ERP central con la mayoría de datos</span></label>
+              <label><input type="radio" name="dat_centr" value="3" /><span>Centralizado, gobernado y con APIs disponibles</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="datos" data-weight="1">
+            <p class="quiz__q">¿Podríais explicar a una IA, en una página, cómo funciona vuestro negocio?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="dat_pitch" value="0" required /><span>No sabríamos por dónde empezar</span></label>
+              <label><input type="radio" name="dat_pitch" value="1" /><span>Tardaríamos un par de días</span></label>
+              <label><input type="radio" name="dat_pitch" value="2" /><span>Ya lo tenemos, pero sin actualizar</span></label>
+              <label><input type="radio" name="dat_pitch" value="3" /><span>Lo tenemos y lo mantenemos al día</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- STEP 6: Preguntas abiertas + email -->
+        <fieldset class="quiz__step" data-step="6" data-step-title="Tus retos" hidden>
+          <legend>6. Tus retos en tus palabras</legend>
+          <p class="quiz__intro">
+            Estas respuestas alimentan al asistente que te enviará el plan. Cuanto más concreto,
+            mejor.
+          </p>
+
+          <div class="quiz__question">
+            <label class="quiz__q" for="open_repetitivo">¿Qué tarea repetitiva te quita más tiempo cada semana?</label>
+            <textarea id="open_repetitivo" name="open_repetitivo" rows="3" placeholder="Ej.: cada lunes copio pedidos del email al ERP a mano, me lleva 2 horas." required></textarea>
+          </div>
+
+          <div class="quiz__question">
+            <label class="quiz__q" for="open_freno">¿Qué te impide adoptar IA hoy?</label>
+            <textarea id="open_freno" name="open_freno" rows="3" placeholder="Ej.: no sé qué hacer con datos sensibles, miedo a equivocarme delante de clientes…" required></textarea>
+          </div>
+
+          <div class="quiz__question">
+            <label class="quiz__q" for="open_objetivo">¿Qué resultado tangible querrías en 90 días?</label>
+            <textarea id="open_objetivo" name="open_objetivo" rows="3" placeholder="Ej.: ahorrar 5h/semana al equipo de soporte, reducir errores de facturación a la mitad…" required></textarea>
+          </div>
+
+          <div class="quiz__question">
+            <label class="quiz__q" for="open_email">Email para enviarte el plan personalizado</label>
+            <input
+              id="open_email"
+              name="open_email"
+              type="email"
+              autocomplete="email"
+              placeholder="tu@empresa.com"
+              required
+            />
+            <p class="quiz__hint">No spam. Te enviamos el plan y nada más. Validación y envío
+              llegan en una fase posterior — por ahora se guarda localmente y se prepara un
+              borrador.</p>
+          </div>
+        </fieldset>
+
+        <!-- RESULT SCREEN -->
+        <section class="quiz__result" id="result" hidden aria-live="polite">
+          <h2 id="result-title">Tu nivel de madurez de IA</h2>
+          <div class="result__score">
+            <div class="result__score-circle" id="score-circle" role="img" aria-label="Puntuación de madurez"></div>
+            <div class="result__score-text">
+              <p class="result__score-number"><span id="score-number">0</span><small>/100</small></p>
+              <p class="result__level" id="result-level">Exploración</p>
+              <p class="result__pitch" id="result-pitch"></p>
+            </div>
+          </div>
+
+          <h3>Madurez por dimensión</h3>
+          <div id="result-chart" class="result__chart" aria-label="Gráfico de madurez por dimensión"></div>
+
+          <div class="result__cta">
+            <button type="button" class="cta cta--primary" id="cta-email">
+              Recibir plan personalizado por email
+            </button>
+            <button type="button" class="cta" id="cta-restart">Volver a empezar</button>
+            <p class="quiz__hint" id="cta-hint" hidden>
+              Hemos preparado el borrador. <strong>Pendiente conectar el motor de recomendaciones</strong>
+              (issue hermana). Por ahora se ha guardado localmente y se ha abierto tu cliente de
+              correo con un resumen.
+            </p>
+          </div>
+        </section>
+
+        <nav class="quiz__nav" id="quiz-nav">
+          <button type="button" class="cta" id="btn-prev" disabled>← Anterior</button>
+          <button type="button" class="cta cta--primary" id="btn-next">Siguiente →</button>
+          <button type="button" class="cta cta--primary" id="btn-finish" hidden>Ver mi diagnóstico</button>
+        </nav>
+      </form>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year">2026</span> AutonomIA — Sitio gobernado por agentes.</small>
+    </footer>
+
+    <script>
+      (function () {
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        const STORAGE_KEY = "autonomia.quiz.v1";
+        const TOTAL_STEPS = 6;
+        const form = document.getElementById("quiz");
+        const steps = Array.from(form.querySelectorAll(".quiz__step"));
+        const progressBar = document.getElementById("progress-bar");
+        const stepIndicator = document.getElementById("step-indicator");
+        const btnPrev = document.getElementById("btn-prev");
+        const btnNext = document.getElementById("btn-next");
+        const btnFinish = document.getElementById("btn-finish");
+        const nav = document.getElementById("quiz-nav");
+        const resultEl = document.getElementById("result");
+
+        let current = 1;
+
+        // ---------- persistence ----------
+        function readState() {
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : {};
+          } catch (e) {
+            return {};
+          }
+        }
+        function saveState() {
+          const data = collectAnswers();
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: current, data }));
+          } catch (e) {
+            /* localStorage may be disabled */
+          }
+        }
+        function restoreState() {
+          const saved = readState();
+          if (!saved || !saved.data) return;
+          for (const [name, value] of Object.entries(saved.data)) {
+            const fields = form.querySelectorAll('[name="' + name + '"]');
+            if (!fields.length) continue;
+            if (fields[0].type === "radio") {
+              fields.forEach((f) => {
+                if (f.value === value) f.checked = true;
+              });
+            } else {
+              fields[0].value = value;
+            }
+          }
+          if (typeof saved.step === "number") current = Math.max(1, Math.min(TOTAL_STEPS, saved.step));
+        }
+
+        // ---------- collection ----------
+        function collectAnswers() {
+          const formData = new FormData(form);
+          const out = {};
+          for (const [k, v] of formData.entries()) out[k] = v;
+          return out;
+        }
+
+        // ---------- validation ----------
+        function validateStep(idx) {
+          const step = steps[idx - 1];
+          const required = step.querySelectorAll("[required]");
+          let firstInvalid = null;
+          for (const field of required) {
+            if (field.type === "radio") {
+              const group = form.querySelectorAll('[name="' + field.name + '"]');
+              const checked = Array.from(group).some((g) => g.checked);
+              if (!checked && !firstInvalid) firstInvalid = field;
+            } else if (!field.value.trim()) {
+              if (!firstInvalid) firstInvalid = field;
+            } else if (field.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) {
+              if (!firstInvalid) firstInvalid = field;
+            }
+          }
+          if (firstInvalid) {
+            firstInvalid.focus();
+            const q = firstInvalid.closest(".quiz__question");
+            if (q) q.classList.add("quiz__question--error");
+            return false;
+          }
+          step.querySelectorAll(".quiz__question--error").forEach((q) =>
+            q.classList.remove("quiz__question--error")
+          );
+          return true;
+        }
+
+        // ---------- navigation ----------
+        function showStep(n) {
+          steps.forEach((s) => (s.hidden = Number(s.dataset.step) !== n));
+          stepIndicator.textContent = "Paso " + n + " de " + TOTAL_STEPS;
+          progressBar.style.width = ((n / TOTAL_STEPS) * 100).toFixed(0) + "%";
+          btnPrev.disabled = n === 1;
+          btnNext.hidden = n === TOTAL_STEPS;
+          btnFinish.hidden = n !== TOTAL_STEPS;
+          // focus first input of the new step for keyboard users
+          const focusable = steps[n - 1].querySelector("input, textarea, select, button");
+          if (focusable) focusable.focus({ preventScroll: false });
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        btnNext.addEventListener("click", () => {
+          if (!validateStep(current)) return;
+          current = Math.min(TOTAL_STEPS, current + 1);
+          saveState();
+          showStep(current);
+        });
+        btnPrev.addEventListener("click", () => {
+          current = Math.max(1, current - 1);
+          showStep(current);
+        });
+
+        // save on every change
+        form.addEventListener("change", saveState);
+        form.addEventListener("input", saveState);
+
+        // ---------- scoring ----------
+        const DIMENSIONS = {
+          uso: "Uso de IA",
+          auto: "Automatizaciones",
+          agentes: "Agentes",
+          gobernanza: "Gobernanza",
+          datos: "Datos y procesos",
+        };
+
+        function scoreAnswers(data) {
+          const dimSums = {};
+          const dimMax = {};
+          form.querySelectorAll(".quiz__question[data-dim]").forEach((q) => {
+            const dim = q.dataset.dim;
+            const radios = q.querySelectorAll('input[type="radio"]');
+            if (!radios.length) return;
+            const name = radios[0].name;
+            const max = Math.max(...Array.from(radios).map((r) => Number(r.value)));
+            const value = Number(data[name] || 0);
+            dimSums[dim] = (dimSums[dim] || 0) + value;
+            dimMax[dim] = (dimMax[dim] || 0) + max;
+          });
+          const dims = {};
+          let totalSum = 0;
+          let totalMax = 0;
+          for (const dim of Object.keys(DIMENSIONS)) {
+            const s = dimSums[dim] || 0;
+            const m = dimMax[dim] || 1;
+            dims[dim] = Math.round((s / m) * 100);
+            totalSum += s;
+            totalMax += m;
+          }
+          const overall = Math.round((totalSum / totalMax) * 100);
+          return { overall, dims };
+        }
+
+        function levelFor(score) {
+          if (score <= 20) return { name: "Exploración", pitch: "Estás empezando. El primer paso es probar ChatGPT o Claude en una tarea concreta del día a día." };
+          if (score <= 40) return { name: "Adopción inicial", pitch: "Ya hay uso real, pero disperso. Toca documentar políticas y elegir 2–3 procesos para automatizar." };
+          if (score <= 60) return { name: "Integración", pitch: "Tenéis automatizaciones funcionando. El siguiente salto es introducir agentes con humanos en el loop." };
+          if (score <= 80) return { name: "Operación gobernada", pitch: "Ya operáis con agentes. Lo que toca ahora es orquestación, observabilidad y métricas de negocio." };
+          return { name: "Autonomía", pitch: "Estáis en la frontera. Caso candidato a escalar el modelo a partners o a un nuevo producto autónomo." };
+        }
+
+        // ---------- result rendering ----------
+        function renderResult() {
+          const data = collectAnswers();
+          const { overall, dims } = scoreAnswers(data);
+          const level = levelFor(overall);
+
+          document.getElementById("score-number").textContent = String(overall);
+          document.getElementById("result-level").textContent = level.name;
+          document.getElementById("result-pitch").textContent = level.pitch;
+
+          // score circle (conic gradient via inline style)
+          const circle = document.getElementById("score-circle");
+          circle.style.background =
+            "conic-gradient(var(--accent) 0 " +
+            overall +
+            "%, rgba(255,255,255,0.1) " +
+            overall +
+            "% 100%)";
+          circle.setAttribute("aria-label", "Puntuación: " + overall + " sobre 100");
+
+          // chart: simple bars per dimension
+          const chart = document.getElementById("result-chart");
+          chart.innerHTML = "";
+          for (const [key, label] of Object.entries(DIMENSIONS)) {
+            const value = dims[key] || 0;
+            const row = document.createElement("div");
+            row.className = "result__bar-row";
+            row.innerHTML =
+              '<span class="result__bar-label">' +
+              label +
+              '</span><span class="result__bar-track" aria-hidden="true"><span class="result__bar-fill" style="width:' +
+              value +
+              '%"></span></span><span class="result__bar-value">' +
+              value +
+              "</span>";
+            chart.appendChild(row);
+          }
+
+          // hide steps + nav, show result
+          steps.forEach((s) => (s.hidden = true));
+          nav.hidden = true;
+          progressBar.style.width = "100%";
+          stepIndicator.textContent = "Diagnóstico completo";
+          resultEl.hidden = false;
+          resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          // emit data for the recommendations engine (TODO: replace with POST /api/responses)
+          // eslint-disable-next-line no-console
+          console.log("[autonomia.quiz] payload", { overall, dims, level: level.name, answers: data });
+        }
+
+        btnFinish.addEventListener("click", () => {
+          if (!validateStep(current)) return;
+          saveState();
+          renderResult();
+        });
+
+        // CTA: prepare a mailto draft as a placeholder until the backend exists.
+        document.getElementById("cta-email").addEventListener("click", () => {
+          const data = collectAnswers();
+          const { overall, dims } = scoreAnswers(data);
+          const subject = encodeURIComponent("Mi diagnóstico AutonomIA: " + overall + "/100");
+          const body = encodeURIComponent(
+            "Quiero recibir el plan personalizado.\n\n" +
+              "Madurez global: " +
+              overall +
+              "/100 (" +
+              levelFor(overall).name +
+              ").\n\n" +
+              "Por dimensión:\n" +
+              Object.entries(DIMENSIONS)
+                .map(([k, v]) => "- " + v + ": " + (dims[k] || 0))
+                .join("\n") +
+              "\n\nMi email: " +
+              (data.open_email || "(añadir)") +
+              "\n"
+          );
+          // TODO: replace with POST /api/responses (motor de recomendaciones)
+          window.location.href = "mailto:hola@autonomia.local?subject=" + subject + "&body=" + body;
+          document.getElementById("cta-hint").hidden = false;
+        });
+
+        document.getElementById("cta-restart").addEventListener("click", () => {
+          if (!confirm("¿Borrar respuestas y empezar de cero?")) return;
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+          } catch (e) {}
+          form.reset();
+          resultEl.hidden = true;
+          nav.hidden = false;
+          current = 1;
+          showStep(1);
+        });
+
+        // ---------- init ----------
+        restoreState();
+        showStep(current);
+      })();
+    </script>
+  </body>
+</html>
