@@ -1,0 +1,58 @@
+name: Deploy site to IONOS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ionos-autonomia
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: SFTP sync site/ → IONOS /autonomia/
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sanity check
+        run: |
+          test -f site/index.html || { echo "site/index.html missing"; exit 1; }
+          ls -la site
+
+      - name: Sync site/ to IONOS via SFTP (mirror with delete)
+        env:
+          SFTP_HOST: ${{ vars.IONOS_SFTP_HOST }}
+          SFTP_PORT: ${{ vars.IONOS_SFTP_PORT }}
+          SFTP_USER: ${{ vars.IONOS_SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          REMOTE_DIR: ${{ vars.IONOS_REMOTE_DIR }}
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          lftp -u "$SFTP_USER","$SFTP_PASSWORD" "sftp://$SFTP_HOST:$SFTP_PORT" <<EOF
+          set sftp:auto-confirm yes
+          set net:max-retries 3
+          set net:reconnect-interval-base 5
+          set mirror:use-pget-n 1
+          mirror -R --delete --verbose --parallel=4 --exclude-glob .DS_Store \
+            site/ $REMOTE_DIR/
+          bye
+          EOF
+
+      - name: Trigger validation workflow
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run validate.yml \
+            --ref "${{ github.ref_name }}" \
+            -f commit_sha="${{ github.sha }}" || true

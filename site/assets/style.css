@@ -1,0 +1,136 @@
+:root {
+  --bg: #0b0d12;
+  --fg: #f5f6fa;
+  --muted: #9aa1b2;
+  --accent: #6366f1;
+  --accent-fg: #ffffff;
+  --card: #141823;
+  --max: 960px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  background: radial-gradient(circle at 20% 0%, rgba(99, 102, 241, 0.35), transparent 50%),
+    var(--bg);
+  padding: 1.5rem clamp(1rem, 4vw, 3rem) 6rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.cta {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+.cta--primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.4rem;
+  font-weight: 600;
+}
+
+.hero__content {
+  max-width: var(--max);
+  margin: 4rem auto 0;
+  text-align: left;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  margin: 0 0 1rem;
+  line-height: 1.1;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+.section {
+  padding: 4rem clamp(1rem, 4vw, 3rem);
+}
+
+.section--alt {
+  background: var(--card);
+}
+
+.section h2 {
+  max-width: var(--max);
+  margin: 0 auto 1.5rem;
+  font-size: 1.6rem;
+}
+
+.section p {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.grid article {
+  background: var(--card);
+  padding: 1.25rem;
+  border-radius: 12px;
+}
+
+.grid h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.grid p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.footer {
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}

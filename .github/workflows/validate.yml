@@ -1,0 +1,90 @@
+name: Validate deployed site (screenshots)
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: "Commit SHA being validated"
+        required: false
+        default: ""
+      url_override:
+        description: "Override URL to screenshot (otherwise uses vars.PUBLIC_URL)"
+        required: false
+        default: ""
+
+jobs:
+  screenshot:
+    name: Screenshot deployed URL
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout (for scripts)
+        uses: actions/checkout@v4
+
+      - name: Resolve target URL
+        id: target
+        env:
+          OVERRIDE: ${{ github.event.inputs.url_override }}
+          PUBLIC_URL: ${{ vars.PUBLIC_URL }}
+        run: |
+          set -euo pipefail
+          URL="${OVERRIDE:-$PUBLIC_URL}"
+          if [ -z "$URL" ]; then
+            echo "::error::No URL configured. Set vars.PUBLIC_URL on the repo or pass url_override."
+            exit 1
+          fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Target: $URL"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright (chromium only)
+        run: |
+          npm init -y >/dev/null
+          npm i -D @playwright/test >/dev/null
+          npx playwright install --with-deps chromium
+
+      - name: Screenshot + smoke check
+        env:
+          TARGET_URL: ${{ steps.target.outputs.url }}
+          COMMIT_SHA: ${{ github.event.inputs.commit_sha }}
+        run: |
+          mkdir -p artifacts
+          node - <<'JS'
+          const { chromium } = require('@playwright/test');
+          const url = process.env.TARGET_URL;
+          (async () => {
+            const browser = await chromium.launch();
+            const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+            const page = await ctx.newPage();
+            const resp = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+            if (!resp || !resp.ok()) {
+              console.error(`Bad response: ${resp && resp.status()}`);
+              process.exit(2);
+            }
+            const title = await page.title();
+            await page.screenshot({ path: 'artifacts/desktop.png', fullPage: true });
+            await page.setViewportSize({ width: 390, height: 844 });
+            await page.screenshot({ path: 'artifacts/mobile.png', fullPage: true });
+            const html = await page.content();
+            require('fs').writeFileSync('artifacts/page.html', html);
+            require('fs').writeFileSync('artifacts/meta.json', JSON.stringify({
+              url, title, status: resp.status(), commit: process.env.COMMIT_SHA || null,
+              capturedAt: new Date().toISOString(),
+            }, null, 2));
+            console.log(`OK ${resp.status()} — ${title}`);
+            await browser.close();
+          })().catch(e => { console.error(e); process.exit(1); });
+          JS
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-validation-${{ github.run_id }}
+          path: artifacts/
+          retention-days: 14
