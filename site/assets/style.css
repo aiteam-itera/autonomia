@@ -997,13 +997,15 @@ body.intro-open {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Cascadia Mono", "Roboto Mono",
     Consolas, monospace;
   font-size: 0.85rem;
-  line-height: 1.55;
+  line-height: 1.6;
   color: #c8d3f5;
-  max-height: 12em;
+  max-height: 18em;
   overflow: hidden;
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .intro[data-intro-state="code"] .intro__code,
@@ -1014,6 +1016,10 @@ body.intro-open {
 
 .intro__code .tok-prompt {
   color: var(--accent);
+}
+.intro__code .tok-tool {
+  color: #f78c6c;
+  font-weight: 600;
 }
 .intro__code .tok-key {
   color: #82aaff;

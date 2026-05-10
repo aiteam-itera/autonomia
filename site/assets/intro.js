@@ -40,19 +40,21 @@
   const skipBtn = overlay.querySelector("[data-intro-skip]");
 
   const message =
-    "Hola. Soy un agente. Voy a generarte ahora mismo una página web sobre cómo automatizar tu negocio con IA.";
+    "Crea una página web con tutoriales y mejores prácticas del uso de IA en PYMES, con un cuestionario de madurez y un blog.";
 
+  // Visual reproduction of the real agent flow:
+  //   tool calls → git commit → push → GitHub Actions deploy → IONOS sync → Playwright validate.
   const codeLines = [
-    { html: '<span class="tok-prompt">$</span> autonomia start --target home', delay: 60 },
-    { html: '<span class="tok-mute">› cargando visión…</span>', delay: 70 },
-    {
-      html:
-        '<span class="tok-key">render</span>(<span class="tok-str">"hero"</span>, <span class="tok-str">"qué hacemos"</span>, <span class="tok-str">"aprende"</span>, <span class="tok-str">"blog"</span>)',
-      delay: 80,
-    },
-    { html: '<span class="tok-mute">› montando cuestionario de madurez…</span>', delay: 80 },
-    { html: '<span class="tok-mute">› enlazando recomendaciones…</span>', delay: 70 },
-    { html: '<span class="tok-ok">✓ listo</span>', delay: 60 },
+    { html: '<span class="tok-mute">› planificando…</span>', delay: 70 },
+    { html: '<span class="tok-tool">tool</span> <span class="tok-key">Edit</span>(<span class="tok-str">"site/index.html"</span>)', delay: 80 },
+    { html: '<span class="tok-tool">tool</span> <span class="tok-key">Write</span>(<span class="tok-str">"site/cuestionario.html"</span>)', delay: 80 },
+    { html: '<span class="tok-tool">tool</span> <span class="tok-key">Write</span>(<span class="tok-str">"site/blog/que-puede-hacer-la-ia-en-mi-pyme.html"</span>)', delay: 80 },
+    { html: '<span class="tok-prompt">$</span> git commit -m <span class="tok-str">"feat(site): home + cuestionario + blog"</span>', delay: 90 },
+    { html: '<span class="tok-prompt">$</span> git push origin main', delay: 90 },
+    { html: '<span class="tok-mute">› GitHub Actions › Deploy site to IONOS</span>', delay: 100 },
+    { html: '<span class="tok-ok">✓</span> lftp mirror site/ → ionos:/autonomia/', delay: 90 },
+    { html: '<span class="tok-mute">› Playwright › screenshot + smoke check</span>', delay: 90 },
+    { html: '<span class="tok-ok">✓ deployed</span> <span class="tok-str">https://ia.itera.es/</span>', delay: 80 },
   ];
 
   let cancelled = false;
@@ -77,8 +79,8 @@
       textNode.textContent = message.slice(0, i + 1);
       const ch = message[i];
       // Slight cadence variation: pause longer on punctuation
-      const base = 26 + Math.random() * 28;
-      const punct = /[.,…]/.test(ch) ? 220 : /[\s]/.test(ch) ? 14 : 0;
+      const base = 18 + Math.random() * 22;
+      const punct = /[.,…]/.test(ch) ? 160 : /[\s]/.test(ch) ? 10 : 0;
       await delay(base + punct);
     }
   }
@@ -123,16 +125,16 @@
   document.body.classList.add("intro-open");
   skipBtn.addEventListener("click", leave);
   document.addEventListener("keydown", onKey);
-  // Safety net: never block the page longer than 8s even if something hangs
-  const safetyTimer = setTimeout(leave, 8000);
+  // Safety net: never block the page longer than 10s even if something hangs
+  const safetyTimer = setTimeout(leave, 10000);
 
   (async () => {
     await typeMessage();
     if (cancelled) return;
-    await delay(350);
+    await delay(280);
     await streamCode();
     if (cancelled) return;
-    await delay(450);
+    await delay(420);
     leave();
   })().finally(() => clearTimeout(safetyTimer));
 })();
