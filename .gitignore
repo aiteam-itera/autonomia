@@ -5,6 +5,8 @@ node_modules/
 .env.*
 !.env.example
 .playwright/
+playwright-report/
+test-results/
 artifacts/
 # Cloudflare Worker build/runtime
 .wrangler/

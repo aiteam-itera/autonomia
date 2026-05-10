@@ -1,0 +1,13 @@
+{
+  "name": "autonomia-tests",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Playwright end-to-end tests for the static site (form interactions, anti-bot honeypot).",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1"
+  }
+}

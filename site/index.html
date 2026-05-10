@@ -9,6 +9,7 @@
       content="AutonomIA: consejos y automatizaciones impulsadas por IA para que tu empresa adopte agentes y procesos inteligentes."
     />
     <link rel="stylesheet" href="/assets/style.css" />
+    <meta name="autonomia-api-base" content="https://autonomia-api.example.workers.dev" />
   </head>
   <body>
     <div
@@ -153,11 +154,81 @@
       </section>
 
       <section class="section section--alt" id="contacto">
-        <h2>Hablemos</h2>
-        <p>
-          Cuéntanos qué quieres automatizar.
-          <a href="mailto:hola@autonomia.local">hola@autonomia.local</a>
-        </p>
+        <div class="contact">
+          <h2>Hablemos</h2>
+          <p class="contact__intro">
+            Cuéntanos qué quieres automatizar y te respondemos en menos de 24h. Sin
+            compromisos: si no te encaja, te decimos qué tendrías que hacer por tu cuenta.
+          </p>
+
+          <form class="contact__form" data-contact-form novalidate>
+            <label>
+              <span>Nombre</span>
+              <input type="text" name="name" autocomplete="name" required maxlength="100" />
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" required maxlength="200" />
+            </label>
+
+            <label>
+              <span>Sector</span>
+              <select name="sector">
+                <option value="">— Elige un sector —</option>
+                <option value="comercio">Comercio / retail</option>
+                <option value="servicios">Servicios profesionales</option>
+                <option value="industria">Industria / manufactura</option>
+                <option value="salud">Salud / clínicas</option>
+                <option value="educacion">Educación</option>
+                <option value="hosteleria">Hostelería / turismo</option>
+                <option value="tecnologia">Tecnología / SaaS</option>
+                <option value="otro">Otro</option>
+              </select>
+            </label>
+
+            <label>
+              <span>¿Qué quieres automatizar?</span>
+              <textarea
+                name="message"
+                rows="5"
+                required
+                maxlength="2000"
+                placeholder="Cuéntanos un proceso concreto: cuántas personas lo tocan, cuánto tiempo se va, qué herramientas usáis."
+              ></textarea>
+              <small class="contact__counter" data-contact-counter>0 / 2000</small>
+            </label>
+
+            <input type="hidden" name="source" value="home" />
+
+            <!-- Honeypot: real users never see this field. Bots fill every field
+                 they find, so any non-empty value short-circuits the request on
+                 the server. Wrapped in a hidden div + autocomplete=off + tabindex
+                 to avoid accessibility tools surfacing it. -->
+            <div class="contact__hp" aria-hidden="true">
+              <label>
+                Si eres humano deja este campo vacío
+                <input
+                  type="text"
+                  name="website"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </label>
+            </div>
+
+            <button type="submit" class="cta cta--primary" data-contact-submit>
+              Enviar mensaje
+            </button>
+
+            <p class="contact__hint" data-contact-hint hidden></p>
+          </form>
+
+          <p class="contact__fallback">
+            ¿Prefieres email directo?
+            <a href="mailto:hola@autonomia.local">hola@autonomia.local</a>
+          </p>
+        </div>
       </section>
     </main>
 
@@ -169,5 +240,6 @@
     </script>
     <script src="/assets/intro.js" defer></script>
     <script src="/assets/agent-feed.js" defer></script>
+    <script src="/assets/contact.js" defer></script>
   </body>
 </html>

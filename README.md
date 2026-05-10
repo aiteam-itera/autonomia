@@ -28,6 +28,9 @@ autonomia/
 │   └── workflows/
 │       ├── deploy.yml         ← deploy SFTP a IONOS
 │       └── validate.yml       ← validación visual opcional (manual / post-deploy)
+├── worker/                   ← Cloudflare Worker (cuestionario, comentarios, leads /api/contact)
+├── tools/                    ← utilidades (validador de comentarios, etc.)
+├── tests/                    ← Playwright e2e contra `site/` (form, honeypot)
 └── docs/
     ├── DEPLOYMENT.md          ← cómo está cableado el deploy
     └── AGENT_PLAYBOOK.md      ← qué tiene que saber un agente para crear/editar páginas aquí

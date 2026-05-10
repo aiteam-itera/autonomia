@@ -21,11 +21,15 @@ id = "REPLACE_WITH_KV_NAMESPACE_ID"
 # Secrets (NOT defined here — use `wrangler secret put`):
 #   ANTHROPIC_API_KEY
 #   RESEND_API_KEY
-#   PAPERCLIP_API_KEY        (long-lived service key for comment → task creation)
+#   PAPERCLIP_API_KEY        (long-lived service key for comment/contact → task creation)
 #   PAPERCLIP_API_URL        (e.g. https://app.paperclip.ing)
 #   PAPERCLIP_COMPANY_ID     (AutonomIA company id)
 #   PAPERCLIP_ASSIGNEE_AGENT_ID  (CEO agent id; later: dedicated moderator agent)
 #   PAPERCLIP_PROJECT_ID     (optional — pin tasks to AutonomIA project)
 #   PAPERCLIP_PARENT_ID      (optional — group all comment-derived tasks)
+#   PAPERCLIP_LEAD_ASSIGNEE_AGENT_ID  (optional — override assignee for leads only)
+#   PAPERCLIP_LEAD_PARENT_ID          (optional — group all lead-derived tasks)
 # If any of the above are missing, the Worker still accepts and verifies the
-# comment but does not create a Paperclip task (logs `paperclip_integration_not_configured`).
+# comment / lead but does not create a Paperclip task (logs
+# `paperclip_integration_not_configured` for comments,
+# `paperclip_lead_integration_not_configured` for leads).

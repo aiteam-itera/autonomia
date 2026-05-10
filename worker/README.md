@@ -54,10 +54,36 @@ Devuelve la URL `https://autonomia-api.<subdomain>.workers.dev`. Mete esa URL en
 ## Estructura
 
 - `src/index.ts` — entry point (router fetch).
-- `src/handlers.ts` — `handleSubmit`, `handleConfirm`.
+- `src/handlers.ts` — `handleSubmit`, `handleConfirm` (cuestionario / recomendaciones).
+- `src/contact-handlers.ts` — `handleContactSubmit` (formulario `#contacto` de la home → lead → Paperclip).
+- `src/contact-types.ts` — tipos del payload del formulario de contacto.
+- `src/comment-handlers.ts` — comentarios moderados de blog (doble opt-in).
+- `src/comment-storage.ts`, `src/comment-email.ts`, `src/comment-types.ts` — soporte de comentarios.
+- `src/paperclip.ts` — wrapper para crear issues de Paperclip desde comentarios.
 - `src/prompt.ts` — prompt del LLM (iterar aquí sin tocar lógica).
 - `src/llm.ts` — cliente Anthropic.
 - `src/email.ts` — cliente Resend + plantillas.
 - `src/storage.ts` — wrappers de KV (tokens, rate-limit, archive, métricas).
 - `src/types.ts` — tipos compartidos.
 - `src/html.ts` — páginas HTML mínimas que devuelve `/api/confirm`.
+
+## Endpoints
+
+| Path                  | Método | Para qué                                                     |
+|-----------------------|--------|--------------------------------------------------------------|
+| `/api/health`         | GET    | smoke check                                                  |
+| `/api/submit`         | POST   | cuestionario → email de verificación                         |
+| `/api/confirm`        | GET    | confirmación del cuestionario → genera plan vía LLM + envía  |
+| `/api/comment`        | POST   | comentario en blog → email de verificación                   |
+| `/api/comment/confirm`| GET    | confirmación de comentario → crea issue Paperclip            |
+| `/api/contact`        | POST   | lead del `#contacto` de la home → crea issue Paperclip + ack |
+
+## Tests
+
+```bash
+cd worker
+npm test
+```
+
+Usa `node --experimental-strip-types --test` (mismo patrón que `tools/comment-validator`).
+Cubre `parseSubmission` del flujo de contacto (validación de email, honeypot, longitudes).
