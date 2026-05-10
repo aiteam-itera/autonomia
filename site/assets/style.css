@@ -612,3 +612,87 @@ a:hover {
   margin-top: 2.5rem;
   font-size: 0.95rem;
 }
+
+/* --- Comment widget (blog posts) ------------------------------------- */
+
+.comments {
+  margin-top: 3rem;
+  padding: 1.75rem;
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+}
+
+.comments h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.comments__intro {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.comments__form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.comments__form label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.comments__form input,
+.comments__form textarea {
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--fg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.65rem 0.8rem;
+  font: inherit;
+  width: 100%;
+}
+
+.comments__form input:focus,
+.comments__form textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.comments__counter {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.comments__form button {
+  justify-self: start;
+}
+
+.comments__hint {
+  margin: 0.25rem 0 0;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.comments__hint[data-tone="warn"] {
+  background: rgba(234, 179, 8, 0.1);
+  border-color: rgba(234, 179, 8, 0.4);
+}
+
+.comments__hint[data-tone="error"] {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.comments__hint[data-tone="ok"] {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.4);
+}

@@ -103,6 +103,35 @@
         <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico</a>
       </aside>
 
+      <!-- BEGIN comment widget — see docs/COMMENT_VALIDATION.md -->
+      <section class="comments" data-comments aria-label="Comentarios">
+        <h2>Comenta este post</h2>
+        <p class="comments__intro">
+          Para evitar spam verificamos tu email (te llega un enlace) y los comentarios pasan
+          por una validación automática antes de publicarse. Datos mínimos, cero tracking.
+        </p>
+        <form class="comments__form" data-comment-form novalidate>
+          <input type="hidden" name="postSlug" value="{{SLUG}}" />
+          <input type="hidden" name="postTitle" value="{{TITLE}}" />
+          <label>
+            <span>Nombre</span>
+            <input type="text" name="name" required maxlength="80" autocomplete="name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" required maxlength="160" autocomplete="email" />
+          </label>
+          <label>
+            <span>Comentario</span>
+            <textarea name="comment" required minlength="10" maxlength="1500" rows="4"></textarea>
+            <small class="comments__counter" data-counter>0 / 1500</small>
+          </label>
+          <button type="submit" class="cta cta--primary" data-submit>Enviar comentario</button>
+          <p class="comments__hint" data-hint hidden></p>
+        </form>
+      </section>
+      <!-- END comment widget -->
+
       <a class="post__back" href="/blog/">← Volver al blog</a>
     </main>
 
@@ -112,5 +141,6 @@
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
+    <script src="/assets/comments.js" defer></script>
   </body>
 </html>
