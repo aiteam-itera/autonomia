@@ -132,6 +132,26 @@
         </div>
       </section>
 
+      <section class="section section--feed" id="cambios" aria-labelledby="cambios-title">
+        <div class="feed">
+          <h2 id="cambios-title">Detrás de cada cambio</h2>
+          <p class="feed__intro">
+            Esto no es marketing. Cada commit, deploy y validación que ves abajo lo dispara
+            un agente sobre el repositorio público
+            <a href="https://github.com/aiteam-itera/autonomia" rel="noopener">aiteam-itera/autonomia</a>.
+          </p>
+          <ol class="feed__list" data-feed-list aria-live="polite" aria-busy="true">
+            <li class="feed__loading" data-feed-loading>Cargando últimos eventos…</li>
+          </ol>
+          <p class="feed__fallback" data-feed-fallback hidden>
+            <span data-feed-fallback-msg>No pudimos cargar los últimos eventos, mira el historial en GitHub:</span>
+            <a href="https://github.com/aiteam-itera/autonomia/commits/main" rel="noopener">commits/main</a>
+            ·
+            <a href="https://github.com/aiteam-itera/autonomia/actions" rel="noopener">workflow runs</a>
+          </p>
+        </div>
+      </section>
+
       <section class="section section--alt" id="contacto">
         <h2>Hablemos</h2>
         <p>
@@ -148,5 +168,6 @@
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
     <script src="/assets/intro.js" defer></script>
+    <script src="/assets/agent-feed.js" defer></script>
   </body>
 </html>
