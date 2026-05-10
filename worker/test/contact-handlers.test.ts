@@ -56,3 +56,15 @@ test("rejects non-object body", () => {
   assert.equal(parseSubmission("string"), null);
   assert.equal(parseSubmission(42), null);
 });
+
+test("accepts whitelisted paquete and lower-cases it", () => {
+  const r = parseSubmission({ ...valid, paquete: "Diagnostico-Express" });
+  assert.ok(r);
+  assert.equal(r!.paquete, "diagnostico-express");
+});
+
+test("ignores unknown paquete value", () => {
+  const r = parseSubmission({ ...valid, paquete: "el-mejor-plan" });
+  assert.ok(r);
+  assert.equal(r!.paquete, undefined);
+});

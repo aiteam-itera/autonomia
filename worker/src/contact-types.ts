@@ -6,6 +6,7 @@ export interface ContactSubmission {
   sector?: string;
   message: string;
   source?: string;
+  paquete?: string;
   website?: string;
 }
 

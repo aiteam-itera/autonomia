@@ -357,6 +357,15 @@
           <h3>Madurez por dimensión</h3>
           <div id="result-chart" class="result__chart" aria-label="Gráfico de madurez por dimensión"></div>
 
+          <aside class="result__package" id="result-package" hidden aria-live="polite">
+            <p class="package__eyebrow" id="result-package-eyebrow">Paquete recomendado</p>
+            <h3 id="result-package-title">—</h3>
+            <p id="result-package-pitch">—</p>
+            <a class="cta cta--primary" id="result-package-cta" href="/servicios.html">
+              Ver el paquete
+            </a>
+          </aside>
+
           <div class="result__cta">
             <button type="button" class="cta cta--primary" id="cta-email">
               Recibir plan personalizado por email
@@ -545,6 +554,36 @@
           return { overall, dims };
         }
 
+        const PAQUETES = {
+          "diagnostico-express": {
+            title: "Diagnóstico express",
+            pitch: "Empieza por mapear procesos: en 2 semanas sabrás qué automatizar primero. Desde 1.500 €.",
+            anchor: "/servicios.html#diagnostico-express",
+            ctaHref: "/?paquete=diagnostico-express#contacto",
+            ctaLabel: "Quiero el diagnóstico",
+          },
+          piloto: {
+            title: "Piloto de automatización",
+            pitch: "Llevas un proceso a producción con humano en el loop y métricas de ROI en 4–6 semanas. Desde 6.000 €.",
+            anchor: "/servicios.html#piloto",
+            ctaHref: "/?paquete=piloto#contacto",
+            ctaLabel: "Quiero un piloto",
+          },
+          acompanamiento: {
+            title: "Acompañamiento gobernado",
+            pitch: "Tu equipo de IA externalizado: agentes, gobernanza y oncall, mes a mes. Desde 3.500 €/mes.",
+            anchor: "/servicios.html#acompanamiento",
+            ctaHref: "/?paquete=acompanamiento#contacto",
+            ctaLabel: "Quiero acompañamiento",
+          },
+        };
+
+        function packageFor(score) {
+          if (score <= 35) return PAQUETES["diagnostico-express"];
+          if (score <= 65) return PAQUETES.piloto;
+          return PAQUETES.acompanamiento;
+        }
+
         function levelFor(score) {
           if (score <= 20) return { name: "Exploración", pitch: "Estás empezando. El primer paso es probar ChatGPT o Claude en una tarea concreta del día a día." };
           if (score <= 40) return { name: "Adopción inicial", pitch: "Ya hay uso real, pero disperso. Toca documentar políticas y elegir 2–3 procesos para automatizar." };
@@ -599,6 +638,15 @@
               "</span>";
             chart.appendChild(row);
           }
+
+          // package recommendation based on overall score
+          const recommended = packageFor(overall);
+          document.getElementById("result-package-title").textContent = recommended.title;
+          document.getElementById("result-package-pitch").textContent = recommended.pitch;
+          const pkgCta = document.getElementById("result-package-cta");
+          pkgCta.href = recommended.ctaHref;
+          pkgCta.textContent = recommended.ctaLabel;
+          document.getElementById("result-package").hidden = false;
 
           // hide steps + nav, show result
           steps.forEach((s) => (s.hidden = true));

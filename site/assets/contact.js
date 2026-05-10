@@ -14,6 +14,36 @@
 
   var QUIZ_STORAGE_KEY = "autonomia.quiz.v1";
 
+  var PAQUETES = {
+    "diagnostico-express": {
+      label: "Diagnóstico express",
+      anchor: "/servicios.html#diagnostico-express",
+      messageLine: "Me interesa el paquete \"Diagnóstico express\" (2 semanas, desde 1.500 €).",
+    },
+    piloto: {
+      label: "Piloto de automatización",
+      anchor: "/servicios.html#piloto",
+      messageLine:
+        "Me interesa el paquete \"Piloto de automatización\" (4–6 semanas, desde 6.000 €).",
+    },
+    acompanamiento: {
+      label: "Acompañamiento gobernado",
+      anchor: "/servicios.html#acompanamiento",
+      messageLine:
+        "Me interesa el paquete \"Acompañamiento gobernado\" (mensual, desde 3.500 €/mes).",
+    },
+  };
+
+  function readPaqueteParam() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var raw = (params.get("paquete") || "").toLowerCase();
+      return Object.prototype.hasOwnProperty.call(PAQUETES, raw) ? raw : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   function getApiBase() {
     if (typeof window.AUTONOMIA_API_BASE === "string" && window.AUTONOMIA_API_BASE) {
       return window.AUTONOMIA_API_BASE.replace(/\/$/, "");
@@ -84,6 +114,38 @@
     if (sourceField) sourceField.value = "cuestionario";
   }
 
+  function prefillFromPaquete(form, key) {
+    var pkg = PAQUETES[key];
+    if (!pkg) return;
+
+    var hidden = form.querySelector("[data-contact-paquete-input]");
+    if (hidden) hidden.value = key;
+
+    var sourceField = form.querySelector('input[name="source"]');
+    if (sourceField) sourceField.value = "servicios:" + key;
+
+    var textarea = form.querySelector('textarea[name="message"]');
+    if (textarea && !textarea.value) {
+      textarea.value = pkg.messageLine + "\n\n";
+      var counter = form.querySelector("[data-contact-counter]");
+      if (counter) {
+        var max = parseInt(textarea.getAttribute("maxlength") || "2000", 10);
+        counter.textContent = textarea.value.length + " / " + max;
+      }
+    }
+
+    var banner = document.querySelector("[data-contact-paquete]");
+    if (banner) {
+      banner.hidden = false;
+      banner.innerHTML =
+        "Vienes desde el paquete <strong>" +
+        pkg.label +
+        '</strong>. <a href="' +
+        pkg.anchor +
+        '">Ver detalles</a>.';
+    }
+  }
+
   function disableSubmit(form, reason) {
     var button = form.querySelector("[data-contact-submit]");
     if (button) {
@@ -96,6 +158,8 @@
   function init(form) {
     setupCounter(form);
     prefillFromQuiz(form);
+    var paqueteKey = readPaqueteParam();
+    if (paqueteKey) prefillFromPaquete(form, paqueteKey);
 
     var apiBase = getApiBase();
     if (!apiBase) {
@@ -116,6 +180,7 @@
         sector: (data.get("sector") || "").toString().trim(),
         message: (data.get("message") || "").toString(),
         source: (data.get("source") || "home").toString(),
+        paquete: (data.get("paquete") || "").toString().trim(),
         website: (data.get("website") || "").toString(),
       };
 

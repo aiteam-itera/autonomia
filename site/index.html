@@ -71,6 +71,7 @@
         <span class="brand">AutonomIA</span>
         <span class="nav__links">
           <a class="cta cta--ghost" href="/aprende/">Aprende</a>
+          <a class="cta cta--ghost" href="/servicios.html">Servicios</a>
           <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
         </span>
       </nav>
@@ -92,18 +93,21 @@
         <h2>Qué hacemos</h2>
         <div class="grid">
           <article>
-            <h3>Diagnóstico IA</h3>
-            <p>Mapeamos tus procesos y detectamos en qué puede ayudarte un agente hoy.</p>
+            <h3><a href="/servicios.html#diagnostico-express">Diagnóstico express</a></h3>
+            <p>2 semanas. Mapa de procesos y los 3 casos donde la IA paga su coste antes. Desde 1.500 €.</p>
           </article>
           <article>
-            <h3>Automatización</h3>
-            <p>Conectamos tus herramientas y dejamos a los agentes operando los flujos repetitivos.</p>
+            <h3><a href="/servicios.html#piloto">Piloto de automatización</a></h3>
+            <p>4–6 semanas. Un proceso tuyo automatizado en producción, con métricas y 30 días de garantía. Desde 6.000 €.</p>
           </article>
           <article>
-            <h3>Acompañamiento</h3>
-            <p>Tu equipo aprende a trabajar con agentes mientras los agentes trabajan para ti.</p>
+            <h3><a href="/servicios.html#acompanamiento">Acompañamiento gobernado</a></h3>
+            <p>Mensual sin permanencia. Tu equipo de IA externalizado: agentes, gobernanza y oncall. Desde 3.500 €/mes.</p>
           </article>
         </div>
+        <p style="text-align: center; margin-top: 1.5rem;">
+          <a class="cta" href="/servicios.html">Ver paquetes y precios →</a>
+        </p>
       </section>
 
       <section class="section" id="aprende">
@@ -186,7 +190,11 @@
             compromisos: si no te encaja, te decimos qué tendrías que hacer por tu cuenta.
           </p>
 
+          <p class="contact__paquete" data-contact-paquete hidden></p>
+
           <form class="contact__form" data-contact-form novalidate>
+            <input type="hidden" name="paquete" value="" data-contact-paquete-input />
+
             <label>
               <span>Nombre</span>
               <input type="text" name="name" autocomplete="name" required maxlength="100" />

@@ -16,6 +16,7 @@ const NAME_MAX = 100;
 const SECTOR_MAX = 80;
 const MESSAGE_MAX = 2000;
 const SOURCE_MAX = 40;
+const PAQUETE_ALLOWED = new Set(["diagnostico-express", "piloto", "acompanamiento"]);
 const ARCHIVE_TTL_SECONDS = 60 * 60 * 24 * 90;
 const RATE_LIMIT_TTL_SECONDS = 60 * 60;
 const LEADS_PER_IP_PER_HOUR = 5;
@@ -71,6 +72,10 @@ export function parseSubmission(body: unknown): ContactSubmission | null {
   const sector = typeof sectorRaw === "string" ? sectorRaw.trim().slice(0, SECTOR_MAX) : "";
   const sourceRaw = b.source;
   const source = typeof sourceRaw === "string" ? sourceRaw.trim().slice(0, SOURCE_MAX) : "";
+  const paqueteRaw = b.paquete;
+  const paqueteCandidate =
+    typeof paqueteRaw === "string" ? paqueteRaw.trim().toLowerCase() : "";
+  const paquete = PAQUETE_ALLOWED.has(paqueteCandidate) ? paqueteCandidate : "";
   const websiteRaw = b.website;
   const website = typeof websiteRaw === "string" ? websiteRaw : "";
 
@@ -80,6 +85,7 @@ export function parseSubmission(body: unknown): ContactSubmission | null {
     message,
     sector: sector || undefined,
     source: source || undefined,
+    paquete: paquete || undefined,
     website,
   };
 }
@@ -119,7 +125,8 @@ async function createPaperclipLeadIssue(env: ContactEnv, record: ContactRecord):
   }
 
   const sectorTag = record.sector ? record.sector : "sector sin especificar";
-  const title = `Lead: ${record.name} (${sectorTag})`.slice(0, 200);
+  const paqueteTag = record.paquete ? ` [${record.paquete}]` : "";
+  const title = `Lead${paqueteTag}: ${record.name} (${sectorTag})`.slice(0, 200);
 
   const description = [
     "## Lead capturado en autonomia.itera.es",
@@ -127,6 +134,7 @@ async function createPaperclipLeadIssue(env: ContactEnv, record: ContactRecord):
     `**Nombre:** ${record.name}`,
     `**Email:** ${record.email}`,
     `**Sector:** ${record.sector ?? "—"}`,
+    `**Paquete preseleccionado:** ${record.paquete ?? "—"}`,
     `**Origen del formulario:** ${record.source ?? "home"}`,
     `**Recibido:** ${record.createdAt}`,
     `**IP:** ${record.ip}`,
