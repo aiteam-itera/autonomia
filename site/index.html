@@ -11,6 +11,35 @@
     <link rel="stylesheet" href="/assets/style.css" />
   </head>
   <body>
+    <div
+      id="intro-overlay"
+      class="intro"
+      role="dialog"
+      aria-label="Animación de introducción"
+      aria-live="polite"
+      hidden
+    >
+      <button type="button" class="intro__skip" data-intro-skip>
+        Saltar intro <kbd>Esc</kbd>
+      </button>
+      <div class="intro__stage" data-intro-stage="chat">
+        <div class="intro__chat">
+          <div class="intro__avatar" aria-hidden="true">IA</div>
+          <div class="intro__bubble">
+            <span class="intro__text" data-intro-text></span><span
+              class="intro__caret"
+              aria-hidden="true"
+              >▍</span
+            >
+          </div>
+        </div>
+        <pre
+          class="intro__code"
+          data-intro-code
+          aria-hidden="true"
+        ><code></code></pre>
+      </div>
+    </div>
     <header class="hero">
       <nav class="nav">
         <span class="brand">AutonomIA</span>
@@ -118,5 +147,6 @@
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
+    <script src="/assets/intro.js" defer></script>
   </body>
 </html>
