@@ -1,11 +1,36 @@
 :root {
   --bg: #0b0d12;
   --fg: #f5f6fa;
-  --muted: #9aa1b2;
-  --accent: #6366f1;
-  --accent-fg: #ffffff;
+  --muted: #b4bccd;
+  --accent: #818cf8;
+  --accent-deep: #6366f1;
+  --accent-fg: #0b0d12;
   --card: #141823;
   --max: 960px;
+}
+
+/* ---------- Skip link (WCAG 2.4.1 Bypass Blocks) ---------- */
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10000;
+  background: var(--accent);
+  color: var(--accent-fg);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform 0.15s ease-out;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
 }
 
 * {
@@ -64,6 +89,15 @@ a:hover {
   padding: 0.5rem 1rem;
   border-radius: 999px;
   font-size: 0.95rem;
+}
+
+.cta:focus-visible,
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
 .cta--primary {
@@ -165,7 +199,7 @@ a:hover {
 }
 
 .cta--ghost {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.45);
   color: var(--fg);
 }
 
@@ -299,6 +333,20 @@ a:hover {
   gap: 0.75rem;
   margin-top: 2rem;
   flex-wrap: wrap;
+}
+
+.quiz__error {
+  margin: 1.25rem 0 0;
+  padding: 0.7rem 0.9rem;
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  border-radius: 10px;
+  color: #fecaca;
+  font-size: 0.95rem;
+}
+
+.quiz__error[hidden] {
+  display: none;
 }
 
 .quiz__nav[hidden],

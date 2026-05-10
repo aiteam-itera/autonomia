@@ -41,6 +41,7 @@
     -->
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <header class="hero hero--compact">
       <nav class="nav">
         <a class="brand" href="/">AutonomIA</a>
@@ -58,7 +59,7 @@
       </div>
     </header>
 
-    <main class="section">
+    <main id="main-content" tabindex="-1" class="section">
       <form id="quiz" class="quiz" novalidate aria-label="Cuestionario de madurez de IA">
         <div class="quiz__progress" aria-hidden="true">
           <div class="quiz__progress-bar" id="progress-bar"></div>
@@ -379,7 +380,9 @@
           </div>
         </section>
 
-        <nav class="quiz__nav" id="quiz-nav">
+        <p class="quiz__error" id="quiz-error" role="alert" aria-live="assertive" hidden></p>
+
+        <nav class="quiz__nav" id="quiz-nav" aria-label="Navegación del cuestionario">
           <button type="button" class="cta" id="btn-prev" disabled>← Anterior</button>
           <button type="button" class="cta cta--primary" id="btn-next">Siguiente →</button>
           <button type="button" class="cta cta--primary" id="btn-finish" hidden>Ver mi diagnóstico</button>
@@ -452,30 +455,70 @@
         }
 
         // ---------- validation ----------
+        const errorEl = document.getElementById("quiz-error");
+
+        function clearError(step) {
+          errorEl.hidden = true;
+          errorEl.textContent = "";
+          if (step) {
+            step.querySelectorAll(".quiz__question--error").forEach((q) => {
+              q.classList.remove("quiz__question--error");
+            });
+            step.querySelectorAll('[aria-invalid="true"]').forEach((f) => {
+              f.removeAttribute("aria-invalid");
+            });
+          }
+        }
+
+        function reportError(field, message) {
+          // Visual marker on the affected question
+          const q = field.closest(".quiz__question");
+          if (q) q.classList.add("quiz__question--error");
+          field.setAttribute("aria-invalid", "true");
+          // Live-region announcement (role=alert auto-announces when content changes)
+          errorEl.hidden = false;
+          errorEl.textContent = message;
+          // Move focus to the offending control after the announcement
+          field.focus({ preventScroll: false });
+        }
+
+        function questionLabelFor(field) {
+          const q = field.closest(".quiz__question");
+          if (!q) return "una pregunta de esta sección";
+          const label = q.querySelector(".quiz__q");
+          return label ? label.textContent.trim().replace(/\s+/g, " ") : "una pregunta de esta sección";
+        }
+
         function validateStep(idx) {
           const step = steps[idx - 1];
+          clearError(step);
           const required = step.querySelectorAll("[required]");
           let firstInvalid = null;
+          let invalidReason = "";
           for (const field of required) {
             if (field.type === "radio") {
               const group = form.querySelectorAll('[name="' + field.name + '"]');
               const checked = Array.from(group).some((g) => g.checked);
-              if (!checked && !firstInvalid) firstInvalid = field;
+              if (!checked && !firstInvalid) {
+                firstInvalid = field;
+                invalidReason = "Falta responder: " + questionLabelFor(field);
+              }
             } else if (!field.value.trim()) {
-              if (!firstInvalid) firstInvalid = field;
+              if (!firstInvalid) {
+                firstInvalid = field;
+                invalidReason = "Falta completar: " + questionLabelFor(field);
+              }
             } else if (field.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) {
-              if (!firstInvalid) firstInvalid = field;
+              if (!firstInvalid) {
+                firstInvalid = field;
+                invalidReason = "El email no parece válido. Revisa el formato (ej.: tu@empresa.com).";
+              }
             }
           }
           if (firstInvalid) {
-            firstInvalid.focus();
-            const q = firstInvalid.closest(".quiz__question");
-            if (q) q.classList.add("quiz__question--error");
+            reportError(firstInvalid, invalidReason);
             return false;
           }
-          step.querySelectorAll(".quiz__question--error").forEach((q) =>
-            q.classList.remove("quiz__question--error")
-          );
           return true;
         }
 
@@ -487,6 +530,7 @@
           btnPrev.disabled = n === 1;
           btnNext.hidden = n === TOTAL_STEPS;
           btnFinish.hidden = n !== TOTAL_STEPS;
+          clearError(steps[n - 1]);
           // focus first input of the new step for keyboard users
           const focusable = steps[n - 1].querySelector("input, textarea, select, button");
           if (focusable) focusable.focus({ preventScroll: false });
