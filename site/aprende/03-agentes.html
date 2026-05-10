@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nivel 3 — Agentes IA en tu pyme — AutonomIA</title>
+    <meta
+      name="description"
+      content="Qué es un agente IA, en qué se diferencia de una automatización, y tres casos reales para una pyme — con qué controlar antes de soltarlo."
+    />
+    <meta name="aprende-level" content="03-agentes" />
+    <link rel="canonical" href="https://www.autonomia.es/aprende/03-agentes.html" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="AutonomIA" />
+    <meta property="og:title" content="Nivel 3 — Agentes IA en tu pyme" />
+    <meta
+      property="og:description"
+      content="Tercer escalón: un LLM con herramientas que decide qué pasos dar para cumplir un objetivo, no sólo seguir un guion."
+    />
+    <meta property="og:url" content="https://www.autonomia.es/aprende/03-agentes.html" />
+
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <header class="hero hero--compact">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
+      </nav>
+    </header>
+
+    <main class="post">
+      <header class="post__hero">
+        <h1>Nivel 3 — Agentes</h1>
+        <div class="post__meta">
+          <span>Currículo · Nivel 3 de 4</span>
+          <span>14 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="post__body">
+        <h2>Qué es</h2>
+        <p>
+          Un agente es un modelo de lenguaje (LLM) con acceso a herramientas — APIs, base de
+          datos, navegador, calendario, email — que recibe un objetivo y <strong>decide por
+          su cuenta qué pasos dar</strong> para cumplirlo. La automatización del nivel 2
+          ejecuta una secuencia fija; el agente <em>elige</em> la secuencia en cada caso.
+        </p>
+        <p>
+          Esto cambia el modelo mental: en vez de pedir "haz A, después B, después C", le
+          dices al agente "consigue X" y le das un set de herramientas. Él decide cuáles
+          usar, en qué orden, y cuándo darse por satisfecho.
+        </p>
+
+        <h2>Tres casos reales para una pyme</h2>
+
+        <h3>1. Agente comercial que cualifica leads</h3>
+        <p>
+          Llega un lead con nombre y empresa. El agente busca a la persona en LinkedIn, mira
+          la web de la empresa, deduce sector y tamaño, consulta tu CRM por si ya
+          interactuasteis y, si encaja con el perfil ideal, le manda un email personalizado
+          proponiendo una demo en un hueco real de tu calendar. Si no encaja, lo descarta con
+          una nota explicativa.
+        </p>
+
+        <h3>2. Agente de soporte de primer nivel</h3>
+        <p>
+          Llega un ticket. El agente busca en tu base de conocimiento (Notion, Help Scout,
+          etc.), redacta una respuesta, y si está seguro la envía directamente. Si no, escala
+          al humano con el ticket etiquetado, contexto resumido y enlaces relevantes ya
+          buscados. El humano hace 3× más tickets en el mismo tiempo porque llega con todo
+          masticado.
+        </p>
+
+        <h3>3. Agente de operaciones nocturno</h3>
+        <p>
+          Cada noche, un agente compara el stock real (consultando vuestro almacén) con el
+          stock que dice el ERP. Por cada discrepancia abre un ticket en Notion con el SKU,
+          la diferencia, el patrón histórico, y una hipótesis de causa. Por la mañana el
+          responsable se sienta y solo decide; ya no investiga.
+        </p>
+
+        <h2>Cómo lo haces bien</h2>
+        <ul>
+          <li><strong>Define el alcance con cuchillo.</strong> Lista <em>exactamente</em>
+            qué herramientas puede usar el agente y qué no. "Puede leer Drive, no puede
+            borrar." "Puede mandar emails sólo a dominios de la lista blanca." Sin alcance
+            estricto, antes o después se pasa de la raya.</li>
+          <li><strong>Logs auditables.</strong> Cada decisión del agente — qué herramienta
+            llamó, con qué parámetros, qué respondió — debe quedar registrada y consultable.
+            No para vigilarlo, para entender por qué hizo lo que hizo cuando algo sale mal.</li>
+          <li><strong>Humano con poder de revertir.</strong> Toda acción crítica (mandar
+            email, cobrar, borrar) debe poderse cancelar fácilmente desde un panel humano,
+            sin tocar código.</li>
+          <li><strong>Empieza con humano-en-el-loop.</strong> Las primeras semanas, el
+            agente prepara la acción y un humano la aprueba con un clic. Cuando llevas 50
+            aprobaciones seguidas sin corregir nada, le quitas el clic.</li>
+          <li><strong>Presupuesto y límites.</strong> Define cuántas llamadas al modelo y
+            cuántas acciones puede ejecutar al día. Un bug en el prompt puede generar un
+            bucle infinito que cuesta dinero real.</li>
+          <li><strong>Define qué <em>no</em> puede hacer el agente.</strong> Esto es más
+            importante que la lista de lo que sí puede. Política explícita de "stop" para
+            casos sensibles (datos médicos, decisiones legales, despidos, etc.).</li>
+        </ul>
+
+        <h2>Sabes hacer esto cuando…</h2>
+        <ul class="level-checklist">
+          <li>Tienes al menos un agente operando en producción con un objetivo claro y un alcance documentado.</li>
+          <li>Cada acción del agente queda registrada con quién, qué y por qué.</li>
+          <li>Hay un humano nombrado que puede pausar, revertir o reasignar las acciones del agente desde una interfaz.</li>
+          <li>Tienes presupuesto y rate-limits configurados para que un fallo no te cueste un mes de hosting en una noche.</li>
+          <li>Sabes evaluar la calidad del agente con métricas concretas (tasa de cierre, % de respuestas correctas, etc.), no sólo "parece que va bien".</li>
+        </ul>
+
+        <h2>¿Por qué subir al nivel 4?</h2>
+        <p>
+          Un agente solo escala hasta cierto punto. Cuando empiezas a tener varios agentes que
+          deben coordinarse — un comercial que pasa cuentas a un account manager que pasa
+          implantaciones a un PM —, ya no basta con un agente: necesitas una <strong>jerarquía
+          gobernada</strong> con reglas, presupuesto compartido y supervisión. Eso es un
+          orquestador.
+        </p>
+      </article>
+
+      <nav class="level-nav" aria-label="Navegación entre niveles">
+        <a class="cta" href="/aprende/02-automatizaciones.html">← Anterior: Automatizaciones</a>
+        <span class="level-nav__sep">·</span>
+        <a class="cta" href="/aprende/">Currículo</a>
+        <span class="level-nav__sep">·</span>
+        <a class="cta cta--primary" href="/aprende/04-orquestadores.html">Siguiente: Orquestadores →</a>
+      </nav>
+
+      <aside class="post__next" aria-label="Siguiente paso">
+        <h2>¿Estás listo para meter tu primer agente?</h2>
+        <p>
+          El cuestionario evalúa la dimensión <em>Agentes</em> y también la de
+          <em>Gobernanza</em>: si una de las dos sale baja, mejor consolidar antes de
+          desplegar nada en producción.
+        </p>
+        <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico</a>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year">2026</span> AutonomIA — Sitio gobernado por agentes.</small>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="/assets/aprende.js" defer></script>
+  </body>
+</html>

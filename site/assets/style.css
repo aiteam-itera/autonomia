@@ -50,6 +50,13 @@ a:hover {
   letter-spacing: 0.5px;
 }
 
+.nav__links {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .cta {
   display: inline-block;
   border: 1px solid var(--accent);
@@ -695,4 +702,170 @@ a:hover {
 .comments__hint[data-tone="ok"] {
   background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.4);
+}
+
+/* ---------- Aprende (currículo por nivel) ---------- */
+
+.aprende {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+
+.aprende__intro {
+  color: var(--muted);
+  margin: 0 0 2rem;
+  max-width: 38rem;
+}
+
+.aprende__progress {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.aprende__progress-track {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.6rem;
+}
+
+.aprende__progress-bar {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.3s ease-out;
+}
+
+.aprende__progress-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.levels {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.level-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: border-color 0.15s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.level-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.level-card--done {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.05), var(--card));
+}
+
+.level-card__meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.level-card__status {
+  font-weight: 600;
+}
+
+.level-card--done .level-card__status {
+  color: #22c55e;
+}
+
+.level-card a {
+  color: var(--fg);
+}
+
+.level-card a:hover {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.level-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.level-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Páginas individuales de nivel reutilizan .post */
+
+.level-checklist {
+  margin: 1.5rem 0 0;
+  padding: 1.25rem 1.5rem;
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  list-style: none;
+}
+
+.level-checklist li {
+  position: relative;
+  padding-left: 1.75rem;
+  margin: 0.6rem 0;
+  color: var(--fg);
+}
+
+.level-checklist li::before {
+  content: "☐";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.level-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin: 2rem 0 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.level-nav .cta {
+  margin-top: 0;
+}
+
+.level-nav__sep {
+  color: var(--muted);
+}
+
+/* Recomendaciones por dimensión en el resultado del cuestionario */
+
+.result__bar-link {
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
 }

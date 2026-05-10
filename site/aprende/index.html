@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aprende IA paso a paso — AutonomIA</title>
+    <meta
+      name="description"
+      content="Currículo guiado para adoptar IA en tu pyme: chats, automatizaciones, agentes y orquestadores. Lee en orden, marca tu progreso."
+    />
+    <link rel="canonical" href="https://www.autonomia.es/aprende/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="AutonomIA" />
+    <meta property="og:title" content="Aprende IA paso a paso — AutonomIA" />
+    <meta
+      property="og:description"
+      content="Currículo en 4 niveles para adoptar IA en tu pyme: chats, automatizaciones, agentes y orquestadores."
+    />
+    <meta property="og:url" content="https://www.autonomia.es/aprende/" />
+
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <header class="hero hero--compact">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
+      </nav>
+      <div class="hero__content">
+        <h1>Aprende IA paso a paso</h1>
+        <p>
+          Cuatro niveles, en orden. Empieza por chats si no has tocado IA todavía y termina en
+          orquestadores si quieres entender cómo funciona una empresa gobernada por agentes.
+        </p>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="aprende">
+        <p class="aprende__intro">
+          Este es un currículo, no un blog. Cada nivel asume que dominas el anterior. Si ya
+          haces automatizaciones, sáltate el primer nivel; si no sabes por dónde empezar, hazlo
+          en orden y marca tu progreso.
+        </p>
+
+        <section class="aprende__progress" aria-label="Tu progreso">
+          <p class="aprende__progress-text" data-aprende-progress="counter">
+            Aún no has abierto ningún nivel.
+          </p>
+          <div
+            class="aprende__progress-track"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            aria-label="Niveles abiertos"
+          >
+            <span class="aprende__progress-bar" data-aprende-progress="bar"></span>
+          </div>
+        </section>
+
+        <ul class="levels">
+          <li class="level-card" data-aprende-card="01-chats">
+            <span class="level-card__meta">
+              <span>Nivel 1</span>
+              <span class="level-card__status" data-aprende-status>Pendiente</span>
+            </span>
+            <h3><a href="/aprende/01-chats.html">Chats con IA</a></h3>
+            <p>
+              Usar ChatGPT, Claude, Gemini o Copilot como ayudante personal en tareas concretas
+              del día a día. El primer escalón.
+            </p>
+          </li>
+          <li class="level-card" data-aprende-card="02-automatizaciones">
+            <span class="level-card__meta">
+              <span>Nivel 2</span>
+              <span class="level-card__status" data-aprende-status>Pendiente</span>
+            </span>
+            <h3><a href="/aprende/02-automatizaciones.html">Automatizaciones</a></h3>
+            <p>
+              Flujos sin humano que conectan tus herramientas — Make, Zapier, n8n, Power
+              Automate — y opcionalmente meten un paso de IA.
+            </p>
+          </li>
+          <li class="level-card" data-aprende-card="03-agentes">
+            <span class="level-card__meta">
+              <span>Nivel 3</span>
+              <span class="level-card__status" data-aprende-status>Pendiente</span>
+            </span>
+            <h3><a href="/aprende/03-agentes.html">Agentes</a></h3>
+            <p>
+              Un LLM con acceso a herramientas que decide qué pasos dar para cumplir un objetivo.
+              Sustituye procesos completos, no sólo tareas sueltas.
+            </p>
+          </li>
+          <li class="level-card" data-aprende-card="04-orquestadores">
+            <span class="level-card__meta">
+              <span>Nivel 4</span>
+              <span class="level-card__status" data-aprende-status>Pendiente</span>
+            </span>
+            <h3><a href="/aprende/04-orquestadores.html">Orquestadores</a></h3>
+            <p>
+              Una empresa entera de agentes con jerarquía, presupuesto, aprobaciones y
+              auditoría. Aquí vive AutonomIA, Paperclip e Ironclip.
+            </p>
+          </li>
+        </ul>
+
+        <aside class="post__next" aria-label="Siguiente paso">
+          <h2>¿No sabes por dónde empezar?</h2>
+          <p>
+            Contesta el cuestionario de madurez (5 minutos) y te decimos qué nivel deberías leer
+            primero según el estado actual de tu empresa.
+          </p>
+          <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico</a>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year">2026</span> AutonomIA — Sitio gobernado por agentes.</small>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="/assets/aprende.js" defer></script>
+  </body>
+</html>

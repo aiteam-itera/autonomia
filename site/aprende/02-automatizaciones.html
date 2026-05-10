@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nivel 2 — Automatizaciones con IA en tu pyme — AutonomIA</title>
+    <meta
+      name="description"
+      content="Make, Zapier, n8n y Power Automate aplicados a una pyme: tres flujos reales que ahorran horas, qué medir y dónde meterá IA."
+    />
+    <meta name="aprende-level" content="02-automatizaciones" />
+    <link rel="canonical" href="https://www.autonomia.es/aprende/02-automatizaciones.html" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="AutonomIA" />
+    <meta property="og:title" content="Nivel 2 — Automatizaciones con IA" />
+    <meta
+      property="og:description"
+      content="El segundo escalón: flujos sin humano que conectan tus herramientas y meten IA donde aporta."
+    />
+    <meta property="og:url" content="https://www.autonomia.es/aprende/02-automatizaciones.html" />
+
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <header class="hero hero--compact">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
+      </nav>
+    </header>
+
+    <main class="post">
+      <header class="post__hero">
+        <h1>Nivel 2 — Automatizaciones</h1>
+        <div class="post__meta">
+          <span>Currículo · Nivel 2 de 4</span>
+          <span>12 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="post__body">
+        <h2>Qué es</h2>
+        <p>
+          Una automatización es un flujo que se dispara solo cuando ocurre algo (un email, un
+          formulario, un fichero subido a Drive…) y ejecuta una secuencia fija de pasos sin
+          intervención humana. Las herramientas más usadas en pyme son <strong>Make</strong>,
+          <strong>Zapier</strong>, <strong>n8n</strong> y <strong>Microsoft Power
+          Automate</strong>. Algunas también permiten meter un paso de IA a mitad del flujo
+          (resumir, clasificar, redactar) y eso es lo que las convierte en <em>automatizaciones
+          con IA</em>.
+        </p>
+        <p>
+          La diferencia con el nivel 1 es brutal: en chats tú abres una pestaña y pides algo;
+          en automatizaciones, el sistema actúa <strong>aunque tú no estés delante</strong>.
+        </p>
+
+        <h2>Tres flujos reales para una pyme</h2>
+
+        <h3>1. Email entrante → ticket en CRM → aviso al equipo</h3>
+        <p>
+          Cada vez que llega un email a <code>hola@tuempresa.com</code>, el flujo crea un
+          ticket en HubSpot (o Pipedrive, o el CRM que uses), clasifica con IA si es venta /
+          soporte / spam, y avisa al canal de Slack correspondiente con un resumen de tres
+          líneas. Resultado: nadie pierde un email, todo queda trazado y el comercial llega a
+          la mañana con la bandeja priorizada.
+        </p>
+
+        <h3>2. Factura recibida → datos extraídos → registro contable</h3>
+        <p>
+          Subes una factura PDF a una carpeta de Drive (o reenvías un correo a una dirección
+          dedicada). El flujo la pasa por un OCR + IA que extrae proveedor, fecha, importe e
+          IVA, y registra todo en Google Sheets o directamente en Holded / Contasol. La
+          asesoría sigue revisando, pero deja de teclear.
+        </p>
+
+        <h3>3. Lead web → cualificación con IA → enrutado al comercial correcto</h3>
+        <p>
+          Llega un formulario de contacto. Una IA mira lo que escribió el lead y decide:
+          ¿pyme local? ¿gran cuenta? ¿soporte? Según el perfil, asigna al comercial adecuado,
+          le manda un Slack y guarda la justificación de la decisión en el CRM por si hay que
+          auditarla.
+        </p>
+
+        <h2>Cómo lo haces bien</h2>
+        <ul>
+          <li><strong>Empieza por uno solo.</strong> Elige el flujo más doloroso y
+            automatízalo de punta a punta antes de tocar el siguiente. Tres flujos a medias
+            son peores que uno funcionando.</li>
+          <li><strong>Mide tiempo ahorrado.</strong> Antes de empezar, cronometra cuánto
+            tarda alguien hoy en hacer ese flujo a mano. Después del despliegue, vuelve a
+            medir. Sin números no hay justificación para escalar.</li>
+          <li><strong>Pon manejo de errores.</strong> ¿Qué pasa si la IA no sabe clasificar
+            el email? ¿Si Drive está caído? Configura un canal de avisos para fallos y un
+            humano que los revise una vez al día.</li>
+          <li><strong>Versiona tus flujos.</strong> Make y n8n permiten exportar el flujo
+            como JSON. Guárdalo en un repo o en Drive con versión y fecha. Te salvará el día
+            que alguien cambie algo y todo deje de funcionar.</li>
+          <li><strong>No automatices procesos rotos.</strong> Si tu proceso manual ya da
+            problemas, automatizarlo sólo los amplifica. Arregla primero el proceso, después
+            mete la herramienta.</li>
+        </ul>
+
+        <h2>Sabes hacer esto cuando…</h2>
+        <ul class="level-checklist">
+          <li>Tienes al menos un flujo en producción que se ejecuta sin intervención humana cada día.</li>
+          <li>Has medido cuánto tiempo ahorra y puedes ponerlo en una diapositiva.</li>
+          <li>Tienes definido qué hacer cuando el flujo falla (alertas, persona responsable, registro).</li>
+          <li>El flujo está versionado y documentado en algún sitio que no sea sólo la cabeza de quien lo montó.</li>
+          <li>Si meas IA en algún paso, el coste por ejecución y el límite mensual están bajo control.</li>
+        </ul>
+
+        <h2>¿Por qué subir al nivel 3?</h2>
+        <p>
+          Las automatizaciones tienen un techo: son <strong>flujos fijos</strong>. Si llega
+          algo que no encaja en el camino predefinido, fallan. Cuando empiezas a tener casos
+          que requieren <em>decidir qué hacer</em> en función del contexto — no sólo
+          ejecutar pasos predefinidos — necesitas un agente.
+        </p>
+      </article>
+
+      <nav class="level-nav" aria-label="Navegación entre niveles">
+        <a class="cta" href="/aprende/01-chats.html">← Anterior: Chats</a>
+        <span class="level-nav__sep">·</span>
+        <a class="cta" href="/aprende/">Currículo</a>
+        <span class="level-nav__sep">·</span>
+        <a class="cta cta--primary" href="/aprende/03-agentes.html">Siguiente: Agentes →</a>
+      </nav>
+
+      <aside class="post__next" aria-label="Siguiente paso">
+        <h2>¿Tu empresa tiene esta capa montada?</h2>
+        <p>
+          El cuestionario evalúa específicamente la dimensión <em>Automatizaciones</em>. Si
+          sale baja, sabrás dónde concentrar las próximas semanas; si sale alta, ya estás
+          listo para el nivel 3.
+        </p>
+        <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico</a>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year">2026</span> AutonomIA — Sitio gobernado por agentes.</small>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="/assets/aprende.js" defer></script>
+  </body>
+</html>

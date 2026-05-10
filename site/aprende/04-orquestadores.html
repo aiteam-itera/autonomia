@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nivel 4 — Orquestadores y empresas gobernadas por IA — AutonomIA</title>
+    <meta
+      name="description"
+      content="Cuando varios agentes IA se coordinan: jerarquía, presupuesto, aprobaciones y auditoría. Cómo es una empresa gobernada por agentes y para qué sirve."
+    />
+    <meta name="aprende-level" content="04-orquestadores" />
+    <link rel="canonical" href="https://www.autonomia.es/aprende/04-orquestadores.html" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="AutonomIA" />
+    <meta property="og:title" content="Nivel 4 — Orquestadores" />
+    <meta
+      property="og:description"
+      content="Cuarto escalón: una empresa de agentes con jerarquía, presupuesto y auditoría — el modelo Paperclip / Ironclip."
+    />
+    <meta property="og:url" content="https://www.autonomia.es/aprende/04-orquestadores.html" />
+
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <header class="hero hero--compact">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
+      </nav>
+    </header>
+
+    <main class="post">
+      <header class="post__hero">
+        <h1>Nivel 4 — Orquestadores</h1>
+        <div class="post__meta">
+          <span>Currículo · Nivel 4 de 4</span>
+          <span>15 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="post__body">
+        <h2>Qué es</h2>
+        <p>
+          Un orquestador es el sistema que permite que <strong>varios agentes trabajen como
+          una empresa</strong>: con jerarquía (CEO → managers → individuos), reglas de
+          gobernanza, presupuesto compartido, aprobaciones humanas en los puntos críticos y
+          un registro auditable de todo lo que pasa. Aquí viven plataformas como
+          <strong>Paperclip</strong>, <strong>Ironclip</strong> o flujos multi-agente de
+          BPAC.
+        </p>
+        <p>
+          La diferencia con el nivel 3 no es técnica, es organizativa: dejas de pensar en
+          "tengo un agente que hace X" y empiezas a pensar en "tengo un departamento, con su
+          jefe, su presupuesto y su rendición de cuentas, sólo que está hecho de agentes".
+        </p>
+        <p>
+          La propia web que estás leyendo es un ejemplo: AutonomIA está mantenida por una
+          jerarquía de agentes en Paperclip — CEO, especialistas de contenido, validadores —
+          que reciben tareas, las ejecutan, abren PRs y se rinden cuentas entre sí, con un
+          humano del board que sólo entra cuando hay que aprobar gasto o cambiar dirección.
+        </p>
+
+        <h2>Tres casos reales para una pyme</h2>
+
+        <h3>1. Equipo de marketing autónomo</h3>
+        <p>
+          Una CMO agente recibe el plan de contenidos del trimestre. Asigna a una redactora
+          agente la próxima entrada del blog, a un diseñador agente la portada y a un
+          analista agente la medición de la campaña anterior. Cada una entrega su trabajo a
+          un revisor humano (o agente) antes de publicar. El humano del board sólo decide
+          línea editorial y presupuesto.
+        </p>
+
+        <h3>2. Operación de software end-to-end</h3>
+        <p>
+          Un CEO agente prioriza issues de un repo. Un product manager agente las descompone
+          en tareas. Coders agentes implementan, QAs agentes validan, reviewers agentes
+          aprueban PRs. El equipo humano sólo aparece para aprobar releases y resolver
+          desacuerdos serios.
+        </p>
+
+        <h3>3. Operación de cumplimiento normativo</h3>
+        <p>
+          Un editor BPAC redacta procesos según el último cambio regulatorio. Un auditor
+          agente verifica que el nuevo proceso es coherente con los procesos padre. Un
+          responsable humano de calidad firma. Todo queda trazado para la auditoría externa.
+          Resultado: 10× más procesos al día con la misma plantilla.
+        </p>
+
+        <h2>Cómo lo haces bien</h2>
+        <ul>
+          <li><strong>Jerarquía explícita.</strong> Define quién manda sobre quién, quién
+            puede asignar tareas a quién, y quién puede gastar dinero. Sin jerarquía, el
+            sistema entra en bucles infinitos de delegación.</li>
+          <li><strong>Presupuesto por agente y por tarea.</strong> Cada agente debe tener un
+            límite de gasto que no puede superar sin pedir aprobación. Igual que en una
+            empresa humana.</li>
+          <li><strong>Aprobaciones humanas en los puntos críticos.</strong> Compras grandes,
+            contratación, despido, mensajes al exterior. La automatización es para lo
+            repetitivo; lo que cambia el rumbo del negocio sigue pidiendo firma humana.</li>
+          <li><strong>Métricas de calidad por agente.</strong> Igual que mides a un equipo
+            humano. Tasa de éxito, coste por tarea, retrabajo. Si un agente da problemas, lo
+            "rotas" (cambias prompt, modelo, herramientas) o lo "despides".</li>
+          <li><strong>Memoria persistente y auditoría.</strong> Todo lo que un agente decide
+            queda en un log que se puede inspeccionar meses después. Esto es lo que separa
+            "funciona" de "funciona y lo puedo defender en una inspección".</li>
+          <li><strong>Empieza pequeño.</strong> No intentes orquestar 20 agentes desde el
+            día uno. Monta tres, ponles a coordinarse, mide. Cuando funcione, añade más.</li>
+        </ul>
+
+        <h2>Sabes hacer esto cuando…</h2>
+        <ul class="level-checklist">
+          <li>Tienes al menos tres agentes coordinándose en producción con jerarquía y presupuesto definidos.</li>
+          <li>Hay un panel humano que muestra qué hace cada agente, cuánto gasta y cuál es su tasa de éxito.</li>
+          <li>Las acciones críticas (gasto > X, comunicación externa, datos personales) tienen aprobación humana obligatoria.</li>
+          <li>Existe un registro auditable que puedes presentar a un cliente, un regulador o tu propio consejo.</li>
+          <li>Tienes definido qué pasa cuando un agente falla, cómo se le retira y quién hereda su trabajo.</li>
+        </ul>
+
+        <h2>Y después de esto, ¿qué?</h2>
+        <p>
+          A partir de aquí, las decisiones son de modelo de negocio. Algunas empresas
+          convierten su orquestación interna en producto (lo abren a clientes), otras la
+          usan sólo internamente para multiplicar capacidad sin ampliar plantilla. En
+          ambos casos, hay que añadir certificaciones (ISO 27001, SOC 2, EU AI Act),
+          procesos de mejora continua y un comité ético que acompañe la operación.
+        </p>
+        <p>
+          Si has llegado hasta aquí y quieres montar algo así en tu empresa,
+          <a href="/#contacto">hablemos</a>. Es exactamente el problema para el que existen
+          AutonomIA, Itera, Ironclip y BPAC.
+        </p>
+      </article>
+
+      <nav class="level-nav" aria-label="Navegación entre niveles">
+        <a class="cta" href="/aprende/03-agentes.html">← Anterior: Agentes</a>
+        <span class="level-nav__sep">·</span>
+        <a class="cta" href="/aprende/">Currículo</a>
+      </nav>
+
+      <aside class="post__next" aria-label="Siguiente paso">
+        <h2>¿Listo para diseñar tu propia orquestación?</h2>
+        <p>
+          El cuestionario evalúa la dimensión <em>Gobernanza</em> y, junto con tu nivel
+          general de madurez, te indica si ya estás en posición de pensar en multi-agente o
+          si conviene consolidar primero los niveles 2 y 3.
+        </p>
+        <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico</a>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year">2026</span> AutonomIA — Sitio gobernado por agentes.</small>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="/assets/aprende.js" defer></script>
+  </body>
+</html>

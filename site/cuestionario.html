@@ -19,7 +19,10 @@
     <header class="hero hero--compact">
       <nav class="nav">
         <a class="brand" href="/">AutonomIA</a>
-        <a class="cta" href="/">Volver a la home</a>
+        <span class="nav__links">
+          <a class="cta cta--ghost" href="/aprende/">Aprende</a>
+          <a class="cta" href="/">Volver a la home</a>
+        </span>
       </nav>
       <div class="hero__content">
         <h1>¿En qué punto está tu empresa con la IA?</h1>
@@ -480,6 +483,16 @@
           datos: "Datos y procesos",
         };
 
+        // Si una dimensión sale baja, sugerimos el nivel del currículo /aprende/ correspondiente.
+        const DIMENSION_LEVEL = {
+          uso: { href: "/aprende/01-chats.html", label: "Aprender chats" },
+          auto: { href: "/aprende/02-automatizaciones.html", label: "Aprender automatizaciones" },
+          agentes: { href: "/aprende/03-agentes.html", label: "Aprender agentes" },
+          gobernanza: { href: "/aprende/04-orquestadores.html", label: "Aprender orquestadores" },
+          datos: { href: "/aprende/02-automatizaciones.html", label: "Aprender automatizaciones" },
+        };
+        const LOW_DIMENSION_THRESHOLD = 50;
+
         function scoreAnswers(data) {
           const dimSums = {};
           const dimMax = {};
@@ -542,9 +555,18 @@
             const value = dims[key] || 0;
             const row = document.createElement("div");
             row.className = "result__bar-row";
+            const recommend = value < LOW_DIMENSION_THRESHOLD ? DIMENSION_LEVEL[key] : null;
+            const recommendHtml = recommend
+              ? '<a class="result__bar-link" href="' +
+                recommend.href +
+                '" title="Ir al nivel recomendado del currículo">' +
+                recommend.label +
+                " →</a>"
+              : "";
             row.innerHTML =
               '<span class="result__bar-label">' +
               label +
+              recommendHtml +
               '</span><span class="result__bar-track" aria-hidden="true"><span class="result__bar-fill" style="width:' +
               value +
               '%"></span></span><span class="result__bar-value">' +
