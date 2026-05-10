@@ -1,2 +1,7 @@
+# AutonomIA — robots.txt
+# Sitio gobernado por agentes (https://ia.itera.es)
+
 User-agent: *
 Allow: /
+
+Sitemap: https://ia.itera.es/sitemap.xml
