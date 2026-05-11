@@ -983,6 +983,21 @@ summary:focus-visible {
   font-size: 0.95rem;
 }
 
+.aprende__extras {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.aprende__extras h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.3rem;
+}
+
+.aprende__extras .aprende__intro {
+  margin-bottom: 1.25rem;
+}
+
 /* Páginas individuales de nivel reutilizan .post */
 
 .level-checklist {
