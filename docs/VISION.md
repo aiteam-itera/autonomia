@@ -34,13 +34,13 @@ Toda CTA / recomendación de la web debe poder enlazar con uno de estos destinos
 | Landing estática (hero + value prop) | desplegada, en review (ITEAA-1465) | `site/index.html` con feed «Detrás de cada cambio» en vivo |
 | Tutorial / contenidos por nivel de adopción | desplegada (4 niveles + empleo) | `site/aprende/01..04` + `contratar-en-la-era-agente.html` |
 | Cuestionario de madurez de IA (cerradas + abiertas) | desplegada, en review (ITEAA-1536) | client-side en `site/cuestionario.html`; cae a `mailto:` si Worker no está configurado |
-| Motor de recomendaciones + email personalizado | bloqueado (ITEAA-1537) | código completo en `worker/`; **bloqueante = approval del board** para Cloudflare + Resend + Anthropic |
+| Motor de recomendaciones + email personalizado | desplegado parcial — plan 30/60/90 determinista en vivo (ITEAA-1537) | `site/cuestionario.html` ya muestra plan al instante (commit `2e94418`); versión LLM + email sigue **pendiente de approval del board** para Cloudflare + Resend + Anthropic (approval [`1199055c`](#)) |
 | Blog con tutoriales | desplegada, en review (ITEAA-1538) | `site/blog/_template.html` + 2 posts (`que-puede-hacer…`, `errores-caros…`) |
 | Captura de leads (formulario contacto) | desplegada, en review (ITEAA-1572) | home → `/api/contact` Worker → ticket en Paperclip |
 | Servicios contratables | desplegada (ITEAA-1574) | `site/servicios.html` |
 | SEO + accesibilidad WCAG 2.2 AA | desplegada (ITEAA-1575) | sitemap, robots, OG/Twitter cards, skip-link, focus visible |
-| Comentarios externos moderados + SDK validación | en review (ITEAA-1539) | requiere SDK anti-prompt-injection antes de exponer en producción |
-| Hook «comentario → tarea Paperclip» | pendiente | depende del SDK anterior |
+| Comentarios externos moderados + SDK validación | código listo, en review (ITEAA-1539) | SDK 22/22 tests verdes en `tools/comment-validator/`; Worker pide secrets de Cloudflare/Resend para entrar en producción (mismo approval que el motor de recomendaciones) |
+| Hook «comentario → tarea Paperclip» | código listo, blocked por approval | implementado en [`worker/src/paperclip.ts`](https://github.com/aiteam-itera/autonomia/blob/main/worker/src/paperclip.ts); se activa al deployar el Worker con `PAPERCLIP_*` secrets |
 
 ## Principios de diseño
 
