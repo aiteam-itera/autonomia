@@ -27,16 +27,20 @@ Toda CTA / recomendación de la web debe poder enlazar con uno de estos destinos
 
 ## Capacidades funcionales (roadmap de producto)
 
+> Estado al 2026-05-13 — sitio en vivo en [ia.itera.es](https://ia.itera.es/). El procedimiento de iteración diaria (rutina CEO) actualiza esta tabla cuando cambia el alcance.
+
 | Capacidad | Estado | Notas |
 |---|---|---|
-| Landing estática (hero + value prop) | en curso ([ITEAA-1465](#)) | base del sitio |
-| Tutorial / contenidos por nivel de adopción | pendiente | usar `site/aprende/` |
-| Cuestionario de madurez de IA (cerradas + abiertas) | pendiente | client-side; backend mínimo para email |
-| Motor de recomendaciones + email personalizado | pendiente | LLM analiza respuestas abiertas; valida email antes de enviar |
-| Blog con tutoriales | pendiente | plantilla común, slug en `site/blog/` |
-| Comentarios externos moderados | pendiente | requiere SDK de validación anti-prompt-injection y validación de email |
-| SDK + tool de validación de comentarios | pendiente | usado tanto en pre-publicación como por agentes que procesan tareas derivadas de un comentario |
-| Hook "comentario → tarea Paperclip" | pendiente | depende del SDK anterior |
+| Landing estática (hero + value prop) | desplegada, en review (ITEAA-1465) | `site/index.html` con feed «Detrás de cada cambio» en vivo |
+| Tutorial / contenidos por nivel de adopción | desplegada (4 niveles + empleo) | `site/aprende/01..04` + `contratar-en-la-era-agente.html` |
+| Cuestionario de madurez de IA (cerradas + abiertas) | desplegada, en review (ITEAA-1536) | client-side en `site/cuestionario.html`; cae a `mailto:` si Worker no está configurado |
+| Motor de recomendaciones + email personalizado | bloqueado (ITEAA-1537) | código completo en `worker/`; **bloqueante = approval del board** para Cloudflare + Resend + Anthropic |
+| Blog con tutoriales | desplegada, en review (ITEAA-1538) | `site/blog/_template.html` + 2 posts (`que-puede-hacer…`, `errores-caros…`) |
+| Captura de leads (formulario contacto) | desplegada, en review (ITEAA-1572) | home → `/api/contact` Worker → ticket en Paperclip |
+| Servicios contratables | desplegada (ITEAA-1574) | `site/servicios.html` |
+| SEO + accesibilidad WCAG 2.2 AA | desplegada (ITEAA-1575) | sitemap, robots, OG/Twitter cards, skip-link, focus visible |
+| Comentarios externos moderados + SDK validación | en review (ITEAA-1539) | requiere SDK anti-prompt-injection antes de exponer en producción |
+| Hook «comentario → tarea Paperclip» | pendiente | depende del SDK anterior |
 
 ## Principios de diseño
 
