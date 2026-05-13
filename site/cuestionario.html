@@ -358,6 +358,30 @@
           <h3>Madurez por dimensión</h3>
           <div id="result-chart" class="result__chart" aria-label="Gráfico de madurez por dimensión"></div>
 
+          <section class="result__plan" id="result-plan" hidden aria-live="polite">
+            <h3>Tu plan · 30 / 60 / 90 días</h3>
+            <p class="result__plan-intro" id="result-plan-intro"></p>
+            <ol class="result__plan-list">
+              <li>
+                <h4>En 30 días — primer quick win</h4>
+                <p id="result-plan-30"></p>
+              </li>
+              <li>
+                <h4>En 60 días — automatización guiada</h4>
+                <p id="result-plan-60"></p>
+              </li>
+              <li>
+                <h4>En 90 días — gobernanza y medida</h4>
+                <p id="result-plan-90"></p>
+              </li>
+            </ol>
+            <p class="result__plan-products" id="result-plan-products"></p>
+            <p class="quiz__hint result__plan-meta" id="result-plan-meta">
+              Plan generado al instante con reglas determinísticas en tu navegador. Cuando habilitemos el motor con LLM,
+              recibirás además una versión enriquecida por email.
+            </p>
+          </section>
+
           <aside class="result__package" id="result-package" hidden aria-live="polite">
             <p class="package__eyebrow" id="result-package-eyebrow">Paquete recomendado</p>
             <h3 id="result-package-title">—</h3>
@@ -369,13 +393,13 @@
 
           <div class="result__cta">
             <button type="button" class="cta cta--primary" id="cta-email">
-              Recibir plan personalizado por email
+              También quiero recibir el plan por email
             </button>
             <button type="button" class="cta" id="cta-restart">Volver a empezar</button>
             <p class="quiz__hint" id="cta-hint" hidden>
-              Hemos preparado el borrador. <strong>Pendiente conectar el motor de recomendaciones</strong>
-              (issue hermana). Por ahora se ha guardado localmente y se ha abierto tu cliente de
-              correo con un resumen.
+              Ya tienes el plan determinístico arriba. <strong>La versión enriquecida con LLM por email
+              está pendiente de aprobación interna</strong>; mientras tanto hemos abierto tu cliente de
+              correo con un resumen para que nos escribas si quieres seguir hablando.
             </p>
           </div>
         </section>
@@ -636,6 +660,180 @@
           return { name: "Autonomía", pitch: "Estáis en la frontera. Caso candidato a escalar el modelo a partners o a un nuevo producto autónomo." };
         }
 
+        // ---------- deterministic recommendation engine ----------
+        // Generates a 30/60/90-day plan from answers + score without calling any LLM.
+        // The board approval for the LLM-backed Worker (ITEAA-1537) has been pending
+        // 4+ days; this keeps the cuestionario useful in the meantime.
+
+        const SECTOR_REPETITIVO = {
+          servicios: "redactar propuestas, contratos o informes para clientes",
+          comercio: "actualizar stock, precios o atender consultas repetidas de clientes",
+          industria: "partes de producción, control de calidad o gestión de albaranes",
+          tecnologia: "tickets de soporte de primer nivel y QA manual",
+          salud: "agenda, recordatorios y resúmenes de visita",
+          otro: "tareas administrativas repetitivas",
+        };
+
+        const SECTOR_AUTOMATIZACION = {
+          servicios: "un flujo Make/n8n que extraiga datos del email → CRM y genere borradores con IA",
+          comercio: "un flujo que sincronice stock y pedidos entre tienda online, ERP y mensajería",
+          industria: "un flujo que digitalice albaranes con OCR + IA y los cargue al ERP",
+          tecnologia: "un agente de primera línea que clasifique y responda tickets básicos",
+          salud: "un flujo que confirme citas y resuma la visita en la ficha del paciente",
+          otro: "un flujo no-code que conecte vuestras dos herramientas más usadas",
+        };
+
+        // Per-dimension 30-day quick win when that dimension is the weakest.
+        const DIM_QUICK_WIN = {
+          uso: "Da el primer paso de uso: elige 1 tarea repetitiva y úsala con un chat de IA empresarial 1 semana. Mide tiempo antes / después. Sigue la pauta de [aprende/01-chats](/aprende/01-chats.html).",
+          auto: "Conecta dos herramientas que hoy usáis a mano: empieza con un flujo simple en Make o n8n (5 pasos máximo). Guía rápida en [aprende/02-automatizaciones](/aprende/02-automatizaciones.html).",
+          agentes: "Prueba un agente en un caso acotado (ej.: clasificar correos, resumir reuniones) con un humano validando la salida. Material en [aprende/03-agentes](/aprende/03-agentes.html).",
+          gobernanza: "Designa una persona responsable de 'operaciones de IA' y abre un documento vivo de qué se puede / no se puede subir a IA externa. Más en [aprende/04-orquestadores](/aprende/04-orquestadores.html).",
+          datos: "Escribe en una sola página cómo funciona tu negocio: clientes, procesos, datos clave. Será la base que entenderá cualquier IA o agente que metáis después.",
+        };
+
+        // Per-dimension 60-day automation step.
+        const DIM_60 = {
+          uso: "Pasa del piloto individual a uso de equipo: cuentas empresariales, biblioteca de prompts compartida y rotación semanal de casos.",
+          auto: "Documenta el flujo del mes 1, ponle alertas si falla, y suma un segundo flujo a partir del mismo conector.",
+          agentes: "Lleva el agente piloto a producción con métricas (tiempo ahorrado, errores) y un punto manual de revisión antes de cerrar.",
+          gobernanza: "Convierte el documento de políticas en una política escrita: aprobada por dirección, revisada cada trimestre y firmada por el equipo.",
+          datos: "Centraliza los datos clave: si vives en hojas dispersas, mueve lo crítico a un CRM/ERP único con campos consistentes.",
+        };
+
+        function lowestDims(dims) {
+          return Object.entries(dims)
+            .map(([k, v]) => ({ key: k, value: v }))
+            .sort((a, b) => a.value - b.value);
+        }
+
+        function trimSentence(text, maxChars) {
+          if (!text) return "";
+          const clean = String(text).trim().replace(/\s+/g, " ");
+          if (clean.length <= maxChars) return clean;
+          return clean.slice(0, maxChars - 1).trimEnd() + "…";
+        }
+
+        function pickProducts(overall, dims) {
+          // 1-2 products from the catalog: same logic as the worker fallback.
+          const out = [];
+          if ((dims.datos || 0) < 50 || overall <= 35) {
+            out.push({
+              name: "Ficha.es",
+              url: "https://ficha.es",
+              why: "Os ayuda a estructurar procesos y datos antes de meter más IA encima — el suelo sin el que ninguna automatización aguanta.",
+            });
+          }
+          if (overall >= 55 || (dims.agentes || 0) >= 40 || (dims.gobernanza || 0) >= 40) {
+            out.push({
+              name: "Ironclip / BPAC",
+              url: "https://ironclip.com",
+              why: "Para implantar agentes gobernados con auditoría, ideal cuando ya tenéis algo en producción y queréis escalar sin perder control.",
+            });
+          }
+          if (out.length === 0) {
+            // Middle band: lean on consultoría a medida.
+            out.push({
+              name: "Itera.es",
+              url: "https://itera.es",
+              why: "Consultoría e implementación a medida — encaja cuando hay caso de uso claro pero falta acompañamiento técnico.",
+            });
+          }
+          return out.slice(0, 2);
+        }
+
+        function generatePlan(answers, score) {
+          const sector = answers.sector || "otro";
+          const dims = score.dims || {};
+          const ranked = lowestDims(dims);
+          const weakest = ranked[0] || { key: "uso", value: 0 };
+          const second = ranked[1] || ranked[0] || { key: "auto", value: 0 };
+
+          const candidateTask =
+            trimSentence(answers.open_repetitivo, 160) ||
+            "la tarea repetitiva del " + sector + " que más tiempo os quita (" + (SECTOR_REPETITIVO[sector] || SECTOR_REPETITIVO.otro) + ")";
+
+          const objective = trimSentence(answers.open_objetivo, 160);
+          const blocker = trimSentence(answers.open_freno, 160);
+
+          const intro =
+            "Plan derivado de tus respuestas. La dimensión más baja es **" +
+            (DIMENSIONS[weakest.key] || weakest.key) +
+            "** (" +
+            weakest.value +
+            "/100), así que empezamos por ahí." +
+            (blocker ? " Tu freno declarado: «" + blocker + "» — el plan lo tiene en cuenta." : "");
+
+          const plan30 =
+            (DIM_QUICK_WIN[weakest.key] || DIM_QUICK_WIN.uso) +
+            " Aplícalo concretamente a: **" + candidateTask + "**. Mide tiempo antes y después; si no ahorra, descártala y pasa a la siguiente.";
+
+          const plan60 =
+            (DIM_60[second.key] || DIM_60.auto) +
+            " Para tu sector, una buena segunda iteración es: " +
+            (SECTOR_AUTOMATIZACION[sector] || SECTOR_AUTOMATIZACION.otro) + ".";
+
+          const plan90Goal = objective
+            ? "Tu meta a 90 días: «" + objective + "». Cierra el ciclo con un cuadro de mando con 2–3 KPIs ligados a esa meta y revisión mensual."
+            : "Cierra el ciclo con un cuadro de mando con 2–3 KPIs (horas ahorradas, errores evitados, tickets cerrados) y revisión mensual.";
+
+          const plan90 =
+            "Documenta políticas básicas de uso de IA, designa un responsable formal y mide. " +
+            plan90Goal +
+            " Si todo funciona, plantéate dar el salto a orquestación gobernada (Paperclip / Ironclip).";
+
+          const products = pickProducts(score.overall, dims);
+
+          return { intro, plan30, plan60, plan90, products };
+        }
+
+        function renderInlineMarkdown(text) {
+          // Tiny, safe-by-construction renderer: only **bold**, *italic*, and [text](url).
+          // We build DOM nodes rather than HTML strings so user-supplied open-text answers
+          // (which appear inside the plan) cannot inject markup.
+          const frag = document.createDocumentFragment();
+          const pattern = /\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\(([^)]+)\)/g;
+          let lastIndex = 0;
+          let m;
+          while ((m = pattern.exec(text)) !== null) {
+            if (m.index > lastIndex) {
+              frag.appendChild(document.createTextNode(text.slice(lastIndex, m.index)));
+            }
+            if (m[1]) {
+              const strong = document.createElement("strong");
+              strong.textContent = m[1];
+              frag.appendChild(strong);
+            } else if (m[2]) {
+              const em = document.createElement("em");
+              em.textContent = m[2];
+              frag.appendChild(em);
+            } else if (m[3] && m[4]) {
+              const a = document.createElement("a");
+              a.textContent = m[3];
+              // Only allow http(s) and relative URLs; reject javascript:, data:, etc.
+              const href = m[4];
+              if (/^(https?:)?\/\//i.test(href) || href.startsWith("/") || href.startsWith("#")) {
+                a.href = href;
+              } else {
+                a.href = "#";
+              }
+              frag.appendChild(a);
+            }
+            lastIndex = pattern.lastIndex;
+          }
+          if (lastIndex < text.length) {
+            frag.appendChild(document.createTextNode(text.slice(lastIndex)));
+          }
+          return frag;
+        }
+
+        function renderPlanInto(elId, text) {
+          const el = document.getElementById(elId);
+          if (!el) return;
+          el.textContent = "";
+          el.appendChild(renderInlineMarkdown(text));
+        }
+
         // ---------- result rendering ----------
         function renderResult() {
           const data = collectAnswers();
@@ -682,6 +880,31 @@
               "</span>";
             chart.appendChild(row);
           }
+
+          // deterministic plan (rendered before the package CTA so users get value first)
+          const plan = generatePlan(data, { overall, dims });
+          renderPlanInto("result-plan-intro", plan.intro);
+          renderPlanInto("result-plan-30", plan.plan30);
+          renderPlanInto("result-plan-60", plan.plan60);
+          renderPlanInto("result-plan-90", plan.plan90);
+          const productsEl = document.getElementById("result-plan-products");
+          productsEl.textContent = "";
+          if (plan.products.length) {
+            const intro = document.createElement("strong");
+            intro.textContent = "Productos que encajan: ";
+            productsEl.appendChild(intro);
+            plan.products.forEach((p, idx) => {
+              const a = document.createElement("a");
+              a.href = p.url;
+              a.target = "_blank";
+              a.rel = "noopener";
+              a.textContent = p.name;
+              productsEl.appendChild(a);
+              productsEl.appendChild(document.createTextNode(" — " + p.why));
+              if (idx < plan.products.length - 1) productsEl.appendChild(document.createElement("br"));
+            });
+          }
+          document.getElementById("result-plan").hidden = false;
 
           // package recommendation based on overall score
           const recommended = packageFor(overall);
