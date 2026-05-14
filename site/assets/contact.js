@@ -165,7 +165,7 @@
     if (!apiBase) {
       disableSubmit(
         form,
-        "El formulario aún no está conectado al backend. Mientras tanto, escríbenos a <a href=\"mailto:hola@autonomia.local\">hola@autonomia.local</a>."
+        "El formulario está temporalmente offline. Escríbenos a <a href=\"mailto:hola@itera.es\">hola@itera.es</a> con tu sector y el proceso que quieres automatizar y te respondemos en menos de 24 h."
       );
       return;
     }

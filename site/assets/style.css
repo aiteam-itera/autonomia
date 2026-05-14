@@ -203,6 +203,34 @@ summary:focus-visible {
   color: var(--fg);
 }
 
+.hero__proof {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: rgba(230, 233, 240, 0.85);
+  max-width: 36rem;
+}
+
+.hero__proof li {
+  padding-left: 1.4rem;
+  position: relative;
+}
+
+.hero__proof li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.hero__proof strong {
+  color: var(--fg);
+}
+
 .quiz {
   max-width: var(--max);
   margin: 0 auto;
