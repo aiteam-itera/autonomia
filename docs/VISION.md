@@ -27,7 +27,7 @@ Toda CTA / recomendación de la web debe poder enlazar con uno de estos destinos
 
 ## Capacidades funcionales (roadmap de producto)
 
-> Estado al 2026-05-13 — sitio en vivo en [ia.itera.es](https://ia.itera.es/). El procedimiento de iteración diaria (rutina CEO) actualiza esta tabla cuando cambia el alcance.
+> Estado al 2026-05-14 — sitio en vivo en [ia.itera.es](https://ia.itera.es/). El procedimiento de iteración diaria (rutina CEO) actualiza esta tabla cuando cambia el alcance.
 
 | Capacidad | Estado | Notas |
 |---|---|---|
@@ -35,7 +35,7 @@ Toda CTA / recomendación de la web debe poder enlazar con uno de estos destinos
 | Tutorial / contenidos por nivel de adopción | desplegada (4 niveles + empleo) | `site/aprende/01..04` + `contratar-en-la-era-agente.html` |
 | Cuestionario de madurez de IA (cerradas + abiertas) | desplegada, en review (ITEAA-1536) | client-side en `site/cuestionario.html`; cae a `mailto:` si Worker no está configurado |
 | Motor de recomendaciones + email personalizado | desplegado parcial — plan 30/60/90 determinista en vivo (ITEAA-1537) | `site/cuestionario.html` ya muestra plan al instante (commit `2e94418`); versión LLM + email sigue **pendiente de approval del board** para Cloudflare + Resend + Anthropic (approval [`1199055c`](#)) |
-| Blog con tutoriales | desplegada, en review (ITEAA-1538) | `site/blog/_template.html` + 2 posts (`que-puede-hacer…`, `errores-caros…`) |
+| Blog con tutoriales | desplegada, en review (ITEAA-1538) | `site/blog/_template.html` + 3 posts (`que-puede-hacer…`, `errores-caros…`, `plan-ia-30-60-90-dias-pyme`) |
 | Captura de leads (formulario contacto) | desplegada, en review (ITEAA-1572) | home → `/api/contact` Worker → ticket en Paperclip |
 | Servicios contratables | desplegada (ITEAA-1574) | `site/servicios.html` |
 | SEO + accesibilidad WCAG 2.2 AA | desplegada (ITEAA-1575) | sitemap, robots, OG/Twitter cards, skip-link, focus visible |
