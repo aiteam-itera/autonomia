@@ -6,7 +6,7 @@
     <title>Nivel 4 — Orquestadores y empresas gobernadas por IA — AutonomIA</title>
     <meta
       name="description"
-      content="Cuando varios agentes IA se coordinan: jerarquía, presupuesto, aprobaciones y auditoría. Cómo es una empresa gobernada por agentes y para qué sirve."
+      content="Cuando varios agentes IA se coordinan: jerarquía, presupuesto, aprobaciones y auditoría. Qué aportan Paperclip e Ironclip y cuándo conviene apoyarse en ellos."
     />
     <meta name="aprende-level" content="04-orquestadores" />
     <link rel="canonical" href="https://ia.itera.es/aprende/04-orquestadores.html" />
@@ -50,7 +50,7 @@
         <h1>Nivel 4 — Orquestadores</h1>
         <div class="post__meta">
           <span>Currículo · Nivel 4 de 4</span>
-          <span>15 min de lectura</span>
+          <span>20 min de lectura</span>
         </div>
       </header>
 
@@ -75,6 +75,117 @@
           que reciben tareas, las ejecutan, abren PRs y se rinden cuentas entre sí, con un
           humano del board que sólo entra cuando hay que aprobar gasto o cambiar dirección.
         </p>
+
+        <h2 id="paperclip-ironclip">Paperclip e Ironclip: cómo es por dentro</h2>
+        <p>
+          Si quieres ver el motor que hace posible esto sin construirlo desde cero, hay dos
+          piezas que conviene conocer: <strong>Paperclip</strong> e <strong>Ironclip</strong>.
+          Las dos resuelven el mismo problema — "tengo varios agentes y necesito gobernarlos
+          como gobierno a un equipo humano" — pero con enfoque distinto.
+        </p>
+
+        <h3>Paperclip: el plano de control para trabajadores IA</h3>
+        <p>
+          <a href="https://paperclip.ing/" rel="noopener">Paperclip</a> es una plataforma
+          open source que describe su trabajo así:
+          <em>"contrata empleados IA, fíjales objetivos, automatiza puestos y tu negocio
+          funciona solo"</em>. No es un chatbot ni un constructor de flujos: es la capa
+          de gobierno que falta entre <em>"tengo agentes"</em> y <em>"tengo una empresa
+          que funciona con agentes"</em>.
+        </p>
+        <p>
+          La idea central es tratar a los agentes igual que tratas al equipo humano: con
+          un organigrama, un jefe, un puesto, un presupuesto mensual, aprobaciones del
+          board para las decisiones importantes y un registro auditable de todo lo que
+          hicieron. Una sola instalación puede sostener varias empresas distintas en
+          paralelo sin que se mezclen sus datos.
+        </p>
+
+        <h3>Ironclip: el mismo motor, adaptado a tu sector</h3>
+        <p>
+          <a href="https://ironclip.com" rel="noopener">Ironclip</a> es un fork de
+          Paperclip que añade lo que un sector regulado pide encima del control de agentes:
+          editor de procesos BPAC (Buenas Prácticas Asistidas por Computador), conectores
+          con sistemas internos, plantillas de auditoría y soporte enterprise. Lo que en
+          Paperclip es "agente con presupuesto y board", en Ironclip pasa a ser
+          "agente que respeta un proceso firmado por calidad y deja huella para
+          inspección".
+        </p>
+        <p>
+          Para una pyme en sanidad, despacho, industria regulada o servicios profesionales
+          esto cambia el cálculo: no eliges entre <em>"agente IA"</em> y <em>"proceso
+          documentado"</em>, los recibes en el mismo paquete.
+        </p>
+
+        <h3>Las piezas que importan</h3>
+        <p>
+          Tanto si lo despliegas tú (Paperclip) como si lo contratas con soporte
+          (Ironclip), estas son las piezas con las que vas a convivir el día a día:
+        </p>
+        <div class="grid">
+          <article>
+            <h4>Jerarquía y objetivos</h4>
+            <p>
+              Cada agente tiene jefe, puesto y un objetivo encadenado al objetivo de su
+              proyecto y al del negocio. Las tareas suben y bajan por el organigrama, no
+              flotan en un Trello sin dueño.
+            </p>
+          </article>
+          <article>
+            <h4>Heartbeats</h4>
+            <p>
+              Los agentes despiertan solos por horario, por mención o cuando les asignan
+              trabajo. Trabajan, dejan rastro y se duermen. No hay "scripts que se
+              olvidaron de correr" ni "agentes encendidos quemando tokens".
+            </p>
+          </article>
+          <article>
+            <h4>Aprobaciones del board</h4>
+            <p>
+              Compras grandes, contratación de un nuevo agente, mensajes al exterior o
+              cambios de rumbo pasan obligatoriamente por una aprobación humana. El resto
+              del trabajo fluye solo.
+            </p>
+          </article>
+          <article>
+            <h4>Presupuesto por agente</h4>
+            <p>
+              Cada agente tiene un tope mensual de gasto en modelos. Al 80% avisa, al
+              100% se pausa. Eliminas la factura sorpresa de fin de mes y conviertes el
+              coste IA en una línea presupuestaria predecible.
+            </p>
+          </article>
+          <article>
+            <h4>Auditoría completa</h4>
+            <p>
+              Cada decisión queda en un log inmutable: qué herramientas usó el agente,
+              qué resultado obtuvo, qué humano aprobó qué. Lo puedes enseñar a un cliente,
+              a un regulador o a tu propio consejo meses después.
+            </p>
+          </article>
+          <article>
+            <h4>Multi-empresa aislada</h4>
+            <p>
+              Una sola plataforma sostiene varias "empresas" de agentes en paralelo, con
+              datos y auditoría separados. Útil si tienes filiales, sectores distintos o
+              quieres aislar un cliente de otro.
+            </p>
+          </article>
+        </div>
+
+        <h3>Cuándo importa esto en tu pyme</h3>
+        <p>
+          Antes de saltar al nivel 4 no necesitas montar Paperclip o Ironclip — basta con
+          tener bien resueltos los niveles 2 y 3. Empiezan a importar cuando ocurre
+          <em>al menos una</em> de estas cosas:
+        </p>
+        <ul class="level-checklist">
+          <li>Ya tienes tres o más agentes en producción y empiezas a perder el rastro de qué hace cada uno.</li>
+          <li>El coste mensual de IA es lo suficientemente grande como para que alguien pregunte por él en el comité.</li>
+          <li>Operas en un sector que te va a pedir trazabilidad y firma humana (sanidad, legal, financiero, industria regulada).</li>
+          <li>Quieres que tu equipo humano se concentre en estrategia y revisión, no en lanzar scripts a mano.</li>
+          <li>Estás pensando en abrir tu operación interna como producto a clientes.</li>
+        </ul>
 
         <h2>Tres casos reales para una pyme</h2>
 
