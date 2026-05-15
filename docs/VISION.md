@@ -27,7 +27,7 @@ Toda CTA / recomendación de la web debe poder enlazar con uno de estos destinos
 
 ## Capacidades funcionales (roadmap de producto)
 
-> Estado al 2026-05-14 — sitio en vivo en [ia.itera.es](https://ia.itera.es/). El procedimiento de iteración diaria (rutina CEO) actualiza esta tabla cuando cambia el alcance.
+> Estado al 2026-05-15 — sitio en vivo en [ia.itera.es](https://ia.itera.es/). El procedimiento de iteración diaria (rutina CEO) actualiza esta tabla cuando cambia el alcance.
 
 | Capacidad | Estado | Notas |
 |---|---|---|
@@ -37,7 +37,7 @@ Toda CTA / recomendación de la web debe poder enlazar con uno de estos destinos
 | Motor de recomendaciones + email personalizado | desplegado parcial — plan 30/60/90 determinista en vivo (ITEAA-1537) | `site/cuestionario.html` ya muestra plan al instante (commit `2e94418`); versión LLM + email sigue **pendiente de approval del board** para Cloudflare + Resend + Anthropic (approval [`1199055c`](#)) |
 | Blog con tutoriales | desplegada, en review (ITEAA-1538) | `site/blog/_template.html` + 3 posts (`que-puede-hacer…`, `errores-caros…`, `plan-ia-30-60-90-dias-pyme`) |
 | Captura de leads (formulario contacto) | desplegada, en review (ITEAA-1572) | home → `/api/contact` Worker → ticket en Paperclip |
-| Servicios contratables | desplegada (ITEAA-1574) | `site/servicios.html` |
+| Servicios contratables | desplegada, ejemplos por sector + tabla de escenarios típicos (ITEAA-1574 + iter 2026-05-15) | `site/servicios.html`: cada paquete con 4 casos por sector y una tabla de 6 escenarios con precios reales |
 | SEO + accesibilidad WCAG 2.2 AA | desplegada (ITEAA-1575) | sitemap, robots, OG/Twitter cards, skip-link, focus visible |
 | Comentarios externos moderados + SDK validación | código listo, en review (ITEAA-1539) | SDK 22/22 tests verdes en `tools/comment-validator/`; Worker pide secrets de Cloudflare/Resend para entrar en producción (mismo approval que el motor de recomendaciones) |
 | Hook «comentario → tarea Paperclip» | código listo, blocked por approval | implementado en [`worker/src/paperclip.ts`](https://github.com/aiteam-itera/autonomia/blob/main/worker/src/paperclip.ts); se activa al deployar el Worker con `PAPERCLIP_*` secrets |

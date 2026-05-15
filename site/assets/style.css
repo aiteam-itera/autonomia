@@ -1503,6 +1503,162 @@ body.intro-open {
   align-self: stretch;
 }
 
+.package__sectors {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.package__sectors li {
+  position: relative;
+  padding: 0.6rem 0.75rem 0.6rem 1.5rem;
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 8px;
+  color: var(--fg);
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
+.package__sectors li::before {
+  content: "›";
+  position: absolute;
+  left: 0.7rem;
+  top: 0.55rem;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.package__sectors strong {
+  color: var(--fg);
+}
+
+/* ---------- Scenarios pricing table ---------- */
+
+.scenarios {
+  max-width: var(--max);
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.scenarios__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+}
+
+.scenarios__caption {
+  caption-side: bottom;
+  text-align: left;
+  padding: 0.85rem 1.1rem 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.scenarios__table thead th {
+  text-align: left;
+  padding: 0.85rem 1rem;
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scenarios__table tbody th,
+.scenarios__table tbody td {
+  padding: 0.9rem 1rem;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--fg);
+}
+
+.scenarios__table tbody th {
+  font-weight: 600;
+  text-align: left;
+  color: var(--fg);
+  max-width: 16rem;
+}
+
+.scenarios__table tbody tr:last-child th,
+.scenarios__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.scenarios__table tbody tr:hover {
+  background: rgba(99, 102, 241, 0.04);
+}
+
+.scenarios__num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .scenarios {
+    background: transparent;
+    border: none;
+    overflow-x: visible;
+  }
+
+  .scenarios__table,
+  .scenarios__table thead,
+  .scenarios__table tbody,
+  .scenarios__table tr,
+  .scenarios__table th,
+  .scenarios__table td {
+    display: block;
+    width: 100%;
+  }
+
+  .scenarios__table thead {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .scenarios__table tbody tr {
+    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 0.5rem 0.25rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .scenarios__table tbody th,
+  .scenarios__table tbody td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.55rem 1rem;
+    max-width: none;
+  }
+
+  .scenarios__table tbody tr > *:last-child {
+    border-bottom: none;
+  }
+
+  .scenarios__table tbody th::before,
+  .scenarios__table tbody td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+  }
+}
+
 /* ---------- FAQ (servicios) ---------- */
 
 .faq {
