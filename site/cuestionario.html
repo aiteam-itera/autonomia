@@ -100,6 +100,10 @@
         <!-- STEP 2: Uso actual de IA -->
         <fieldset class="quiz__step" data-step="2" data-step-title="Uso actual de IA" hidden>
           <legend>2. ¿Cómo usáis la IA hoy?</legend>
+          <p class="quiz__intro">
+            Este es el paso que más pesa en el diagnóstico de madurez: no basta con haber probado un chat,
+            queremos saber qué tenéis activado de verdad hoy y con qué profundidad.
+          </p>
 
           <div class="quiz__question" data-dim="uso" data-weight="1">
             <p class="quiz__q">¿Con qué frecuencia tu equipo usa chats de IA (ChatGPT, Gemini, Claude…)?</p>
@@ -122,6 +126,36 @@
           </div>
 
           <div class="quiz__question" data-dim="uso" data-weight="1">
+            <p class="quiz__q">¿Cuántas herramientas de IA distintas usáis en el día a día (sumando gratis + pago)?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="uso_stack" value="0" required /><span>Ninguna o solo una probada de vez en cuando</span></label>
+              <label><input type="radio" name="uso_stack" value="1" /><span>Una o dos en uso real (ej.: ChatGPT y poco más)</span></label>
+              <label><input type="radio" name="uso_stack" value="2" /><span>Tres o cuatro entre chat, transcripción, asistentes en suites…</span></label>
+              <label><input type="radio" name="uso_stack" value="3" /><span>Stack completo: chat + copilots integrados + experimentos propios</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="uso" data-weight="1">
+            <p class="quiz__q">¿Tenéis IA integrada <em>dentro</em> de las herramientas que ya usáis (CRM, email, Office/Google, soporte, dev)?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="uso_integrada" value="0" required /><span>No, solo abrimos una pestaña aparte cuando hace falta</span></label>
+              <label><input type="radio" name="uso_integrada" value="1" /><span>Solo las funciones que vienen activadas por defecto</span></label>
+              <label><input type="radio" name="uso_integrada" value="2" /><span>Sí, activamente en 1 o 2 áreas (ej.: Copilot en Office o en el CRM)</span></label>
+              <label><input type="radio" name="uso_integrada" value="3" /><span>IA integrada y configurada en la mayoría de la stack diaria</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="uso" data-weight="1">
+            <p class="quiz__q">¿Usáis patrones avanzados como prompts compartidos, GPTs propios, MCP o copilots de código (Cursor, Claude Code, Copilot)?</p>
+            <div class="quiz__options">
+              <label><input type="radio" name="uso_avanzado" value="0" required /><span>No usamos ninguno</span></label>
+              <label><input type="radio" name="uso_avanzado" value="1" /><span>Hay quien lo prueba a título personal</span></label>
+              <label><input type="radio" name="uso_avanzado" value="2" /><span>Tenemos algún GPT/prompt compartido o un copilot de código en uso</span></label>
+              <label><input type="radio" name="uso_avanzado" value="3" /><span>Stack avanzado: prompts versionados, MCPs propios o copilots activos en todo el equipo</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question" data-dim="uso" data-weight="1">
             <p class="quiz__q">¿Tenéis cuentas de IA empresariales o cada persona usa la suya personal?</p>
             <div class="quiz__options">
               <label><input type="radio" name="uso_cuentas" value="0" required /><span>Nadie usa IA</span></label>
@@ -138,6 +172,22 @@
               <label><input type="radio" name="uso_politicas" value="1" /><span>Acuerdos informales</span></label>
               <label><input type="radio" name="uso_politicas" value="2" /><span>Política escrita pero sin auditar</span></label>
               <label><input type="radio" name="uso_politicas" value="3" /><span>Política escrita y revisada periódicamente</span></label>
+            </div>
+          </div>
+
+          <div class="quiz__question quiz__question--multi" data-classify="herramientas">
+            <p class="quiz__q">¿Cuáles de estas herramientas tenéis activas hoy? (marca todas las que apliquen — no puntúa, sirve para personalizar el plan)</p>
+            <div class="quiz__options quiz__options--checkbox">
+              <label><input type="checkbox" name="herramientas" value="chatgpt" /><span>ChatGPT (gratis o Plus/Team)</span></label>
+              <label><input type="checkbox" name="herramientas" value="claude" /><span>Claude (Anthropic)</span></label>
+              <label><input type="checkbox" name="herramientas" value="gemini" /><span>Gemini / Google Workspace AI</span></label>
+              <label><input type="checkbox" name="herramientas" value="copilot365" /><span>Copilot en Microsoft 365</span></label>
+              <label><input type="checkbox" name="herramientas" value="copilot_dev" /><span>GitHub Copilot / Cursor / Claude Code</span></label>
+              <label><input type="checkbox" name="herramientas" value="transcripcion" /><span>Transcripción de reuniones (Fireflies, Otter, tl;dv…)</span></label>
+              <label><input type="checkbox" name="herramientas" value="crm" /><span>IA dentro del CRM / soporte (HubSpot AI, Zendesk AI…)</span></label>
+              <label><input type="checkbox" name="herramientas" value="imagen_voz" /><span>Generación de imagen, vídeo o voz (DALL·E, Midjourney, ElevenLabs…)</span></label>
+              <label><input type="checkbox" name="herramientas" value="agentes" /><span>Agentes / orquestadores (Paperclip, n8n agentes, Make IA…)</span></label>
+              <label><input type="checkbox" name="herramientas" value="gpts" /><span>Custom GPTs o asistentes propios</span></label>
             </div>
           </div>
         </fieldset>
@@ -463,6 +513,11 @@
               fields.forEach((f) => {
                 if (f.value === value) f.checked = true;
               });
+            } else if (fields[0].type === "checkbox") {
+              const values = Array.isArray(value) ? value : [value];
+              fields.forEach((f) => {
+                f.checked = values.includes(f.value);
+              });
             } else {
               fields[0].value = value;
             }
@@ -472,9 +527,29 @@
 
         // ---------- collection ----------
         function collectAnswers() {
-          const formData = new FormData(form);
+          // FormData collapses duplicate keys, which loses multi-checkbox state.
+          // Walk the form by element so checkbox groups end up as arrays.
           const out = {};
-          for (const [k, v] of formData.entries()) out[k] = v;
+          const seen = new Set();
+          for (const el of form.elements) {
+            if (!el.name || seen.has(el)) continue;
+            seen.add(el);
+            if (el.type === "checkbox") {
+              if (!out[el.name]) out[el.name] = [];
+              if (el.checked) out[el.name].push(el.value);
+            } else if (el.type === "radio") {
+              if (el.checked) out[el.name] = el.value;
+              else if (!(el.name in out)) out[el.name] = ""; // placeholder for empty group
+            } else if (el.tagName === "BUTTON") {
+              continue;
+            } else {
+              out[el.name] = el.value;
+            }
+          }
+          // Clean empty radio placeholders so consumers can rely on truthy checks.
+          for (const k of Object.keys(out)) {
+            if (out[k] === "") delete out[k];
+          }
           return out;
         }
 
@@ -742,12 +817,58 @@
           return out.slice(0, 2);
         }
 
+        // Read the actual current-usage signal (Step 2 radios + the herramientas multi-select)
+        // and turn it into a short narrative phrase used in the result intro and the plan.
+        const TOOL_LABELS = {
+          chatgpt: "ChatGPT",
+          claude: "Claude",
+          gemini: "Gemini",
+          copilot365: "Copilot Microsoft 365",
+          copilot_dev: "copilots de código",
+          transcripcion: "transcripción de reuniones",
+          crm: "IA en CRM/soporte",
+          imagen_voz: "generación de imagen/voz",
+          agentes: "agentes/orquestadores",
+          gpts: "GPTs propios",
+        };
+
+        function summariseCurrentUse(answers, dims) {
+          const usoScore = dims.uso || 0;
+          const tools = Array.isArray(answers.herramientas) ? answers.herramientas : [];
+          const toolCount = tools.length;
+          const advanced = Number(answers.uso_avanzado || 0);
+          const integrated = Number(answers.uso_integrada || 0);
+          const stack = Number(answers.uso_stack || 0);
+
+          let label;
+          if (usoScore < 25 && toolCount === 0) {
+            label = "uso prácticamente inexistente";
+          } else if (usoScore < 45) {
+            label = "uso aislado (1–2 herramientas a título personal)";
+          } else if (usoScore < 65 || (toolCount <= 3 && advanced < 2)) {
+            label = "uso disperso pero ya cotidiano";
+          } else if (advanced >= 2 || integrated >= 2 || stack >= 2) {
+            label = "uso embebido en herramientas y con patrones avanzados";
+          } else {
+            label = "uso intensivo";
+          }
+
+          const toolList = tools.map((t) => TOOL_LABELS[t] || t).filter(Boolean);
+          const toolPhrase = toolList.length
+            ? "Tu stack declarado: " + toolList.slice(0, 6).join(", ") +
+              (toolList.length > 6 ? " y " + (toolList.length - 6) + " más" : "") + "."
+            : "No has marcado ninguna herramienta concreta — si esto es por inercia, el primer paso del plan es elegir 1.";
+
+          return { label, toolPhrase, toolCount, advanced, integrated };
+        }
+
         function generatePlan(answers, score) {
           const sector = answers.sector || "otro";
           const dims = score.dims || {};
           const ranked = lowestDims(dims);
           const weakest = ranked[0] || { key: "uso", value: 0 };
           const second = ranked[1] || ranked[0] || { key: "auto", value: 0 };
+          const usage = summariseCurrentUse(answers, dims);
 
           const candidateTask =
             trimSentence(answers.open_repetitivo, 160) ||
@@ -757,11 +878,12 @@
           const blocker = trimSentence(answers.open_freno, 160);
 
           const intro =
-            "Plan derivado de tus respuestas. La dimensión más baja es **" +
+            "Plan derivado de tus respuestas. **Hoy estáis en " + usage.label + "** (" +
+            (dims.uso || 0) + "/100 en uso de IA). " +
+            usage.toolPhrase +
+            " La dimensión más baja es **" +
             (DIMENSIONS[weakest.key] || weakest.key) +
-            "** (" +
-            weakest.value +
-            "/100), así que empezamos por ahí." +
+            "** (" + weakest.value + "/100), así que empezamos por ahí." +
             (blocker ? " Tu freno declarado: «" + blocker + "» — el plan lo tiene en cuenta." : "");
 
           const plan30 =

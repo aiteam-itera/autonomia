@@ -314,15 +314,21 @@ summary:focus-visible {
   border-color: rgba(99, 102, 241, 0.4);
 }
 
-.quiz__options input[type="radio"] {
+.quiz__options input[type="radio"],
+.quiz__options input[type="checkbox"] {
   margin-top: 0.2rem;
   accent-color: var(--accent);
   flex-shrink: 0;
 }
 
-.quiz__options input[type="radio"]:focus-visible + span {
+.quiz__options input[type="radio"]:focus-visible + span,
+.quiz__options input[type="checkbox"]:focus-visible + span {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.quiz__options--checkbox {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .quiz__options label:has(input:checked) {
