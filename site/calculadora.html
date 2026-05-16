@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calculadora de ahorro con IA — AutonomIA</title>
+    <meta
+      name="description"
+      content="Calcula en 1 minuto cuántas horas y euros podrías ahorrar al mes con IA en tu pyme. Sin email, sin registro y con la fórmula a la vista."
+    />
+    <link rel="canonical" href="https://ia.itera.es/calculadora.html" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="AutonomIA" />
+    <meta property="og:title" content="Calculadora de ahorro con IA — AutonomIA" />
+    <meta
+      property="og:description"
+      content="Calcula en 1 minuto cuánto te ahorraría la IA al mes. Fórmula transparente y propuesta concreta por sector."
+    />
+    <meta property="og:url" content="https://ia.itera.es/calculadora.html" />
+    <meta property="og:image" content="https://ia.itera.es/assets/og-default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AutonomIA — IA que entiende tu negocio." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Calculadora de ahorro con IA — AutonomIA" />
+    <meta
+      name="twitter:description"
+      content="Calcula en 1 minuto cuánto te ahorraría la IA al mes en tu pyme. Sin email y con la fórmula a la vista."
+    />
+    <meta name="twitter:image" content="https://ia.itera.es/assets/og-default.png" />
+    <meta name="twitter:image:alt" content="AutonomIA — IA que entiende tu negocio." />
+
+    <link rel="stylesheet" href="/assets/style.css" />
+    <style>
+      /* Estilos específicos de la calculadora (vainilla, reutilizan variables del :root). */
+      .calc {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 clamp(1rem, 4vw, 3rem);
+      }
+      .calc__grid {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .calc__field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .calc__field > span {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .calc__field > small {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .calc__field input,
+      .calc__field select {
+        background: var(--card);
+        color: var(--fg);
+        border: 1px solid #2a3145;
+        border-radius: 8px;
+        padding: 0.65rem 0.75rem;
+        font: inherit;
+      }
+      .calc__field input:focus-visible,
+      .calc__field select:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .calc__results {
+        margin-top: 1.5rem;
+        background: var(--card);
+        border: 1px solid #2a3145;
+        border-radius: 12px;
+        padding: 1.5rem;
+      }
+      .calc__numbers {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        margin: 1rem 0 1.25rem;
+      }
+      .calc__metric {
+        background: rgba(99, 102, 241, 0.08);
+        border: 1px solid rgba(129, 140, 248, 0.35);
+        border-radius: 10px;
+        padding: 0.9rem 1rem;
+      }
+      .calc__metric strong {
+        display: block;
+        font-size: 1.6rem;
+        line-height: 1.1;
+        color: var(--fg);
+      }
+      .calc__metric span {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .calc__suggestions {
+        margin: 1rem 0 0;
+        padding-left: 1.25rem;
+      }
+      .calc__suggestions li {
+        margin: 0.35rem 0;
+      }
+      .calc__formula {
+        margin-top: 1.25rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+        background: rgba(0, 0, 0, 0.25);
+        border-left: 3px solid var(--accent);
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+      }
+      .calc__cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <header class="hero hero--compact">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <span class="nav__links">
+          <a class="cta cta--ghost" href="/aprende/">Aprende</a>
+          <a class="cta cta--ghost" href="/servicios.html">Servicios</a>
+          <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
+        </span>
+      </nav>
+      <div class="hero__content">
+        <h1>¿Cuánto te ahorrarías al mes con IA?</h1>
+        <p>
+          Estimador rápido, transparente y sin email. Dinos cuántas horas a la semana se va tu equipo en
+          tareas repetitivas y te decimos qué podría ahorrarte la IA y por dónde empezar.
+        </p>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="section">
+        <div class="calc">
+          <form id="calc-form" novalidate>
+            <div class="calc__grid">
+              <label class="calc__field">
+                <span>Sector</span>
+                <select name="sector" required>
+                  <option value="comercio">Comercio / retail</option>
+                  <option value="servicios" selected>Servicios profesionales</option>
+                  <option value="industria">Industria / manufactura</option>
+                  <option value="salud">Salud / clínicas</option>
+                  <option value="educacion">Educación</option>
+                  <option value="hosteleria">Hostelería / turismo</option>
+                  <option value="tecnologia">Tecnología / SaaS</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </label>
+
+              <label class="calc__field">
+                <span>Personas en el equipo</span>
+                <input type="number" name="people" min="1" max="250" value="5" inputmode="numeric" />
+                <small>Cuántas personas hacen las tareas que vas a contar abajo.</small>
+              </label>
+
+              <label class="calc__field">
+                <span>Coste medio por hora (€)</span>
+                <input type="number" name="hourCost" min="5" max="200" value="25" inputmode="numeric" />
+                <small>Salario bruto + cotización ÷ horas trabajadas. Si no lo sabes, 25 €/h sirve.</small>
+              </label>
+
+              <label class="calc__field">
+                <span>Horas/semana en email y mensajes</span>
+                <input type="number" name="hEmail" min="0" max="60" value="6" inputmode="numeric" />
+                <small>Por persona. Bandeja, plantillas, contestar lo mismo dos veces.</small>
+              </label>
+
+              <label class="calc__field">
+                <span>Horas/semana en informes y documentos</span>
+                <input type="number" name="hReports" min="0" max="60" value="4" inputmode="numeric" />
+                <small>Por persona. Resúmenes, propuestas, actas, presentaciones repetitivas.</small>
+              </label>
+
+              <label class="calc__field">
+                <span>Horas/semana en atención / FAQ</span>
+                <input type="number" name="hSupport" min="0" max="60" value="3" inputmode="numeric" />
+                <small>Por persona. Dudas de clientes, llamadas que se repiten, soporte interno.</small>
+              </label>
+            </div>
+          </form>
+
+          <div class="calc__results" aria-live="polite" aria-atomic="true">
+            <h2 style="margin-top: 0">Tu estimación</h2>
+            <p id="calc-summary">Ajusta los datos y verás aquí el ahorro estimado.</p>
+
+            <div class="calc__numbers">
+              <div class="calc__metric">
+                <strong id="calc-hours">— h</strong>
+                <span>Horas/mes ahorradas (total equipo)</span>
+              </div>
+              <div class="calc__metric">
+                <strong id="calc-month">— €</strong>
+                <span>Ahorro estimado al mes</span>
+              </div>
+              <div class="calc__metric">
+                <strong id="calc-year">— €</strong>
+                <span>Ahorro estimado al año</span>
+              </div>
+            </div>
+
+            <h3 style="margin: 1rem 0 0.5rem">Por dónde empezaríamos en tu sector</h3>
+            <ul class="calc__suggestions" id="calc-suggestions"></ul>
+
+            <details class="calc__formula">
+              <summary>Cómo se calcula esto (sin trucos)</summary>
+              <p>
+                Para cada bloque de horas semanales por persona aplicamos un factor de reducción
+                conservador basado en lo que vemos en pilotos reales:
+              </p>
+              <ul>
+                <li><strong>Email/mensajes:</strong> −40 % con borradores y plantillas asistidas.</li>
+                <li><strong>Informes/documentos:</strong> −50 % con generación + revisión humana.</li>
+                <li><strong>Atención / FAQ:</strong> −35 % con respuestas asistidas y FAQ semántica.</li>
+              </ul>
+              <p>
+                <code>ahorroSemana = (hEmail·0.40 + hInformes·0.50 + hSoporte·0.35) × personas</code><br />
+                <code>ahorroMes ≈ ahorroSemana × 4.33</code><br />
+                <code>ahorroEuros = ahorroMes × costeHora</code>
+              </p>
+              <p>
+                Los factores son medianas observadas, no garantías. Un piloto serio mide tu caso
+                concreto antes de prometer nada — eso es justo lo que hace el
+                <a href="/servicios.html#diagnostico-express">diagnóstico express</a>.
+              </p>
+            </details>
+
+            <div class="calc__cta-row">
+              <a class="cta cta--primary" href="/cuestionario.html"
+                >Quiero un plan personalizado (5 min) →</a
+              >
+              <a class="cta cta--ghost" href="/servicios.html">Ver paquetes y precios</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--alt">
+        <h2>¿Y si tu caso es más complejo?</h2>
+        <p>
+          Esta calculadora es deliberadamente simple: tres bloques de tareas y unos factores de reducción
+          medios. Sirve para que veas el orden de magnitud, no para presupuestar un proyecto.
+        </p>
+        <p>
+          Si quieres una propuesta concreta — qué proceso primero, con qué herramientas, en cuántas semanas
+          y con qué riesgos — empieza por el
+          <a href="/cuestionario.html">diagnóstico de IA gratis</a> o salta directamente a los
+          <a href="/servicios.html">paquetes contratables</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year">2026</span> AutonomIA — Sitio gobernado por agentes.</small>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // --- Lógica de la calculadora -------------------------------------------------
+      const FACTORS = { email: 0.4, reports: 0.5, support: 0.35 };
+      const WEEKS_PER_MONTH = 4.33;
+
+      const SUGGESTIONS = {
+        comercio: [
+          "Fichas de producto y descripciones generadas con IA a partir de tu catálogo.",
+          "Bot WhatsApp con tus FAQ y horarios — atiende fuera de horario y deriva si no sabe.",
+          "Respuestas borrador a reseñas de Google/Tripadvisor con tu tono.",
+          "Resumen semanal de ventas y stock con alertas accionables.",
+        ],
+        servicios: [
+          "Borradores de propuestas y presupuestos a partir de notas o llamada transcrita.",
+          "Buscador semántico sobre tus documentos (informes, contratos, plantillas).",
+          "Actas de reuniones y resúmenes de email automáticos.",
+          "Asistente para responder dudas frecuentes de clientes con tu doctrina.",
+        ],
+        industria: [
+          "Asistente sobre manuales y procedimientos — el operario pregunta y obtiene la página exacta.",
+          "Generación y traducción de fichas técnicas y documentación de calidad.",
+          "Resúmenes automáticos de incidencias y partes de producción.",
+          "Plantillas de respuesta para soporte interno y proveedores.",
+        ],
+        salud: [
+          "Borradores de informes clínicos a partir de notas dictadas (con revisión humana).",
+          "Recordatorios y confirmaciones de cita automáticos por SMS/WhatsApp.",
+          "Resumen de antecedentes del paciente antes de la consulta.",
+          "Respuestas asistidas a dudas administrativas y de citación.",
+        ],
+        educacion: [
+          "Material adaptado por nivel a partir de tu temario base.",
+          "Corrección asistida de ejercicios con feedback personalizado.",
+          "Resúmenes y exámenes tipo a partir de los apuntes de clase.",
+          "Asistente para responder dudas frecuentes de familias/alumnado.",
+        ],
+        hosteleria: [
+          "Respuestas a reservas y consultas multilingües 24/7.",
+          "Generación de menús, descripciones y traducciones a partir de tus platos.",
+          "Borradores de respuesta a reseñas (Booking, Tripadvisor, Google).",
+          "Resumen diario de ocupación, reseñas y comentarios accionables.",
+        ],
+        tecnologia: [
+          "Copilots para tu equipo de soporte y de ingeniería sobre la base de conocimiento.",
+          "Documentación generada y mantenida a partir del código y los tickets.",
+          "Clasificación y borrador de respuesta automático para tickets entrantes.",
+          "Resúmenes ejecutivos del estado del producto a partir de PRs y métricas.",
+        ],
+        otro: [
+          "Empieza mapeando las 3 tareas más repetitivas y caras de tu semana.",
+          "Una de ellas casi siempre es generar o revisar documentos: ese es el primer piloto.",
+          "Otra es atender preguntas frecuentes: una FAQ asistida quita carga rápido.",
+          "Mide horas antes y después — sin medir no hay caso de negocio.",
+        ],
+      };
+
+      const $ = (id) => document.getElementById(id);
+      const fmtEur = (n) =>
+        new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
+      const fmtH = (n) =>
+        new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0 }).format(n) + " h";
+
+      function num(name, fallback) {
+        const el = document.querySelector(`[name="${name}"]`);
+        const v = parseFloat(el.value);
+        return Number.isFinite(v) && v >= 0 ? v : fallback;
+      }
+
+      function recalc() {
+        const sector = document.querySelector('[name="sector"]').value || "otro";
+        const people = Math.max(1, num("people", 1));
+        const hourCost = Math.max(0, num("hourCost", 0));
+        const hEmail = num("hEmail", 0);
+        const hReports = num("hReports", 0);
+        const hSupport = num("hSupport", 0);
+
+        const perPersonWeek =
+          hEmail * FACTORS.email + hReports * FACTORS.reports + hSupport * FACTORS.support;
+        const hoursMonth = perPersonWeek * people * WEEKS_PER_MONTH;
+        const eurMonth = hoursMonth * hourCost;
+        const eurYear = eurMonth * 12;
+
+        $("calc-hours").textContent = fmtH(hoursMonth);
+        $("calc-month").textContent = fmtEur(eurMonth);
+        $("calc-year").textContent = fmtEur(eurYear);
+
+        const summary =
+          hoursMonth > 0
+            ? `Con tus datos, un equipo de ${people} ${people === 1 ? "persona" : "personas"} en ` +
+              `${sectorLabel(sector)} podría liberar unas ${fmtH(hoursMonth)} al mes. ` +
+              `A ${fmtEur(hourCost)}/hora son ${fmtEur(eurMonth)} al mes ` +
+              `(${fmtEur(eurYear)} al año).`
+            : "Pon al menos unas horas en uno de los bloques para ver la estimación.";
+        $("calc-summary").textContent = summary;
+
+        const list = $("calc-suggestions");
+        list.innerHTML = "";
+        (SUGGESTIONS[sector] || SUGGESTIONS.otro).forEach((text) => {
+          const li = document.createElement("li");
+          li.textContent = text;
+          list.appendChild(li);
+        });
+      }
+
+      function sectorLabel(s) {
+        const opt = document.querySelector(`[name="sector"] option[value="${s}"]`);
+        return opt ? opt.textContent.trim().toLowerCase() : s;
+      }
+
+      document.getElementById("calc-form").addEventListener("input", recalc);
+      document.getElementById("calc-form").addEventListener("change", recalc);
+      recalc();
+    </script>
+  </body>
+</html>
