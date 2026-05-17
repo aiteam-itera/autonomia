@@ -32,7 +32,7 @@ Toda CTA / recomendación de la web debe poder enlazar con uno de estos destinos
 | Capacidad | Estado | Notas |
 |---|---|---|
 | Landing estática (hero + value prop) | desplegada, en review (ITEAA-1465) | `site/index.html` con feed «Detrás de cada cambio» en vivo |
-| Tutorial / contenidos por nivel de adopción | desplegada (4 niveles + empleo) | `site/aprende/01..04` + `contratar-en-la-era-agente.html` |
+| Tutorial / contenidos por nivel de adopción | desplegada (4 niveles + empleo) | `site/aprende/01..04` + `contratar-en-la-era-agente.html`. Nivel 1 ampliado el 2026-05-17 con tabla comparativa de chats (ChatGPT/Claude/Gemini/Copilot), 5 casos por sector, plantilla universal de prompt, errores frecuentes y checklist de datos sensibles |
 | Cuestionario de madurez de IA (cerradas + abiertas) | desplegada, en review (ITEAA-1536) | client-side en `site/cuestionario.html`; Step 2 ampliado el 2026-05-16 con preguntas sobre stack actual, integración en herramientas y patrones avanzados + multi-select de herramientas concretas; cae a `mailto:` si Worker no está configurado |
 | Motor de recomendaciones + email personalizado | desplegado parcial — plan 30/60/90 determinista en vivo (ITEAA-1537) | `site/cuestionario.html` ya muestra plan al instante (commit `2e94418`); versión LLM + email sigue **pendiente de approval del board** para Cloudflare + Resend + Anthropic (approval [`1199055c`](#)) |
 | Calculadora de ahorro con IA | desplegada (iter 2026-05-16) | `site/calculadora.html`: estimador determinista por sector con fórmula visible; complementa el cuestionario sin pedir email |
