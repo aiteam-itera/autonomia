@@ -6,7 +6,7 @@
     <title>Nivel 2 — Automatizaciones con IA en tu pyme — AutonomIA</title>
     <meta
       name="description"
-      content="Make, Zapier, n8n y Power Automate aplicados a una pyme: tres flujos reales que ahorran horas, qué medir y dónde meterá IA."
+      content="Make, Zapier, n8n y Power Automate aplicados a una pyme: comparativa real, flujos por sector, anatomía de un workflow y control de coste."
     />
     <meta name="aprende-level" content="02-automatizaciones" />
     <link rel="canonical" href="https://ia.itera.es/aprende/02-automatizaciones.html" />
@@ -50,7 +50,7 @@
         <h1>Nivel 2 — Automatizaciones</h1>
         <div class="post__meta">
           <span>Currículo · Nivel 2 de 4</span>
-          <span>12 min de lectura</span>
+          <span>14 min de lectura</span>
         </div>
       </header>
 
@@ -61,40 +61,167 @@
           formulario, un fichero subido a Drive…) y ejecuta una secuencia fija de pasos sin
           intervención humana. Las herramientas más usadas en pyme son <strong>Make</strong>,
           <strong>Zapier</strong>, <strong>n8n</strong> y <strong>Microsoft Power
-          Automate</strong>. Algunas también permiten meter un paso de IA a mitad del flujo
-          (resumir, clasificar, redactar) y eso es lo que las convierte en <em>automatizaciones
+          Automate</strong>. Todas permiten meter un paso de IA a mitad del flujo (resumir,
+          clasificar, redactar) y eso es lo que las convierte en <em>automatizaciones
           con IA</em>.
         </p>
         <p>
           La diferencia con el nivel 1 es brutal: en chats tú abres una pestaña y pides algo;
           en automatizaciones, el sistema actúa <strong>aunque tú no estés delante</strong>.
+          Lo que pierdes en flexibilidad lo ganas en repetibilidad — y en horas que dejan de
+          tener que pasar por la cabeza de alguien del equipo.
         </p>
 
-        <h2>Tres flujos reales para una pyme</h2>
+        <h2 id="que-herramienta-usar">¿Qué herramienta de automatización usar?</h2>
+        <p>
+          Las cuatro grandes hacen lo mismo a grandes rasgos (trigger → acciones → branching →
+          paso de IA opcional), pero se diferencian mucho en coste, curva de aprendizaje y
+          hasta dónde puedes llevar el flujo. Esta es la comparativa práctica a fecha de
+          2026-05 para una pyme española que quiere empezar sin atarse a ningún proveedor:
+        </p>
+        <div class="scenarios">
+          <table class="scenarios__table">
+            <caption class="scenarios__caption">
+              Precios <abbr title="impuestos no incluidos">ex&nbsp;IVA</abbr>, en euros al
+              mes para el plan más barato pensado para equipos. La métrica de uso varía: Make
+              cuenta "operaciones", Zapier "tasks", n8n y Power Automate "executions" o
+              "flow runs". Usa la tabla como orden de magnitud, no como tarifa firme.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Herramienta</th>
+                <th scope="col">Versión gratis</th>
+                <th scope="col" class="scenarios__num">Plan inicial pyme</th>
+                <th scope="col">Mejor para…</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Make (antes Integromat)</th>
+                <td data-label="Gratis">Sí, 1.000 operaciones/mes.</td>
+                <td data-label="Plan inicial" class="scenarios__num">~10 € / mes (10.000 ops)</td>
+                <td data-label="Mejor para">Pymes sin perfil técnico que quieren ver el flujo
+                  visualmente. Editor más bonito y la curva más suave del grupo.</td>
+              </tr>
+              <tr>
+                <th scope="row">Zapier</th>
+                <td data-label="Gratis">Sí, 100 tasks/mes y flujos de 2 pasos.</td>
+                <td data-label="Plan inicial" class="scenarios__num">~20 € / mes (750 tasks)</td>
+                <td data-label="Mejor para">Conectar herramientas SaaS conocidas (HubSpot,
+                  Slack, Notion). Es el que más integraciones tiene, también el más caro
+                  cuando crece el volumen.</td>
+              </tr>
+              <tr>
+                <th scope="row">n8n</th>
+                <td data-label="Gratis">Sí en self-hosted (instalado en tu servidor).</td>
+                <td data-label="Plan inicial" class="scenarios__num">~20 € / mes cloud o 0 €
+                  self-hosted</td>
+                <td data-label="Mejor para">Pymes con alguien técnico cerca. Open source,
+                  ejecuciones ilimitadas en self-hosted y código JavaScript a mitad del flujo
+                  si lo necesitas.</td>
+              </tr>
+              <tr>
+                <th scope="row">Power Automate (Microsoft)</th>
+                <td data-label="Gratis">Incluido con muchas licencias M365.</td>
+                <td data-label="Plan inicial" class="scenarios__num">~13 € / usuario / mes
+                  (premium)</td>
+                <td data-label="Mejor para">Pymes 100% Microsoft 365. Toca SharePoint,
+                  Outlook, Teams y Dynamics sin permisos extra y es el único con RPA de
+                  escritorio incluido.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Regla práctica: <strong>elige donde menos fricción tengas</strong>. Si toda la
+          empresa está en Microsoft 365, Power Automate ya está pagado. Si quieres ver y
+          tocar el flujo visualmente sin equipo técnico, Make. Si tienes a alguien que
+          programa y quieres que el coste no crezca con el volumen, n8n self-hosted.
+          Zapier es la opción cara pero segura cuando necesitas conectar herramientas
+          raras con una integración ya hecha.
+        </p>
 
-        <h3>1. Email entrante → ticket en CRM → aviso al equipo</h3>
+        <h2>Cinco flujos reales por sector</h2>
+        <p>
+          Los tres primeros son los que casi todas las pymes acaban montando antes o después;
+          los dos últimos son los que más sorprenden cuando los pones en producción porque
+          eliminan tareas que parecían imposibles de automatizar.
+        </p>
+
+        <h3>1. Servicios profesionales — email entrante → ticket en CRM → aviso al equipo</h3>
         <p>
           Cada vez que llega un email a <code>hola@tuempresa.com</code>, el flujo crea un
           ticket en HubSpot (o Pipedrive, o el CRM que uses), clasifica con IA si es venta /
           soporte / spam, y avisa al canal de Slack correspondiente con un resumen de tres
-          líneas. Resultado: nadie pierde un email, todo queda trazado y el comercial llega a
-          la mañana con la bandeja priorizada.
+          líneas. Resultado: nadie pierde un email, todo queda trazado y el comercial llega
+          a la mañana con la bandeja priorizada.
         </p>
 
-        <h3>2. Factura recibida → datos extraídos → registro contable</h3>
+        <h3>2. Asesoría / despacho — factura recibida → datos extraídos → registro contable</h3>
         <p>
           Subes una factura PDF a una carpeta de Drive (o reenvías un correo a una dirección
           dedicada). El flujo la pasa por un OCR + IA que extrae proveedor, fecha, importe e
           IVA, y registra todo en Google Sheets o directamente en Holded / Contasol. La
-          asesoría sigue revisando, pero deja de teclear.
+          asesoría sigue revisando, pero deja de teclear. 80 facturas al mes son
+          tranquilamente 8 horas que recuperas.
         </p>
 
-        <h3>3. Lead web → cualificación con IA → enrutado al comercial correcto</h3>
+        <h3>3. Comercial / B2B — lead web → cualificación con IA → enrutado al comercial correcto</h3>
         <p>
           Llega un formulario de contacto. Una IA mira lo que escribió el lead y decide:
           ¿pyme local? ¿gran cuenta? ¿soporte? Según el perfil, asigna al comercial adecuado,
-          le manda un Slack y guarda la justificación de la decisión en el CRM por si hay que
-          auditarla.
+          le manda un Slack y guarda la justificación de la decisión en el CRM por si hay
+          que auditarla. Más rápido que cualquier reparto manual y, sobre todo, repetible.
+        </p>
+
+        <h3>4. Comercio / e-commerce — reseña nueva → respuesta lista para revisar</h3>
+        <p>
+          Cada vez que aparece una reseña nueva en Google, Trustpilot o tu tienda, el flujo
+          la pasa por una IA con tu tono de marca y prepara un borrador de respuesta.
+          <strong>No se publica solo</strong>: se queda en un canal de Slack o en una hoja
+          con dos botones (aprobar / editar). Tú apruebas en 5 segundos lo que antes
+          tardabas 5 minutos en redactar, y mantienes el tono coherente en las 50 reseñas
+          del mes.
+        </p>
+
+        <h3>5. Taller / instalador — parte de trabajo → presupuesto borrador → al cliente</h3>
+        <p>
+          El técnico rellena un parte en el móvil (Forms, AppSheet o un Google Form). El
+          flujo lo recoge, busca precios en tu hoja maestra, monta un PDF de presupuesto
+          con tu plantilla y se lo manda al administrativo para revisar antes de enviar al
+          cliente. Lo que antes pasaba al gerente al final del día y se mandaba dos días
+          después, sale en una hora con cero re-tecleo.
+        </p>
+
+        <h2 id="anatomia-flujo">Anatomía de un buen flujo (la plantilla que vale para todos)</h2>
+        <p>
+          El 90% de los flujos útiles en una pyme tienen los mismos cinco bloques. Si te
+          cuesta diseñar uno, copia esta estructura y rellena los huecos:
+        </p>
+        <ul>
+          <li><strong>1. Trigger:</strong> el evento que arranca el flujo. Email nuevo,
+            formulario enviado, fichero subido, fila nueva en una hoja, hora del día… Mejor
+            uno solo y bien definido — si tienes dos triggers para "lo mismo", probablemente
+            necesitas dos flujos separados.</li>
+          <li><strong>2. Validación:</strong> ¿el dato es válido? ¿el email viene de un
+            dominio que esperas? ¿el PDF realmente es una factura? Si no, sal del flujo
+            antes de gastar operaciones / tokens.</li>
+          <li><strong>3. Enriquecimiento:</strong> aquí entra la IA. Resume, clasifica,
+            extrae datos, redacta un borrador. Es el paso que da el salto del nivel 1 al
+            nivel 2 — sin IA tienes una automatización vieja; con IA tienes una pieza que
+            antes necesitaba a un humano leyendo.</li>
+          <li><strong>4. Acción:</strong> escribir en el CRM, mandar un email, crear un
+            ticket, archivar el fichero. <em>Una</em> acción principal y, si hay más, que
+            sean derivadas obvias.</li>
+          <li><strong>5. Notificación + log:</strong> avisar al humano que algo pasó (Slack
+            / email) y dejar registro (hoja, base de datos, canal de auditoría). Sin esto,
+            cuando algo falle no podrás reconstruir qué hizo el flujo.</li>
+        </ul>
+        <p>
+          Variantes habituales: meter un paso de <em>aprobación humana</em> entre 3 y 4
+          (típico en respuestas a clientes, presupuestos, comunicaciones públicas), o un
+          <em>fallback</em> en 3 cuando la IA no está segura (probabilidad baja → pasa al
+          humano en lugar de actuar).
         </p>
 
         <h2>Cómo lo haces bien</h2>
@@ -104,16 +231,62 @@
             son peores que uno funcionando.</li>
           <li><strong>Mide tiempo ahorrado.</strong> Antes de empezar, cronometra cuánto
             tarda alguien hoy en hacer ese flujo a mano. Después del despliegue, vuelve a
-            medir. Sin números no hay justificación para escalar.</li>
+            medir. Sin números no hay justificación para escalar al nivel 3.</li>
           <li><strong>Pon manejo de errores.</strong> ¿Qué pasa si la IA no sabe clasificar
             el email? ¿Si Drive está caído? Configura un canal de avisos para fallos y un
             humano que los revise una vez al día.</li>
-          <li><strong>Versiona tus flujos.</strong> Make y n8n permiten exportar el flujo
-            como JSON. Guárdalo en un repo o en Drive con versión y fecha. Te salvará el día
-            que alguien cambie algo y todo deje de funcionar.</li>
+          <li><strong>Versiona tus flujos.</strong> Make, n8n y Zapier permiten exportar
+            como JSON; Power Automate los empaqueta como solution. Guárdalo en un repo o
+            en Drive con versión y fecha. Te salvará el día que alguien cambie algo y todo
+            deje de funcionar.</li>
           <li><strong>No automatices procesos rotos.</strong> Si tu proceso manual ya da
-            problemas, automatizarlo sólo los amplifica. Arregla primero el proceso, después
-            mete la herramienta.</li>
+            problemas, automatizarlo sólo los amplifica. Arregla primero el proceso,
+            después mete la herramienta.</li>
+        </ul>
+
+        <h2 id="errores-frecuentes">Errores frecuentes en este nivel</h2>
+        <ul>
+          <li><strong>Confundir "muchas integraciones" con "muchos flujos".</strong> 30
+            "zaps" sueltos que nadie mantiene son una bomba de relojería. Mejor 5 flujos
+            críticos, monitorizados y con dueño.</li>
+          <li><strong>Olvidarte del coste por ejecución.</strong> Una automatización que
+            llama a la IA en cada email entrante puede costar más al mes que un becario
+            haciendo lo mismo. Calcula <em>(volumen mensual × coste por operación) +
+            tokens de IA</em> antes de lanzar.</li>
+          <li><strong>Mandar la respuesta de la IA sin revisión humana cuando es cara o
+            pública.</strong> Reseñas, comunicaciones a clientes, presupuestos: deja un
+            paso de aprobación. Para clasificar emails internos puedes saltarlo.</li>
+          <li><strong>Hacer que el dueño del flujo sea "el que lo montó".</strong> Si la
+            persona se va, el flujo se queda huérfano. Asigna desde el día 1 una persona
+            del negocio como propietario funcional, no sólo técnico.</li>
+          <li><strong>Conectar el flujo directamente a producción sin pruebas.</strong>
+            Make y Zapier permiten ejecutar el flujo con datos de muestra. Úsalo: una
+            automatización mal montada que escribe en tu CRM real puede tardar horas en
+            limpiarse.</li>
+        </ul>
+
+        <h2 id="control-coste-datos">Control de coste y de datos</h2>
+        <p>
+          Dos cuentas que conviene tener claras antes de pasar de 3 flujos a 30:
+        </p>
+        <ul class="level-checklist">
+          <li><strong>Coste por flujo:</strong> calcula <em>operaciones consumidas × precio
+            del plan + tokens de IA × volumen mensual</em>. Por ejemplo, clasificar 1.000
+            emails al mes con Make + GPT-4o-mini cuesta del orden de 3-5 €/mes; con
+            GPT-4o subes a 15-25 €/mes; con Power Automate premium dependerás de tus
+            licencias M365. Ponlo en una hoja antes de lanzar.</li>
+          <li><strong>Límite mensual duro:</strong> configura un tope de ejecuciones por
+            flujo. Si por un bug recibes 10.000 emails de un loop, no quieres descubrirlo
+            por la factura de fin de mes.</li>
+          <li><strong>Qué datos pueden pasar por la IA del flujo:</strong> las mismas
+            reglas que en el <a href="/aprende/01-chats.html#datos-sensibles">nivel 1</a>.
+            Usa modelos vía API empresarial (OpenAI Business, Anthropic Workspaces, Azure
+            OpenAI) en lugar de las versiones gratuitas, y desactiva el "training on
+            inputs". Para datos médicos / DNI / bancarios completos sigue haciendo falta
+            infraestructura propia.</li>
+          <li><strong>Quién tiene acceso al editor del flujo:</strong> mínimo dos personas
+            con permisos de edición y una sola con permiso de borrado. Activa 2FA en la
+            cuenta de la herramienta — es la puerta de servicio a todo tu stack.</li>
         </ul>
 
         <h2>Sabes hacer esto cuando…</h2>
@@ -122,15 +295,20 @@
           <li>Has medido cuánto tiempo ahorra y puedes ponerlo en una diapositiva.</li>
           <li>Tienes definido qué hacer cuando el flujo falla (alertas, persona responsable, registro).</li>
           <li>El flujo está versionado y documentado en algún sitio que no sea sólo la cabeza de quien lo montó.</li>
-          <li>Si meas IA en algún paso, el coste por ejecución y el límite mensual están bajo control.</li>
+          <li>Si metes IA en algún paso, el coste por ejecución y el límite mensual están bajo control.</li>
+          <li>Hay al menos dos personas con permisos para editarlo y una propietaria funcional desde el negocio.</li>
         </ul>
 
         <h2>¿Por qué subir al nivel 3?</h2>
         <p>
           Las automatizaciones tienen un techo: son <strong>flujos fijos</strong>. Si llega
-          algo que no encaja en el camino predefinido, fallan. Cuando empiezas a tener casos
-          que requieren <em>decidir qué hacer</em> en función del contexto — no sólo
-          ejecutar pasos predefinidos — necesitas un agente.
+          algo que no encaja en el camino predefinido, fallan o caen al humano. Cuando
+          empiezas a tener casos que requieren <em>decidir qué hacer</em> en función del
+          contexto — no sólo ejecutar pasos predefinidos — necesitas un agente. Señales
+          típicas de que toca subir: ramas <code>if/else</code> que se han hecho ingobernables,
+          flujos que pasan la mitad del tiempo en aprobación humana porque la regla es
+          demasiado sutil, o reglas que cambian todas las semanas y nadie quiere volver al
+          editor.
         </p>
       </article>
 
@@ -147,7 +325,8 @@
         <p>
           El cuestionario evalúa específicamente la dimensión <em>Automatizaciones</em>. Si
           sale baja, sabrás dónde concentrar las próximas semanas; si sale alta, ya estás
-          listo para el nivel 3.
+          listo para el nivel 3. Si prefieres ver primero cuántas horas podrías liberar,
+          prueba la <a href="/calculadora.html">calculadora de ahorro</a> — sin email.
         </p>
         <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico</a>
       </aside>
