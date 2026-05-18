@@ -6,7 +6,7 @@
     <title>Nivel 3 — Agentes IA en tu pyme — AutonomIA</title>
     <meta
       name="description"
-      content="Qué es un agente IA, en qué se diferencia de una automatización, y tres casos reales para una pyme — con qué controlar antes de soltarlo."
+      content="Qué es un agente IA, cuándo subes desde una automatización, comparativa real de frameworks, casos por sector y guard-rails antes de soltarlo en producción."
     />
     <meta name="aprende-level" content="03-agentes" />
     <link rel="canonical" href="https://ia.itera.es/aprende/03-agentes.html" />
@@ -68,6 +68,105 @@
           usar, en qué orden, y cuándo darse por satisfecho.
         </p>
 
+        <h2 id="cuando-pasar-de-flujo-a-agente">Cuándo un flujo se queda corto y necesitas agente</h2>
+        <p>
+          La regla pyme es <strong>no subir al nivel 3 hasta que el nivel 2 te empuje</strong>.
+          Si tu automatización aún cabe en un diagrama de cuatro o cinco pasos, no necesitas
+          un agente. Estas son las señales reales de que tu flujo se ha quedado corto:
+        </p>
+        <ul>
+          <li><strong>Ramas <code>if/else</code> que se han hecho ingobernables.</strong> Cuando
+            tu flujo en Make/Zapier tiene 8+ bifurcaciones para cubrir variantes y cada
+            mes hay que añadir una más, el agente acaba siendo más barato de mantener
+            que el árbol de reglas.</li>
+          <li><strong>El humano interviene en más del 30% de las ejecuciones.</strong> Si
+            tu pipeline de aprobación se ha convertido en "el humano arregla lo que la
+            regla no supo", el coste del humano ya pagaría un agente con guard-rails.</li>
+          <li><strong>La regla cambia todas las semanas.</strong> Si negocio te pide ajustar
+            criterios constantemente y cada cambio rompe el flujo, un agente con instrucciones
+            en lenguaje natural absorbe el cambio mejor que un editor visual.</li>
+          <li><strong>Hace falta combinar varias fuentes para decidir.</strong> "Lee el CRM,
+            mira LinkedIn, consulta el historial de soporte y decide tono" — eso ya no es
+            una secuencia fija, es una decisión. Encaja en un agente.</li>
+          <li><strong>Quieres que el sistema explique por qué hizo lo que hizo.</strong> Las
+            automatizaciones registran qué pasos ejecutaron; los agentes pueden registrar
+            <em>el razonamiento</em>, útil cuando hay que justificar decisiones a un cliente
+            o a un auditor.</li>
+        </ul>
+        <p>
+          Si ninguna de las cinco aplica, ahorra tiempo: refina tu automatización
+          <a href="/aprende/02-automatizaciones.html#anatomia-flujo">en el nivel 2</a>.
+          Un agente sin necesidad real es coste, riesgo y deuda operativa.
+        </p>
+
+        <h2 id="frameworks">¿Qué framework de agentes usar?</h2>
+        <p>
+          A diferencia del nivel 2, aquí no hay (todavía) un "Make / Zapier" que te resuelva
+          todo desde la UI. Los cuatro grandes a fecha de 2026-05 son frameworks pensados
+          para meter código alrededor, no para arrastrar bloques. Esta es la comparativa
+          honesta para una pyme española:
+        </p>
+        <div class="scenarios">
+          <table class="scenarios__table">
+            <caption class="scenarios__caption">
+              Precios estimados <abbr title="impuestos no incluidos">ex&nbsp;IVA</abbr>. El
+              coste real depende casi siempre del modelo (Claude / GPT-4o / etc.) más que
+              del framework. Usa la tabla para decidir <em>dónde escribir el agente</em>,
+              no como tarifa firme.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Framework</th>
+                <th scope="col">Licencia / coste base</th>
+                <th scope="col" class="scenarios__num">Curva</th>
+                <th scope="col">Mejor para…</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Claude Agent SDK (Anthropic)</th>
+                <td data-label="Licencia">Open-source, pagas el modelo (Claude vía API).</td>
+                <td data-label="Curva" class="scenarios__num">Media</td>
+                <td data-label="Mejor para">Equipos que ya tienen un desarrollador y quieren
+                  un agente con herramientas bien definidas, sub-agentes y un loop estable.
+                  Es el stack con el que está montado este sitio.</td>
+              </tr>
+              <tr>
+                <th scope="row">LangGraph (LangChain)</th>
+                <td data-label="Licencia">Open-source, modelo aparte. Versión cloud opcional.</td>
+                <td data-label="Curva" class="scenarios__num">Alta</td>
+                <td data-label="Mejor para">Pymes con equipo técnico fuerte y casos
+                  multi-agente complejos (varios agentes que se hablan, branching, retries).
+                  Muy potente pero te pide invertir en aprenderlo bien.</td>
+              </tr>
+              <tr>
+                <th scope="row">OpenAI Assistants API</th>
+                <td data-label="Licencia">SaaS de OpenAI; pagas tokens y storage.</td>
+                <td data-label="Curva" class="scenarios__num">Baja</td>
+                <td data-label="Mejor para">Pymes que ya viven en el ecosistema OpenAI y
+                  quieren montar un agente conversacional con file-search y function calling
+                  rápido. Cierra el stack y depende de un solo proveedor.</td>
+              </tr>
+              <tr>
+                <th scope="row">AutoGen (Microsoft)</th>
+                <td data-label="Licencia">Open-source, modelo aparte. Encaja con Azure OpenAI.</td>
+                <td data-label="Curva" class="scenarios__num">Media-Alta</td>
+                <td data-label="Mejor para">Pymes con Microsoft 365 / Azure y experimentos de
+                  múltiples agentes que se reparten roles (analista + revisor + escritor).
+                  Reusa la cuenta Azure ya existente.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Regla práctica: <strong>elige el framework por el equipo que tienes, no por la
+          moda</strong>. Si tu desarrollador ya usa Anthropic, Claude Agent SDK. Si tu
+          empresa vive en Microsoft 365, AutoGen + Azure OpenAI. Si necesitas algo rápido
+          y conversacional para clientes y no te asusta atarte a un proveedor, OpenAI
+          Assistants. LangGraph cuando el caso es de verdad multi-agente o cuando
+          previsiblemente vas a saltar al <a href="/aprende/04-orquestadores.html">nivel 4</a>.
+        </p>
+
         <h2>Tres casos reales para una pyme</h2>
 
         <h3>1. Agente comercial que cualifica leads</h3>
@@ -96,6 +195,32 @@
           responsable se sienta y solo decide; ya no investiga.
         </p>
 
+        <h3>4. Asesoría / despacho — agente de cierre fiscal mensual</h3>
+        <p>
+          A final de mes el agente recoge las facturas que el flujo del
+          <a href="/aprende/02-automatizaciones.html#anatomia-flujo">nivel 2</a> ya dejó
+          archivadas, detecta huecos (proveedor recurrente sin factura, IVA descuadrado),
+          consulta el histórico para deducir si es retraso del proveedor o un error de
+          imputación, y prepara un informe con tres pestañas: <em>lo que está bien</em>,
+          <em>lo que requiere revisión</em>, y <em>lo que el agente ha corregido</em> con la
+          justificación. El asesor revisa el segundo bloque en 30 min en vez de 4 horas. Lo
+          que cambia frente al nivel 2: el agente decide qué huecos vale la pena marcar
+          según el patrón histórico, no según una regla fija.
+        </p>
+
+        <h3>5. Comercio / e-commerce — agente de catálogo permanente</h3>
+        <p>
+          El agente vigila tu catálogo 24/7. Cuando aparece un producto sin foto decente,
+          una descripción incoherente con el SKU, o una variante sin precio, busca en tu
+          propio histórico cómo redactaste casos similares, propone foto desde el banco de
+          imágenes interno y deja un borrador de ficha completa esperando aprobación.
+          Cuando un producto se queda sin stock previsiblemente (según ventas pasadas),
+          abre un ticket en tu sistema con la sugerencia de reorden. Un humano del equipo
+          comercial revisa el panel una vez al día y aprueba los cambios con un clic. Lo
+          que cambia frente a una automatización: aquí no hay un "trigger" — el agente
+          decide qué mirar y cuándo, dentro del alcance permitido.
+        </p>
+
         <h2>Cómo lo haces bien</h2>
         <ul>
           <li><strong>Define el alcance con cuchillo.</strong> Lista <em>exactamente</em>
@@ -119,13 +244,74 @@
             casos sensibles (datos médicos, decisiones legales, despidos, etc.).</li>
         </ul>
 
+        <h2 id="errores-frecuentes">Errores frecuentes en este nivel</h2>
+        <ul>
+          <li><strong>Confundir un "chatbot con tools" con un agente.</strong> Si la única
+            "decisión" es elegir qué función de tres llamar, todavía estás en el nivel 2
+            disfrazado. Mide cuántas trayectorias distintas toma el agente en un mes; si
+            son menos de cinco, era un flujo.</li>
+          <li><strong>No medir el coste por ejecución desde el día 1.</strong> Un agente
+            mal acotado puede llamar al modelo 20-30 veces para resolver un caso simple.
+            Sin contador no hay forma de saber si el agente cuesta 5 € o 5.000 € al mes.</li>
+          <li><strong>Darle al agente acceso a "todo" porque queda mejor.</strong> Cada
+            herramienta nueva expande la superficie de error y de coste. Empieza con dos
+            herramientas y suma una cada semana solo cuando hay un caso real que la pida.</li>
+          <li><strong>Sin método de evaluación, sin agente.</strong> "Parece que va bien"
+            no es métrica. Necesitas un set de casos conocidos con la respuesta correcta
+            (o aceptable) para poder verificar que un cambio de prompt no rompe lo que
+            antes funcionaba.</li>
+          <li><strong>Encender el agente en producción sin botón de pausa.</strong> Antes
+            de meterlo, asegúrate de que existe una forma <em>no técnica</em> de pararlo
+            (un toggle en un panel, un secreto que el responsable puede revocar). Si para
+            apagarlo hay que llamar al desarrollador, descubrirás el problema un sábado
+            por la noche.</li>
+          <li><strong>Olvidarte del registro completo de decisiones.</strong> Guarda
+            <em>input → herramientas llamadas → respuestas → output final</em> para cada
+            ejecución durante al menos 90 días. Es lo que te salva cuando un cliente
+            pregunta "¿por qué tu sistema me dijo esto?".</li>
+        </ul>
+
+        <h2 id="guard-rails">Control de coste, alcance y registro</h2>
+        <p>
+          Las tres cuentas que hay que cerrar antes de poner un agente en producción —
+          aunque sea con humano-en-el-loop:
+        </p>
+        <ul class="level-checklist">
+          <li><strong>Presupuesto de tokens y acciones por día:</strong> tope duro de
+            llamadas al modelo (p. ej. 5.000 al día) y tope de acciones que cuestan
+            dinero o son visibles (p. ej. máx. 50 emails enviados, 20 tickets creados,
+            0 borrados). Sin tope, un prompt en bucle puede gastar el presupuesto del
+            mes en una noche.</li>
+          <li><strong>Dominio de acción cerrado con lista blanca:</strong> "puede leer Drive
+            de la carpeta <code>/clientes</code>; no puede tocar <code>/finanzas</code>;
+            puede enviar email solo a dominios de la lista <code>clientes_activos.csv</code>".
+            La regla por defecto es <em>denegar</em>; lo que se permite, se permite por
+            escrito.</li>
+          <li><strong>Registro de decisiones consultable:</strong> cada ejecución registra
+            <em>quién</em> (qué agente y versión del prompt), <em>qué</em> (entrada y
+            herramientas llamadas), <em>por qué</em> (razonamiento si lo expone el modelo)
+            y <em>resultado</em>. Guárdalo en BigQuery, Postgres o incluso una hoja
+            cifrada — lo importante es que un humano pueda buscar por caso y reconstruir
+            la trayectoria en 5 minutos.</li>
+          <li><strong>Modelo vía API empresarial:</strong> mismas reglas que en el
+            <a href="/aprende/01-chats.html#datos-sensibles">nivel 1</a> y el
+            <a href="/aprende/02-automatizaciones.html#control-coste-datos">nivel 2</a>.
+            Para datos sensibles, OpenAI Business / Anthropic Workspaces / Azure OpenAI;
+            nunca la cuenta gratis. Desactiva el entrenamiento con tus inputs.</li>
+          <li><strong>Toggle de pausa accesible al negocio:</strong> el dueño funcional
+            tiene que poder pausar el agente desde un panel (Notion, Retool, un Google
+            Form que pone una variable a <em>false</em>) sin tocar código.</li>
+        </ul>
+
         <h2>Sabes hacer esto cuando…</h2>
         <ul class="level-checklist">
           <li>Tienes al menos un agente operando en producción con un objetivo claro y un alcance documentado.</li>
-          <li>Cada acción del agente queda registrada con quién, qué y por qué.</li>
+          <li>Cada acción del agente queda registrada con quién, qué y por qué, y un humano puede consultar el log sin pedir ayuda al desarrollador.</li>
           <li>Hay un humano nombrado que puede pausar, revertir o reasignar las acciones del agente desde una interfaz.</li>
           <li>Tienes presupuesto y rate-limits configurados para que un fallo no te cueste un mes de hosting en una noche.</li>
           <li>Sabes evaluar la calidad del agente con métricas concretas (tasa de cierre, % de respuestas correctas, etc.), no sólo "parece que va bien".</li>
+          <li>El dominio de acción está cerrado con lista blanca (no "deny by exception") y hay al menos una herramienta sensible explícitamente prohibida.</li>
+          <li>Antes de subir el siguiente agente, el primero lleva ≥ 30 días en producción con incidencias clasificadas y un plan claro de qué automatizar primero.</li>
         </ul>
 
         <h2>¿Por qué subir al nivel 4?</h2>
