@@ -40,6 +40,96 @@
     <!-- End Cloudflare Web Analytics -->
     <script src="/assets/analytics.js" defer></script>
     <meta name="autonomia-api-base" content="https://autonomia-api.example.workers.dev" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://ia.itera.es/#organization",
+          "name": "AutonomIA",
+          "url": "https://ia.itera.es/",
+          "logo": "https://ia.itera.es/assets/og-default.png",
+          "description": "Servicio de adopción de IA para pymes españolas: diagnóstico, piloto y acompañamiento gobernado por agentes.",
+          "parentOrganization": {
+            "@type": "Organization",
+            "name": "Itera",
+            "url": "https://www.itera.es/"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "España"
+          },
+          "knowsLanguage": ["es"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ia.itera.es/#website",
+          "url": "https://ia.itera.es/",
+          "name": "AutonomIA",
+          "inLanguage": "es-ES",
+          "publisher": { "@id": "https://ia.itera.es/#organization" }
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://ia.itera.es/#service",
+          "name": "AutonomIA — Adopción de IA para pymes",
+          "url": "https://ia.itera.es/servicios.html",
+          "provider": { "@id": "https://ia.itera.es/#organization" },
+          "serviceType": "Consultoría e implantación de IA",
+          "areaServed": { "@type": "Country", "name": "España" },
+          "audience": {
+            "@type": "BusinessAudience",
+            "audienceType": "Pymes (5–250 empleados)"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Paquetes contratables",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "name": "Diagnóstico express",
+                "url": "https://ia.itera.es/servicios.html#diagnostico-express",
+                "description": "2 semanas. Mapa de procesos y los 3 casos donde la IA paga su coste antes.",
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "price": 1500,
+                  "priceCurrency": "EUR",
+                  "minPrice": 1500
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "Piloto de automatización",
+                "url": "https://ia.itera.es/servicios.html#piloto",
+                "description": "4–6 semanas. Un proceso automatizado en producción, con métricas y 30 días de garantía.",
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "price": 6000,
+                  "priceCurrency": "EUR",
+                  "minPrice": 6000
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "Acompañamiento gobernado",
+                "url": "https://ia.itera.es/servicios.html#acompanamiento",
+                "description": "Mensual sin permanencia. Tu equipo de IA externalizado: agentes, gobernanza y oncall.",
+                "priceSpecification": {
+                  "@type": "UnitPriceSpecification",
+                  "price": 3500,
+                  "priceCurrency": "EUR",
+                  "unitText": "MES",
+                  "minPrice": 3500
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
