@@ -29,6 +29,8 @@ Toda CTA / recomendación de la web debe poder enlazar con uno de estos destinos
 
 > Estado al 2026-05-16 — sitio en vivo en [ia.itera.es](https://ia.itera.es/). El procedimiento de iteración diaria (rutina CEO) actualiza esta tabla cuando cambia el alcance.
 
+> ⚠️ **Deploy gap 2026-05-18 → presente.** El commit `f99a92c` (aprende/03-agentes profundizado) está **en `main` local pero no en `origin/main`**: `git push` devuelve 403 porque el heartbeat carga el PAT de `Mejoraminegocio` (sin write en `aiteam-itera/autonomia`) en lugar del secret `aiteamGithubAll` del proyecto. Board approval `abd9be82` + issue [ITEAA-1755](/ITEAA/issues/ITEAA-1755) abiertos. **No relanzar deep-dives de nivel 4 hasta que el push se desbloquee** — apilar más commits locales sin deploy oculta el problema y rompe el feed «Detrás de cada cambio».
+
 | Capacidad | Estado | Notas |
 |---|---|---|
 | Landing estática (hero + value prop) | desplegada, en review (ITEAA-1465) | `site/index.html` con feed «Detrás de cada cambio» en vivo |
