@@ -1,6 +1,7 @@
 import { handleConfirm, handleSubmit } from "./handlers";
 import { handleCommentConfirm, handleCommentSubmit, type CommentEnv } from "./comment-handlers";
 import { handleContactSubmit, type ContactEnv } from "./contact-handlers";
+import { handleTrack } from "./track-handlers";
 
 type AllEnv = CommentEnv & ContactEnv;
 
@@ -8,6 +9,18 @@ export default {
   async fetch(request: Request, env: AllEnv): Promise<Response> {
     const url = new URL(request.url);
 
+    if (url.pathname === "/api/track") {
+      if (request.method === "OPTIONS") {
+        return new Response(null, {
+          status: 204,
+          headers: {
+            "Access-Control-Allow-Origin": "https://ia.itera.es",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+          },
+        });
+      }
+      return handleTrack(request);
+    }
     if (url.pathname === "/api/submit") {
       return handleSubmit(request, env);
     }
