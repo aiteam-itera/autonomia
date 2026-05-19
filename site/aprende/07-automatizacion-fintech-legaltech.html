@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Automatización con IA en fintech y legaltech — AutonomIA</title>
+    <meta
+      name="description"
+      content="Guía práctica para equipos de ops en fintech y legaltech: los 4 procesos más automatizables, el modelo HITL para entornos regulados, y las preguntas que hacer a cualquier proveedor."
+    />
+    <link rel="canonical" href="https://ia.itera.es/aprende/07-automatizacion-fintech-legaltech.html" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="AutonomIA" />
+    <meta property="og:title" content="Automatización con IA en fintech y legaltech: guía práctica para equipos de ops" />
+    <meta
+      property="og:description"
+      content="Los 4 procesos más automatizables en fintech y legaltech, el modelo HITL para entornos regulados, y las 5 preguntas que hacer antes de contratar."
+    />
+    <meta property="og:url" content="https://ia.itera.es/aprende/07-automatizacion-fintech-legaltech.html" />
+    <meta property="og:image" content="https://ia.itera.es/assets/og-default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AutonomIA — IA que entiende tu negocio." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Automatización con IA en fintech y legaltech: guía práctica" />
+    <meta
+      name="twitter:description"
+      content="Los 4 procesos más automatizables en fintech y legaltech, el modelo HITL y las preguntas que hacer a cualquier proveedor."
+    />
+    <meta name="twitter:image" content="https://ia.itera.es/assets/og-default.png" />
+    <meta name="twitter:image:alt" content="AutonomIA — IA que entiende tu negocio." />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Automatización con IA en fintech y legaltech: guía práctica para equipos de ops",
+      "description": "Guía práctica para equipos de ops en fintech y legaltech: los 4 procesos más automatizables, el modelo HITL para entornos regulados, y las preguntas que hacer a cualquier proveedor.",
+      "url": "https://ia.itera.es/aprende/07-automatizacion-fintech-legaltech.html",
+      "datePublished": "2026-06-09",
+      "dateModified": "2026-06-09",
+      "inLanguage": "es-ES",
+      "author": { "@type": "Organization", "name": "AutonomIA", "url": "https://ia.itera.es/" },
+      "publisher": { "@type": "Organization", "name": "AutonomIA", "url": "https://ia.itera.es/" },
+      "isPartOf": { "@type": "WebSite", "name": "AutonomIA", "url": "https://ia.itera.es/" },
+      "keywords": ["automatización fintech", "automatización legaltech España", "IA compliance", "HITL automatización"]
+    }
+    </script>
+
+    <link rel="stylesheet" href="/assets/style.css" />
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"FILL_CWA_TOKEN"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    <script src="/assets/analytics.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <header class="hero hero--compact">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
+      </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1" class="post">
+      <header class="post__hero">
+        <h1>Automatización con IA en fintech y legaltech: guía práctica para equipos de ops</h1>
+        <div class="post__meta">
+          <span>Automatización · Sectores regulados</span>
+          <span>7 min de lectura</span>
+        </div>
+      </header>
+
+      <article class="post__body">
+        <p>
+          Fintech y legaltech comparten un problema que pocas industrias tienen en la misma
+          medida: son sectores intensivos en documentos, regulados por normativas complejas,
+          y con equipos de operaciones que gestionan volúmenes crecientes con procesos
+          heredados del mundo analógico.
+        </p>
+        <p>
+          La consecuencia es que los cuellos de botella de ops en estas empresas no son
+          cosméticos. Son estructurales. Y la automatización con IA no es solo una mejora
+          de eficiencia: en muchos casos es la única forma de cumplir requisitos regulatorios
+          sin escalar el equipo linealmente.
+        </p>
+
+        <h2 id="por-que">Por qué fintech y legaltech concentran tanto potencial de automatización</h2>
+        <p>Tres factores se combinan en estos sectores:</p>
+        <p>
+          <strong>1. Intensidad documental.</strong> Un proceso de onboarding KYC en una
+          fintech puede requerir verificar identidad, validar documentos, cruzar datos con
+          registros públicos, gestionar listas de exclusión y generar un expediente
+          auditado — todo esto para cada nuevo cliente. En una legaltech, la revisión de
+          contratos implica estructuras similares: extraer cláusulas, comparar con
+          plantillas, identificar desviaciones, generar dictámenes.
+        </p>
+        <p>
+          <strong>2. Presión regulatoria.</strong> GDPR, AML, MiCA, DORA, NIS2 — el
+          entorno normativo europeo exige auditabilidad. No basta con hacer las cosas bien:
+          hay que poder demostrar que se hicieron bien, con timestamps, logs y trazabilidad.
+          Esto crea una demanda natural de procesos sistematizados y documentados, que es
+          exactamente lo que la automatización proporciona.
+        </p>
+        <p>
+          <strong>3. Crecimiento asimétrico.</strong> Las fintech y legaltech en fase de
+          crecimiento suelen escalar clientes más rápido que su capacidad operativa. El gap
+          entre lo que el equipo de ventas cierra y lo que operaciones puede gestionar crea
+          acumulaciones, errores y clientes insatisfechos — exactamente cuando la empresa
+          no se lo puede permitir.
+        </p>
+
+        <h2 id="procesos">Los 4 procesos más automatizables en estos sectores</h2>
+
+        <h3>1. Onboarding y KYC/AML</h3>
+        <p>
+          Extracción de datos de documentos de identidad, validación contra registros
+          públicos (SEPBLAC, etc.), scoring de riesgo inicial, generación del expediente
+          digital y notificación al equipo de compliance para revisión final (HITL). Tiempo
+          actual típico: 45-90 min por cliente. Tiempo con automatización: 5-10 min de
+          revisión humana en casos de baja confianza.
+        </p>
+
+        <h3>2. Reporting regulatorio</h3>
+        <p>
+          Consolidación de datos de múltiples fuentes (core bancario, CRM, sistema de
+          gestión), aplicación de reglas de cálculo regulatorias, generación del informe en
+          formato requerido y envío al regulador. Actualmente consume entre 3 y 8 días de
+          trabajo de compliance al trimestre. Con automatización: horas.
+        </p>
+
+        <h3>3. Revisión de contratos</h3>
+        <p>
+          Extracción de cláusulas clave, comparación con plantillas base, detección de
+          desviaciones, generación de informe de revisiones recomendadas. El equipo jurídico
+          valida y negocia (el trabajo de criterio que no se puede automatizar). Tiempo
+          actual: 4-12 horas por contrato. Con IA: 30-60 min de revisión humana sobre el
+          informe generado.
+        </p>
+
+        <h3>4. Gestión de incidencias y reclamaciones</h3>
+        <p>
+          Clasificación automática de la incidencia, búsqueda en base de conocimiento,
+          generación de respuesta draft, escalado al especialista si la confianza es baja.
+          Las incidencias tier-1 se resuelven sin intervención humana. Reducción típica en
+          tiempo de respuesta: 60-80%.
+        </p>
+
+        <h2 id="gobernanza">El reto de la gobernanza en sectores regulados</h2>
+        <p>
+          El error más frecuente al implementar automatización en fintech y legaltech es
+          tratar la IA como una caja negra: el proceso entra, la decisión sale, y nadie
+          sabe exactamente por qué. Esto no funciona en entornos regulados por una razón
+          simple: el regulador no acepta "el algoritmo lo decidió" como justificación.
+        </p>
+        <p>
+          La alternativa es el modelo <strong>HITL (Human-in-the-Loop)</strong>: la IA
+          maneja el 80-90% de los casos de forma autónoma, pero los casos de baja
+          confianza, alto riesgo o desviación de la norma se escalan automáticamente a un
+          especialista humano. El sistema registra qué decisión tomó el humano, con qué
+          información y en qué momento — creando la trazabilidad que el regulador necesita.
+        </p>
+        <p>
+          Este modelo no es más lento que la automatización total. Es más seguro. Y en
+          sectores como fintech y legaltech, la seguridad es el precio de entrada.
+        </p>
+
+        <h2 id="preguntas-proveedor">Las 5 preguntas que hacer a un proveedor antes de contratar</h2>
+        <ol>
+          <li>¿Cómo documenta el sistema las decisiones automáticas? ¿Puede exportar logs auditables?</li>
+          <li>¿Cuál es el mecanismo de escalado cuando la confianza es baja? ¿Quién decide el umbral?</li>
+          <li>¿Qué ocurre si el modelo comete un error? ¿Cómo se revierte y se audita?</li>
+          <li>¿Tiene experiencia en entornos regulados por GDPR/AML/DORA/NIS2? ¿Puede compartir referencias?</li>
+          <li>¿Cómo se actualiza el modelo cuando cambian las normativas? ¿Quién asume ese mantenimiento?</li>
+        </ol>
+        <p>
+          Un proveedor serio tiene respuestas concretas a todas estas preguntas antes de la
+          primera reunión comercial.
+        </p>
+      </article>
+
+      <nav class="level-nav" aria-label="Navegación">
+        <a class="cta" href="/aprende/">← Volver a Aprende</a>
+      </nav>
+
+      <aside class="post__next" aria-label="Siguiente paso">
+        <h2>¿Tu empresa está lista para automatizar de forma segura?</h2>
+        <p>
+          Haz la evaluación gratuita de madurez en automatización — 5 preguntas, menos de
+          3 minutos — y descubre tu nivel con un plan de acción personalizado.
+        </p>
+        <a class="cta cta--primary" href="/evaluacion/">Hacer la evaluación gratuita →</a>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year">2026</span> AutonomIA — Sitio gobernado por agentes.</small>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
