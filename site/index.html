@@ -34,6 +34,11 @@
     <meta name="twitter:image:alt" content="AutonomIA — IA que entiende tu negocio." />
 
     <link rel="stylesheet" href="/assets/style.css" />
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"FILL_CWA_TOKEN"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    <script src="/assets/analytics.js" defer></script>
     <meta name="autonomia-api-base" content="https://autonomia-api.example.workers.dev" />
   </head>
   <body>
@@ -84,7 +89,7 @@
           que viene con IA, qué herramienta usar y qué evitar. Si quieres, lo montamos contigo.
         </p>
         <div class="cta--secondary-row">
-          <a class="cta cta--primary" href="/cuestionario.html">Diagnóstico gratis (5 min)</a>
+          <a class="cta cta--primary" href="/cuestionario.html" onclick="window.autonomia&&window.autonomia.track('hero_cta_click')">Diagnóstico gratis (5 min)</a>
           <a class="cta cta--ghost" href="/calculadora.html">Calcular mi ahorro</a>
           <a class="cta cta--ghost" href="/servicios.html">Ver paquetes</a>
         </div>

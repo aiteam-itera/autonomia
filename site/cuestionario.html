@@ -34,6 +34,11 @@
     <meta name="twitter:image:alt" content="AutonomIA — IA que entiende tu negocio." />
 
     <link rel="stylesheet" href="/assets/style.css" />
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"FILL_CWA_TOKEN"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    <script src="/assets/analytics.js" defer></script>
     <!--
       Set this to the deployed Worker URL once it exists, e.g.:
         <meta name="autonomia-api-base" content="https://autonomia-api.example.workers.dev" />
@@ -638,9 +643,12 @@
 
         btnNext.addEventListener("click", () => {
           if (!validateStep(current)) return;
+          var prevStep = current;
           current = Math.min(TOTAL_STEPS, current + 1);
           saveState();
           showStep(current);
+          if (prevStep === 1) window.autonomia && window.autonomia.track("quiz_start");
+          window.autonomia && window.autonomia.track("quiz_step_complete", { step: current });
         });
         btnPrev.addEventListener("click", () => {
           current = Math.max(1, current - 1);
@@ -1054,6 +1062,8 @@
           if (!validateStep(current)) return;
           saveState();
           renderResult();
+          var _d = collectAnswers(); var _s = scoreAnswers(_d);
+          window.autonomia && window.autonomia.track("quiz_finish", { score: _s.overall });
         });
 
         // CTA: when the backend is configured (window.AUTONOMIA_API_BASE or
@@ -1109,6 +1119,7 @@
         }
 
         document.getElementById("cta-email").addEventListener("click", () => {
+          window.autonomia && window.autonomia.track("quiz_email_cta_click");
           const data = collectAnswers();
           const { overall, dims } = scoreAnswers(data);
           const apiBase = getApiBase();

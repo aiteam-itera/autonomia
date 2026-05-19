@@ -34,6 +34,11 @@
     <meta name="twitter:image:alt" content="AutonomIA — IA que entiende tu negocio." />
 
     <link rel="stylesheet" href="/assets/style.css" />
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"FILL_CWA_TOKEN"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    <script src="/assets/analytics.js" defer></script>
     <style>
       /* Estilos específicos de la calculadora (vainilla, reutilizan variables del :root). */
       .calc {
@@ -329,6 +334,7 @@
         ],
       };
 
+      var calcFinishFired = false;
       const $ = (id) => document.getElementById(id);
       const fmtEur = (n) =>
         new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
@@ -367,6 +373,11 @@
               `(${fmtEur(eurYear)} al año).`
             : "Pon al menos unas horas en uno de los bloques para ver la estimación.";
         $("calc-summary").textContent = summary;
+
+        if (!calcFinishFired && hoursMonth > 0) {
+          calcFinishFired = true;
+          window.autonomia && window.autonomia.track("calculadora_finish");
+        }
 
         const list = $("calc-suggestions");
         list.innerHTML = "";

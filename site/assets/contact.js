@@ -222,6 +222,7 @@
               "<strong>¡Recibido!</strong> Te responderemos en menos de 24h. Revisa tu email; te hemos mandado una copia.",
               "ok"
             );
+            window.autonomia && window.autonomia.track("contact_form_submit", { paquete: payload.paquete || "" });
             button.textContent = "Mensaje enviado";
             Array.prototype.forEach.call(
               form.querySelectorAll("input,textarea,select"),
