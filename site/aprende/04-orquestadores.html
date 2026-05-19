@@ -173,21 +173,169 @@
           </article>
         </div>
 
-        <h3>Cuándo importa esto en tu pyme</h3>
+        <h3 id="cuando-subir">Cuándo un agente solo se queda corto y necesitas orquestación</h3>
         <p>
           Antes de saltar al nivel 4 no necesitas montar Paperclip o Ironclip — basta con
-          tener bien resueltos los niveles 2 y 3. Empiezan a importar cuando ocurre
-          <em>al menos una</em> de estas cosas:
+          tener bien resueltos los niveles 2 y 3. Las cinco señales reales de que tu pyme
+          ya está pidiendo orquestación, no un agente más:
         </p>
         <ul class="level-checklist">
-          <li>Ya tienes tres o más agentes en producción y empiezas a perder el rastro de qué hace cada uno.</li>
-          <li>El coste mensual de IA es lo suficientemente grande como para que alguien pregunte por él en el comité.</li>
-          <li>Operas en un sector que te va a pedir trazabilidad y firma humana (sanidad, legal, financiero, industria regulada).</li>
-          <li>Quieres que tu equipo humano se concentre en estrategia y revisión, no en lanzar scripts a mano.</li>
-          <li>Estás pensando en abrir tu operación interna como producto a clientes.</li>
+          <li><strong>Tienes tres o más agentes en producción</strong> y empiezas a perder el
+            rastro de qué hace cada uno, qué herramientas tocó y en qué tarea está bloqueado.</li>
+          <li><strong>El coste mensual de IA es lo suficientemente grande</strong> como para
+            que alguien pregunte por él en el comité. Necesitas presupuesto por agente, no un
+            agregado de OpenAI o Anthropic que nadie sabe descomponer.</li>
+          <li><strong>Operas en un sector regulado</strong> (sanidad, legal, financiero,
+            industria) que te va a pedir trazabilidad, firma humana en los puntos críticos
+            y registros que aguanten una inspección años después.</li>
+          <li><strong>Quieres que tu equipo humano se concentre en estrategia y revisión</strong>,
+            no en lanzar scripts a mano ni en hacer de "router" entre agentes que no se
+            hablan entre sí.</li>
+          <li><strong>Estás pensando en abrir tu operación interna como producto</strong> a
+            clientes — para eso necesitas multi-empresa aislado, audit log por cliente y
+            facturación trazable.</li>
         </ul>
+        <p>
+          Si no se cumple <em>ninguna</em> de las cinco, sigue invirtiendo en los niveles 2 y
+          3. El nivel 4 mal aplicado <em>añade burocracia sin añadir valor</em>: jerarquías
+          fantasma, paneles que nadie mira, y un coste fijo de plataforma que sólo se
+          justifica cuando hay volumen real de agentes.
+        </p>
 
-        <h2>Tres casos reales para una pyme</h2>
+        <h2 id="plataformas">¿Qué plataforma de orquestación usar?</h2>
+        <p>
+          A diferencia del nivel 3 — donde los frameworks (Claude Agent SDK, LangGraph,
+          OpenAI Assistants, AutoGen) te dan el agente pero te dejan la gobernanza por
+          montar — en el nivel 4 lo que compras es <strong>el plano de control que ya
+          incluye organigrama, presupuesto, aprobaciones y auditoría</strong>. La
+          comparativa honesta a fecha de 2026-05 para una pyme española:
+        </p>
+        <div class="scenarios">
+          <table class="scenarios__table">
+            <caption class="scenarios__caption">
+              Precios estimados <abbr title="impuestos no incluidos">ex&nbsp;IVA</abbr> y a
+              fecha de 2026-05. El coste real lo marca casi siempre el modelo (Claude /
+              GPT-4o / Azure OpenAI) más que la plataforma. Usa la tabla para decidir
+              <em>dónde gobernar a tus agentes</em>, no como tarifa firme.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Plataforma</th>
+                <th scope="col">Licencia / coste base</th>
+                <th scope="col" class="scenarios__num">Curva</th>
+                <th scope="col">Mejor para…</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Paperclip</th>
+                <td data-label="Licencia">Open-source (auto-alojado). Pagas modelo aparte.
+                  Soporte de pago opcional.</td>
+                <td data-label="Curva" class="scenarios__num">Media</td>
+                <td data-label="Mejor para">Pymes y operaciones que quieren tratar agentes
+                  <em>como empleados</em> (organigrama, jefe, puesto, presupuesto, aprobaciones)
+                  sin atarse a un proveedor. Multi-empresa aislada de serie. Es el motor que
+                  gobierna este sitio.</td>
+              </tr>
+              <tr>
+                <th scope="row">Ironclip + BPAC</th>
+                <td data-label="Licencia">SaaS / on-premise gestionado. Plan inicial pyme
+                  desde ~600&nbsp;€/mes según volumen.</td>
+                <td data-label="Curva" class="scenarios__num">Media</td>
+                <td data-label="Mejor para">Pymes en sectores regulados (sanidad, despachos,
+                  industria con certificaciones) que necesitan el motor de Paperclip + editor
+                  de procesos BPAC, plantillas de auditoría y conectores a sus sistemas
+                  internos firmados por calidad.</td>
+              </tr>
+              <tr>
+                <th scope="row">LangGraph (modo multi-agente)</th>
+                <td data-label="Licencia">Open-source. Versión cloud LangSmith de pago para
+                  el panel de observabilidad.</td>
+                <td data-label="Curva" class="scenarios__num">Alta</td>
+                <td data-label="Mejor para">Equipos técnicos fuertes que quieren <em>diseñar</em>
+                  el grafo multi-agente desde código y montar ellos mismos el plano de control.
+                  Da máximo control y mínima abstracción — te toca implementar presupuesto,
+                  aprobaciones y multi-tenancy.</td>
+              </tr>
+              <tr>
+                <th scope="row">Microsoft Copilot Studio</th>
+                <td data-label="Licencia">SaaS de Microsoft. Desde ~200&nbsp;€/usuario/mes
+                  según licencia M365.</td>
+                <td data-label="Curva" class="scenarios__num">Baja-Media</td>
+                <td data-label="Mejor para">Pymes ya instaladas en Microsoft 365 / Azure que
+                  quieren orquestar agentes sobre Outlook, Teams, SharePoint y Dataverse
+                  con identidad corporativa (Entra ID) ya conectada. Cierra el stack en
+                  Microsoft y simplifica auditoría si vives ahí.</td>
+              </tr>
+              <tr>
+                <th scope="row">CrewAI / AutoGen Studio</th>
+                <td data-label="Licencia">Open-source. CrewAI tiene plan SaaS opcional;
+                  AutoGen Studio se ejecuta local.</td>
+                <td data-label="Curva" class="scenarios__num">Media</td>
+                <td data-label="Mejor para">Experimentos rápidos de equipos pequeños (3-5
+                  agentes con roles fijos: analista + redactor + revisor). Bueno para
+                  prototipar; le faltan piezas de gobernanza (presupuesto por agente,
+                  multi-tenancy, audit log) que sí trae Paperclip.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Regla práctica: <strong>elige plataforma por lo que ya tienes y por el sector,
+          no por la moda</strong>. Si tu empresa vive en Microsoft 365, Copilot Studio.
+          Si estás en un sector regulado o quieres soporte enterprise sobre el motor de
+          Paperclip, Ironclip + BPAC. Si quieres control total y tienes equipo técnico,
+          Paperclip auto-alojado. LangGraph cuando vas a inventar la orquestación porque
+          ningún producto encaja. Y CrewAI / AutoGen para prototipar antes de elegir.
+        </p>
+
+        <h2 id="anatomia-orquestador">Anatomía de un orquestador en 6 bloques</h2>
+        <p>
+          Sea cual sea la plataforma, todo orquestador real tiene las mismas seis piezas.
+          Si te ofrecen un "orquestador" al que le falta alguna, es un framework multi-agente
+          disfrazado, no un plano de control. Esta es la plantilla equivalente al
+          "trigger → validación → enriquecimiento IA → acción → log" del
+          <a href="/aprende/02-automatizaciones.html#anatomia-flujo">nivel 2</a> o al
+          "alcance + tools + memoria + logs" del
+          <a href="/aprende/03-agentes.html#frameworks">nivel 3</a>:
+        </p>
+        <ol>
+          <li><strong>Organigrama explícito.</strong> Cada agente tiene jefe, puesto y
+            objetivo encadenado al objetivo del proyecto y al del negocio. Las tareas
+            <em>bajan</em> por la línea de mando y los resultados <em>suben</em>. Sin
+            organigrama no es orquestación, es un grupo de WhatsApp de agentes.</li>
+          <li><strong>Heartbeats programados o por evento.</strong> Los agentes despiertan
+            por horario (rutina diaria), por mención (asignación, comentario) o por
+            condición (un KPI cruza un umbral). Trabajan, dejan rastro y se duermen. Ni
+            "scripts olvidados" ni "agentes encendidos quemando tokens".</li>
+          <li><strong>Presupuesto por agente y por proyecto.</strong> Tope mensual de gasto
+            en modelos y en acciones que cuestan dinero (emails enviados, llamadas a APIs
+            de pago, almacenamiento). Al 80% avisa; al 100% pausa. Convierte el coste IA en
+            una línea presupuestaria predecible.</li>
+          <li><strong>Aprobaciones humanas en los puntos críticos.</strong> Compras grandes,
+            contratación o despido de agentes, mensajes al exterior, cambios de rumbo
+            estratégico. El sistema bloquea la acción y espera firma humana. Lo demás fluye
+            solo. Sin esta pieza, antes o después te toca explicar al board un mensaje que
+            no salió de ningún humano.</li>
+          <li><strong>Audit log inmutable y consultable.</strong> Cada decisión queda
+            registrada con <em>quién</em> (agente y versión), <em>qué</em> (entrada,
+            herramientas, salida), <em>por qué</em> (razonamiento si lo expone el modelo)
+            y <em>quién aprobó qué</em>. Se puede enseñar a un cliente, a un regulador o
+            a tu propio consejo meses después.</li>
+          <li><strong>Multi-empresa / multi-cliente aislado.</strong> Una sola plataforma
+            sostiene varias "empresas" de agentes en paralelo con datos, auditoría y
+            presupuesto separados. Imprescindible si tienes filiales, varios sectores, o
+            piensas abrir la operación a clientes externos.</li>
+        </ol>
+        <p>
+          Variante habitual: añadir un <strong>"motor de evaluación"</strong> que mide la
+          calidad de cada agente con un set de casos conocidos. Cuando una versión nueva
+          de prompt baja la métrica, el orquestador <em>no</em> la promociona a producción.
+          Es lo que separa "tengo agentes" de "tengo agentes que mejoran sin que un humano
+          mire cada cambio".
+        </p>
+
+        <h2>Cinco casos reales para una pyme</h2>
 
         <h3>1. Equipo de marketing autónomo</h3>
         <p>
@@ -214,6 +362,32 @@
           Resultado: 10× más procesos al día con la misma plantilla.
         </p>
 
+        <h3>4. Despacho profesional — instrucción de expediente end-to-end</h3>
+        <p>
+          Un <em>case manager</em> agente recibe un expediente nuevo (contrato, reclamación,
+          incidencia laboral). Asigna a un investigador agente la búsqueda de jurisprudencia
+          y documentación relevante, a un redactor agente el primer borrador del escrito, y
+          a un revisor agente el control de coherencia con casos similares del propio
+          despacho. El socio humano sólo firma la salida y aprueba los hitos críticos
+          (presentación oficial, comunicación al cliente). Lo que cambia frente al nivel 3:
+          aquí el case manager <em>decide cuándo escalar</em> a un humano según riesgo del
+          caso, no según una regla fija; y cada paso queda en un audit log que se puede
+          presentar al colegio profesional.
+        </p>
+
+        <h3>5. Industria / sanidad — control de calidad continuo con BPAC</h3>
+        <p>
+          Un orquestador en una clínica o un laboratorio mantiene viva la cadena BPAC
+          (Buenas Prácticas Asistidas por Computador): un editor agente actualiza los
+          protocolos según el último cambio regulatorio, un revisor agente comprueba la
+          coherencia entre procesos padre e hijo, un auditor agente revisa los registros
+          del día buscando desviaciones, y un responsable humano de calidad firma cada
+          protocolo nuevo. Cuando un técnico humano sigue un proceso, el orquestador
+          registra cada paso firmado para que la inspección de Sanidad o la auditoría ISO
+          pueda reconstruir la trayectoria años después. Resultado: la trazabilidad deja
+          de ser un proyecto trimestral y pasa a ser un subproducto de operar.
+        </p>
+
         <h2>Cómo lo haces bien</h2>
         <ul>
           <li><strong>Jerarquía explícita.</strong> Define quién manda sobre quién, quién
@@ -235,13 +409,83 @@
             día uno. Monta tres, ponles a coordinarse, mide. Cuando funcione, añade más.</li>
         </ul>
 
+        <h2 id="errores-frecuentes">Errores frecuentes en este nivel</h2>
+        <ul>
+          <li><strong>Saltar al nivel 4 con un solo agente.</strong> Si todavía no tienes
+            tres agentes con tracción real, montar plataforma de orquestación es comprarse
+            un ERP para llevar la contabilidad de un autónomo. Consolida niveles 2 y 3
+            primero.</li>
+          <li><strong>Organigrama copiado del humano.</strong> Replicar literalmente la
+            jerarquía de la empresa humana suele dar bucles (CEO agente delega a manager
+            agente que delega a CEO agente). Diseña la jerarquía pensando en flujos de
+            trabajo, no en cargos honoríficos.</li>
+          <li><strong>Presupuesto agregado, no por agente.</strong> Tener un único "límite
+            mensual de OpenAI" para toda la operación es el síntoma clásico: nadie sabe
+            qué agente quemó el presupuesto cuando llega un mes caro. Presupuesto por
+            agente, por proyecto y por tarea — granular.</li>
+          <li><strong>Aprobaciones humanas decorativas.</strong> Si el humano firma todo lo
+            que llega sin mirar (clic-clic-clic), la aprobación no protege nada. Mejor
+            pocas aprobaciones, con contexto suficiente para decidir, que un torrente que
+            entrena al humano a aprobar a ciegas.</li>
+          <li><strong>Audit log sin búsqueda.</strong> Guardar todo en un blob al que
+            nadie puede acceder en menos de un día equivale a no guardar nada. El log
+            tiene que estar indexado por agente, fecha, herramienta y resultado para que
+            un humano lo reconstruya en 5 minutos cuando algo sale mal.</li>
+          <li><strong>Sin botón de pausa global.</strong> Cuando el sistema empieza a hacer
+            algo raro un sábado por la noche, debe existir un toggle que un humano no
+            técnico pueda pulsar para detener <em>todos</em> los agentes (no sólo uno) sin
+            llamar al desarrollador. Si para parar hace falta deploy, ya es tarde.</li>
+          <li><strong>Sin método de evaluación entre versiones.</strong> Cada cambio de
+            prompt, modelo o herramienta debe pasar un set de casos conocidos antes de
+            llegar a producción. Si no, las regresiones se descubren por reclamaciones
+            de clientes meses después.</li>
+        </ul>
+
+        <h2 id="gobernanza">Gobernanza: presupuesto compartido, identidad por agente, audit log</h2>
+        <p>
+          Las cinco cuentas que hay que cerrar antes de poner un orquestador en producción —
+          aunque sea con un piloto pequeño:
+        </p>
+        <ul class="level-checklist">
+          <li><strong>Presupuesto compartido con vista granular:</strong> tope mensual a
+            nivel proyecto y subtopes por agente y por tarea. Cuadro de mando que cualquier
+            humano del board puede mirar y entender en 30 segundos: cuánto se gastó este
+            mes, en qué agente, en qué tarea, y cuánto queda. Sin esto, la primera factura
+            sorpresa cancela el proyecto entero.</li>
+          <li><strong>Identidad por agente (no compartida):</strong> cada agente tiene sus
+            propias credenciales, su propia clave de API y su propio scope en las
+            integraciones (Drive, GitHub, CRM). Ni claves compartidas ni un "usuario
+            agente genérico". Cuando algo se rompe, sabes <em>qué</em> agente lo rompió y
+            puedes revocar sólo sus accesos.</li>
+          <li><strong>Audit log inmutable y consultable por caso:</strong> cada ejecución
+            registra <em>quién</em>, <em>qué</em>, <em>cuándo</em>, <em>por qué</em> y
+            <em>resultado</em>, con retención de al menos 1 año (5 años en sectores
+            regulados). Hash encadenado o firma para detectar manipulación a posteriori.
+            Búsqueda por agente, por caso y por herramienta.</li>
+          <li><strong>Aprobaciones humanas con contexto y SLA:</strong> cuando un agente
+            pide firma humana, llega al panel con el contexto que un humano necesita para
+            decidir en menos de 2 minutos (qué pide, por qué, qué pasaría si se rechaza,
+            qué alternativas hay). Cada aprobación tiene un SLA: si nadie responde en X
+            horas, el sistema escala o aborta — no se queda esperando para siempre.</li>
+          <li><strong>Modelo vía API empresarial con DPA firmado:</strong> mismas reglas
+            que en
+            <a href="/aprende/01-chats.html#datos-sensibles">nivel 1</a>,
+            <a href="/aprende/02-automatizaciones.html#control-coste-datos">nivel 2</a> y
+            <a href="/aprende/03-agentes.html#guard-rails">nivel 3</a>. Cuenta empresarial,
+            entrenamiento desactivado, residencia EU si tu cliente lo exige. En sectores
+            regulados, además, evaluación de riesgos según EU AI Act.</li>
+        </ul>
+
         <h2>Sabes hacer esto cuando…</h2>
         <ul class="level-checklist">
           <li>Tienes al menos tres agentes coordinándose en producción con jerarquía y presupuesto definidos.</li>
           <li>Hay un panel humano que muestra qué hace cada agente, cuánto gasta y cuál es su tasa de éxito.</li>
-          <li>Las acciones críticas (gasto > X, comunicación externa, datos personales) tienen aprobación humana obligatoria.</li>
+          <li>Las acciones críticas (gasto &gt; X, comunicación externa, datos personales) tienen aprobación humana obligatoria.</li>
           <li>Existe un registro auditable que puedes presentar a un cliente, un regulador o tu propio consejo.</li>
           <li>Tienes definido qué pasa cuando un agente falla, cómo se le retira y quién hereda su trabajo.</li>
+          <li>Cada agente tiene identidad propia y permisos cerrados con lista blanca; nada de credenciales compartidas.</li>
+          <li>Tienes un set de casos de evaluación que cualquier versión nueva de prompt o modelo debe pasar antes de llegar a producción.</li>
+          <li>Existe un toggle de pausa global accesible a un humano no técnico, y un protocolo escrito de qué hacer cuando se activa.</li>
         </ul>
 
         <h2>Y después de esto, ¿qué?</h2>
