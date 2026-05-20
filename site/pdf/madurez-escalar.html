@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Estrategia de escala con IA supervisada — Plan de Acción Personalizado</title>
+    <style>
+      @page {
+        size: A4 portrait;
+        margin: 20mm 18mm 20mm 18mm;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.55;
+        color: #1e293b;
+        background: #fff;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .page {
+        page-break-after: always;
+        min-height: 247mm;
+        position: relative;
+        padding-bottom: 16mm;
+      }
+
+      .page:last-child {
+        page-break-after: avoid;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #2563eb;
+        padding-bottom: 10px;
+        margin-bottom: 24px;
+      }
+
+      .header-brand {
+        font-weight: 700;
+        font-size: 13pt;
+        color: #2563eb;
+        letter-spacing: 0.3px;
+      }
+
+      .header-tag {
+        font-size: 9pt;
+        color: #64748b;
+      }
+
+      .page-title {
+        font-size: 22pt;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 6px;
+        line-height: 1.2;
+      }
+
+      .page-subtitle {
+        font-size: 13pt;
+        color: #2563eb;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .level-badge {
+        display: inline-block;
+        background: #2563eb;
+        color: #fff;
+        font-weight: 700;
+        font-size: 10pt;
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 8px;
+      }
+
+      .score-line {
+        font-size: 14pt;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 20px;
+      }
+
+      .score-line span {
+        color: #2563eb;
+      }
+
+      .intro-text {
+        font-size: 11pt;
+        color: #334155;
+        margin-bottom: 20px;
+        line-height: 1.65;
+      }
+
+      h2 {
+        font-size: 14pt;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 12px;
+        margin-top: 24px;
+      }
+
+      h3 {
+        font-size: 12pt;
+        font-weight: 700;
+        color: #2563eb;
+        margin-bottom: 8px;
+        margin-top: 18px;
+      }
+
+      ul {
+        padding-left: 20px;
+        margin-bottom: 14px;
+      }
+
+      ul li {
+        margin-bottom: 5px;
+        color: #334155;
+      }
+
+      .highlight-box {
+        background: #eff6ff;
+        border-left: 4px solid #2563eb;
+        padding: 14px 16px;
+        border-radius: 0 6px 6px 0;
+        margin: 18px 0;
+      }
+
+      .highlight-box p {
+        color: #1e40af;
+        font-weight: 500;
+        line-height: 1.6;
+      }
+
+      .level-card {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 16px 18px;
+        margin-bottom: 12px;
+      }
+
+      .level-card.active {
+        border-color: #2563eb;
+        background: #eff6ff;
+      }
+
+      .level-card h3 {
+        margin-top: 0;
+      }
+
+      .level-card p {
+        color: #475569;
+        margin-bottom: 6px;
+        line-height: 1.6;
+      }
+
+      .level-card ul {
+        margin-top: 6px;
+      }
+
+      .roi-list {
+        list-style: none;
+        padding-left: 0;
+        counter-reset: roi;
+      }
+
+      .roi-list li {
+        counter-increment: roi;
+        padding-left: 28px;
+        position: relative;
+        margin-bottom: 8px;
+        color: #334155;
+      }
+
+      .roi-list li::before {
+        content: counter(roi) ".";
+        position: absolute;
+        left: 0;
+        font-weight: 700;
+        color: #2563eb;
+      }
+
+      .service-block {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 18px;
+        margin-bottom: 14px;
+      }
+
+      .service-block h3 {
+        margin-top: 0;
+      }
+
+      .service-block p {
+        color: #475569;
+        line-height: 1.6;
+        margin-bottom: 4px;
+      }
+
+      .checklist {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .checklist li {
+        padding-left: 22px;
+        position: relative;
+        margin-bottom: 6px;
+        color: #334155;
+      }
+
+      .checklist li::before {
+        content: "\2713";
+        position: absolute;
+        left: 0;
+        color: #2563eb;
+        font-weight: 700;
+      }
+
+      .timeline {
+        margin-top: 6px;
+      }
+
+      .timeline li {
+        margin-bottom: 4px;
+        color: #475569;
+      }
+
+      .pricing {
+        margin-top: 16px;
+      }
+
+      .pricing li {
+        margin-bottom: 6px;
+        color: #334155;
+      }
+
+      .pricing strong {
+        color: #0f172a;
+      }
+
+      .case-study {
+        background: #fefce8;
+        border-left: 4px solid #ca8a04;
+        padding: 12px 16px;
+        border-radius: 0 6px 6px 0;
+        margin: 14px 0;
+        font-size: 10pt;
+        color: #713f12;
+        line-height: 1.6;
+      }
+
+      .cta-section {
+        background: #2563eb;
+        color: #fff;
+        padding: 24px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .cta-section h2 {
+        color: #fff;
+        font-size: 16pt;
+        margin-top: 0;
+        margin-bottom: 8px;
+      }
+
+      .cta-section p {
+        color: #dbeafe;
+        font-size: 10.5pt;
+        margin-bottom: 6px;
+        line-height: 1.6;
+      }
+
+      .cta-section .cta-link {
+        display: inline-block;
+        margin-top: 12px;
+        background: #fff;
+        color: #2563eb;
+        font-weight: 700;
+        font-size: 11pt;
+        padding: 10px 28px;
+        border-radius: 999px;
+        text-decoration: none;
+      }
+
+      .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 8.5pt;
+        color: #94a3b8;
+        padding-top: 10px;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      .footer a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          page-break-after: always;
+        }
+
+        .page:last-child {
+          page-break-after: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- PAGE 1 — Tu diagnóstico -->
+    <div class="page">
+      <div class="header">
+        <span class="header-brand">itera.es</span>
+        <span class="header-tag">Plan de Acción Personalizado</span>
+      </div>
+
+      <div class="level-badge">Nivel Listo para escalar</div>
+      <div class="score-line">Nivel {{level}} · <span>{{score}}/10</span> puntos</div>
+
+      <h1 class="page-title">Estrategia de escala con IA supervisada</h1>
+      <p class="page-subtitle">PÁGINA 1 — Tu diagnóstico</p>
+
+      <p class="intro-text">
+        Tienes una base sólida. Tus sistemas principales están conectados, tu equipo confía en la automatización, y los resultados son medibles. Ahora el siguiente nivel no es más automatización — es inteligencia: sistemas que aprenden de los datos de tu empresa y mejoran con el tiempo.
+      </p>
+
+      <h2>Lo que hemos detectado en empresas listas para escalar:</h2>
+      <ul>
+        <li>Stack técnico maduro con integraciones estables</li>
+        <li>Equipo que mantiene flujos existentes sin fricción</li>
+        <li>Datos de operaciones acumulados durante meses/años (activo subutilizado)</li>
+        <li>Procesos estables que podrían predecir resultados, no solo ejecutar reglas</li>
+        <li>Liderazgo con apetito real por casos de uso de IA</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>Tu mayor oportunidad:</strong> Los datos que ya tienes en tu sistema son el entrenamiento para modelos que predicen churn, optimizan pricing, o priorizan leads automáticamente. El tiempo de implementación es 12 semanas, no 12 meses.</p>
+      </div>
+
+      <div class="footer">
+        <a href="https://ia.itera.es">ia.itera.es</a> · Automatización con IA supervisada para empresas españolas
+      </div>
+    </div>
+
+    <!-- PAGE 2 — El framework HITL para tu nivel -->
+    <div class="page">
+      <div class="header">
+        <span class="header-brand">itera.es</span>
+        <span class="header-tag">Plan de Acción · Listo para escalar</span>
+      </div>
+
+      <p class="page-subtitle">PÁGINA 2 — El framework HITL para tu nivel</p>
+
+      <p class="intro-text">
+        En itera.es trabajamos con el espectro de automatización con IA supervisada (HITL — Human In The Loop). Tu empresa está lista para los niveles 2 y 3:
+      </p>
+
+      <div class="level-card">
+        <h3>Nivel 1 — Automatización reactiva (donde empezaste)</h3>
+        <p>El sistema ejecuta reglas predefinidas. Si A → entonces B. Sin aprendizaje.</p>
+      </div>
+
+      <div class="level-card active">
+        <h3>Nivel 2 — IA predictiva con aprobación humana (tu próximo paso inmediato)</h3>
+        <p>El sistema analiza patrones y sugiere acciones. El humano aprueba las de alto impacto. El sistema aprende de cada decisión.</p>
+        <p><strong>Ejemplos prácticos:</strong></p>
+        <ul>
+          <li>CRM predice probabilidad de churn por cliente → alerta al account manager con contexto y acción sugerida</li>
+          <li>Sistema clasifica leads por probabilidad de cierre → prioriza automáticamente la agenda del SDR</li>
+          <li>Análisis de contratos identifica cláusulas de riesgo → flag para revisión legal antes de firma</li>
+        </ul>
+      </div>
+
+      <div class="level-card">
+        <h3>Nivel 3 — IA autónoma con HITL estratégico (objetivo 12 meses)</h3>
+        <p>Decisiones rutinarias se ejecutan automáticamente. Solo las excepciones y decisiones de alto impacto escalan al equipo humano. El equipo supervisa el sistema, no los casos individuales.</p>
+      </div>
+
+      <h2>Los 3 casos de uso con mayor ROI para tu perfil:</h2>
+      <ol class="roi-list">
+        <li>Predicción de churn y retención proactiva</li>
+        <li>Automatización de propuestas y pricing dinámico</li>
+        <li>Optimización de recursos y capacidad operativa</li>
+      </ol>
+
+      <div class="footer">
+        <a href="https://ia.itera.es">ia.itera.es</a> · Automatización con IA supervisada para empresas españolas
+      </div>
+    </div>
+
+    <!-- PAGE 3 — Propuesta de escala -->
+    <div class="page">
+      <div class="header">
+        <span class="header-brand">itera.es</span>
+        <span class="header-tag">Plan de Acción · Listo para escalar</span>
+      </div>
+
+      <p class="page-subtitle">PÁGINA 3 — Propuesta de escala</p>
+
+      <div class="service-block">
+        <h3>Diagnóstico premium (2 horas)</h3>
+        <p>Análisis profundo de tu stack, datos disponibles, y casos de uso de IA más rentables para tu sector. Al terminar:</p>
+        <ul class="checklist">
+          <li>Mapa de madurez técnica y de datos</li>
+          <li>3 casos de uso priorizados por ROI</li>
+          <li>Estimación de inversión y timeline</li>
+          <li>Propuesta de proyecto si aplica</li>
+        </ul>
+      </div>
+
+      <div class="service-block">
+        <h3>Proyecto piloto de IA (12 semanas)</h3>
+        <ul class="timeline">
+          <li>Semanas 1-3: análisis de datos disponibles y diseño del modelo</li>
+          <li>Semanas 4-7: desarrollo e integración con tu stack</li>
+          <li>Semanas 8-10: pruebas con datos reales y calibración</li>
+          <li>Semanas 11-12: producción con HITL y medición de resultados</li>
+        </ul>
+        <p>Resultado: un caso de uso de IA en producción, medido, con tu equipo formado para operarlo</p>
+      </div>
+
+      <h2>Modalidades:</h2>
+      <ul class="pricing">
+        <li><strong>Proyecto puntual</strong> desde €8.500 (un caso de uso completo)</li>
+        <li><strong>Retainer mensual</strong> desde €2.500/mes (evolución continua + soporte)</li>
+        <li><strong>Partnership estratégico</strong> (co-desarrollo para sectores específicos — consultar)</li>
+      </ul>
+
+      <h2>Empresas que ya escalan con itera.es:</h2>
+      <div class="case-study">
+        <strong>Fintech regulada:</strong> predicción de riesgo en originación de crédito → reducción de morosidad 31% en 6 meses
+      </div>
+      <div class="case-study">
+        <strong>Legaltech:</strong> clasificación automática de 40.000 documentos/mes con supervisión en puntos críticos
+      </div>
+
+      <div class="cta-section">
+        <h2>Agenda tu diagnóstico premium</h2>
+        <p>2 horas. Análisis profundo. Plan concreto de IA para tu empresa.</p>
+        <a class="cta-link" href="https://ia.itera.es/evaluacion/">ia.itera.es/evaluacion</a>
+      </div>
+
+      <div class="footer">
+        <a href="https://ia.itera.es">ia.itera.es</a> · Automatización con IA supervisada para empresas españolas
+      </div>
+    </div>
+
+  </body>
+</html>

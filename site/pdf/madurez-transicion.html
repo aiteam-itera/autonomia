@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acelera tu transformación digital — Plan de Acción Personalizado</title>
+    <style>
+      @page {
+        size: A4 portrait;
+        margin: 20mm 18mm 20mm 18mm;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.55;
+        color: #1e293b;
+        background: #fff;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .page {
+        page-break-after: always;
+        min-height: 247mm;
+        position: relative;
+        padding-bottom: 16mm;
+      }
+
+      .page:last-child {
+        page-break-after: avoid;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #2563eb;
+        padding-bottom: 10px;
+        margin-bottom: 24px;
+      }
+
+      .header-brand {
+        font-weight: 700;
+        font-size: 13pt;
+        color: #2563eb;
+        letter-spacing: 0.3px;
+      }
+
+      .header-tag {
+        font-size: 9pt;
+        color: #64748b;
+      }
+
+      .page-title {
+        font-size: 22pt;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 6px;
+        line-height: 1.2;
+      }
+
+      .page-subtitle {
+        font-size: 13pt;
+        color: #2563eb;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .level-badge {
+        display: inline-block;
+        background: #2563eb;
+        color: #fff;
+        font-weight: 700;
+        font-size: 10pt;
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 8px;
+      }
+
+      .score-line {
+        font-size: 14pt;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 20px;
+      }
+
+      .score-line span {
+        color: #2563eb;
+      }
+
+      .intro-text {
+        font-size: 11pt;
+        color: #334155;
+        margin-bottom: 20px;
+        line-height: 1.65;
+      }
+
+      h2 {
+        font-size: 14pt;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 12px;
+        margin-top: 24px;
+      }
+
+      h3 {
+        font-size: 12pt;
+        font-weight: 700;
+        color: #2563eb;
+        margin-bottom: 8px;
+        margin-top: 18px;
+      }
+
+      ul {
+        padding-left: 20px;
+        margin-bottom: 14px;
+      }
+
+      ul li {
+        margin-bottom: 5px;
+        color: #334155;
+      }
+
+      .highlight-box {
+        background: #eff6ff;
+        border-left: 4px solid #2563eb;
+        padding: 14px 16px;
+        border-radius: 0 6px 6px 0;
+        margin: 18px 0;
+      }
+
+      .highlight-box p {
+        color: #1e40af;
+        font-weight: 500;
+        line-height: 1.6;
+      }
+
+      .step-card {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+      }
+
+      .step-card h3 {
+        margin-top: 0;
+        color: #2563eb;
+      }
+
+      .step-card p {
+        color: #475569;
+        margin-bottom: 6px;
+        line-height: 1.6;
+      }
+
+      .step-card .format {
+        font-size: 9.5pt;
+        color: #64748b;
+        font-style: italic;
+      }
+
+      .stat {
+        font-size: 10pt;
+        color: #475569;
+        margin-top: 10px;
+        font-style: italic;
+      }
+
+      .cta-section {
+        background: #2563eb;
+        color: #fff;
+        padding: 24px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 24px;
+      }
+
+      .cta-section h2 {
+        color: #fff;
+        font-size: 16pt;
+        margin-top: 0;
+        margin-bottom: 8px;
+      }
+
+      .cta-section p {
+        color: #dbeafe;
+        font-size: 10.5pt;
+        margin-bottom: 6px;
+        line-height: 1.6;
+      }
+
+      .cta-section .cta-link {
+        display: inline-block;
+        margin-top: 12px;
+        background: #fff;
+        color: #2563eb;
+        font-weight: 700;
+        font-size: 11pt;
+        padding: 10px 28px;
+        border-radius: 999px;
+        text-decoration: none;
+      }
+
+      .phase-block {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 18px;
+        margin-bottom: 14px;
+      }
+
+      .phase-block h3 {
+        margin-top: 0;
+      }
+
+      .phase-block p {
+        color: #475569;
+        line-height: 1.6;
+        margin-bottom: 4px;
+      }
+
+      .investment {
+        font-size: 10pt;
+        color: #64748b;
+        margin-top: 8px;
+      }
+
+      .case-study {
+        background: #fefce8;
+        border-left: 4px solid #ca8a04;
+        padding: 12px 16px;
+        border-radius: 0 6px 6px 0;
+        margin: 14px 0;
+        font-size: 10pt;
+        color: #713f12;
+        line-height: 1.6;
+      }
+
+      .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 8.5pt;
+        color: #94a3b8;
+        padding-top: 10px;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      .footer a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          page-break-after: always;
+        }
+
+        .page:last-child {
+          page-break-after: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- PAGE 1 — Tu diagnóstico -->
+    <div class="page">
+      <div class="header">
+        <span class="header-brand">itera.es</span>
+        <span class="header-tag">Plan de Acción Personalizado</span>
+      </div>
+
+      <div class="level-badge">Nivel En transición</div>
+      <div class="score-line">Nivel {{level}} · <span>{{score}}/10</span> puntos</div>
+
+      <h1 class="page-title">Acelera tu transformación digital</h1>
+      <p class="page-subtitle">PÁGINA 1 — Tu diagnóstico</p>
+
+      <p class="intro-text">
+        Ya tienes experiencia real con automatización. Algunas integraciones funcionan, tu equipo ha visto resultados, y sabes que hay más potencial. El reto ahora no es empezar — es pasar de automatizaciones aisladas a un sistema cohesionado.
+      </p>
+
+      <h2>Lo que hemos detectado en empresas en transición:</h2>
+      <ul>
+        <li>Automatizaciones que funcionan por separado pero no se comunican entre sí</li>
+        <li>Dependencia de herramientas SaaS específicas sin capa de orquestación</li>
+        <li>Procesos críticos que siguen siendo manuales porque "son demasiado complejos"</li>
+        <li>Equipo técnico sobrecargado manteniendo integraciones frágiles</li>
+        <li>Datos de negocio dispersos: difícil medir el impacto real de la automatización</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>Tu mayor oportunidad:</strong> La diferencia entre el nivel En transición y Listo para escalar es una sola cosa: un hub de orquestación central. Con n8n o similar, cada nuevo proceso se conecta una vez y funciona con todos los demás.</p>
+      </div>
+
+      <div class="footer">
+        <a href="https://ia.itera.es">ia.itera.es</a> · Automatización con IA supervisada para empresas españolas
+      </div>
+    </div>
+
+    <!-- PAGE 2 — Tus 3 palancas de aceleración -->
+    <div class="page">
+      <div class="header">
+        <span class="header-brand">itera.es</span>
+        <span class="header-tag">Plan de Acción · En transición</span>
+      </div>
+
+      <p class="page-subtitle">PÁGINA 2 — Tus 3 palancas de aceleración</p>
+
+      <div class="step-card">
+        <h3>Palanca 1: Auditoría de integraciones (semana 1)</h3>
+        <p>
+          Mapa completo de tu stack: qué sistemas tienes, cómo están conectados (o no), dónde están los cuellos de botella. Este mapa tarda 4 horas en construirse y elimina meses de trabajo reactivo.
+        </p>
+        <p class="format">Formato: [Sistema A] → [Integración] → [Sistema B] · Estado: ✓ automático / ⚠️ manual / ✗ desconectado</p>
+      </div>
+
+      <div class="step-card">
+        <h3>Palanca 2: Capa de orquestación (semanas 2-4)</h3>
+        <p>
+          Implementa un hub central (n8n recomendado para control y coste). Las reglas:
+        </p>
+        <ul>
+          <li>Toda nueva integración pasa por el hub, nunca directamente entre apps</li>
+          <li>Cada flujo tiene un dueño en el equipo</li>
+          <li>Errores y excepciones siempre notifican a un humano antes de fallar silenciosamente</li>
+        </ul>
+        <p>Resultado: cuando una app cambia su API, solo actualizas el hub — no 12 integraciones.</p>
+      </div>
+
+      <div class="step-card">
+        <h3>Palanca 3: Supervisión humana en puntos críticos (HITL)</h3>
+        <p>
+          Define explícitamente qué decisiones deben pasar por revisión humana antes de ejecutarse. Criterio práctico: cualquier acción que afecte a clientes, pagos o datos críticos requiere aprobación humana.
+        </p>
+        <p>
+          Ejemplo: el sistema identifica un posible fraude → notifica al equipo con contexto → humano aprueba o rechaza en 1 clic. El sistema aprende del patrón.
+        </p>
+        <p class="stat">Empresas con HITL bien implementado reducen errores operativos en un 73% vs automatización sin supervisión.</p>
+      </div>
+
+      <div class="footer">
+        <a href="https://ia.itera.es">ia.itera.es</a> · Automatización con IA supervisada para empresas españolas
+      </div>
+    </div>
+
+    <!-- PAGE 3 — Proyecto recomendado -->
+    <div class="page">
+      <div class="header">
+        <span class="header-brand">itera.es</span>
+        <span class="header-tag">Plan de Acción · En transición</span>
+      </div>
+
+      <p class="page-subtitle">PÁGINA 3 — Proyecto recomendado</p>
+
+      <div class="phase-block">
+        <h3>Fase 1 — Auditoría y orquestación (semanas 1-6)</h3>
+        <ul>
+          <li>Mapa completo de tu stack actual</li>
+          <li>Configuración de hub n8n (on-premise o cloud)</li>
+          <li>Migración de las 3 integraciones más frágiles al hub</li>
+          <li>Dashboard de monitorización de flujos</li>
+          <li>Resultado: sistema predecible, errores visibles, equipo con control real</li>
+        </ul>
+      </div>
+
+      <div class="phase-block">
+        <h3>Fase 2 — Automatización de procesos críticos (semanas 7-12)</h3>
+        <ul>
+          <li>Identificación de 2-3 procesos de alto impacto</li>
+          <li>Construcción con HITL en puntos de decisión</li>
+          <li>Medición de ROI antes y después</li>
+          <li>Documentación para mantenimiento interno</li>
+        </ul>
+        <p class="investment">Inversión estimada: desde €3.500 · Retorno típico: 6-12x en 18 meses</p>
+      </div>
+
+      <h2>Casos de empresas similares:</h2>
+      <div class="case-study">
+        <strong>Agencia de marketing (35 personas):</strong> automatizó reporting, onboarding de clientes y facturación → 22 horas/semana recuperadas, ROI en 3 meses.
+      </div>
+      <div class="case-study">
+        <strong>Legaltech (60 personas):</strong> orquestó CRM + firma digital + ERP → elimina 180 intervenciones manuales/semana en gestión de contratos.
+      </div>
+
+      <div class="cta-section">
+        <h2>Agenda tu diagnóstico de automatización</h2>
+        <p>Analizamos tu stack, tus integraciones y tu roadmap. Sin compromiso.</p>
+        <a class="cta-link" href="https://ia.itera.es/evaluacion/">ia.itera.es/evaluacion</a>
+      </div>
+
+      <div class="footer">
+        <a href="https://ia.itera.es">ia.itera.es</a> · Automatización con IA supervisada para empresas españolas
+      </div>
+    </div>
+
+  </body>
+</html>
