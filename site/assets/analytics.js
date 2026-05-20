@@ -1,33 +1,32 @@
 // First-party analytics event bus for AutonomIA.
-// Sends beacons via navigator.sendBeacon to /api/track (Cloudflare Worker).
-// Until the Worker is deployed, calls are silently no-op — the tracking code
-// is wired now so no second pass is needed when the Worker ships.
+// Sends beacons to the same-origin PHP collector at /_a.php — no third party,
+// no cookies. page_view fires automatically on load; custom events (clicks,
+// form submits, scroll depth) go through window.autonomia.track().
 //
 // Usage: window.autonomia.track('event_name', { optional: 'props' })
 //
-// Cloudflare Web Analytics handles page_view automatically via the beacon
-// snippet in each HTML <head>. Custom events (clicks, form submits, scroll
-// depth) go through this module.
+// The collector keeps only a daily-rotating salted visitor hash (no raw IP/UA),
+// so the baseline KPIs are computable without any third-party analytics.
 (function () {
   "use strict";
 
-  function resolveEndpoint() {
-    if (typeof window.AUTONOMIA_API_BASE === "string" && window.AUTONOMIA_API_BASE) {
-      return window.AUTONOMIA_API_BASE.replace(/\/$/, "");
-    }
-    var meta = document.querySelector('meta[name="autonomia-api-base"]');
-    return meta && meta.content ? meta.content.replace(/\/$/, "") : null;
-  }
+  // Same-origin first-party endpoint. Kept overridable for tests/staging.
+  var ENDPOINT =
+    (typeof window.AUTONOMIA_TRACK_ENDPOINT === "string" && window.AUTONOMIA_TRACK_ENDPOINT) ||
+    "/_a.php";
 
   function track(event, props) {
-    var endpoint = resolveEndpoint();
-    if (!endpoint) return;
-    if (typeof navigator === "undefined" || !navigator.sendBeacon) return;
+    var body = JSON.stringify({ event: event, props: props || {}, url: location.href, ts: Date.now() });
     try {
-      navigator.sendBeacon(
-        endpoint + "/api/track",
-        JSON.stringify({ event: event, props: props || {}, url: location.href, ts: Date.now() })
-      );
+      if (typeof navigator !== "undefined" && navigator.sendBeacon) {
+        navigator.sendBeacon(ENDPOINT, body);
+        return;
+      }
+      // Fallback for browsers without sendBeacon.
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", ENDPOINT, true);
+      xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+      xhr.send(body);
     } catch (e) {
       // tracking must never break the page
     }
@@ -48,4 +47,11 @@
 
   window.autonomia = window.autonomia || {};
   window.autonomia.track = track;
+
+  // Fire page_view once per load.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { track("page_view"); });
+  } else {
+    track("page_view");
+  }
 })();
