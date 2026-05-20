@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>¿Está tu empresa lista para automatizar con IA? — AutonomIA</title>
+    <meta
+      name="description"
+      content="Evalúa el nivel de madurez de automatización de tu organización en 5 minutos y recibe un plan de acción personalizado con los procesos que automatizar primero."
+    />
+    <link rel="canonical" href="https://ia.itera.es/herramienta/madurez.html" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="AutonomIA" />
+    <meta property="og:title" content="¿Está tu empresa lista para automatizar con IA?" />
+    <meta
+      property="og:description"
+      content="Evalúa tu madurez de automatización en 5 minutos y recibe un plan de acción personalizado: los procesos que automatizar primero y su ROI típico."
+    />
+    <meta property="og:url" content="https://ia.itera.es/herramienta/madurez.html" />
+    <meta property="og:image" content="https://ia.itera.es/assets/og-default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AutonomIA — IA que entiende tu negocio." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="¿Está tu empresa lista para automatizar con IA?" />
+    <meta
+      name="twitter:description"
+      content="Evalúa tu madurez de automatización en 5 minutos y recibe un plan de acción personalizado."
+    />
+    <meta name="twitter:image" content="https://ia.itera.es/assets/og-default.png" />
+    <meta name="twitter:image:alt" content="AutonomIA — IA que entiende tu negocio." />
+
+    <link rel="stylesheet" href="/assets/style.css" />
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"FILL_CWA_TOKEN"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    <script src="/assets/analytics.js" defer></script>
+    <!--
+      Set this to the deployed Worker URL once it exists, e.g.:
+        <meta name="autonomia-api-base" content="https://autonomia-api.example.workers.dev" />
+      Until then, the email gate falls back to a mailto: draft so the page still works pre-deploy.
+    -->
+    <meta name="autonomia-api-base" content="https://autonomia-api.example.workers.dev" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <header class="hero hero--compact">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <span class="nav__links">
+          <a class="cta cta--ghost" href="/aprende/">Aprende</a>
+          <a class="cta" href="/">Volver a la home</a>
+        </span>
+      </nav>
+      <div class="hero__content">
+        <h1>¿Está tu empresa lista para automatizar con IA? Descúbrelo en 5 minutos.</h1>
+        <p>
+          Evalúa el nivel de madurez de automatización de tu organización y recibe un plan
+          de acción personalizado con los procesos que empresas como la tuya automatizan primero.
+        </p>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1" class="section">
+      <form id="quiz" class="quiz" novalidate aria-label="Evaluación de madurez de automatización">
+        <div class="quiz__progress" aria-hidden="true">
+          <div class="quiz__progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="quiz__step-indicator" id="step-indicator" aria-live="polite">Pregunta 1 de 5</p>
+
+        <!-- Q1 -->
+        <fieldset class="quiz__step" data-step="1">
+          <div class="quiz__question">
+            <legend class="quiz__q">Identificación de procesos</legend>
+            <p class="quiz__intro">¿Cómo de bien conoces los procesos repetibles de tu empresa?</p>
+            <div class="quiz__options">
+              <label>
+                <input type="radio" name="q1" value="0" required />
+                <span>No tenemos un inventario de procesos. Sabemos que hay tareas manuales pero no hemos mapeado cuáles ni cuánto tiempo consumen.</span>
+              </label>
+              <label>
+                <input type="radio" name="q1" value="1" />
+                <span>Tenemos una lista parcial de candidatos a automatizar, pero sin estimaciones de tiempo o coste.</span>
+              </label>
+              <label>
+                <input type="radio" name="q1" value="2" />
+                <span>Tenemos un mapa completo de procesos repetibles con tiempo estimado mensual y ROI potencial por cada uno.</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Q2 -->
+        <fieldset class="quiz__step" data-step="2" hidden>
+          <div class="quiz__question">
+            <legend class="quiz__q">Madurez técnica</legend>
+            <p class="quiz__intro">¿Cómo describirías el stack tecnológico de tu empresa?</p>
+            <div class="quiz__options">
+              <label>
+                <input type="radio" name="q2" value="0" required />
+                <span>Predominan Excel/email y procesos manuales. Pocas o ninguna integración entre herramientas.</span>
+              </label>
+              <label>
+                <input type="radio" name="q2" value="1" />
+                <span>Tenemos algunas integraciones point-to-point (Zapier, Make, webhooks básicos) montadas por el equipo, pero sin gobernanza.</span>
+              </label>
+              <label>
+                <input type="radio" name="q2" value="2" />
+                <span>Stack API-first con datos centralizados, integraciones documentadas y gestionadas por el equipo técnico.</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Q3 -->
+        <fieldset class="quiz__step" data-step="3" hidden>
+          <div class="quiz__question">
+            <legend class="quiz__q">Gobernanza y cumplimiento</legend>
+            <p class="quiz__intro">¿Cómo gestionáis la supervisión humana en decisiones automatizadas?</p>
+            <div class="quiz__options">
+              <label>
+                <input type="radio" name="q3" value="0" required />
+                <span>Sin políticas de automatización/IA. Las decisiones automatizadas no están documentadas ni auditadas.</span>
+              </label>
+              <label>
+                <input type="radio" name="q3" value="1" />
+                <span>Revisamos algunas decisiones críticas manualmente, pero no hay un proceso sistemático ni logs de auditoría.</span>
+              </label>
+              <label>
+                <input type="radio" name="q3" value="2" />
+                <span>Tenemos HITL (Human-in-the-Loop) documentado para decisiones críticas, logs de auditoría y alineamiento con normativas sectoriales (GDPR, DORA, NIS2…).</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Q4 -->
+        <fieldset class="quiz__step" data-step="4" hidden>
+          <div class="quiz__question">
+            <legend class="quiz__q">Equipo y cultura</legend>
+            <p class="quiz__intro">¿Cómo es la actitud de tu equipo hacia la automatización?</p>
+            <div class="quiz__options">
+              <label>
+                <input type="radio" name="q4" value="0" required />
+                <span>Hay resistencia al cambio o falta de patrocinio directivo para proyectos de automatización.</span>
+              </label>
+              <label>
+                <input type="radio" name="q4" value="1" />
+                <span>Hay experimentación aislada (un piloto aquí y allá) pero sin escalar ni apoyo ejecutivo sostenido.</span>
+              </label>
+              <label>
+                <input type="radio" name="q4" value="2" />
+                <span>Ops y Tech trabajan alineados en automatización. Los KPIs de ahorro de tiempo y reducción de errores se revisan en ciclos de negocio.</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Q5 -->
+        <fieldset class="quiz__step" data-step="5" hidden>
+          <div class="quiz__question">
+            <legend class="quiz__q">Medición del ROI</legend>
+            <p class="quiz__intro">¿Medís el impacto de vuestros procesos actuales?</p>
+            <div class="quiz__options">
+              <label>
+                <input type="radio" name="q5" value="0" required />
+                <span>No tenemos métricas de automatización. Desconocemos el coste real de los procesos manuales.</span>
+              </label>
+              <label>
+                <input type="radio" name="q5" value="1" />
+                <span>Tenemos métricas anecdóticas ("ahorramos tiempo") pero sin cuantificación sistemática.</span>
+              </label>
+              <label>
+                <input type="radio" name="q5" value="2" />
+                <span>Calculamos el ROI por proceso automatizado. Tenemos dashboards activos con horas ahorradas, reducción de errores y coste evitado.</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="quiz__error" id="quiz-error" hidden role="alert">
+          Elige una opción para continuar.
+        </p>
+
+        <div class="quiz__nav" id="quiz-nav">
+          <button type="button" class="cta cta--ghost" id="btn-prev" hidden>← Anterior</button>
+          <button type="button" class="cta cta--primary" id="btn-next">Siguiente →</button>
+          <button type="button" class="cta cta--primary" id="btn-finish" hidden>Ver mi resultado →</button>
+        </div>
+      </form>
+
+      <!-- RESULT -->
+      <section class="quiz quiz__result" id="result" hidden aria-live="polite">
+        <h2>Tu nivel de madurez de automatización</h2>
+        <div class="result__score">
+          <div class="result__score-circle" id="score-circle" aria-hidden="true"></div>
+          <div class="result__score-text">
+            <p class="result__score-number"><span id="score-number">0</span><small> / 10</small></p>
+            <p class="result__level" id="result-level">Explorador</p>
+            <p class="result__pitch" id="result-pitch"></p>
+          </div>
+        </div>
+
+        <h3>Tu puntuación por dimensión</h3>
+        <div class="result__chart" id="result-chart"></div>
+
+        <!-- EMAIL GATE -->
+        <div id="email-gate">
+          <h3>Recibe tu plan de acción personalizado</h3>
+          <p class="result__pitch">
+            Hemos preparado un plan de acción de 3 páginas adaptado a tu nivel — con los 5 procesos
+            que empresas como la tuya automatizan primero y el ROI típico de cada uno.
+          </p>
+          <form id="gate-form" novalidate>
+            <p style="position:absolute;left:-9999px;" aria-hidden="true">
+              <label>No rellenar<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+            </p>
+            <label>
+              <span class="quiz__q">Tu email de trabajo</span>
+              <input type="email" name="email" autocomplete="email" required maxlength="200" placeholder="nombre@tuempresa.com" />
+            </label>
+            <p class="quiz__hint">
+              Te enviamos el plan y una invitación a un diagnóstico gratuito de 30 min. Nada de spam.
+            </p>
+            <div class="result__cta">
+              <button type="submit" class="cta cta--primary" id="gate-submit">Quiero mi plan →</button>
+            </div>
+            <p class="quiz__hint" id="gate-hint" hidden></p>
+          </form>
+        </div>
+
+        <div class="result__cta" style="margin-top:1.5rem;">
+          <a class="cta cta--ghost" href="/cuestionario.html">Hacer el diagnóstico completo</a>
+          <a class="cta cta--ghost" href="/servicios.html">Ver paquetes y precios</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year">2026</span> AutonomIA — Sitio gobernado por agentes.</small>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var TOTAL = 5;
+        var STORAGE_KEY = "autonomia.maturity.v1";
+        var DIMS = [
+          { key: "q1", label: "Identificación de procesos" },
+          { key: "q2", label: "Madurez técnica" },
+          { key: "q3", label: "Gobernanza" },
+          { key: "q4", label: "Equipo y cultura" },
+          { key: "q5", label: "Medición del ROI" },
+        ];
+
+        var form = document.getElementById("quiz");
+        var steps = Array.prototype.slice.call(form.querySelectorAll(".quiz__step"));
+        var progressBar = document.getElementById("progress-bar");
+        var stepIndicator = document.getElementById("step-indicator");
+        var nav = document.getElementById("quiz-nav");
+        var btnPrev = document.getElementById("btn-prev");
+        var btnNext = document.getElementById("btn-next");
+        var btnFinish = document.getElementById("btn-finish");
+        var errorEl = document.getElementById("quiz-error");
+        var resultEl = document.getElementById("result");
+        var current = 1;
+        var startedTracked = false;
+
+        function track(event, props) {
+          if (window.autonomia && typeof window.autonomia.track === "function") {
+            window.autonomia.track(event, props || {});
+          }
+        }
+
+        function showStep(n) {
+          steps.forEach(function (s) {
+            s.hidden = parseInt(s.dataset.step, 10) !== n;
+          });
+          progressBar.style.width = Math.round((n / TOTAL) * 100) + "%";
+          stepIndicator.textContent = "Pregunta " + n + " de " + TOTAL;
+          btnPrev.hidden = n === 1;
+          btnNext.hidden = n === TOTAL;
+          btnFinish.hidden = n !== TOTAL;
+          errorEl.hidden = true;
+        }
+
+        function answeredAt(n) {
+          var step = steps[n - 1];
+          return step.querySelector("input[type=radio]:checked");
+        }
+
+        function collect() {
+          var data = {};
+          DIMS.forEach(function (d) {
+            var checked = form.querySelector('input[name="' + d.key + '"]:checked');
+            data[d.key] = checked ? parseInt(checked.value, 10) : 0;
+          });
+          return data;
+        }
+
+        function score(data) {
+          return DIMS.reduce(function (sum, d) {
+            return sum + (data[d.key] || 0);
+          }, 0);
+        }
+
+        function levelFor(total) {
+          if (total <= 3) {
+            return {
+              name: "Explorador",
+              pitch:
+                "Estás en el punto de partida ideal. Los primeros 3 procesos que automatices generarán el mayor retorno: una victoria rápida construye la cultura y libera recursos para los siguientes pasos.",
+            };
+          }
+          if (total <= 7) {
+            return {
+              name: "En transición",
+              pitch:
+                "Ya tienes las bases. El siguiente paso es estructurar un roadmap de automatización con prioridades claras, para pasar de experimentos aislados a impacto sistemático.",
+            };
+          }
+          return {
+            name: "Listo para escalar",
+            pitch:
+              "Tienes la madurez para proyectos de automatización ambiciosos. Ahora el objetivo es acelerar: más procesos, más integración, más gobernanza sin más headcount.",
+          };
+        }
+
+        function saveState(data, total, level) {
+          try {
+            localStorage.setItem(
+              STORAGE_KEY,
+              JSON.stringify({ data: data, score: total, level: level.name, ts: Date.now() })
+            );
+          } catch (e) {
+            /* storage may be unavailable; non-fatal */
+          }
+        }
+
+        function renderResult() {
+          var data = collect();
+          var total = score(data);
+          var level = levelFor(total);
+          saveState(data, total, level);
+
+          document.getElementById("score-number").textContent = total;
+          document.getElementById("result-level").textContent = level.name;
+          document.getElementById("result-pitch").textContent = level.pitch;
+
+          var pct = Math.round((total / 10) * 100);
+          var circle = document.getElementById("score-circle");
+          circle.style.background =
+            "conic-gradient(var(--accent) 0 " + pct + "%, rgba(255,255,255,0.1) " + pct + "% 100%)";
+
+          var chart = document.getElementById("result-chart");
+          chart.innerHTML = "";
+          DIMS.forEach(function (d) {
+            var v = data[d.key] || 0;
+            var row = document.createElement("div");
+            row.className = "result__bar-row";
+            row.innerHTML =
+              '<span class="result__bar-label">' + d.label + "</span>" +
+              '<span class="result__bar-track"><span class="result__bar-fill" style="width:' +
+              (v / 2) * 100 +
+              '%"></span></span>' +
+              '<span class="result__bar-value">' + v + "/2</span>";
+            chart.appendChild(row);
+          });
+
+          steps.forEach(function (s) { s.hidden = true; });
+          nav.hidden = true;
+          form.querySelector(".quiz__progress").hidden = true;
+          progressBar.style.width = "100%";
+          stepIndicator.textContent = "Evaluación completa";
+          resultEl.hidden = false;
+          resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          track("assessment_complete", { score: total, level: level.name });
+          window.__maturity = { score: total, level: level.name };
+        }
+
+        btnNext.addEventListener("click", function () {
+          if (!answeredAt(current)) {
+            errorEl.hidden = false;
+            return;
+          }
+          if (current < TOTAL) {
+            current += 1;
+            showStep(current);
+          }
+        });
+
+        btnPrev.addEventListener("click", function () {
+          if (current > 1) {
+            current -= 1;
+            showStep(current);
+          }
+        });
+
+        btnFinish.addEventListener("click", function () {
+          if (!answeredAt(current)) {
+            errorEl.hidden = false;
+            return;
+          }
+          renderResult();
+        });
+
+        // advance automatically on selection for snappier UX, but don't skip the
+        // final question (user needs the explicit "Ver mi resultado" button)
+        form.addEventListener("change", function (e) {
+          if (e.target && e.target.type === "radio") {
+            errorEl.hidden = true;
+            if (!startedTracked) {
+              startedTracked = true;
+              track("assessment_start", {});
+            }
+          }
+        });
+
+        // ----- Email gate -----
+        function getApiBase() {
+          if (typeof window.AUTONOMIA_API_BASE === "string" && window.AUTONOMIA_API_BASE) {
+            return window.AUTONOMIA_API_BASE.replace(/\/$/, "");
+          }
+          var meta = document.querySelector('meta[name="autonomia-api-base"]');
+          if (meta && meta.content) {
+            var v = meta.content.replace(/\/$/, "");
+            if (v.indexOf("example.workers.dev") !== -1) return null;
+            return v;
+          }
+          return null;
+        }
+
+        var gateForm = document.getElementById("gate-form");
+        var gateHint = document.getElementById("gate-hint");
+        var gateSubmit = document.getElementById("gate-submit");
+
+        function setGateHint(html, tone) {
+          gateHint.hidden = false;
+          gateHint.innerHTML = html;
+          gateHint.dataset.tone = tone || "info";
+        }
+
+        gateForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var fd = new FormData(gateForm);
+          var email = (fd.get("email") || "").toString().trim();
+          var honeypot = (fd.get("website") || "").toString();
+          var result = window.__maturity || { score: 0, level: "Explorador" };
+
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setGateHint("Ese email no parece válido. Revísalo.", "warn");
+            return;
+          }
+
+          track("assessment_email_submit", { score: result.score, level: result.level });
+
+          var apiBase = getApiBase();
+          var message =
+            "Evaluación de madurez de automatización completada.\n" +
+            "Resultado: " + result.level + " (" + result.score + "/10).\n" +
+            "Quiero recibir mi plan de acción personalizado de 3 páginas.";
+
+          if (!apiBase) {
+            // Graceful fallback before the Worker is wired: open a prefilled mailto.
+            var subject = encodeURIComponent("Mi plan de automatización — nivel " + result.level);
+            var body = encodeURIComponent(message + "\n\nEmail de contacto: " + email);
+            setGateHint(
+              'El envío automático está temporalmente offline. Te abrimos un email para ' +
+                '<a href="mailto:hola@itera.es?subject=' + subject + "&body=" + body + '">' +
+                "solicitar tu plan a hola@itera.es</a> — o escríbenos directamente.",
+              "warn"
+            );
+            return;
+          }
+
+          var payload = {
+            name: email.split("@")[0] || "Lead evaluación",
+            email: email,
+            sector: "",
+            message: message,
+            source: "maturity-assessment",
+            score: result.score,
+            level: result.level,
+            paquete: "",
+            website: honeypot,
+          };
+
+          gateSubmit.disabled = true;
+          gateSubmit.textContent = "Enviando…";
+          setGateHint("Enviando tu solicitud…", "info");
+
+          fetch(apiBase + "/api/contact", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(payload),
+          })
+            .then(function (res) {
+              return res.json().catch(function () { return {}; }).then(function (d) {
+                return { res: res, data: d || {} };
+              });
+            })
+            .then(function (r) {
+              if (r.res.ok) {
+                setGateHint(
+                  "<strong>¡Recibido!</strong> Te enviamos el plan a tu email en breve. Revisa también la carpeta de spam.",
+                  "ok"
+                );
+                gateSubmit.textContent = "Solicitud enviada";
+                Array.prototype.forEach.call(gateForm.querySelectorAll("input"), function (f) {
+                  f.disabled = true;
+                });
+              } else if (r.res.status === 429) {
+                setGateHint("Has enviado demasiadas solicitudes. Inténtalo más tarde.", "warn");
+                gateSubmit.disabled = false;
+                gateSubmit.textContent = "Quiero mi plan →";
+              } else {
+                setGateHint(
+                  "No hemos podido enviar tu solicitud (" + (r.data.error || r.res.status) + "). Inténtalo más tarde.",
+                  "error"
+                );
+                gateSubmit.disabled = false;
+                gateSubmit.textContent = "Quiero mi plan →";
+              }
+            })
+            .catch(function () {
+              setGateHint("Error de red. Inténtalo más tarde.", "error");
+              gateSubmit.disabled = false;
+              gateSubmit.textContent = "Quiero mi plan →";
+            });
+        });
+
+        // init
+        showStep(1);
+      })();
+    </script>
+  </body>
+</html>
