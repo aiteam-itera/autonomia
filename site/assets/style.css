@@ -203,6 +203,14 @@ summary:focus-visible {
   color: var(--fg);
 }
 
+.hero__reassure {
+  margin: 0.85rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+}
+
 .hero__proof {
   margin: 1.75rem 0 0;
   padding: 0;
