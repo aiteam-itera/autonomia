@@ -1164,12 +1164,25 @@
           const { overall, dims } = scoreAnswers(data);
           const mailtoHref = buildMailtoHref(data, overall, dims);
           if (data.open_email) {
+            // Recompute the same deterministic plan the page just rendered, so the
+            // backend can email the visitor the exact recommendation they saw on
+            // screen (no LLM, no content drift). pickProducts/packageFor are pure.
+            const plan = generatePlan(data, { overall, dims });
+            const pkg = packageFor(overall);
             const payload = {
               email: data.open_email,
               answers: data,
               score: { overall, dims },
               level: levelFor(overall).name,
               source: "cuestionario",
+              recommendation: {
+                intro: plan.intro,
+                plan30: plan.plan30,
+                plan60: plan.plan60,
+                plan90: plan.plan90,
+                products: plan.products,
+                package: { title: pkg.title, pitch: pkg.pitch, ctaHref: pkg.ctaHref, ctaLabel: pkg.ctaLabel },
+              },
             };
             submitToBackend(getSubmitUrl(), payload, mailtoHref);
             return;
