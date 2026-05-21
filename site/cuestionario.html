@@ -1074,66 +1074,26 @@
             return window.AUTONOMIA_API_BASE.replace(/\/$/, "");
           }
           const meta = document.querySelector('meta[name="autonomia-api-base"]');
-          if (meta && meta.content) return meta.content.replace(/\/$/, "");
+          if (meta && meta.content) {
+            const v = meta.content.replace(/\/$/, "");
+            // Skip the placeholder host (does not resolve) so we never POST to a
+            // dead URL — capture first-party instead.
+            if (v.indexOf("example.workers.dev") !== -1) return null;
+            return v;
+          }
           return null;
         }
 
-        async function submitToBackend(apiBase, payload) {
-          const hint = document.getElementById("cta-hint");
-          const button = document.getElementById("cta-email");
-          button.disabled = true;
-          button.textContent = "Enviando…";
-          hint.hidden = false;
-          hint.innerHTML = "Estamos enviando un email para verificar tu dirección…";
-          try {
-            const res = await fetch(apiBase + "/api/submit", {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify(payload),
-            });
-            const data = await res.json().catch(() => ({}));
-            if (res.ok) {
-              hint.innerHTML =
-                "<strong>Revisa tu email.</strong> Te hemos enviado un enlace de confirmación. " +
-                "Cuando lo pulses, generaremos tu plan personalizado y te lo mandaremos en el siguiente correo.";
-              button.textContent = "Email enviado";
-            } else if (res.status === 429) {
-              hint.innerHTML =
-                "Has solicitado el plan demasiadas veces. Inténtalo de nuevo en una hora.";
-              button.disabled = false;
-              button.textContent = "Volver a intentar";
-            } else {
-              hint.innerHTML =
-                "No hemos podido enviar el email (" +
-                (data.error || res.status) +
-                "). Inténtalo más tarde.";
-              button.disabled = false;
-              button.textContent = "Volver a intentar";
-            }
-          } catch (err) {
-            hint.innerHTML =
-              "Error de red. Inténtalo más tarde o escríbenos a hola@itera.es.";
-            button.disabled = false;
-            button.textContent = "Volver a intentar";
-          }
+        // Where the lead goes: the real Worker if it's wired, otherwise the
+        // same-origin first-party PHP collector (_submit.php), which always
+        // exists on ia.itera.es. This guarantees we capture the lead without
+        // depending on the (board-blocked) Worker or on the user sending a mailto.
+        function getSubmitUrl() {
+          const apiBase = getApiBase();
+          return apiBase ? apiBase + "/api/submit" : "/_submit.php";
         }
 
-        document.getElementById("cta-email").addEventListener("click", () => {
-          window.autonomia && window.autonomia.track("quiz_email_cta_click");
-          const data = collectAnswers();
-          const { overall, dims } = scoreAnswers(data);
-          const apiBase = getApiBase();
-          if (apiBase && data.open_email) {
-            const payload = {
-              email: data.open_email,
-              answers: data,
-              score: { overall, dims },
-              level: levelFor(overall).name,
-            };
-            submitToBackend(apiBase, payload);
-            return;
-          }
-          // Fallback: backend not yet wired → mailto draft.
+        function buildMailtoHref(data, overall, dims) {
           const subject = encodeURIComponent("Mi diagnóstico AutonomIA: " + overall + "/100");
           const body = encodeURIComponent(
             "Quiero recibir el plan personalizado.\n\n" +
@@ -1150,7 +1110,72 @@
               (data.open_email || "(añadir)") +
               "\n"
           );
-          window.location.href = "mailto:hola@itera.es?subject=" + subject + "&body=" + body;
+          return "mailto:hola@itera.es?subject=" + subject + "&body=" + body;
+        }
+
+        async function submitToBackend(url, payload, mailtoHref) {
+          const hint = document.getElementById("cta-hint");
+          const button = document.getElementById("cta-email");
+          button.disabled = true;
+          button.textContent = "Enviando…";
+          hint.hidden = false;
+          hint.innerHTML = "Estamos registrando tu diagnóstico…";
+          try {
+            const res = await fetch(url, {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (res.ok) {
+              hint.innerHTML =
+                "<strong>¡Recibido!</strong> Hemos registrado tu diagnóstico y te enviaremos " +
+                "tu plan personalizado por email en menos de 24 h. Revisa también la carpeta de spam.";
+              button.textContent = "Solicitud enviada";
+            } else if (res.status === 429) {
+              hint.innerHTML =
+                "Has solicitado el plan demasiadas veces. Inténtalo de nuevo en una hora.";
+              button.disabled = false;
+              button.textContent = "Volver a intentar";
+            } else {
+              hint.innerHTML =
+                "No hemos podido registrar tu solicitud (" +
+                (data.error || res.status) +
+                '). Escríbenos a <a href="' +
+                mailtoHref +
+                '">hola@itera.es</a>.';
+              button.disabled = false;
+              button.textContent = "Volver a intentar";
+            }
+          } catch (err) {
+            // Network failure → don't dead-end: offer the prefilled mailto draft.
+            hint.innerHTML =
+              'No hemos podido conectar. Escríbenos tu solicitud a <a href="' +
+              mailtoHref +
+              '">hola@itera.es</a> y te respondemos en menos de 24 h.';
+            button.disabled = false;
+            button.textContent = "Volver a intentar";
+          }
+        }
+
+        document.getElementById("cta-email").addEventListener("click", () => {
+          window.autonomia && window.autonomia.track("quiz_email_cta_click");
+          const data = collectAnswers();
+          const { overall, dims } = scoreAnswers(data);
+          const mailtoHref = buildMailtoHref(data, overall, dims);
+          if (data.open_email) {
+            const payload = {
+              email: data.open_email,
+              answers: data,
+              score: { overall, dims },
+              level: levelFor(overall).name,
+              source: "cuestionario",
+            };
+            submitToBackend(getSubmitUrl(), payload, mailtoHref);
+            return;
+          }
+          // No email captured → open a prefilled mailto draft so the page still works.
+          window.location.href = mailtoHref;
           document.getElementById("cta-hint").hidden = false;
         });
 

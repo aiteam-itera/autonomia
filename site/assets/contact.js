@@ -59,6 +59,14 @@
     return null;
   }
 
+  // Where the lead goes: the real Worker if wired, otherwise the same-origin
+  // first-party PHP collector (_contact.php), which always exists. Guarantees
+  // capture without depending on the (board-blocked) Worker.
+  function getContactUrl() {
+    var apiBase = getApiBase();
+    return apiBase ? apiBase + "/api/contact" : "/_contact.php";
+  }
+
   function setHint(form, html, tone) {
     var hint = form.querySelector("[data-contact-hint]");
     if (!hint) return;
@@ -146,29 +154,11 @@
     }
   }
 
-  function disableSubmit(form, reason) {
-    var button = form.querySelector("[data-contact-submit]");
-    if (button) {
-      button.disabled = true;
-      button.textContent = "Backend no conectado";
-    }
-    setHint(form, reason, "warn");
-  }
-
   function init(form) {
     setupCounter(form);
     prefillFromQuiz(form);
     var paqueteKey = readPaqueteParam();
     if (paqueteKey) prefillFromPaquete(form, paqueteKey);
-
-    var apiBase = getApiBase();
-    if (!apiBase) {
-      disableSubmit(
-        form,
-        "El formulario está temporalmente offline. Escríbenos a <a href=\"mailto:hola@itera.es\">hola@itera.es</a> con tu sector y el proceso que quieres automatizar y te respondemos en menos de 24 h."
-      );
-      return;
-    }
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -198,7 +188,7 @@
       button.textContent = "Enviando…";
       setHint(form, "Enviando tu mensaje…", "info");
 
-      fetch(apiBase + "/api/contact", {
+      fetch(getContactUrl(), {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payload),

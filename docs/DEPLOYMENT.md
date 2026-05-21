@@ -64,6 +64,36 @@ curl -k --user "acc736162435:$IONOS_SFTP_PASSWORD" \
 2. Confirmar la **URL pública** que sirve `/autonomia/` y meterla en `vars.PUBLIC_URL` (o en `url_override` al lanzar `validate.yml` manualmente).
 3. Validar el primer deploy (push, ver run verde, descargar el artifact `site-validation-*` del run de validación).
 
+## Captura de leads first-party (sin Cloudflare) — ITEAA-1775
+
+Mientras el Worker `autonomia-api` siga bloqueado (ITEAA-1537/1773), el funnel captura
+leads con PHP first-party en IONOS, espejo del colector de analytics `site/_a.php`:
+
+| Endpoint (same-origin) | Lo usa | Payload |
+|---|---|---|
+| `POST /_submit.php`  | `cuestionario.html` (CTA email del diagnóstico) | `{email, answers, score, level, source}` |
+| `POST /_contact.php` | home `#contacto` (`assets/contact.js`) y `herramienta/madurez.html` | `{name, email, sector, message, source, paquete, score?, level?}` |
+
+- Ambos validan el email, descartan el honeypot `website` y **añaden una línea JSON** a
+  `/_leads/leads.jsonl`, **fuera del docroot** (hermano de `/autonomia/`, igual que `/_analytics`).
+  No es web-accesible (`/_leads/...` → 404). Sólo se guarda lo que el visitante envía (GDPR-mínimo).
+- El JS resuelve el endpoint como `Worker real (si está cableado) || PHP same-origin`; el
+  `mailto:` queda sólo como último recurso ante fallo de red. Así no se pierde ningún lead.
+- **Notificación best-effort:** cada endpoint intenta `mail()` a `hola@itera.es` (From `no-reply@itera.es`).
+  Si IONOS no tiene `mail()` disponible, el lead se guarda igual (`mailed:false` en la respuesta) y
+  el seguimiento es manual leyendo `leads.jsonl`.
+
+### Cómo lee los leads HeadOfGrowth (vía SFTP)
+
+```bash
+# El fichero vive FUERA de /autonomia (en el padre del chroot SFTP).
+curl -k --user "acc736162435:$IONOS_SFTP_PASSWORD" \
+  "sftp://access878577274.webspace-data.io:22/_leads/leads.jsonl"
+```
+
+Si el padre del chroot no fuese escribible, el fallback es `/autonomia/_leads/leads.jsonl`
+protegido con `.htaccess` (`Require all denied`). Verificar tras el primer deploy cuál de los dos quedó.
+
 ## Worker (`worker/`) — secrets adicionales para captura de leads
 
 El formulario de `#contacto` (home) llama al endpoint `POST /api/contact` del Worker

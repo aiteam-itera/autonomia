@@ -440,6 +440,13 @@
           return null;
         }
 
+        // Real Worker if wired, otherwise the same-origin first-party PHP
+        // collector (_contact.php) — always captures the lead.
+        function getContactUrl() {
+          var apiBase = getApiBase();
+          return apiBase ? apiBase + "/api/contact" : "/_contact.php";
+        }
+
         var gateForm = document.getElementById("gate-form");
         var gateHint = document.getElementById("gate-hint");
         var gateSubmit = document.getElementById("gate-submit");
@@ -464,24 +471,14 @@
 
           track("assessment_email_submit", { score: result.score, level: result.level });
 
-          var apiBase = getApiBase();
           var message =
             "Evaluación de madurez de automatización completada.\n" +
             "Resultado: " + result.level + " (" + result.score + "/10).\n" +
             "Quiero recibir mi plan de acción personalizado de 3 páginas.";
-
-          if (!apiBase) {
-            // Graceful fallback before the Worker is wired: open a prefilled mailto.
-            var subject = encodeURIComponent("Mi plan de automatización — nivel " + result.level);
-            var body = encodeURIComponent(message + "\n\nEmail de contacto: " + email);
-            setGateHint(
-              'El envío automático está temporalmente offline. Te abrimos un email para ' +
-                '<a href="mailto:hola@itera.es?subject=' + subject + "&body=" + body + '">' +
-                "solicitar tu plan a hola@itera.es</a> — o escríbenos directamente.",
-              "warn"
-            );
-            return;
-          }
+          // Prefilled mailto kept as a last-resort fallback if the network fails.
+          var mailSubject = encodeURIComponent("Mi plan de automatización — nivel " + result.level);
+          var mailBody = encodeURIComponent(message + "\n\nEmail de contacto: " + email);
+          var mailtoHref = "mailto:hola@itera.es?subject=" + mailSubject + "&body=" + mailBody;
 
           var payload = {
             name: email.split("@")[0] || "Lead evaluación",
@@ -499,7 +496,7 @@
           gateSubmit.textContent = "Enviando…";
           setGateHint("Enviando tu solicitud…", "info");
 
-          fetch(apiBase + "/api/contact", {
+          fetch(getContactUrl(), {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(payload),
@@ -533,7 +530,12 @@
               }
             })
             .catch(function () {
-              setGateHint("Error de red. Inténtalo más tarde.", "error");
+              // Network failure → don't dead-end: offer the prefilled mailto draft.
+              setGateHint(
+                'No hemos podido conectar. Escríbenos a <a href="' + mailtoHref +
+                  '">hola@itera.es</a> y te enviamos tu plan en menos de 24 h.',
+                "warn"
+              );
               gateSubmit.disabled = false;
               gateSubmit.textContent = "Quiero mi plan →";
             });
