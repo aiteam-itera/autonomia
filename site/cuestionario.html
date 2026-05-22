@@ -432,8 +432,8 @@
             </ol>
             <p class="result__plan-products" id="result-plan-products"></p>
             <p class="quiz__hint result__plan-meta" id="result-plan-meta">
-              Plan generado al instante con reglas determinísticas en tu navegador. Cuando habilitemos el motor con LLM,
-              recibirás además una versión enriquecida por email.
+              Plan generado al instante a partir de tus respuestas. Introduce tu email abajo para
+              recibir una copia con el informe completo.
             </p>
           </section>
 
@@ -448,14 +448,10 @@
 
           <div class="result__cta">
             <button type="button" class="cta cta--primary" id="cta-email">
-              También quiero recibir el plan por email
+              Recibir mi informe por email
             </button>
             <button type="button" class="cta" id="cta-restart">Volver a empezar</button>
-            <p class="quiz__hint" id="cta-hint" hidden>
-              Ya tienes el plan determinístico arriba. <strong>La versión enriquecida con LLM por email
-              está pendiente de aprobación interna</strong>; mientras tanto hemos abierto tu cliente de
-              correo con un resumen para que nos escribas si quieres seguir hablando.
-            </p>
+            <p class="quiz__hint" id="cta-hint" hidden></p>
           </div>
         </section>
 
@@ -744,9 +740,6 @@
         }
 
         // ---------- deterministic recommendation engine ----------
-        // Generates a 30/60/90-day plan from answers + score without calling any LLM.
-        // The board approval for the LLM-backed Worker (ITEAA-1537) has been pending
-        // 4+ days; this keeps the cuestionario useful in the meantime.
 
         const SECTOR_REPETITIVO = {
           servicios: "redactar propuestas, contratos o informes para clientes",
