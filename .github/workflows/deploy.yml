@@ -48,6 +48,10 @@ jobs:
           bye
           EOF
 
+      - name: Notify IndexNow (Bing/Yandex/DuckDuckGo)
+        if: success()
+        run: node tools/indexnow.mjs || true
+
       - name: Trigger validation workflow
         if: success()
         env:
