@@ -170,7 +170,7 @@ if ($rec !== null) {
         . "MIME-Version: 1.0\r\n"
         . "Content-Type: text/html; charset=utf-8\r\n";
     if (function_exists('mail')) {
-        $recommended = (bool) @mail($email, 'Tu plan personalizado AutonomIA · 30/60/90 días', $htmlMail, $vHeaders);
+        $recommended = (bool) @mail($email, 'Tu plan personalizado AutonomIA · 30/60/90 días', $htmlMail, $vHeaders, '-fhola@itera.es');
     }
 }
 
@@ -188,7 +188,7 @@ $body =
     "Respuestas (JSON):\n" . json_encode($record['answers'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n";
 $headers = "From: AutonomIA <no-reply@itera.es>\r\nReply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
 if (function_exists('mail')) {
-    $mailed = (bool) @mail($to, $subject, $body, $headers);
+    $mailed = (bool) @mail($to, $subject, $body, $headers, '-fhola@itera.es');
 }
 
 http_response_code(200);

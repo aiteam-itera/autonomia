@@ -92,7 +92,7 @@ $body =
     "\nMensaje:\n{$record['message']}\n";
 $headers = "From: AutonomIA <no-reply@itera.es>\r\nReply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
 if (function_exists('mail')) {
-    $mailed = (bool) @mail($to, $subject, $body, $headers);
+    $mailed = (bool) @mail($to, $subject, $body, $headers, '-fhola@itera.es');
 }
 
 http_response_code(200);
