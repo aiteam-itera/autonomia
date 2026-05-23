@@ -90,9 +90,11 @@ $body =
     "Fuente:  {$record['source']}\n" .
     ($record['level'] ? "Nivel:   {$record['level']} ({$record['score']})\n" : '') .
     "\nMensaje:\n{$record['message']}\n";
-$headers = "From: AutonomIA <no-reply@itera.es>\r\nReply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
+// IONOS sendmail rejects custom From/-f sender; omit so mail() is accepted
+// from the default system sender (verified ITEAA-1781). Reply-To routes replies.
+$headers = "Reply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
 if (function_exists('mail')) {
-    $mailed = (bool) @mail($to, $subject, $body, $headers, '-fhola@itera.es');
+    $mailed = (bool) @mail($to, $subject, $body, $headers);
 }
 
 http_response_code(200);

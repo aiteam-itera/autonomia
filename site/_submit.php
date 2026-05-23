@@ -165,12 +165,15 @@ if ($rec !== null) {
         . 'Conservamos tus respuestas un máximo de 90 días; escribe a <a href="mailto:hola@itera.es" style="color:#1565c0;">hola@itera.es</a> para pedir su borrado. '
         . '¿Hablamos? Responde a este email y te ayudamos a dar el primer paso.</p></div>';
 
-    $vHeaders = "From: AutonomIA <no-reply@itera.es>\r\n"
-        . "Reply-To: hola@itera.es\r\n"
+    // IONOS sendmail rejects any custom From: header or -f envelope sender
+    // (verified ITEAA-1781: mail() returns false unless the default system
+    // sender is used). We omit From/-f so the message is accepted; Reply-To
+    // still routes replies to the team.
+    $vHeaders = "Reply-To: hola@itera.es\r\n"
         . "MIME-Version: 1.0\r\n"
         . "Content-Type: text/html; charset=utf-8\r\n";
     if (function_exists('mail')) {
-        $recommended = (bool) @mail($email, 'Tu plan personalizado AutonomIA · 30/60/90 días', $htmlMail, $vHeaders, '-fhola@itera.es');
+        $recommended = (bool) @mail($email, 'Tu plan personalizado AutonomIA · 30/60/90 días', $htmlMail, $vHeaders);
     }
 }
 
@@ -186,9 +189,9 @@ $body =
     "Score:  {$overall}/100\n" .
     "Fuente: {$record['source']}\n\n" .
     "Respuestas (JSON):\n" . json_encode($record['answers'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n";
-$headers = "From: AutonomIA <no-reply@itera.es>\r\nReply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
+$headers = "Reply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
 if (function_exists('mail')) {
-    $mailed = (bool) @mail($to, $subject, $body, $headers, '-fhola@itera.es');
+    $mailed = (bool) @mail($to, $subject, $body, $headers);
 }
 
 http_response_code(200);
