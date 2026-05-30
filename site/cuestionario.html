@@ -44,6 +44,111 @@
         <meta name="autonomia-api-base" content="https://autonomia-api.example.workers.dev" />
       Until then, the form falls back to a mailto: draft.
     -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://ia.itera.es/cuestionario.html#webpage",
+          "url": "https://ia.itera.es/cuestionario.html",
+          "name": "Cuestionario de madurez de IA — AutonomIA",
+          "description": "Diagnóstico gratis en 5 minutos: te decimos qué deberías automatizar primero en tu pyme con IA, qué herramienta usar y por dónde empezar.",
+          "inLanguage": "es-ES",
+          "isPartOf": { "@type": "WebSite", "@id": "https://ia.itera.es/#website" },
+          "primaryImageOfPage": { "@type": "ImageObject", "url": "https://ia.itera.es/assets/og-default.png" },
+          "breadcrumb": { "@id": "https://ia.itera.es/cuestionario.html#breadcrumb" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://ia.itera.es/cuestionario.html#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "AutonomIA", "item": "https://ia.itera.es/" },
+            { "@type": "ListItem", "position": 2, "name": "Cuestionario de madurez de IA", "item": "https://ia.itera.es/cuestionario.html" }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://ia.itera.es/cuestionario.html#howto",
+          "name": "Cómo saber qué automatizar primero con IA en tu pyme",
+          "description": "Pasos para descubrir, en 5 minutos, el primer proceso que tu empresa debería automatizar con IA y obtener un plan a 30/60/90 días.",
+          "totalTime": "PT5M",
+          "inLanguage": "es-ES",
+          "supply": [
+            { "@type": "HowToSupply", "name": "Conocer tu sector y tamaño de equipo" },
+            { "@type": "HowToSupply", "name": "Identificar un proceso repetitivo que te duela" }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Clasifica tu empresa",
+              "text": "Selecciona sector y tamaño para que la recomendación se adapte a tu contexto."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Mide tu madurez actual con IA",
+              "text": "Responde a preguntas cerradas sobre uso de chats, automatizaciones y agentes en tu empresa."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Describe un proceso que te duela",
+              "text": "Cuenta en tus propias palabras qué tarea consume horas o produce errores."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Recibe tu plan personalizado",
+              "text": "Te enviamos por email un plan a 30/60/90 días con qué automatizar primero, qué herramienta usar y qué evitar."
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://ia.itera.es/cuestionario.html#faq",
+          "inLanguage": "es-ES",
+          "isPartOf": { "@id": "https://ia.itera.es/#website" },
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tarda el cuestionario?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unos 5 minutos. Son 6 pasos cortos: clasificación de tu empresa, madurez actual con IA y un par de preguntas abiertas sobre el proceso que más te duele."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Necesito dejar mi email para ver el resultado?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El email solo es necesario para recibir el plan completo a 30/60/90 días por correo. Durante el cuestionario verás un preview de la recomendación antes de decidir si te interesa el informe completo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué hacéis con mis respuestas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Solo se usan para generar tu plan personalizado. Las conservamos 90 días y después se eliminan. No se comparten con terceros."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Es gratis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. El cuestionario, la recomendación inicial y el plan a 30/60/90 días son gratuitos. Si después quieres que lo montemos contigo, te proponemos un diagnóstico express o un piloto."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
