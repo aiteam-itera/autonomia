@@ -1162,12 +1162,55 @@
           console.log("[autonomia.quiz] payload", { overall, dims, level: level.name, answers: data });
         }
 
+        // Build the lead payload from current answers + score. Shared by the
+        // auto-submit on finish AND the manual "Recibir mi informe" CTA so the
+        // server sees the exact same plan the visitor saw on screen.
+        function buildLeadPayload(data, overall, dims) {
+          const plan = generatePlan(data, { overall, dims });
+          const pkg = packageFor(overall);
+          return {
+            email: data.open_email,
+            answers: data,
+            score: { overall, dims },
+            level: levelFor(overall).name,
+            source: "cuestionario",
+            recommendation: {
+              intro: plan.intro,
+              plan30: plan.plan30,
+              plan60: plan.plan60,
+              plan90: plan.plan90,
+              products: plan.products,
+              package: { title: pkg.title, pitch: pkg.pitch, ctaHref: pkg.ctaHref, ctaLabel: pkg.ctaLabel },
+            },
+          };
+        }
+
+        // Tracks whether the lead was already POSTed (auto on finish OR via CTA)
+        // so the result-page CTA does not re-submit and overwrite hint copy.
+        let leadAutoSubmitted = false;
+
         btnFinish.addEventListener("click", () => {
           if (!validateStep(current)) return;
           saveState();
           renderResult();
           var _d = collectAnswers(); var _s = scoreAnswers(_d);
           window.autonomia && window.autonomia.track("quiz_finish", { score: _s.overall });
+          // The email was required at step 6, so capture the lead immediately
+          // instead of waiting for the result-page CTA click. Drops the second
+          // click as a leak point (~100% loss observed in 2026-05-29 session).
+          if (_d.open_email) {
+            const mailtoHref = buildMailtoHref(_d, _s.overall, _s.dims);
+            const payload = buildLeadPayload(_d, _s.overall, _s.dims);
+            const metaEl = document.getElementById("result-plan-meta");
+            if (metaEl) {
+              metaEl.textContent =
+                "Te enviamos el informe completo a " + _d.open_email +
+                " en menos de 24 h. Revisa también la carpeta de spam.";
+            }
+            submitToBackend(getSubmitUrl(), payload, mailtoHref);
+            leadAutoSubmitted = true;
+            window.autonomia && window.autonomia.track("quiz_lead_autosubmit");
+          }
         });
 
         // CTA: when the backend is configured (window.AUTONOMIA_API_BASE or
@@ -1264,30 +1307,13 @@
 
         document.getElementById("cta-email").addEventListener("click", () => {
           window.autonomia && window.autonomia.track("quiz_email_cta_click");
+          // Already auto-submitted on finish — don't double-POST.
+          if (leadAutoSubmitted) return;
           const data = collectAnswers();
           const { overall, dims } = scoreAnswers(data);
           const mailtoHref = buildMailtoHref(data, overall, dims);
           if (data.open_email) {
-            // Recompute the same deterministic plan the page just rendered, so the
-            // backend can email the visitor the exact recommendation they saw on
-            // screen (no LLM, no content drift). pickProducts/packageFor are pure.
-            const plan = generatePlan(data, { overall, dims });
-            const pkg = packageFor(overall);
-            const payload = {
-              email: data.open_email,
-              answers: data,
-              score: { overall, dims },
-              level: levelFor(overall).name,
-              source: "cuestionario",
-              recommendation: {
-                intro: plan.intro,
-                plan30: plan.plan30,
-                plan60: plan.plan60,
-                plan90: plan.plan90,
-                products: plan.products,
-                package: { title: pkg.title, pitch: pkg.pitch, ctaHref: pkg.ctaHref, ctaLabel: pkg.ctaLabel },
-              },
-            };
+            const payload = buildLeadPayload(data, overall, dims);
             submitToBackend(getSubmitUrl(), payload, mailtoHref);
             return;
           }
