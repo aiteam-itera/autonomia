@@ -57,6 +57,17 @@ function clean_path(string $url): string {
     return substr($p, 0, 128);
 }
 
+function utm_source(string $url): string {
+    if ($url === '') return '';
+    $q = parse_url($url, PHP_URL_QUERY);
+    if (!is_string($q) || $q === '') return '';
+    parse_str($q, $parts);
+    $s = isset($parts['utm_source']) ? (string) $parts['utm_source'] : '';
+    if ($s === '') return '';
+    $s = preg_replace('/[^a-zA-Z0-9_\-.]/', '', $s);
+    return substr((string) $s, 0, 64);
+}
+
 function ref_host(): string {
     $r = $_SERVER['HTTP_REFERER'] ?? '';
     if ($r === '') return '';
@@ -94,12 +105,14 @@ if (is_bot($ua)) {
 $day = gmdate('Y-m-d');
 $visitor = substr(hash('sha256', $day . '|' . SALT . '|' . client_ip() . '|' . $ua), 0, 16);
 
+$src_url = $url === '' ? ($_SERVER['HTTP_REFERER'] ?? '') : $url;
 $line = implode("\t", [
     gmdate('c'),
     $visitor,
     $event,
-    clean_path($url === '' ? ($_SERVER['HTTP_REFERER'] ?? '') : $url),
+    clean_path($src_url),
     ref_host(),
+    utm_source($src_url),
 ]) . "\n";
 
 // Store the log OUTSIDE the docroot (parent of /autonomia/). Fall back to a

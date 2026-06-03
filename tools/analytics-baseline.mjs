@@ -8,7 +8,8 @@
 //     "sftp://access878577274.webspace-data.io:22/_analytics/a.log" > a.log
 //   node tools/analytics-baseline.mjs a.log
 //
-// Log line format (TSV): isoTs \t visitorHash \t event \t path \t refHost
+// Log line format (TSV): isoTs \t visitorHash \t event \t path \t refHost \t utmSource
+// (utmSource column added 2026-06-03; older lines have 5 columns — handled gracefully.)
 // Privacy note: visitorHash rotates daily, so "unique visitors" is the sum of
 // per-day uniques (a privacy-preserving under/over-count tradeoff, same as
 // Plausible's daily-salt model). It is a stable baseline, not a CRM identity.
@@ -20,11 +21,12 @@ const lines = readFileSync(file, "utf8").split("\n").filter(Boolean);
 
 const events = {};
 const dailyVisitors = {}; // day -> Set(visitorHash)
+const utmCounts = {}; // utm_source -> { page_view, quiz_start, quiz_finish, contact_form_submit }
 let pageViewsHome = 0;
 let pageViewsTotal = 0;
 
 for (const line of lines) {
-  const [ts, visitor, event, path] = line.split("\t");
+  const [ts, visitor, event, path, _refHost, utmSource] = line.split("\t");
   if (!event) continue;
   events[event] = (events[event] || 0) + 1;
   const day = (ts || "").slice(0, 10);
@@ -32,6 +34,10 @@ for (const line of lines) {
   if (event === "page_view") {
     pageViewsTotal++;
     if (path === "/" || path === "/index.html") pageViewsHome++;
+  }
+  if (utmSource) {
+    const u = (utmCounts[utmSource] ||= { page_view: 0, quiz_start: 0, quiz_finish: 0, contact_form_submit: 0 });
+    if (u[event] !== undefined) u[event]++;
   }
 }
 
@@ -55,4 +61,14 @@ console.log("");
 console.log("All event counts:");
 for (const [e, c] of Object.entries(events).sort((a, b) => b[1] - a[1])) {
   console.log(`  ${e.padEnd(24)} ${c}`);
+}
+
+const utmEntries = Object.entries(utmCounts);
+if (utmEntries.length > 0) {
+  console.log("");
+  console.log("UTM source breakdown (which distribution channels delivered):");
+  console.log(`  ${"source".padEnd(20)} ${"views".padStart(6)} ${"quiz_st".padStart(8)} ${"quiz_fi".padStart(8)} ${"contact".padStart(8)}`);
+  for (const [src, u] of utmEntries.sort((a, b) => b[1].page_view - a[1].page_view)) {
+    console.log(`  ${src.padEnd(20)} ${String(u.page_view).padStart(6)} ${String(u.quiz_start).padStart(8)} ${String(u.quiz_finish).padStart(8)} ${String(u.contact_form_submit).padStart(8)}`);
+  }
 }

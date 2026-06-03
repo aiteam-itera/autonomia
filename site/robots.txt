@@ -3,5 +3,6 @@
 
 User-agent: *
 Allow: /
+Disallow: /distribuir/
 
 Sitemap: https://ia.itera.es/sitemap.xml
