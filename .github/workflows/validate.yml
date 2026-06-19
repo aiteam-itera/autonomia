@@ -76,19 +76,25 @@ jobs:
             // below-the-fold sections render blank in the screenshot.
             const autoScroll = async () => {
               await page.evaluate(async () => {
+                // Disable smooth scrolling so scripted scrollTo jumps instantly;
+                // otherwise CSS `scroll-behavior: smooth` animates and the rapid
+                // steps coalesce, leaving deep sections un-revealed.
+                const prev = document.documentElement.style.scrollBehavior;
+                document.documentElement.style.scrollBehavior = 'auto';
                 await new Promise((resolve) => {
                   let y = 0;
                   const step = () => {
                     const max = document.body.scrollHeight;
-                    y += Math.max(400, window.innerHeight * 0.8);
+                    y += Math.max(300, window.innerHeight * 0.6);
                     window.scrollTo(0, y);
-                    if (y >= max) { window.scrollTo(0, 0); resolve(); }
-                    else setTimeout(step, 120);
+                    if (y >= max) { resolve(); }
+                    else setTimeout(step, 150);
                   };
                   step();
                 });
+                document.documentElement.style.scrollBehavior = prev;
               });
-              await page.waitForTimeout(900);
+              await page.waitForTimeout(1000);
             };
             await autoScroll();
             await page.screenshot({ path: 'artifacts/desktop.png', fullPage: true });
