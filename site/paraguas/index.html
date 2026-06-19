@@ -1,1112 +1,240 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutonomIA | La suite inteligente para tu empresa</title>
-  <meta name="description" content="Automatiza procesos, organiza tu equipo y mide el rendimiento con nuestra suite de herramientas de IA para pymes: Ficha, BPAC, IronBrain y Meritoria.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0a0e1a;
-      --bg-card: #111827;
-      --bg-card-hover: #1a2236;
-      --border: rgba(255,255,255,0.08);
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --accent: #7c3aed;
-      --accent-light: #a78bfa;
-      --accent-glow: rgba(124,58,237,0.25);
-      --green: #10b981;
-      --blue: #3b82f6;
-      --orange: #f59e0b;
-      --radius: 16px;
-      --radius-sm: 10px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background: rgba(10,14,26,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .nav-logo span { color: var(--accent-light); }
-    .nav-links {
-      display: flex;
-      gap: 0.25rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      padding: 0.5rem 0.75rem;
-      border-radius: var(--radius-sm);
-      transition: color 0.2s, background 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
-    .nav-cta {
-      background: var(--accent);
-      color: #fff !important;
-      padding: 0.5rem 1.25rem !important;
-      border-radius: 999px !important;
-    }
-    .nav-cta:hover { background: #6d28d9 !important; }
-
-    /* ── SECTIONS ── */
-    section { padding: 5rem 2rem; }
-    .container { max-width: 1100px; margin: 0 auto; }
-
-    .section-badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-light);
-      background: rgba(124,58,237,0.12);
-      border: 1px solid rgba(124,58,237,0.25);
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      margin-bottom: 1.25rem;
-    }
-
-    h2 {
-      font-size: clamp(1.75rem, 4vw, 2.75rem);
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
-    h2 em { font-style: normal; color: var(--accent-light); }
-
-    .section-subtitle {
-      font-size: 1.125rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin-bottom: 3rem;
-    }
-
-    /* ── HERO ── */
-    #hero {
-      padding: 9rem 2rem 6rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-glow {
-      position: absolute;
-      top: -100px; left: 50%;
-      transform: translateX(-50%);
-      width: 800px; height: 500px;
-      background: radial-gradient(ellipse, rgba(124,58,237,0.2) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent-light);
-      background: rgba(124,58,237,0.1);
-      border: 1px solid rgba(124,58,237,0.3);
-      border-radius: 999px;
-      padding: 0.4rem 1rem;
-      margin-bottom: 2rem;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 6px var(--green);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-    }
-    h1 em { font-style: normal; color: var(--accent-light); }
-    .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto 3rem;
-    }
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 2rem;
-      border-radius: 999px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
-    }
-    .btn-primary:hover { background: #6d28d9; box-shadow: 0 6px 28px rgba(124,58,237,0.5); }
-    .btn-secondary {
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
-
-    /* ── STATS BAR ── */
-    .stats-bar {
-      display: flex;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-top: 5rem;
-    }
-    .stat {
-      flex: 1;
-      padding: 1.5rem 2rem;
-      background: var(--bg-card);
-      text-align: center;
-    }
-    .stat-number {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-    .stat-number em { font-style: normal; color: var(--accent-light); }
-    .stat-label { font-size: 0.85rem; color: var(--text-muted); }
-
-    /* ── MODEL DIAGRAM ── */
-    #modelo { background: linear-gradient(180deg, var(--bg) 0%, rgba(124,58,237,0.04) 50%, var(--bg) 100%); }
-    .model-diagram {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      flex-wrap: wrap;
-      margin-top: 3rem;
-    }
-    .model-node {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      text-align: center;
-      position: relative;
-    }
-    .model-icon {
-      width: 72px; height: 72px;
-      border-radius: var(--radius);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.75rem;
-      border: 1px solid var(--border);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .model-icon:hover { transform: scale(1.08); }
-    .model-icon.ficha { background: linear-gradient(135deg, #1e40af20, #3b82f620); border-color: rgba(59,130,246,0.3); }
-    .model-icon.bpac { background: linear-gradient(135deg, #065f4620, #10b98120); border-color: rgba(16,185,129,0.3); }
-    .model-icon.ironbrain { background: linear-gradient(135deg, #581c8720, #7c3aed20); border-color: rgba(124,58,237,0.4); }
-    .model-icon.railway { background: linear-gradient(135deg, #78350f20, #f59e0b20); border-color: rgba(245,158,11,0.3); }
-    .model-icon.meritoria { background: linear-gradient(135deg, #7f1d1d20, #ef444420); border-color: rgba(239,68,68,0.3); }
-    .model-name {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .model-tagline {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      max-width: 100px;
-    }
-    .model-arrow {
-      display: flex;
-      align-items: center;
-      padding: 0 0.5rem;
-      color: var(--text-dim);
-      font-size: 1.25rem;
-      flex-shrink: 0;
-      margin-bottom: 2.5rem;
-    }
-    .model-arrow svg { width: 32px; height: 16px; }
-
-    /* IronBrain has Railway beneath */
-    .ironbrain-cluster {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .railway-sub {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 1;
-    }
-    .railway-connector {
-      width: 1px;
-      height: 20px;
-      background: var(--border);
-    }
-    .railway-sub .model-icon {
-      width: 52px; height: 52px;
-      font-size: 1.25rem;
-    }
-    .railway-sub .model-name { font-size: 0.75rem; }
-
-    /* ── PROPUESTAS DE VALOR ── */
-    .props-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .prop-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .prop-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: var(--radius) var(--radius) 0 0;
-    }
-    .prop-card.blue::before { background: linear-gradient(90deg, var(--blue), #60a5fa); }
-    .prop-card.green::before { background: linear-gradient(90deg, var(--green), #34d399); }
-    .prop-card.purple::before { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
-    .prop-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.15);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-    }
-    .prop-icon {
-      font-size: 2rem;
-      margin-bottom: 1.25rem;
-    }
-    .prop-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .prop-desc {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
-      margin-bottom: 1.25rem;
-    }
-    .prop-products {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .product-tag {
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.25rem 0.625rem;
-      border-radius: 999px;
-      border: 1px solid;
-    }
-    .tag-blue { color: #93c5fd; border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.08); }
-    .tag-green { color: #6ee7b7; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08); }
-    .tag-purple { color: #c4b5fd; border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.08); }
-    .tag-orange { color: #fcd34d; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
-    .tag-red { color: #fca5a5; border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); }
-
-    /* ── PAQUETES ── */
-    #paquetes { background: var(--bg-card); }
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .plan-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .plan-card.featured {
-      border-color: var(--accent);
-      background: linear-gradient(180deg, rgba(124,58,237,0.08) 0%, var(--bg) 100%);
-      position: relative;
-    }
-    .plan-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.2); }
-    .plan-card.featured:hover { border-color: var(--accent-light); }
-    .plan-badge {
-      position: absolute;
-      top: -12px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: var(--accent);
-      color: #fff;
-      padding: 0.25rem 0.875rem;
-      border-radius: 999px;
-    }
-    .plan-name {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.5rem;
-    }
-    .plan-price {
-      font-size: 2.25rem;
-      font-weight: 800;
-      margin-bottom: 0.25rem;
-    }
-    .plan-price span { font-size: 1rem; font-weight: 400; color: var(--text-muted); }
-    .plan-desc {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .plan-features {
-      list-style: none;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-      margin-bottom: 2rem;
-    }
-    .plan-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.625rem;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
-    .plan-features li::before {
-      content: '✓';
-      color: var(--green);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 0.1em;
-    }
-    .plan-cta {
-      display: block;
-      text-align: center;
-      padding: 0.875rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .plan-cta.primary { background: var(--accent); color: #fff; }
-    .plan-cta.primary:hover { background: #6d28d9; }
-    .plan-cta.secondary { border: 1px solid var(--border); color: var(--text); }
-    .plan-cta.secondary:hover { background: rgba(255,255,255,0.06); }
-
-    /* ── CASOS DE ÉXITO ── */
-    .cases-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .case-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-    .case-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
-    .case-sector {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent-light);
-      margin-bottom: 1rem;
-    }
-    .case-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .case-desc {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-    .case-metric {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
-      background: rgba(16,185,129,0.06);
-      border: 1px solid rgba(16,185,129,0.15);
-      border-radius: var(--radius-sm);
-    }
-    .case-metric-value {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--green);
-    }
-    .case-metric-label { font-size: 0.8rem; color: var(--text-muted); }
-
-    /* ── COMO FUNCIONA ── */
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 3rem;
-      max-width: 700px;
-    }
-    .step {
-      display: flex;
-      gap: 1.5rem;
-      position: relative;
-    }
-    .step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      left: 19px;
-      top: 52px;
-      bottom: -20px;
-      width: 2px;
-      background: var(--border);
-    }
-    .step-number {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-    }
-    .step-content { padding-bottom: 2.5rem; }
-    .step-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .step-desc { color: var(--text-muted); font-size: 0.875rem; }
-
-    /* ── CTA FINAL ── */
-    #contacto {
-      text-align: center;
-      background: radial-gradient(ellipse at center, rgba(124,58,237,0.12) 0%, transparent 70%);
-    }
-    .cta-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 4rem 3rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 3rem 2rem;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-    .footer-logo {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-    .footer-logo span { color: var(--accent-light); }
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      list-style: none;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--text); }
-    .footer-copy { color: var(--text-dim); font-size: 0.8rem; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem; }
-      .nav-links { display: none; }
-      .stats-bar { flex-direction: column; gap: 0; }
-      .model-diagram { gap: 0.5rem; }
-      .model-arrow { padding: 0 0.25rem; }
-      .model-arrow svg { width: 24px; }
-      .model-name { font-size: 0.75rem; }
-      .model-tagline { font-size: 0.65rem; max-width: 75px; }
-      .model-icon { width: 56px; height: 56px; font-size: 1.4rem; }
-      .cta-card { padding: 2.5rem 1.5rem; }
-    }
-    @media (max-width: 580px) {
-      .model-diagram { flex-direction: column; }
-      .model-arrow { transform: rotate(90deg); }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutonomIA · El portfolio que pone la IA a trabajar para tu pyme</title>
+<meta name="description" content="Una suite integrada para pymes: Ficha (proyectos y tiempo), BPAC (procesos), IronBrain + Railway (agentes de IA gobernados) y Meritoria (mérito basado en evidencia). Diagnóstico gratuito.">
+<meta property="og:title" content="AutonomIA · La IA aplicada a tu pyme, con control total">
+<meta property="og:description" content="Organiza, automatiza con agentes gobernados y mide el mérito real. Ficha · BPAC · IronBrain · Railway · Meritoria.">
+<meta property="og:image" content="/assets/og-default.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/paraguas/assets/paraguas.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">Autono<span>IA</span></a>
+<nav class="nav">
+  <a href="/paraguas/" class="nav-logo">Autono<span>IA</span></a>
+  <button class="nav-toggle" aria-label="Menú">☰</button>
   <ul class="nav-links">
-    <li><a href="#modelo">Cómo funciona</a></li>
-    <li><a href="#propuestas">Propuestas</a></li>
+    <li><a href="#ecosistema">Ecosistema</a></li>
+    <li><a href="#productos">Productos</a></li>
     <li><a href="#gobernanza">Gobernanza IA</a></li>
-    <li><a href="#paquetes">Precios</a></li>
-    <li><a href="#casos">Casos de éxito</a></li>
+    <li><a href="#planes">Planes</a></li>
     <li><a href="#contacto" class="nav-cta">Diagnóstico gratuito</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <div class="hero-glow"></div>
-  <div class="container" style="position:relative">
-    <div class="hero-badge">Suite de IA para pymes · Gobernado por agentes</div>
-    <h1>Tu empresa,<br>al ritmo de <em>la IA</em></h1>
-    <p class="hero-sub">
-      Automatiza procesos, organiza tu equipo y mide el rendimiento real.
-      Una suite integrada diseñada para que las pymes compitan con las grandes.
-    </p>
+<header class="hero">
+  <div class="aurora"></div>
+  <div class="container">
+    <span class="eyebrow"><span class="dot"></span> Suite de IA para pymes · Gobernada por agentes</span>
+    <h1>Tu empresa, <span class="grad">al ritmo de la IA</span></h1>
+    <p class="lead">Cuatro herramientas que encajan en un ecosistema: organiza el trabajo, digitaliza tus procesos, automatiza con agentes de IA <strong>bajo tu control</strong> y mide el mérito real de tu equipo. Diseñado para que una pyme compita como una gran empresa.</p>
     <div class="hero-ctas">
-      <a href="#contacto" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        Diagnóstico gratuito
+      <a href="#contacto" class="btn btn-primary">Pide tu diagnóstico gratuito →</a>
+      <a href="#productos" class="btn btn-ghost">Explorar el portfolio</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat reveal"><div class="stat-num"><span data-count="4">4</span></div><div class="stat-label">productos integrados en una suite</div></div>
+      <div class="stat reveal d1"><div class="stat-num"><span data-count="24" data-suffix="/7">24/7</span></div><div class="stat-label">agentes trabajando, con tu aprobación</div></div>
+      <div class="stat reveal d2"><div class="stat-num"><span data-count="100" data-suffix="%">100%</span></div><div class="stat-label">trazabilidad de cada acción de IA</div></div>
+      <div class="stat reveal d3"><div class="stat-num"><span data-count="48" data-suffix="h">48h</span></div><div class="stat-label">para tu primer plan de automatización</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ECOSISTEMA -->
+<section id="ecosistema" class="tinted">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">El ecosistema</span>
+      <h2>Cuatro herramientas. <span class="grad">Un ecosistema conectado.</span></h2>
+      <p class="lead">Cada producto resuelve una capa del negocio. Juntos, los datos fluyen de uno a otro: del trabajo organizado al proceso digitalizado, del proceso al agente que lo ejecuta, y del resultado a la medición del mérito.</p>
+    </div>
+    <div class="grid grid-4">
+      <div class="card bar blue reveal"><div class="ic">📋</div><h3>Ficha</h3><p>Gestión de proyectos con control de tiempo por tarea. Sabes dónde está cada cuello de botella.</p></div>
+      <div class="card bar green reveal d1"><div class="ic">🧩</div><h3>BPAC</h3><p>Digitaliza y conecta el conocimiento de tu empresa. Procesos vivos, listos para la IA.</p></div>
+      <div class="card bar reveal d2"><div class="ic">🧠</div><h3>IronBrain + Railway</h3><p>Orquestador de agentes de IA con gobernanza: límites codificados y tu aprobación antes de actuar.</p></div>
+      <div class="card bar red reveal d3"><div class="ic">🏆</div><h3>Meritoria</h3><p>Convierte el trabajo real en evidencia objetiva. Mide quién aporta valor y reconócelo con datos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS (links to dedicated pages) -->
+<section id="productos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Explora cada producto</span>
+      <h2>Una página por tema, <span class="grad">sin atajos</span></h2>
+      <p class="lead">Profundiza en lo que te interesa. Cada producto tiene su propia página con cómo funciona, para quién es y una demo en vivo.</p>
+    </div>
+    <div class="grid grid-2">
+      <a href="/paraguas/ficha.html" class="card bar blue prodlink reveal">
+        <div class="ic">📋</div><h3>Ficha — Proyectos y tiempo</h3>
+        <p>El ERP ligero centrado en proyectos: tareas, subtareas, dedicación real y bloqueos a la vista. La base de datos sobre la que todo lo demás mide.</p>
+        <div class="chips"><span class="chip blue">Gestión de proyectos</span><span class="chip blue">Control horario</span></div>
+        <span class="arrow">Ver Ficha →</span>
       </a>
-      <a href="#modelo" class="btn btn-secondary">Ver cómo funciona →</a>
+      <a href="/paraguas/bpac.html" class="card bar green prodlink reveal d1">
+        <div class="ic">🧩</div><h3>BPAC — Procesos y conocimiento</h3>
+        <p>Saca el conocimiento de la cabeza de tus personas clave y conviértelo en procesos digitales que cualquiera —persona o agente— puede ejecutar.</p>
+        <div class="chips"><span class="chip green">Digitalización</span><span class="chip green">Onboarding</span></div>
+        <span class="arrow">Ver BPAC →</span>
+      </a>
+      <a href="/paraguas/ironbrain.html" class="card bar prodlink reveal d2">
+        <div class="ic">🧠</div><h3>IronBrain + Railway — Agentes gobernados</h3>
+        <p>Delega procesos repetitivos a agentes de IA que trabajan 24/7. Railway garantiza que nunca actúan fuera de las reglas que tú defines.</p>
+        <div class="chips"><span class="chip purple">Orquestación IA</span><span class="chip orange">Gobernanza</span></div>
+        <span class="arrow">Ver IronBrain →</span>
+      </a>
+      <a href="/paraguas/meritoria.html" class="card bar red prodlink reveal d3">
+        <div class="ic">🏆</div><h3>Meritoria — Mérito basado en evidencia</h3>
+        <p>Work Proof, Outcome Cards e Impact Loop: convierte señales operativas en mejores decisiones de talento. Meritocracia, no política.</p>
+        <div class="chips"><span class="chip red">Rendimiento</span><span class="chip red">Evidencia objetiva</span></div>
+        <span class="arrow">Ver Meritoria →</span>
+      </a>
     </div>
+  </div>
+</section>
 
-    <div class="stats-bar">
-      <div class="stat">
-        <div class="stat-number"><em>+40%</em></div>
-        <div class="stat-label">Eficiencia media en procesos automatizados</div>
+<!-- GOBERNANZA -->
+<section id="gobernanza" class="tinted orange">
+  <div class="container">
+    <div class="split">
+      <div class="reveal">
+        <span class="eyebrow" style="color:var(--orange);background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.28)">Gobernanza de IA · Railway</span>
+        <h2 style="margin:1rem 0">IA que trabaja <span style="color:var(--orange)">para ti</span>, no en lugar de ti</h2>
+        <p class="lead" style="margin-bottom:1.6rem">La objeción nº1 a la IA es el miedo a perder el control. Railway lo resuelve: cada agente tiene permisos explícitos, te pide aprobación antes de las acciones sensibles y deja registro auditado de todo lo que hace.</p>
+        <div class="grid grid-3" style="gap:1rem">
+          <div class="card" style="padding:1.2rem"><div class="ic" style="font-size:1.4rem">🔒</div><strong>Límites codificados</strong><p style="font-size:.85rem;margin-top:.3rem">Permisos por agente. Nada fuera de su ámbito.</p></div>
+          <div class="card" style="padding:1.2rem"><div class="ic" style="font-size:1.4rem">👁️</div><strong>Aprobación humana</strong><p style="font-size:.85rem;margin-top:.3rem">Ves qué hará y por qué antes de que ocurra.</p></div>
+          <div class="card" style="padding:1.2rem"><div class="ic" style="font-size:1.4rem">📋</div><strong>Trazabilidad</strong><p style="font-size:.85rem;margin-top:.3rem">Quién hizo qué, cuándo y bajo qué instrucción.</p></div>
+        </div>
+        <a href="/paraguas/ironbrain.html#gobernanza" class="btn btn-ghost" style="margin-top:1.6rem">Cómo gobernamos la IA →</a>
       </div>
-      <div class="stat">
-        <div class="stat-number"><em>5 min</em></div>
-        <div class="stat-label">Para identificar tu primera automatización</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number"><em>30 días</em></div>
-        <div class="stat-label">De garantía en cada piloto implementado</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number"><em>4 tools</em></div>
-        <div class="stat-label">Integradas: Ficha, BPAC, IronBrain, Meritoria</div>
+      <div class="split-visual reveal d2">
+        <div class="mock">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-body">
+            <div style="display:flex;justify-content:space-between;align-items:center"><strong style="font-size:.85rem">Aprobación pendiente</strong><span class="chip orange">requiere humano</span></div>
+            <div class="mock-row w85"></div>
+            <div class="mock-row w70"></div>
+            <div style="display:flex;gap:.5rem;margin-top:.4rem">
+              <span class="btn btn-primary" style="padding:.5rem 1rem;font-size:.8rem">Aprobar</span>
+              <span class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">Rechazar</span>
+            </div>
+            <div class="mock-bars" style="margin-top:.6rem"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <p class="demo-note">Vista ilustrativa del panel de aprobaciones de Railway.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MODELO OPERATIVO -->
-<section id="modelo">
+<!-- PROCESO -->
+<section id="proceso">
   <div class="container">
-    <div class="section-badge">Modelo operativo</div>
-    <h2>Cuatro herramientas.<br><em>Un ecosistema</em> conectado.</h2>
-    <p class="section-subtitle">
-      Cada producto resuelve una capa del negocio. Juntos, crean una ventaja competitiva real: desde la gestión de tareas hasta la orquestación de agentes de IA.
-    </p>
-
-    <div class="model-diagram">
-      <!-- Ficha -->
-      <div class="model-node">
-        <div class="model-icon ficha">📋</div>
-        <div class="model-name">Ficha</div>
-        <div class="model-tagline">Proyectos y tiempo</div>
-      </div>
-
-      <div class="model-arrow">
-        <svg viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="8" x2="24" y2="8" stroke="#475569" stroke-width="1.5"/>
-          <polyline points="18,3 26,8 18,13" stroke="#475569" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <!-- BPAC -->
-      <div class="model-node">
-        <div class="model-icon bpac">🧩</div>
-        <div class="model-name">BPAC</div>
-        <div class="model-tagline">Procesos y conocimiento</div>
-      </div>
-
-      <div class="model-arrow">
-        <svg viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="8" x2="24" y2="8" stroke="#475569" stroke-width="1.5"/>
-          <polyline points="18,3 26,8 18,13" stroke="#475569" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <!-- IronBrain + Railway -->
-      <div class="ironbrain-cluster">
-        <div class="model-node">
-          <div class="model-icon ironbrain">🧠</div>
-          <div class="model-name">IronBrain</div>
-          <div class="model-tagline">Orquestador de agentes IA</div>
-        </div>
-        <div class="railway-connector"></div>
-        <div class="railway-sub">
-          <div class="model-icon railway">🛡️</div>
-          <div class="model-name">Railway</div>
-          <div class="model-tagline">Gobernanza y límites</div>
-        </div>
-      </div>
-
-      <div class="model-arrow">
-        <svg viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="8" x2="24" y2="8" stroke="#475569" stroke-width="1.5"/>
-          <polyline points="18,3 26,8 18,13" stroke="#475569" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <!-- Meritoria -->
-      <div class="model-node">
-        <div class="model-icon meritoria">🏆</div>
-        <div class="model-name">Meritoria</div>
-        <div class="model-tagline">Rendimiento y mérito</div>
-      </div>
+    <div class="section-head reveal">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>De cero a <span class="grad">automatizado</span>, paso a paso</h2>
+      <p class="lead">Un proceso probado y repetible. Empiezas pequeño, mides resultados reales y expandes a tu ritmo.</p>
     </div>
-
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:1rem; margin-top:3rem;">
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.25rem;">
-        <div style="font-size:1.25rem;margin-bottom:0.5rem">📋</div>
-        <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.375rem">Ficha</div>
-        <div style="font-size:0.8rem;color:var(--text-muted)">Gestión de proyectos con control horario por tarea. Identifica cuellos de botella y mide la eficiencia real del equipo.</div>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.25rem;">
-        <div style="font-size:1.25rem;margin-bottom:0.5rem">🧩</div>
-        <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.375rem">BPAC</div>
-        <div style="font-size:0.8rem;color:var(--text-muted)">Digitaliza y conecta el conocimiento de tu organización. Procesos vivos, accesibles y listos para los agentes de IA.</div>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius-sm);padding:1.25rem;">
-        <div style="font-size:1.25rem;margin-bottom:0.5rem">🧠</div>
-        <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.375rem">IronBrain + Railway</div>
-        <div style="font-size:0.8rem;color:var(--text-muted)">Orquestador de agentes IA con gobernanza integrada. Railway actúa como capa de control: límites codificados y aprobaciones humanas visibles antes de cada acción sensible.</div>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.25rem;">
-        <div style="font-size:1.25rem;margin-bottom:0.5rem">🏆</div>
-        <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.375rem">Meritoria</div>
-        <div style="font-size:0.8rem;color:var(--text-muted)">Mide el valor aportado por cada persona. Datos para promocionar a quien se lo merece y motivar al equipo.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROPUESTAS DE VALOR -->
-<section id="propuestas">
-  <div class="container">
-    <div class="section-badge">Propuestas de valor</div>
-    <h2>Tres formas de<br><em>transformar</em> tu empresa</h2>
-    <p class="section-subtitle">
-      Cada empresa es distinta. Empieza por donde más duele y expande a tu ritmo.
-    </p>
-
-    <div class="props-grid">
-      <!-- Propuesta 1 -->
-      <div class="prop-card blue">
-        <div class="prop-icon">⚙️</div>
-        <div class="prop-title">Organiza y escala tu operación</div>
-        <div class="prop-desc">
-          Deja de perder tiempo en reuniones y correos. Centraliza proyectos, tareas y procesos en una sola plataforma. Sabe en tiempo real qué hace cada persona y dónde está el cuello de botella.
-        </div>
-        <div class="prop-products">
-          <span class="product-tag tag-blue">Ficha</span>
-          <span class="product-tag tag-green">BPAC</span>
-        </div>
-      </div>
-
-      <!-- Propuesta 2 -->
-      <div class="prop-card purple">
-        <div class="prop-icon">🤖</div>
-        <div class="prop-title">Automatiza con IA, con control total</div>
-        <div class="prop-desc">
-          Identifica qué procesos repetitivos te roban horas y delégalos a agentes de IA. Facturación, onboarding, respuestas, informes... funcionando solos, 24/7. Railway garantiza que tú siempre tienes el control: límites codificados y tu aprobación antes de cada acción crítica.
-        </div>
-        <div class="prop-products">
-          <span class="product-tag tag-purple">IronBrain</span>
-          <span class="product-tag tag-orange">Railway</span>
-        </div>
-      </div>
-
-      <!-- Propuesta 3 -->
-      <div class="prop-card green">
-        <div class="prop-icon">📈</div>
-        <div class="prop-title">Mide y reconoce el mérito real</div>
-        <div class="prop-desc">
-          Sustituye las percepciones por datos. Identifica quién aporta más valor, motiva a tu equipo con reconocimiento objetivo y toma decisiones de talento basadas en evidencia.
-        </div>
-        <div class="prop-products">
-          <span class="product-tag tag-green">Meritoria</span>
-          <span class="product-tag tag-blue">Ficha</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GOBERNANZA IA -->
-<section id="gobernanza" style="background: linear-gradient(180deg, var(--bg) 0%, rgba(245,158,11,0.04) 50%, var(--bg) 100%);">
-  <div class="container">
-    <div class="section-badge" style="color: var(--orange); background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.25);">Gobernanza de IA · Railway</div>
-    <h2>IA que trabaja <em style="color: var(--orange);">para ti</em>,<br>no en lugar de ti</h2>
-    <p class="section-subtitle">
-      La objeción nº1 a la IA es el miedo a perder el control. Railway resuelve eso: cada agente tiene límites codificados y tú apruebas las acciones importantes antes de que ocurran.
-    </p>
-
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:1.5rem; margin-top:2rem;">
-      <div style="background:var(--bg-card);border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius);padding:2rem;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--orange), #fbbf24);border-radius:var(--radius) var(--radius) 0 0;"></div>
-        <div style="font-size:2rem;margin-bottom:1rem">🔒</div>
-        <div style="font-weight:700;font-size:1rem;margin-bottom:0.5rem;color:var(--text)">Límites codificados</div>
-        <div style="font-size:0.875rem;color:var(--text-muted);line-height:1.6">Cada agente tiene permisos explícitos. No puede acceder a datos fuera de su ámbito ni ejecutar acciones que tú no hayas autorizado previamente.</div>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius);padding:2rem;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--orange), #fbbf24);border-radius:var(--radius) var(--radius) 0 0;"></div>
-        <div style="font-size:2rem;margin-bottom:1rem">👁️</div>
-        <div style="font-weight:700;font-size:1rem;margin-bottom:0.5rem;color:var(--text)">Aprobación humana visible</div>
-        <div style="font-size:0.875rem;color:var(--text-muted);line-height:1.6">Antes de ejecutar acciones sensibles (enviar emails, modificar datos críticos), el agente pausa y espera tu aprobación. Ves exactamente qué va a hacer y por qué.</div>
-      </div>
-      <div style="background:var(--bg-card);border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius);padding:2rem;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg, var(--orange), #fbbf24);border-radius:var(--radius) var(--radius) 0 0;"></div>
-        <div style="font-size:2rem;margin-bottom:1rem">📋</div>
-        <div style="font-weight:700;font-size:1rem;margin-bottom:0.5rem;color:var(--text)">Trazabilidad completa</div>
-        <div style="font-size:0.875rem;color:var(--text-muted);line-height:1.6">Registro auditado de cada acción realizada por cada agente. Quién hizo qué, cuándo y por qué instrucción. Transparencia total para tu equipo.</div>
-      </div>
-    </div>
-
-    <div style="margin-top:2.5rem;padding:2rem 2.5rem;background:var(--bg-card);border:1px solid rgba(245,158,11,0.3);border-radius:var(--radius);display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
-      <div style="font-size:3rem;flex-shrink:0;">🛡️</div>
-      <div style="flex:1;min-width:220px;">
-        <div style="font-weight:800;font-size:1.1rem;margin-bottom:0.375rem;color:var(--text)">Railway: la capa de gobernanza de IronBrain</div>
-        <div style="color:var(--text-muted);font-size:0.875rem;line-height:1.6">Railway gestiona los límites y credenciales de todos los agentes. Actúa como guardia de seguridad entre la IA y tus sistemas — ningún agente puede actuar fuera de las reglas que tú defines. Integrado directamente en Ficha: cuando asignas una tarea a un agente IA, ves las garantías de Railway antes de confirmar.</div>
-      </div>
-      <a href="https://railway.212.47.241.78.nip.io" target="_blank" rel="noopener" style="flex-shrink:0;display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:999px;color:var(--orange);font-weight:600;font-size:0.875rem;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(245,158,11,0.2)'" onmouseout="this.style.background='rgba(245,158,11,0.1)'">Ver Railway →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CASOS DE ÉXITO -->
-<section id="casos">
-  <div class="container">
-    <div class="section-badge">Casos de éxito</div>
-    <h2>Resultados reales<br>en empresas <em>como la tuya</em></h2>
-    <p class="section-subtitle">
-      No vendemos tecnología, vendemos resultados medibles. Aquí los números hablan.
-    </p>
-
-    <div class="cases-grid">
-      <div class="case-card">
-        <div class="case-sector">Gestoría / Contabilidad</div>
-        <div class="case-title">Automatización del ciclo de facturación</div>
-        <div class="case-desc">
-          Una gestoría con 12 empleados procesaba facturas manualmente 3 horas al día. Implementamos un agente de IA conectado a su software de contabilidad que extrae, valida y registra facturas de forma autónoma.
-        </div>
-        <div class="case-metric">
-          <div class="case-metric-value">+880€</div>
-          <div class="case-metric-label">ahorro mensual en tiempo de equipo recuperado</div>
-        </div>
-      </div>
-
-      <div class="case-card">
-        <div class="case-sector">Salud / Clínica Dental</div>
-        <div class="case-title">Agente de confirmación de citas</div>
-        <div class="case-desc">
-          Una clínica dental con 3 consultorios perdía el 18% de las citas por no-show. Desplegamos un agente que confirma, reprograma y rellena huecos libres de forma automática por WhatsApp y email.
-        </div>
-        <div class="case-metric">
-          <div class="case-metric-value">+2.250€</div>
-          <div class="case-metric-label">ingresos mensuales recuperados por reducción de no-shows</div>
-        </div>
-      </div>
-
-      <div class="case-card">
-        <div class="case-sector">Construcción / PYME industrial</div>
-        <div class="case-title">Digitalización de procesos con BPAC</div>
-        <div class="case-desc">
-          Una empresa constructora tenía todo el conocimiento operativo en la cabeza de 2 personas clave. Documentamos y digitalizamos sus procesos en BPAC, haciendo el conocimiento accesible para todo el equipo.
-        </div>
-        <div class="case-metric">
-          <div class="case-metric-value">−65%</div>
-          <div class="case-metric-label">tiempo de onboarding de nuevos empleados</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PAQUETES -->
-<section id="paquetes">
-  <div class="container">
-    <div class="section-badge">Planes y precios</div>
-    <h2>Empieza pequeño.<br><em>Crece</em> sin límites.</h2>
-    <p class="section-subtitle">
-      Transparencia total desde el primer día. Sin sorpresas, sin letra pequeña.
-    </p>
-
-    <div class="plans-grid">
-      <!-- Plan 1: Diagnóstico -->
-      <div class="plan-card">
-        <div class="plan-name">Diagnóstico</div>
-        <div class="plan-price">1.500€ <span>único</span></div>
-        <div class="plan-desc">
-          Análisis exprés de tu operación para identificar las 3 principales oportunidades de automatización con ROI estimado.
-        </div>
-        <ul class="plan-features">
-          <li>Entrevistas con equipo clave (4h)</li>
-          <li>Mapeo de procesos principales</li>
-          <li>Informe con 3 automatizaciones prioritarias</li>
-          <li>Estimación de ROI por cada oportunidad</li>
-          <li>Sesión de presentación y Q&amp;A</li>
-        </ul>
-        <a href="#contacto" class="plan-cta secondary">Solicitar diagnóstico</a>
-      </div>
-
-      <!-- Plan 2: Piloto (featured) -->
-      <div class="plan-card featured">
-        <div class="plan-badge">Más popular</div>
-        <div class="plan-name">Piloto</div>
-        <div class="plan-price">desde 6.000€ <span>por proceso</span></div>
-        <div class="plan-desc">
-          4–6 semanas. Un proceso automatizado en producción, con métricas reales y garantía de 30 días.
-        </div>
-        <ul class="plan-features">
-          <li>Diseño e implementación completa</li>
-          <li>Integración con tus sistemas actuales</li>
-          <li>Dashboard de métricas en tiempo real</li>
-          <li>Formación del equipo incluida</li>
-          <li>30 días de garantía de funcionamiento</li>
-          <li>Documentación en BPAC incluida</li>
-        </ul>
-        <a href="#contacto" class="plan-cta primary">Empezar piloto</a>
-      </div>
-
-      <!-- Plan 3: Soporte mensual -->
-      <div class="plan-card">
-        <div class="plan-name">Soporte gestionado</div>
-        <div class="plan-price">desde 3.500€ <span>/mes</span></div>
-        <div class="plan-desc">
-          Tu equipo de IA dedicado. Mantenemos, mejoramos y expandimos las automatizaciones mes a mes.
-        </div>
-        <ul class="plan-features">
-          <li>Monitoring 24/7 de todos los agentes</li>
-          <li>Nuevas automatizaciones mensuales</li>
-          <li>Acceso completo a Ficha, BPAC e IronBrain</li>
-          <li>Reunión mensual de resultados</li>
-          <li>Soporte prioritario vía Slack</li>
-          <li>Informe mensual de ROI</li>
-        </ul>
-        <a href="#contacto" class="plan-cta secondary">Hablar con un experto</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMO FUNCIONA -->
-<section id="como-funciona">
-  <div class="container">
-    <div class="section-badge">Proceso</div>
-    <h2>De cero a <em>automatizado</em><br>en 6 semanas</h2>
-    <p class="section-subtitle">
-      Un proceso probado y repetible para cada empresa.
-    </p>
     <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <div class="step-title">Diagnóstico (5 minutos)</div>
-          <div class="step-desc">Rellenas nuestro formulario de diagnóstico rápido. En 48h, un experto te contacta con las 3 primeras oportunidades de automatización identificadas en tu sector.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <div class="step-title">Diseño del piloto (semana 1–2)</div>
-          <div class="step-desc">Definimos el proceso exacto a automatizar, los sistemas a integrar y los KPIs de éxito. Validamos contigo antes de empezar a construir.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <div class="step-title">Implementación (semana 3–5)</div>
-          <div class="step-desc">Nuestros agentes de IronBrain construyen, prueban y despliegan la automatización. Tu equipo la ve en tiempo real y da feedback continuo.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <div class="step-title">Entrega y expansión (semana 6+)</div>
-          <div class="step-desc">El proceso funciona en producción. Medimos el ROI real, formamos a tu equipo y planificamos la siguiente automatización. La bola de nieve empieza a rodar.</div>
-        </div>
-      </div>
+      <div class="step reveal"><div class="step-n">1</div><div class="step-c"><h3>Diagnóstico</h3><p>Nos cuentas qué proceso te roba más tiempo. En 48h te decimos qué se puede automatizar y qué retorno esperar.</p></div></div>
+      <div class="step reveal d1"><div class="step-n">2</div><div class="step-c"><h3>Diseño del piloto</h3><p>Definimos el proceso exacto, los sistemas a integrar y los KPIs. Lo validamos contigo antes de construir.</p></div></div>
+      <div class="step reveal d2"><div class="step-n">3</div><div class="step-c"><h3>Implementación gobernada</h3><p>Los agentes de IronBrain construyen y despliegan la automatización; Railway mantiene los límites y tus aprobaciones.</p></div></div>
+      <div class="step reveal d3"><div class="step-n">4</div><div class="step-c"><h3>Entrega y expansión</h3><p>En producción medimos el retorno real, formamos a tu equipo y planificamos la siguiente automatización.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section id="contacto">
+<!-- PLANES -->
+<section id="planes" class="tinted">
   <div class="container">
-    <div class="cta-card">
-      <div class="section-badge" style="margin-bottom:1.5rem">Empieza hoy</div>
-      <h2 style="margin-bottom:1rem">¿Qué proceso repetitivo<br>te roba más <em>tiempo cada semana</em>?</h2>
-      <p style="color:var(--text-muted);margin-bottom:2rem;font-size:1rem">
-        Cuéntanoslo. En 48 horas te decimos si podemos automatizarlo y cuánto ROI puedes esperar.
-      </p>
-      <form style="display:flex;flex-direction:column;gap:1rem;max-width:440px;margin:0 auto">
-        <input type="text" placeholder="Tu nombre" required
-          style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.875rem 1rem;color:var(--text);font-size:0.95rem;font-family:inherit;outline:none;transition:border-color 0.2s"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
-        <input type="email" placeholder="Email de empresa" required
-          style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.875rem 1rem;color:var(--text);font-size:0.95rem;font-family:inherit;outline:none;transition:border-color 0.2s"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
-        <select style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.875rem 1rem;color:var(--text-muted);font-size:0.95rem;font-family:inherit;outline:none">
-          <option value="">Sector de tu empresa</option>
-          <option>Consultoría / Asesoría</option>
-          <option>Salud</option>
-          <option>Legal</option>
-          <option>Logística</option>
-          <option>Manufactura</option>
-          <option>Retail / E-commerce</option>
-          <option>Hostelería</option>
-          <option>Otro</option>
+    <div class="section-head reveal">
+      <span class="eyebrow">Planes</span>
+      <h2>Empieza pequeño. <span class="grad">Crece sin límites.</span></h2>
+      <p class="lead">Transparencia desde el primer día. Mismos paquetes que el resto de AutonomIA — sin letra pequeña.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="plan reveal">
+        <div class="plan-name">Diagnóstico express</div>
+        <div class="plan-price">1.500€ <small>único</small></div>
+        <p style="color:var(--muted);font-size:.88rem">2 semanas. Identificamos las 3 mejores oportunidades de automatización con retorno estimado.</p>
+        <ul><li>Entrevistas con tu equipo clave</li><li>Mapeo de procesos principales</li><li>Informe con 3 prioridades y ROI</li></ul>
+        <a href="#contacto" class="btn btn-ghost" style="justify-content:center">Solicitar diagnóstico</a>
+      </div>
+      <div class="plan feat reveal d1">
+        <div class="plan-badge">Más popular</div>
+        <div class="plan-name">Piloto de automatización</div>
+        <div class="plan-price">desde 6.000€ <small>/ proceso</small></div>
+        <p style="color:var(--muted);font-size:.88rem">4–6 semanas. Un proceso en producción, con métricas reales y garantía.</p>
+        <ul><li>Diseño e implementación completa</li><li>Integración con tus sistemas</li><li>Dashboard de métricas en vivo</li><li>Formación del equipo incluida</li></ul>
+        <a href="#contacto" class="btn btn-primary" style="justify-content:center">Empezar piloto</a>
+      </div>
+      <div class="plan reveal d2">
+        <div class="plan-name">Acompañamiento gobernado</div>
+        <div class="plan-price">desde 3.500€ <small>/ mes</small></div>
+        <p style="color:var(--muted);font-size:.88rem">Tu equipo de IA dedicado. Mantenemos, mejoramos y ampliamos las automatizaciones.</p>
+        <ul><li>Monitoring continuo de los agentes</li><li>Nuevas automatizaciones cada mes</li><li>Acceso a Ficha, BPAC e IronBrain</li><li>Informe mensual de retorno</li></ul>
+        <a href="#contacto" class="btn btn-ghost" style="justify-content:center">Hablar con un experto</a>
+      </div>
+    </div>
+    <p class="fineprint" style="margin-top:1.5rem">Precios de referencia, alineados con <a href="/servicios.html" style="color:var(--accent-light)">/servicios</a>. El alcance final se cierra tras el diagnóstico.</p>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="cta-band">
+  <div class="container">
+    <div class="cta-card reveal">
+      <span class="eyebrow">Empieza hoy</span>
+      <h2 style="margin:1rem 0">¿Qué proceso repetitivo te roba <span class="grad">más tiempo cada semana?</span></h2>
+      <p class="lead" style="margin:0 auto 2rem">Cuéntanoslo. En 48 horas te decimos si podemos automatizarlo y qué retorno esperar. Sin compromiso.</p>
+      <form class="form" data-lead-form>
+        <input type="text" name="name" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Email de empresa" required>
+        <select name="sector">
+          <option value="">Sector de tu empresa (opcional)</option>
+          <option>Consultoría / Asesoría</option><option>Salud</option><option>Legal</option>
+          <option>Logística</option><option>Manufactura</option><option>Retail / E-commerce</option>
+          <option>Hostelería</option><option>Construcción</option><option>Otro</option>
         </select>
-        <textarea placeholder="Describe el proceso que más tiempo te consume (ej: 'revisamos 200 facturas al mes a mano')" rows="3" required
-          style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.875rem 1rem;color:var(--text);font-size:0.95rem;font-family:inherit;outline:none;resize:vertical;transition:border-color 0.2s"
-          onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-        <button type="submit" class="btn btn-primary" style="justify-content:center;border:none;cursor:pointer;width:100%">
-          Solicitar diagnóstico gratuito →
-        </button>
-        <p style="font-size:0.75rem;color:var(--text-dim);text-align:center">
-          Sin compromiso · Sin spam · GDPR compliant
-        </p>
+        <textarea name="message" placeholder="Describe el proceso que más tiempo te consume (ej: 'revisamos 200 facturas al mes a mano')" required></textarea>
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="source" value="paraguas">
+        <button type="submit" class="btn btn-primary" style="justify-content:center;width:100%">Solicitar diagnóstico gratuito →</button>
+        <p class="hint" data-hint hidden></p>
+        <p class="fineprint">Sin compromiso · Sin spam · Cumplimiento RGPD</p>
       </form>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
+<footer class="footer">
   <div class="container">
-    <div class="footer-logo">Autono<span>IA</span></div>
+    <div class="nav-logo" style="justify-content:center;margin-bottom:.4rem">Autono<span>IA</span></div>
     <ul class="footer-links">
-      <li><a href="https://proyectos.ficha.es" target="_blank">Ficha</a></li>
-      <li><a href="https://meritoria.eu" target="_blank">Meritoria</a></li>
+      <li><a href="/paraguas/ficha.html">Ficha</a></li>
+      <li><a href="/paraguas/bpac.html">BPAC</a></li>
+      <li><a href="/paraguas/ironbrain.html">IronBrain + Railway</a></li>
+      <li><a href="/paraguas/meritoria.html">Meritoria</a></li>
       <li><a href="/aprende/">Aprende</a></li>
-      <li><a href="/calculadora.html">Calculadora de ROI</a></li>
-      <li><a href="/servicios.html">Servicios</a></li>
+      <li><a href="/calculadora.html">Calculadora ROI</a></li>
       <li><a href="mailto:hola@itera.es">hola@itera.es</a></li>
     </ul>
-    <p class="footer-copy">© 2026 AutonomIA · Sitio gobernado por agentes · Itera</p>
+    <small>© <span data-year>2026</span> AutonomIA · Sitio gobernado por agentes · Itera</small>
   </div>
 </footer>
 
-<script>
-  // Smooth reveal on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.prop-card, .plan-card, .case-card, .step').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
-  });
-
-  // Form submission
-  document.querySelector('form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type=submit]');
-    btn.textContent = 'Enviando...';
-    btn.disabled = true;
-    // Simulate submission
-    await new Promise(r => setTimeout(r, 1000));
-    btn.textContent = '¡Mensaje enviado! Te contactamos en 48h ✓';
-    btn.style.background = 'var(--green)';
-  });
-</script>
-
+<script src="/paraguas/assets/paraguas.js" defer></script>
 </body>
 </html>
