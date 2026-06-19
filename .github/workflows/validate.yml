@@ -71,8 +71,29 @@ jobs:
               process.exit(2);
             }
             const title = await page.title();
+            // Scroll through the page so scroll-reveal (IntersectionObserver)
+            // content animates in before the full-page capture; otherwise
+            // below-the-fold sections render blank in the screenshot.
+            const autoScroll = async () => {
+              await page.evaluate(async () => {
+                await new Promise((resolve) => {
+                  let y = 0;
+                  const step = () => {
+                    const max = document.body.scrollHeight;
+                    y += Math.max(400, window.innerHeight * 0.8);
+                    window.scrollTo(0, y);
+                    if (y >= max) { window.scrollTo(0, 0); resolve(); }
+                    else setTimeout(step, 120);
+                  };
+                  step();
+                });
+              });
+              await page.waitForTimeout(900);
+            };
+            await autoScroll();
             await page.screenshot({ path: 'artifacts/desktop.png', fullPage: true });
             await page.setViewportSize({ width: 390, height: 844 });
+            await autoScroll();
             await page.screenshot({ path: 'artifacts/mobile.png', fullPage: true });
             const html = await page.content();
             require('fs').writeFileSync('artifacts/page.html', html);

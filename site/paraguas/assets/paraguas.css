@@ -210,9 +210,11 @@ h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; }
 .tinted.orange { background: linear-gradient(180deg, var(--bg) 0%, rgba(245,158,11,.05) 50%, var(--bg) 100%); }
 
 /* ── SCROLL REVEAL ── */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-.reveal.in { opacity: 1; transform: none; }
-.reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; } .reveal.d3 { transition-delay: .24s; } .reveal.d4 { transition-delay: .32s; }
+/* Only hide reveal elements when JS is available to bring them back.
+   Without JS (or before the inline flag runs) content stays fully visible. */
+html.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+html.js .reveal.in { opacity: 1; transform: none; }
+html.js .reveal.d1 { transition-delay: .08s; } html.js .reveal.d2 { transition-delay: .16s; } html.js .reveal.d3 { transition-delay: .24s; } html.js .reveal.d4 { transition-delay: .32s; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 880px) {
@@ -228,5 +230,5 @@ h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
+  html.js .reveal { opacity: 1; transform: none; }
 }
