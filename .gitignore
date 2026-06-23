@@ -14,3 +14,5 @@ worker/dist/
 # Real lead data (PII) and pipeline cursor — never commit
 _leads/
 tools/leads/.processed.json
+# SMTP credentials — injected at deploy time from Actions secrets, never commit
+site/_smtp_config.php

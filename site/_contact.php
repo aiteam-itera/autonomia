@@ -90,10 +90,17 @@ $body =
     "Fuente:  {$record['source']}\n" .
     ($record['level'] ? "Nivel:   {$record['level']} ({$record['score']})\n" : '') .
     "\nMensaje:\n{$record['message']}\n";
-// IONOS sendmail rejects custom From/-f sender; omit so mail() is accepted
-// from the default system sender (verified ITEAA-1781). Reply-To routes replies.
-$headers = "Reply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
-if (function_exists('mail')) {
+// Prefer branded, SPF/DKIM-aligned authenticated SMTP (ITEA-2402) when
+// provisioned; otherwise fall back to mail(). IONOS sendmail rejects custom
+// From/-f on mail() (verified ITEAA-1781), so the mail() path omits From and
+// relies on Reply-To.
+require_once __DIR__ . '/_mailer.php';
+$smtp = autonomia_smtp_config();
+if ($smtp !== null) {
+    $mailed = autonomia_smtp_send($smtp, $to, $subject, $body, ['Reply-To' => $email], false);
+}
+if (!$mailed && function_exists('mail')) {
+    $headers = "Reply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
     $mailed = (bool) @mail($to, $subject, $body, $headers);
 }
 

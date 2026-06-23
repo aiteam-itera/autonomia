@@ -165,15 +165,21 @@ if ($rec !== null) {
         . 'Conservamos tus respuestas un máximo de 90 días; escribe a <a href="mailto:hola@itera.es" style="color:#1565c0;">hola@itera.es</a> para pedir su borrado. '
         . '¿Hablamos? Responde a este email y te ayudamos a dar el primer paso.</p></div>';
 
-    // IONOS sendmail rejects any custom From: header or -f envelope sender
-    // (verified ITEAA-1781: mail() returns false unless the default system
-    // sender is used). We omit From/-f so the message is accepted; Reply-To
-    // still routes replies to the team.
-    $vHeaders = "Reply-To: hola@itera.es\r\n"
-        . "MIME-Version: 1.0\r\n"
-        . "Content-Type: text/html; charset=utf-8\r\n";
-    if (function_exists('mail')) {
-        $recommended = (bool) @mail($email, 'Tu plan personalizado AutonomIA · 30/60/90 días', $htmlMail, $vHeaders);
+    // Prefer branded, SPF/DKIM-aligned authenticated SMTP (ITEA-2402) when
+    // credentials are provisioned; otherwise fall back to mail(). IONOS
+    // sendmail rejects any custom From/-f on mail() (verified ITEAA-1781), so
+    // the mail() path omits From and relies on Reply-To.
+    require_once __DIR__ . '/_mailer.php';
+    $smtp = autonomia_smtp_config();
+    $recSubject = 'Tu plan personalizado AutonomIA · 30/60/90 días';
+    if ($smtp !== null) {
+        $recommended = autonomia_smtp_send($smtp, $email, $recSubject, $htmlMail, ['Reply-To' => 'hola@itera.es'], true);
+    }
+    if (!$recommended && function_exists('mail')) {
+        $vHeaders = "Reply-To: hola@itera.es\r\n"
+            . "MIME-Version: 1.0\r\n"
+            . "Content-Type: text/html; charset=utf-8\r\n";
+        $recommended = (bool) @mail($email, $recSubject, $htmlMail, $vHeaders);
     }
 }
 
@@ -189,8 +195,13 @@ $body =
     "Score:  {$overall}/100\n" .
     "Fuente: {$record['source']}\n\n" .
     "Respuestas (JSON):\n" . json_encode($record['answers'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n";
-$headers = "Reply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
-if (function_exists('mail')) {
+require_once __DIR__ . '/_mailer.php';
+$smtpN = autonomia_smtp_config();
+if ($smtpN !== null) {
+    $mailed = autonomia_smtp_send($smtpN, $to, $subject, $body, ['Reply-To' => $email], false);
+}
+if (!$mailed && function_exists('mail')) {
+    $headers = "Reply-To: {$email}\r\nContent-Type: text/plain; charset=utf-8\r\n";
     $mailed = (bool) @mail($to, $subject, $body, $headers);
 }
 

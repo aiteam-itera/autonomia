@@ -27,6 +27,57 @@ jobs:
           test -f site/index.html || { echo "site/index.html missing"; exit 1; }
           ls -la site
 
+      - name: Lint PHP (no parse errors)
+        run: |
+          set -euo pipefail
+          if ! command -v php >/dev/null; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq php-cli
+          fi
+          find site tools -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Write SMTP config (branded sender) if provisioned
+        env:
+          SMTP_HOST: ${{ vars.IONOS_SMTP_HOST }}
+          SMTP_PORT: ${{ vars.IONOS_SMTP_PORT }}
+          SMTP_USER: ${{ vars.IONOS_SMTP_USER }}
+          SMTP_FROM: ${{ vars.IONOS_SMTP_FROM }}
+          SMTP_SECURE: ${{ vars.IONOS_SMTP_SECURE }}
+          SMTP_PASSWORD: ${{ secrets.IONOS_SMTP_PASSWORD }}
+        run: |
+          set -euo pipefail
+          rm -f site/_smtp_config.php
+          if [ -z "${SMTP_PASSWORD:-}" ] || [ -z "${SMTP_USER:-}" ]; then
+            echo "IONOS SMTP not provisioned (missing IONOS_SMTP_PASSWORD/IONOS_SMTP_USER) — site keeps using mail() fallback."
+            exit 0
+          fi
+          HOST="${SMTP_HOST:-smtp.ionos.es}"
+          PORT="${SMTP_PORT:-587}"
+          FROM="${SMTP_FROM:-AutonomIA <$SMTP_USER>}"
+          SECURE="${SMTP_SECURE:-starttls}"
+          # base64-encode every value so arbitrary password bytes can never break
+          # PHP string quoting or leak via shell expansion. Values are not echoed.
+          b64() { printf '%s' "$1" | base64 -w0; }
+          {
+            echo '<?php'
+            echo '// AUTO-GENERATED at deploy time from GitHub Actions secrets. Never commit.'
+            echo 'return ['
+            echo "  'host'   => base64_decode('$(b64 "$HOST")'),"
+            echo "  'port'   => $(printf '%d' "$PORT"),"
+            echo "  'user'   => base64_decode('$(b64 "$SMTP_USER")'),"
+            echo "  'pass'   => base64_decode('$(b64 "$SMTP_PASSWORD")'),"
+            echo "  'from'   => base64_decode('$(b64 "$FROM")'),"
+            echo "  'secure' => base64_decode('$(b64 "$SECURE")'),"
+            echo '];'
+          } > site/_smtp_config.php
+          echo "Wrote site/_smtp_config.php (host=$HOST port=$PORT user=$SMTP_USER from=$FROM secure=$SECURE)"
+
+      - name: SMTP auth self-test (proves credentials authenticate)
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          command -v php >/dev/null || { echo "php missing, skipping"; exit 0; }
+          php tools/smtp_selftest.php
+
       - name: Sync site/ to IONOS via SFTP (mirror with delete)
         env:
           SFTP_HOST: ${{ vars.IONOS_SFTP_HOST }}
