@@ -17,24 +17,30 @@ código corre en el heartbeat del agente.
 | `lib/catalog.mjs` | Catálogo de productos (Ficha.es / Ironclip-BPAC / Itera.es). |
 | `lib/prompt.mjs` | `SYSTEM_PROMPT` (marco de seguridad) + `buildPrompt(record)`. |
 | `lib/validate-draft.mjs` | Valida el borrador antes del envío: cita literal, referencia de catálogo, sin fuga del prompt, sin inyección reflejada, longitud. |
+| `sync-ftp.mjs` | Descarga `_leads/leads.jsonl` desde IONOS por SFTP (mismo `lftp` y credenciales que el deploy) a una ruta local efímera (gitignored). Una pasada por heartbeat. |
 | `ingest.mjs` | Detecta leads nuevos en `leads.jsonl` vía cursor (`.processed.json`). Una pasada por heartbeat, sin busy-loop. |
 | `fixtures/` | Lead de ejemplo, lead hostil (inyección) y borrador de muestra. |
 
 ## Flujo por heartbeat (rutina diaria)
 
-1. La rutina sincroniza `_leads/leads.jsonl` desde IONOS (FTP `ionosftpaccess`)
-   a una ruta local — fuera del docroot, igual que lo escribe `_submit.php`.
-2. `node ingest.mjs --leads <ruta> --state .processed.json` imprime, por cada
-   lead nuevo, el `SYSTEM` + `USER` que el agente debe responder.
+1. `node sync-ftp.mjs` baja `_leads/leads.jsonl` desde IONOS por SFTP a
+   `./_leads/leads.jsonl` (efímero, gitignored — contiene PII). Credenciales por
+   env: `IONOS_SFTP_HOST/PORT/USER/PASSWORD` (+ `LEADS_REMOTE_PATH` opcional). Si
+   aún no hay leads, escribe un fichero vacío y sale 0 (no-op). `--dry-run`
+   imprime el script `lftp` con la contraseña redactada.
+2. `node ingest.mjs --leads ./_leads/leads.jsonl --state .processed.json --json`
+   imprime, por cada lead nuevo, el `SYSTEM` + `USER` que el agente debe responder.
 3. El agente redacta el borrador siguiendo el formato del prompt.
-4. `validateDraft(draft, openValues)` debe pasar antes de pasar a ITEA-2789.
+4. `validateDraft(draft, openValues)` debe pasar. **Modo draft-only**: hasta que
+   un humano muestree los primeros borradores reales (ITEA-3110 item 4), el
+   borrador se publica para revisión, NO se envía automáticamente.
 5. `ingest.mjs --mark` marca los leads procesados (idempotente).
 
 ## Probar
 
 ```bash
 cd tools/leads
-node --test            # 12 casos: neutralización, inyección, validación
+node --test            # neutralización, inyección, validación, sync-ftp
 ```
 
 ## Garantías de seguridad (ITEA-2787)

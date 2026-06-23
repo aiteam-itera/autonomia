@@ -1,3 +1,7 @@
+// DEPRECATED (ITEA-3110, 2026-06-23): external Anthropic API call for the lead
+// recommendation. Superseded by the in-house path in `tools/leads/` where the
+// IronBrain agent itself drafts the recommendation during its heartbeat — no
+// external API key. Not wired to production. See docs/LEAD_RECOMMENDATION_PIPELINE.md.
 import type { Env } from "./types";
 
 interface AnthropicResponse {

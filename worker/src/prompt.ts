@@ -1,3 +1,6 @@
+// DEPRECATED (ITEA-3110, 2026-06-23): Worker lead-prompt builder. Superseded by
+// `tools/leads/lib/prompt.mjs` (in-house path). Not wired to production.
+// See docs/LEAD_RECOMMENDATION_PIPELINE.md.
 import type { SubmitPayload } from "./types";
 import { buildGuardedPrompt, type GuardedPrompt } from "./guardrail";
 

@@ -1,3 +1,12 @@
+// DEPRECATED (ITEA-3110, 2026-06-23): the lead recommendation engine now runs
+// in-house via `tools/leads/` — the IronBrain agent IS the LLM during its
+// heartbeat (no external Anthropic key, no Cloudflare Worker, no Resend), per
+// the ITEA-2788 first-party / no-SPOF mandate. This Worker lead path
+// (handleSubmit/handleConfirm) is NOT wired to production: cuestionario.html
+// ships a placeholder `autonomia-api-base` meta and POSTs to first-party
+// `_submit.php`. Kept for history; do not extend. Canonical pipeline:
+// docs/LEAD_RECOMMENDATION_PIPELINE.md. The Worker's /api/contact, /api/comment
+// and /api/track handlers are NOT deprecated and remain in service.
 import {
   archiveResponse,
   bumpDailyLLMCounter,

@@ -1,5 +1,16 @@
 # Motor de recomendaciones — AutonomIA
 
+> ⚠️ **DEPRECADO (ITEA-3110, 2026-06-23).** Este diseño con Cloudflare Worker +
+> Resend + Anthropic **no es la arquitectura vigente**. La decisión confirmada es
+> el pipeline **in-house** (`tools/leads/`), donde el propio agente IronBrain
+> redacta la recomendación durante su heartbeat — sin clave Anthropic externa, sin
+> Worker, sin Resend (mandato first-party / sin SPOFs de ITEA-2788). El código
+> Worker del path de leads (`worker/src/{handlers,prompt,llm,guardrail}.ts`) queda
+> marcado como legacy y no se extiende. Arquitectura vigente:
+> [LEAD_RECOMMENDATION_PIPELINE.md](LEAD_RECOMMENDATION_PIPELINE.md). El Worker
+> sigue sirviendo `/api/contact`, `/api/comment` y `/api/track` (no afectados).
+> Este documento se conserva como registro histórico de la decisión original.
+
 > Backend del cuestionario de madurez. Recibe las respuestas, valida el email del visitante por doble opt-in y genera un plan personalizado a 30/60/90 días con un LLM. Ver [VISION.md](VISION.md) capacidad #3 e issue [ITEAA-1537](#).
 
 ## Decisiones arquitectónicas

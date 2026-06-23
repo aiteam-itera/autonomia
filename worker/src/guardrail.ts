@@ -1,5 +1,11 @@
 // Anti-prompt-injection guardrail for AutonomIA lead free-text (ITEA-2787).
 //
+// DEPRECATED for the lead path (ITEA-3110, 2026-06-23): the chosen architecture
+// is the in-house pipeline, whose equivalent guardrail lives in
+// `tools/leads/lib/sanitize.mjs` + `tools/leads/lib/validate-draft.mjs`. This
+// Worker copy is only reachable via the dormant /api/submit path and is kept
+// for history; do not extend it. Canonical: docs/LEAD_RECOMMENDATION_PIPELINE.md.
+//
 // The recommendation engine (whether it runs as the legacy Worker or an
 // IronBrain agent) receives OPEN-TEXT answers written by strangers. That text
 // is UNTRUSTED DATA, never instructions. This module is runtime-agnostic (no
