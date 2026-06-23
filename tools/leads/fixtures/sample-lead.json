@@ -1,0 +1,15 @@
+{
+  "ts": "2026-06-23T09:12:00Z",
+  "kind": "quiz",
+  "email": "lead-demo@example.com",
+  "source": "cuestionario",
+  "level": "Adopción inicial",
+  "score": { "overall": 38, "dims": { "uso": 45, "auto": 30, "agentes": 20, "gobernanza": 40, "datos": 35 } },
+  "answers": {
+    "sector": "asesoría fiscal y contable",
+    "tamano": "pequeña (8 personas)",
+    "open_repetitivo": "Cada inicio de mes copiamos a mano las facturas que llegan por email al programa de contabilidad, una por una, y revisamos que el IVA cuadre.",
+    "open_freno": "Nos da miedo equivocarnos con datos de clientes y que Hacienda nos sancione si automatizamos algo mal.",
+    "open_objetivo": "Cerrar el mes contable en la mitad de tiempo y dedicar esas horas a asesorar mejor a los clientes."
+  }
+}

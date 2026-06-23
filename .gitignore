@@ -11,3 +11,6 @@ artifacts/
 # Cloudflare Worker build/runtime
 .wrangler/
 worker/dist/
+# Real lead data (PII) and pipeline cursor — never commit
+_leads/
+tools/leads/.processed.json

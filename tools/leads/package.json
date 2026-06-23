@@ -1,0 +1,10 @@
+{
+  "name": "autonomia-leads",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Guardrail + ingest toolkit for the in-house lead recommendation pipeline (ITEA-2787/2788).",
+  "scripts": {
+    "test": "node --test"
+  }
+}
