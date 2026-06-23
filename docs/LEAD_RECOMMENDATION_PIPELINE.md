@@ -77,9 +77,38 @@ Con `fixtures/sample-lead.json` (asesoría fiscal), el agente produce
 - referencia **dos** productos del catálogo (Ficha.es, Ironclip / BPAC),
 - sin relleno genérico de plantilla.
 
-## Pendientes
+## Envío + reply-rate (ITEA-2789)
 
-- ITEA-2789: paso de envío (mail() de IONOS) + tracking de reply-rate.
-- Rutina diaria + sub-paso de sync FTP de `leads.jsonl` desde IONOS.
-- Muestreo humano de los primeros borradores antes de habilitar envío
-  automático (no habilitar sin el guardrail de ITEA-2787 cerrado).
+Lado de envío implementado y testeado (no transmite todavía):
+
+- `tools/leads/lib/render-email.mjs` — borrador validado → email HTML branded
+  (escape-then-markup como `_submit.php`); `Reply-To: hola@itera.es` y un
+  `Message-ID` que lleva el `ref` (= lead key) para correlacionar la respuesta.
+  Salida `{to,subject,html,headers}` que mapea sobre `autonomia_smtp_send()`
+  (`site/_mailer.php`, ITEA-2402) con fallback transparente a `mail()`.
+- `tools/leads/lib/track.mjs` — ledger append-only (`sends.jsonl`) +
+  `computeReplyRate(sends, repliedRefs)` (métrica primaria).
+- `tools/leads/prepare-send.mjs` — `prepareReco(record, draft)` puro: valida →
+  renderiza → fila de ledger. No envía, no escribe en IONOS.
+
+Correlación de replies: la respuesta del lead a `hola@itera.es` conserva el
+`Message-ID` original en `References`/`In-Reply-To`; cosechando esos refs del
+buzón se obtiene `repliedRefs`. El cosechado es enchufable (humano al inicio —
+mismo gate de muestreo —, automatizable después sin cambiar el contrato).
+
+## Pendientes (bloqueantes del envío real)
+
+- **Transporte en IONOS.** El render es agnóstico del canal; falta el sender en
+  IONOS que entregue `{to,subject,html,headers}` vía `autonomia_smtp_send()` /
+  `mail()`. Como el heartbeat no corre PHP en IONOS, el patrón es un sender
+  CLI-only alimentado por outbox vía SFTP — **bloqueado en ITEA-3111**
+  (`IONOS_SFTP_*` no inyectadas en el sandbox; sin ellas tampoco hay leads
+  reales que enviar).
+- **Entrega a bandeja (no spam).** `_mailer.php` ya existe pero usa el fallback
+  `mail()` hasta que el board provisione `_smtp_config.php` (secret
+  `IONOS_SMTP_PASSWORD`) — **ITEA-2402**.
+- **Muestreo humano** de los primeros borradores antes de habilitar el envío
+  (guardrail ITEA-2787 ya cerrado).
+- **Doble opt-in** (alcance 2a de ITEA-2789): hoy la captura es single opt-in;
+  decidir con el board si el reco-email asíncrono exige confirmación explícita.
+- Rutina diaria que orqueste sync→ingest→draft→prepare (ITEA-3111).

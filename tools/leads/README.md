@@ -19,6 +19,9 @@ código corre en el heartbeat del agente.
 | `lib/validate-draft.mjs` | Valida el borrador antes del envío: cita literal, referencia de catálogo, sin fuga del prompt, sin inyección reflejada, longitud. |
 | `sync-ftp.mjs` | Descarga `_leads/leads.jsonl` desde IONOS por SFTP (mismo `lftp` y credenciales que el deploy) a una ruta local efímera (gitignored). Una pasada por heartbeat. |
 | `ingest.mjs` | Detecta leads nuevos en `leads.jsonl` vía cursor (`.processed.json`). Una pasada por heartbeat, sin busy-loop. |
+| `lib/render-email.mjs` | (ITEA-2789) Renderiza el borrador validado al email HTML branded (escape-then-markup como `_submit.php`). `Reply-To: hola@itera.es` + `Message-ID` con el `ref` para correlacionar replies. Salida `{to,subject,html,headers}` que mapea sobre `autonomia_smtp_send()` de `site/_mailer.php`. |
+| `lib/track.mjs` | (ITEA-2789) Ledger append-only de envíos (`sends.jsonl`) + `computeReplyRate(sends, repliedRefs)`. Métrica primaria de reply-rate. |
+| `prepare-send.mjs` | (ITEA-2789) `prepareReco(record, draft)` puro: valida → renderiza → fila de ledger. **No transmite, no escribe en IONOS.** El envío real queda tras el muestreo humano + transporte. |
 | `fixtures/` | Lead de ejemplo, lead hostil (inyección) y borrador de muestra. |
 
 ## Flujo por heartbeat (rutina diaria)
@@ -34,13 +37,21 @@ código corre en el heartbeat del agente.
 4. `validateDraft(draft, openValues)` debe pasar. **Modo draft-only**: hasta que
    un humano muestree los primeros borradores reales (ITEA-3110 item 4), el
    borrador se publica para revisión, NO se envía automáticamente.
-5. `ingest.mjs --mark` marca los leads procesados (idempotente).
+5. `prepareReco(record, draft)` (`prepare-send.mjs`) valida + renderiza el email
+   branded + prepara la fila de ledger. **No envía**: el mensaje espera muestreo
+   humano y el transporte (ITEA-2789).
+6. Tras el visto bueno y con transporte disponible: el transporte (sender en
+   IONOS que invoca `autonomia_smtp_send()` de `_mailer.php`, con fallback a
+   `mail()`) envía y `recordSend(sends.jsonl, entry)` lo registra como `sent`.
+   La reply-rate sale de `computeReplyRate(loadSends(...), repliedRefs)`, donde
+   `repliedRefs` se cosecha de `hola@itera.es` por el `Message-ID`/ref.
+7. `ingest.mjs --mark` marca los leads procesados (idempotente).
 
 ## Probar
 
 ```bash
 cd tools/leads
-node --test            # neutralización, inyección, validación, sync-ftp
+node --test            # neutralización, inyección, validación, sync-ftp, render, tracking
 ```
 
 ## Garantías de seguridad (ITEA-2787)
