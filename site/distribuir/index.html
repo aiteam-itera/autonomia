@@ -403,8 +403,8 @@ Gracias,
               Ejecuta el baseline con el log descargado de IONOS para ver visitas e inicios por UTM.
             </p>
           </div>
-          <pre class="kit-copy" id="copy-cmd">curl -s -k --user "acc736162435:$ionosftpaccess" \
-  "sftp://access878577274.webspace-data.io:22/_analytics/a.log" -o a.log \
+          <pre class="kit-copy" id="copy-cmd">curl -s -k --user "$IONOS_SFTP_USER:$IONOS_SFTP_PASSWORD" \
+  "sftp://$IONOS_SFTP_HOST:$IONOS_SFTP_PORT/_analytics/a.log" -o a.log \
   &amp;&amp; node tools/analytics-baseline.mjs a.log</pre>
           <div class="cta-row">
             <button class="cta cta--primary kit-copy-btn" type="button" data-copy="#copy-cmd">
