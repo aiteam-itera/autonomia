@@ -218,200 +218,340 @@
         ><code></code></pre>
       </div>
     </div>
-    <header class="hero">
+    <header class="hero hero--home hero--xl">
       <nav class="nav">
         <span class="brand">AutonomIA</span>
         <span class="nav__links">
           <a class="cta cta--ghost" href="/aprende/">Aprende</a>
-          <a class="cta cta--ghost" href="#gobernanza">Gobernanza</a>
+          <a class="cta cta--ghost" href="#metodo">Método</a>
           <a class="cta cta--ghost" href="/calculadora.html">Calculadora</a>
           <a class="cta cta--ghost" href="/servicios.html">Servicios</a>
-          <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
+          <a class="cta" href="/cuestionario.html">Diagnóstico en 5 min</a>
         </span>
       </nav>
       <div class="hero__content">
-        <h1>La IA aplicada a tu pyme, sin jerga ni pilotos eternos.</h1>
-        <p>
-          Te decimos en 5 minutos qué proceso de tu empresa puede ahorrarte horas la semana
-          que viene con IA, qué herramienta usar y qué evitar. Si quieres, lo montamos contigo.
-        </p>
-        <div class="cta--secondary-row">
-          <a class="cta cta--primary" href="/cuestionario.html" onclick="window.autonomia&&window.autonomia.track('hero_cta_click')">Diagnóstico gratis (5 min)</a>
-          <a class="cta cta--ghost" href="/calculadora.html">Calcular mi ahorro</a>
-          <a class="cta cta--ghost" href="/servicios.html">Ver paquetes</a>
+        <div class="home-hero-grid">
+          <div class="home-hero-copy">
+            <p class="hero__eyebrow eyebrow">IA aplicada a pymes, sin pilotos eternos</p>
+            <h1>En 5 minutos sabes qué automatizar primero.</h1>
+            <p class="lead">
+              AutonomIA convierte el ruido de la IA en una decisión concreta: qué proceso de tu
+              empresa puede ahorrar horas ya, cómo implantarlo y qué riesgos debes evitar antes
+              de invertir.
+            </p>
+            <div class="cta-row">
+              <a
+                class="cta cta--primary cta--lg"
+                href="/cuestionario.html"
+                onclick="window.autonomia&&window.autonomia.track('hero_cta_click',{from:'home_hero'})"
+                >Diagnóstico en 5 min</a
+              >
+              <a class="cta cta--ghost" href="#informes">Ver informes reales</a>
+            </div>
+            <p class="hero__reassure">Gratis · sin registro previo · plan 30/60/90 al terminar</p>
+            <div class="trust-row home-trust-row" aria-label="Señales de confianza">
+              <span class="trust-row__item">Itera acompaña la implantación</span>
+              <span class="trust-row__item">Gobernanza y trazabilidad visibles</span>
+              <span class="trust-row__item">Sin permanencia en el acompañamiento</span>
+            </div>
+          </div>
+
+          <aside class="home-hero-panel surface" aria-label="Vista resumida del diagnóstico">
+            <div class="home-panel__top">
+              <span class="pill">Diagnóstico AutonomIA</span>
+              <span class="badge badge--ok">5 min</span>
+            </div>
+            <div class="home-panel__body">
+              <p class="home-panel__label">Primer proceso candidato</p>
+              <h2>Entrada y clasificación de facturas</h2>
+              <p>
+                Trabajo repetitivo, reglas claras y datos ya disponibles. Buen candidato para
+                medir ahorro sin tocar procesos críticos.
+              </p>
+            </div>
+            <div class="home-mini-stats" aria-label="Resultado estimado de ejemplo">
+              <span><strong>8 h/sem</strong> liberadas</span>
+              <span><strong>3-4 sem</strong> de piloto</span>
+              <span><strong>Baja</strong> dificultad</span>
+            </div>
+            <ol class="home-routing" aria-label="Ruta recomendada">
+              <li>Diagnóstico</li>
+              <li>Piloto medido</li>
+              <li>Proceso gobernado</li>
+            </ol>
+          </aside>
         </div>
-        <p class="hero__reassure">Gratis · 5 minutos · sin registro · ves tu plan al instante</p>
-        <ul class="hero__proof" aria-label="Para quién es esto">
-          <li><strong>Para</strong> dueños y directores de pymes españolas (5–250 empleados).</li>
-          <li><strong>No</strong> es para departamentos de IT que ya tienen equipo de datos.</li>
-          <li><strong>Sí</strong> incluye un plan a 30, 60 y 90 días al terminar el diagnóstico.</li>
-        </ul>
       </div>
     </header>
 
     <main id="main-content" tabindex="-1">
-      <section class="section section--alt" id="ejemplos-informe" aria-labelledby="ejemplos-title">
-        <h2 id="ejemplos-title">Esto es lo que recibirás (informes reales)</h2>
-        <p style="text-align:center;color:var(--muted);max-width:48rem;margin:0 auto 2rem;">
-          Dos ejemplos del informe que genera el diagnóstico, por sector. El tuyo se monta
-          en 5 minutos con tus respuestas — mismo formato, números calculados con tu volumen real.
-        </p>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:60rem;">
-          <article style="padding:1.5rem;">
-            <p style="margin:0;color:var(--muted);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;">Asesoría / gestoría — 8 personas</p>
-            <p style="margin:0.3rem 0 0.8rem;font-size:2rem;font-weight:700;line-height:1;">38<small style="font-size:1rem;font-weight:400;color:var(--muted);">/100</small> <span style="font-size:0.95rem;font-weight:600;color:#2540a0;display:block;margin-top:0.2rem;">Nivel: Adopción inicial</span></p>
-            <p style="margin:0 0 0.5rem;font-weight:600;font-size:0.95rem;">Oportunidad nº1 (de 3):</p>
-            <p style="margin:0 0 0.4rem;font-size:0.95rem;">Captura y clasificación automática de facturas con OCR + IA.</p>
-            <p style="margin:0 0 1rem;color:var(--muted);font-size:0.9rem;">
-              <strong style="color:#2540a0;">8 h/sem</strong> ahorradas ·
-              <strong style="color:#2540a0;">≈ 880 €/mes</strong> evitados ·
-              dificultad baja · 3–4 semanas.
+      <section class="section" id="transformacion" aria-labelledby="transformacion-title">
+        <div class="section__head">
+          <p class="eyebrow">Antes -> método -> después</p>
+          <h2 class="section__title" id="transformacion-title">
+            No necesitas "hacer IA". Necesitas sacar un proceso del atasco.
+          </h2>
+          <p class="section__lead">
+            La mayoría de pymes pierde semanas comparando herramientas. AutonomIA empieza por el
+            cuello de botella operativo y lo transforma en un flujo medido, con límites y una
+            persona aprobando lo sensible.
+          </p>
+        </div>
+        <div class="arc" aria-label="Arco de transformación">
+          <article class="arc__phase">
+            <span class="badge badge--danger">Antes</span>
+            <h3>Horas invisibles en tareas manuales</h3>
+            <p>
+              Correos que se clasifican a mano, facturas copiadas entre sistemas, clientes
+              esperando respuestas repetidas y equipos que no saben por dónde empezar.
             </p>
-            <a class="cta cta--ghost" href="/ejemplo-informe/asesoria.html" onclick="window.autonomia&&window.autonomia.track('sample_report_view',{from:'home_proof',icp:'asesoria'})">Ver informe completo →</a>
           </article>
-          <article style="padding:1.5rem;">
-            <p style="margin:0;color:var(--muted);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;">Clínica dental — 4 sillones</p>
-            <p style="margin:0.3rem 0 0.8rem;font-size:2rem;font-weight:700;line-height:1;">22<small style="font-size:1rem;font-weight:400;color:var(--muted);">/100</small> <span style="font-size:0.95rem;font-weight:600;color:#2540a0;display:block;margin-top:0.2rem;">Nivel: Sin adopción real</span></p>
-            <p style="margin:0 0 0.5rem;font-weight:600;font-size:0.95rem;">Oportunidad nº1 (de 3):</p>
-            <p style="margin:0 0 0.4rem;font-size:0.95rem;">Agente anti no-show: confirmación, reagendado y lista de espera dinámica por WhatsApp.</p>
-            <p style="margin:0 0 1rem;color:var(--muted);font-size:0.9rem;">
-              <strong style="color:#2540a0;">≈ 2.250 €/mes</strong> de sillón recuperado ·
-              <strong style="color:#2540a0;">6 h/sem</strong> ahorradas ·
-              dificultad baja · 3–4 semanas.
+          <span class="arc__arrow" aria-hidden="true">-></span>
+          <article class="arc__phase arc__phase--now">
+            <span class="badge badge--accent">Método AutonomIA</span>
+            <h3>Diagnóstico, piloto y acompañamiento gobernado</h3>
+            <p>
+              Priorizamos por ahorro, riesgo y dificultad. Después montamos un piloto en
+              producción con métricas, aprobaciones y trazabilidad desde el primer día.
             </p>
-            <a class="cta cta--ghost" href="/ejemplo-informe/clinica-dental.html" onclick="window.autonomia&&window.autonomia.track('sample_report_view',{from:'home_proof',icp:'clinica_dental'})">Ver informe completo →</a>
+          </article>
+          <span class="arc__arrow" aria-hidden="true">-></span>
+          <article class="arc__phase">
+            <span class="badge badge--ok">Después</span>
+            <h3>Un proceso funcionando, no una demo</h3>
+            <p>
+              Tu equipo ve horas liberadas, tasa de error y siguientes pasos. La IA queda
+              dentro de límites operativos, con control humano donde importa.
+            </p>
           </article>
         </div>
-        <p style="text-align:center;margin-top:2rem;">
-          <a class="cta cta--primary" href="/cuestionario.html" onclick="window.autonomia&&window.autonomia.track('hero_cta_click',{from:'home_proof'})">Hazte tu propio diagnóstico (5 min) →</a>
-        </p>
-        <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-top:0.8rem;">
-          Gratis · sin registro previo · informe al instante en pantalla y por email si lo pides.
-        </p>
       </section>
 
-      <section class="section" id="que-hacemos">
-        <h2>Qué hacemos</h2>
-        <div class="grid">
-          <article>
-            <h3><a href="/servicios.html#diagnostico-express">Diagnóstico express</a></h3>
-            <p>2 semanas. Mapa de procesos y los 3 casos donde la IA paga su coste antes. Desde 1.500 €.</p>
+      <section class="section section--alt" id="informes" aria-labelledby="informes-title">
+        <div class="section__head section__head--center">
+          <p class="eyebrow">Prueba temprana</p>
+          <h2 class="section__title" id="informes-title">El diagnóstico devuelve un informe accionable.</h2>
+          <p class="section__lead">
+            Estos ejemplos muestran el formato que recibe una pyme: nivel de madurez, oportunidad
+            priorizada, estimación de ahorro y una ruta de implantación sin jerga.
+          </p>
+        </div>
+        <div class="card-grid home-report-grid">
+          <article class="card card--feature">
+            <p class="home-card-meta">Asesoría / gestoría · 8 personas</p>
+            <p class="home-score"><strong>38</strong><span>/100</span></p>
+            <p class="badge badge--warn">Adopción inicial</p>
+            <h3 class="card__title">Captura y clasificación automática de facturas</h3>
+            <p class="card__text">
+              8 h/sem ahorradas · aprox. 880 €/mes evitados · dificultad baja · piloto de 3-4
+              semanas.
+            </p>
+            <div class="card__foot">
+              <a
+                class="cta cta--ghost"
+                href="/ejemplo-informe/asesoria.html"
+                onclick="window.autonomia&&window.autonomia.track('sample_report_view',{from:'home_proof',icp:'asesoria'})"
+                >Ver informe completo</a
+              >
+            </div>
           </article>
-          <article>
-            <h3><a href="/servicios.html#piloto">Piloto de automatización</a></h3>
-            <p>4–6 semanas. Un proceso tuyo automatizado en producción, con métricas y 30 días de garantía. Desde 6.000 €.</p>
-          </article>
-          <article>
-            <h3><a href="/servicios.html#acompanamiento">Acompañamiento gobernado</a></h3>
-            <p>Mensual sin permanencia. Tu equipo de IA externalizado: agentes, gobernanza y oncall. Desde 3.500 €/mes.</p>
+          <article class="card">
+            <p class="home-card-meta">Clínica dental · 4 sillones</p>
+            <p class="home-score"><strong>22</strong><span>/100</span></p>
+            <p class="badge badge--danger">Sin adopción real</p>
+            <h3 class="card__title">Agente anti no-show para agenda y lista de espera</h3>
+            <p class="card__text">
+              Aprox. 2.250 €/mes de sillón recuperado · 6 h/sem ahorradas · dificultad baja ·
+              piloto de 3-4 semanas.
+            </p>
+            <div class="card__foot">
+              <a
+                class="cta cta--ghost"
+                href="/ejemplo-informe/clinica-dental.html"
+                onclick="window.autonomia&&window.autonomia.track('sample_report_view',{from:'home_proof',icp:'clinica_dental'})"
+                >Ver informe completo</a
+              >
+            </div>
           </article>
         </div>
-        <p style="text-align: center; margin-top: 1.5rem;">
-          <a class="cta" href="/servicios.html">Ver paquetes y precios →</a>
-        </p>
+        <div class="home-section-actions">
+          <a
+            class="cta cta--primary"
+            href="/cuestionario.html"
+            onclick="window.autonomia&&window.autonomia.track('hero_cta_click',{from:'home_proof'})"
+            >Haz tu diagnóstico en 5 min</a
+          >
+          <p>Sin registro previo. Ves el plan en pantalla y puedes pedirlo por email.</p>
+        </div>
+      </section>
+
+      <section class="section" id="metodo" aria-labelledby="metodo-title">
+        <div class="section__head">
+          <p class="eyebrow">Método</p>
+          <h2 class="section__title" id="metodo-title">Tres pasos para pasar de idea a producción.</h2>
+          <p class="section__lead">
+            Empezamos pequeño para que el riesgo sea bajo, pero con suficiente rigor para que el
+            resultado no se quede en una prueba bonita que nadie usa.
+          </p>
+        </div>
+        <ol class="steps steps--flow">
+          <li class="step">
+            <span class="step__num" aria-hidden="true"></span>
+            <span class="step__body">
+              <a class="step__title" href="/servicios.html#diagnostico-express">Diagnóstico express</a>
+              <span class="step__text">
+                2 semanas para mapear procesos, elegir los 3 casos donde la IA paga antes y
+                estimar coste, ahorro y riesgo. Desde 1.500 €.
+              </span>
+            </span>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true"></span>
+            <span class="step__body">
+              <a class="step__title" href="/servicios.html#piloto">Piloto de automatización</a>
+              <span class="step__text">
+                4-6 semanas para poner un proceso real en producción, con métricas y 30 días de
+                garantía. Desde 6.000 €.
+              </span>
+            </span>
+          </li>
+          <li class="step">
+            <span class="step__num" aria-hidden="true"></span>
+            <span class="step__body">
+              <a class="step__title" href="/servicios.html#acompanamiento">Acompañamiento gobernado</a>
+              <span class="step__text">
+                Equipo de IA externalizado para mantener agentes, límites, aprobaciones y oncall
+                sin permanencia. Desde 3.500 €/mes.
+              </span>
+            </span>
+          </li>
+        </ol>
+        <div class="home-section-actions">
+          <a class="cta" href="/servicios.html">Ver paquetes y precios</a>
+        </div>
       </section>
 
       <section class="section section--alt" id="gobernanza" aria-labelledby="gobernanza-title">
-        <h2 id="gobernanza-title">Tu IA, siempre bajo control</h2>
-        <p style="text-align:center;color:var(--muted);max-width:48rem;margin:0 auto 2rem;">
-          El miedo más común es que un agente actúe por su cuenta y meta la pata. Por eso cada
-          agente de AutonomIA corre sobre una <strong>capa de gobernanza</strong> que pone límites
-          en código, deja la última palabra a una persona y registra todo. La IA trabaja
-          <em>para</em> ti, no <em>en lugar de</em> ti.
-        </p>
-        <div class="grid">
-          <article>
-            <h3>🔒 Límites codificados</h3>
-            <p>
+        <div class="section__head section__head--center">
+          <p class="eyebrow">Gobernanza</p>
+          <h2 class="section__title" id="gobernanza-title">Tu IA trabaja con límites, aprobaciones y registro.</h2>
+          <p class="section__lead">
+            El miedo más común es que un agente actúe por su cuenta. Por eso cada agente de
+            AutonomIA corre sobre una capa de gobernanza que pone límites en código, deja la
+            última palabra a una persona y registra todo.
+          </p>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">01</span>
+            <h3 class="card__title">Límites codificados</h3>
+            <p class="card__text">
               Cada agente solo puede hacer lo que su rol permite: qué herramientas toca, qué
               presupuesto gasta, a qué datos accede. No es una promesa, son reglas que el sistema
               hace cumplir antes de cada acción.
             </p>
           </article>
-          <article>
-            <h3>👁️ Aprobación humana visible</h3>
-            <p>
+          <article class="card card--feature">
+            <span class="card__icon" aria-hidden="true">02</span>
+            <h3 class="card__title">Aprobación humana visible</h3>
+            <p class="card__text">
               Las acciones sensibles —enviar un correo, mover dinero, publicar algo— se paran y
               esperan tu visto bueno. Tú apruebas o rechazas; el agente no avanza solo.
             </p>
           </article>
-          <article>
-            <h3>📋 Trazabilidad completa</h3>
-            <p>
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">03</span>
+            <h3 class="card__title">Trazabilidad completa</h3>
+            <p class="card__text">
               Cada paso queda en un registro auditado: qué agente hizo qué, cuándo y por qué.
               Si algo se tuerce, sabes exactamente dónde mirar. Nada ocurre a oscuras.
             </p>
           </article>
         </div>
-        <p style="text-align:center;margin-top:2rem;">
-          <a class="cta cta--primary" href="https://railway.212.47.241.78.nip.io/" target="_blank" rel="noopener" onclick="window.autonomia&&window.autonomia.track('governance_panel_view',{from:'home'})">Ver el panel de gobernanza en vivo →</a>
-        </p>
-        <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-top:0.8rem;">
-          Es el mismo panel con el que operamos: límites, aprobaciones y auditoría reales, no una maqueta.
-        </p>
-      </section>
-
-      <section class="section" id="aprende">
-        <h2>Aprende paso a paso</h2>
-        <p>
-          Currículo en cuatro niveles para adoptar IA en tu empresa, en orden. Empieza por
-          chats si no has tocado nada todavía y termina en orquestadores si quieres entender
-          cómo funciona una empresa gobernada por agentes.
-        </p>
-        <div class="grid">
-          <article>
-            <h3><a href="/aprende/01-chats.html">1. Chats con IA</a></h3>
-            <p>El primer escalón: ChatGPT, Claude, Gemini o Copilot como ayudante diario.</p>
-          </article>
-          <article>
-            <h3><a href="/aprende/02-automatizaciones.html">2. Automatizaciones</a></h3>
-            <p>Flujos sin humano que conectan tus herramientas y meten IA donde aporta.</p>
-          </article>
-          <article>
-            <h3><a href="/aprende/03-agentes.html">3. Agentes</a></h3>
-            <p>Un LLM con herramientas que decide qué pasos dar para cumplir un objetivo.</p>
-          </article>
-          <article>
-            <h3><a href="/aprende/04-orquestadores.html">4. Orquestadores</a></h3>
-            <p>Una empresa de agentes con jerarquía, presupuesto, aprobaciones y auditoría.</p>
-          </article>
+        <div class="home-section-actions">
+          <a
+            class="cta cta--primary"
+            href="https://railway.212.47.241.78.nip.io/"
+            target="_blank"
+            rel="noopener"
+            onclick="window.autonomia&&window.autonomia.track('governance_panel_view',{from:'home'})"
+            >Ver el panel de gobernanza en vivo</a
+          >
+          <p>Es el mismo panel con el que operamos: límites, aprobaciones y auditoría reales.</p>
         </div>
-        <p style="text-align: center; margin-top: 1.5rem;">
-          <a class="cta" href="/aprende/">Ver el currículo completo →</a>
-        </p>
       </section>
 
-      <section class="section" id="tutoriales">
-        <h2>Tutoriales sueltos</h2>
-        <p>
-          Además del currículo, publicamos guías prácticas en el blog: casos por sector,
-          automatizaciones que ya funcionan y errores comunes a evitar.
-        </p>
-        <div class="grid">
-          <article>
-            <h3>
+      <section class="section" id="aprende" aria-labelledby="aprende-title">
+        <div class="section__head">
+          <p class="eyebrow">Aprendizaje</p>
+          <h2 class="section__title" id="aprende-title">Aprende la ruta completa, paso a paso.</h2>
+          <p class="section__lead">
+            Currículo en cuatro niveles para adoptar IA en orden: de chats útiles a empresas
+            gobernadas por agentes.
+          </p>
+        </div>
+        <div class="card-grid">
+          <a class="card card--link" href="/aprende/01-chats.html">
+            <span class="badge badge--accent">Nivel 1</span>
+            <h3 class="card__title">Chats con IA</h3>
+            <p class="card__text">ChatGPT, Claude, Gemini o Copilot como ayudante diario.</p>
+          </a>
+          <a class="card card--link" href="/aprende/02-automatizaciones.html">
+            <span class="badge badge--accent">Nivel 2</span>
+            <h3 class="card__title">Automatizaciones</h3>
+            <p class="card__text">Flujos que conectan tus herramientas y meten IA donde aporta.</p>
+          </a>
+          <a class="card card--link" href="/aprende/03-agentes.html">
+            <span class="badge badge--accent">Nivel 3</span>
+            <h3 class="card__title">Agentes</h3>
+            <p class="card__text">Un LLM con herramientas que decide pasos para cumplir un objetivo.</p>
+          </a>
+          <a class="card card--link" href="/aprende/04-orquestadores.html">
+            <span class="badge badge--accent">Nivel 4</span>
+            <h3 class="card__title">Orquestadores</h3>
+            <p class="card__text">Jerarquía, presupuesto, aprobaciones y auditoría entre agentes.</p>
+          </a>
+        </div>
+        <div class="home-section-actions">
+          <a class="cta" href="/aprende/">Ver el currículo completo</a>
+        </div>
+      </section>
+
+      <section class="section" id="tutoriales" aria-labelledby="tutoriales-title">
+        <div class="section__head">
+          <p class="eyebrow">Guías prácticas</p>
+          <h2 class="section__title" id="tutoriales-title">Cuando quieras profundizar, entra por un caso concreto.</h2>
+          <p class="section__lead">
+            Además del currículo, publicamos guías por sector, automatizaciones que ya funcionan
+            y errores comunes antes de invertir.
+          </p>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <h3 class="card__title">
               <a href="/blog/que-puede-hacer-la-ia-en-mi-pyme.html"
                 >¿Qué puede hacer la IA en mi pyme?</a
               >
             </h3>
-            <p>Casos reales por sector — comercio, despachos, clínicas, talleres y servicios.</p>
+            <p class="card__text">Casos reales por sector: comercio, despachos, clínicas, talleres y servicios.</p>
           </article>
-          <article>
-            <h3>
+          <article class="card">
+            <h3 class="card__title">
               <a href="/calculadora.html">Calculadora de ahorro con IA</a>
             </h3>
-            <p>Estima en 1 minuto cuántas horas y euros liberaría la IA en tu equipo. Sin email.</p>
+            <p class="card__text">Estima en 1 minuto cuántas horas y euros liberaría la IA en tu equipo. Sin email.</p>
           </article>
-          <article>
-            <h3>
+          <article class="card">
+            <h3 class="card__title">
               <a href="/herramienta/madurez.html">Test de madurez de automatización</a>
             </h3>
-            <p>5 preguntas para saber si tu empresa está lista para automatizar — con plan de acción según tu nivel.</p>
+            <p class="card__text">5 preguntas para saber si tu empresa está lista, con plan según tu nivel.</p>
           </article>
-          <article>
-            <h3><a href="/blog/">Ver todos los tutoriales</a></h3>
-            <p>El blog completo con tutoriales nuevos cada semana.</p>
-          </article>
+          <a class="card card--link" href="/blog/">
+            <span class="badge badge--accent">Blog</span>
+            <h3 class="card__title">Ver todos los tutoriales</h3>
+            <p class="card__text">El archivo completo con guías nuevas para pymes.</p>
+          </a>
         </div>
       </section>
 
