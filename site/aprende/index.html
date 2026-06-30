@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Aprende IA paso a paso — AutonomIA</title>
+    <title>Hub de aprendizaje IA — AutonomIA</title>
     <meta
       name="description"
-      content="Currículo guiado para adoptar IA en tu pyme: chats, automatizaciones, agentes y orquestadores. Lee en orden, marca tu progreso."
+      content="Currículo guiado para adoptar IA en tu pyme: chats, automatizaciones, agentes y orquestadores. Lee en orden, marca tu progreso, y aprende al ritmo de tu empresa."
     />
     <link rel="canonical" href="https://ia.itera.es/aprende/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="AutonomIA" />
-    <meta property="og:title" content="Aprende IA paso a paso — AutonomIA" />
+    <meta property="og:title" content="Hub de aprendizaje IA — AutonomIA" />
     <meta
       property="og:description"
       content="Currículo en 4 niveles para adoptar IA en tu pyme: chats, automatizaciones, agentes y orquestadores."
@@ -25,7 +25,7 @@
     <meta property="og:image:alt" content="AutonomIA — IA que entiende tu negocio." />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Aprende IA paso a paso — AutonomIA" />
+    <meta name="twitter:title" content="Hub de aprendizaje IA — AutonomIA" />
     <meta
       name="twitter:description"
       content="Currículo en 4 niveles para adoptar IA en tu pyme: chats, automatizaciones, agentes y orquestadores."
@@ -34,6 +34,236 @@
     <meta name="twitter:image:alt" content="AutonomIA — IA que entiende tu negocio." />
 
     <link rel="stylesheet" href="/assets/style.css" />
+
+    <!-- ===== aprende/index.html — estilos de página (no duplicar en style.css) ===== -->
+    <style>
+      /* ── Ruta de aprendizaje: path numerado ── */
+      .learn-path { margin: 0 0 2.5rem; }
+
+      .learn-section__header {
+        display: flex;
+        align-items: baseline;
+        gap: var(--space-4);
+        margin: 0 0 var(--space-5);
+        flex-wrap: wrap;
+      }
+
+      .learn-section__header h2 {
+        flex: 1;
+        margin: 0;
+        font-size: var(--step-1);
+        line-height: 1.2;
+      }
+
+      .path-steps {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      /* Vertical connector threading through step numbers */
+      .path-steps::before {
+        content: "";
+        position: absolute;
+        left: 1.375rem;
+        top: 3.25rem;
+        bottom: 2.75rem;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--accent-line) 0%, transparent 100%);
+        border-radius: 2px;
+        pointer-events: none;
+      }
+
+      .path-step {
+        display: flex;
+        gap: var(--space-5);
+        margin-bottom: var(--space-4);
+        position: relative;
+      }
+
+      .path-step__num {
+        flex: 0 0 2.75rem;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: var(--radius-pill);
+        background: var(--surface-2);
+        border: 2px solid var(--accent-line);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.82rem;
+        color: var(--accent);
+        z-index: 1;
+        flex-shrink: 0;
+        margin-top: 0.5rem;
+        transition: background var(--dur-1), border-color var(--dur-1), color var(--dur-1);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .path-step__card {
+        flex: 1;
+        background: var(--surface-1);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        border: 1px solid var(--border);
+        transition: border-color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        min-width: 0;
+      }
+
+      .path-step__card:hover {
+        border-color: var(--accent-line);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+      }
+
+      .path-step.level-card--done .path-step__num {
+        background: var(--ok-soft);
+        border-color: rgba(74, 222, 128, 0.45);
+        color: var(--ok);
+      }
+
+      .path-step.level-card--done .path-step__card {
+        border-color: rgba(74, 222, 128, 0.2);
+        background: linear-gradient(160deg, rgba(74, 222, 128, 0.04), var(--surface-1));
+      }
+
+      .path-step__title { margin: 0; font-size: var(--step-1); line-height: 1.3; }
+      .path-step__title a { color: var(--fg); text-decoration: none; }
+      .path-step__title a:hover { color: var(--accent); }
+
+      .path-step__desc { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.5; }
+
+      .path-step__outcome {
+        margin: var(--space-1) 0 0;
+        font-size: var(--step--1);
+        color: var(--accent);
+        background: var(--accent-soft);
+        border-left: 2px solid var(--accent-line);
+        padding: var(--space-2) var(--space-4);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        line-height: 1.45;
+      }
+
+      .path-step__cta {
+        display: inline-block;
+        margin-top: var(--space-1);
+        font-size: var(--step--1);
+        color: var(--accent);
+        font-weight: 600;
+        padding: var(--space-2) var(--space-4);
+        border: 1px solid var(--accent-line);
+        border-radius: var(--radius-pill);
+        align-self: flex-start;
+        transition: background var(--dur-1), border-color var(--dur-1);
+        text-decoration: none;
+      }
+
+      .path-step__cta:hover {
+        background: var(--accent-soft);
+        border-color: rgba(129, 140, 248, 0.55);
+        text-decoration: none;
+      }
+
+      /* ── Tags (container) + modifier classes — .tag base is in style.css ── */
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        align-items: center;
+      }
+
+      .tag--level {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-color: var(--accent-line);
+      }
+
+      .tag--done {
+        background: var(--ok-soft);
+        color: var(--ok);
+        border-color: rgba(74, 222, 128, 0.3);
+        font-weight: 700;
+      }
+
+      .tag--filter {
+        cursor: pointer;
+        user-select: none;
+        transition: background var(--dur-1), color var(--dur-1), border-color var(--dur-1);
+      }
+
+      .tag--filter:hover,
+      .tag--filter[aria-pressed="true"] {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-color: var(--accent-line);
+      }
+
+      /* ── Article filters / cards ── */
+      .articles-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-bottom: var(--space-5);
+        align-items: center;
+      }
+
+      .articles-filters__label {
+        font-size: var(--step--1);
+        color: var(--muted);
+        margin-right: var(--space-1);
+      }
+
+      .article-card { display: flex; flex-direction: column; gap: var(--space-2); }
+      .article-card.hidden { display: none; }
+      .article-card .level-card__meta { flex-wrap: wrap; gap: var(--space-2); }
+
+      /* ── Progress widget ── */
+      .progress-widget {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-2) var(--space-5);
+        align-items: center;
+      }
+
+      .progress-widget__stats { display: flex; gap: var(--space-5); align-items: center; }
+      .progress-widget__stat { text-align: center; }
+
+      .progress-widget__stat-value {
+        display: block;
+        font-size: var(--step-3);
+        font-weight: 800;
+        color: var(--accent);
+        line-height: 1;
+      }
+
+      .progress-widget__stat-label {
+        display: block;
+        font-size: var(--step--1);
+        color: var(--faint);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: var(--space-1);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 580px) {
+        .path-steps::before { left: 1.1rem; }
+        .path-step { gap: var(--space-4); }
+        .path-step__num { flex: 0 0 2.25rem; width: 2.25rem; height: 2.25rem; font-size: 0.75rem; }
+        .path-step__card { padding: var(--space-4); }
+        .progress-widget { grid-template-columns: 1fr; }
+        .progress-widget__stats { gap: var(--space-4); }
+      }
+    </style>
+    <!-- ===== fin estilos de página ===== -->
+
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
       data-cf-beacon='{"token":"FILL_CWA_TOKEN"}'></script>
@@ -42,103 +272,212 @@
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
     <header class="hero hero--compact">
       <nav class="nav">
         <a class="brand" href="/">AutonomIA</a>
-        <a class="cta" href="/cuestionario.html">Diagnóstico de IA</a>
+        <a class="cta" href="/cuestionario.html">Diagnóstico gratuito</a>
       </nav>
       <div class="hero__content">
-        <h1>Aprende IA paso a paso</h1>
+        <h1>De 0 a empresa gobernada por agentes</h1>
         <p>
-          Cuatro niveles, en orden. Empieza por chats si no has tocado IA todavía y termina en
-          orquestadores si quieres entender cómo funciona una empresa gobernada por agentes.
+          Un currículo en 4 niveles diseñado para pymes que quieren adoptar IA sin pilotos
+          eternos. Empieza donde estás, termina donde necesitas.
         </p>
       </div>
     </header>
 
     <main id="main-content" tabindex="-1" class="section">
       <div class="aprende">
-        <p class="aprende__intro">
-          Este es un currículo, no un blog. Cada nivel asume que dominas el anterior. Si ya
-          haces automatizaciones, sáltate el primer nivel; si no sabes por dónde empezar, hazlo
-          en orden y marca tu progreso.
-        </p>
 
-        <section class="aprende__progress" aria-label="Tu progreso">
-          <p class="aprende__progress-text" data-aprende-progress="counter">
-            Aún no has abierto ningún nivel.
-          </p>
-          <div
-            class="aprende__progress-track"
-            role="progressbar"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow="0"
-            aria-label="Niveles abiertos"
-          >
-            <span class="aprende__progress-bar" data-aprende-progress="bar"></span>
+        <!-- ── Progreso ── -->
+        <section class="aprende__progress" aria-label="Tu progreso en la ruta">
+          <div class="progress-widget">
+            <div>
+              <p class="aprende__progress-text" data-aprende-progress="counter">
+                Aún no has abierto ningún nivel.
+              </p>
+              <div
+                class="aprende__progress-track"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                aria-label="Progreso en la ruta de aprendizaje"
+                style="margin-top: 0.75rem"
+              >
+                <span class="aprende__progress-bar" data-aprende-progress="bar"></span>
+              </div>
+            </div>
+            <div class="progress-widget__stats" aria-hidden="true">
+              <div class="progress-widget__stat">
+                <span class="progress-widget__stat-value" data-aprende-progress="done-count">0</span>
+                <span class="progress-widget__stat-label">completados</span>
+              </div>
+              <div class="progress-widget__stat">
+                <span class="progress-widget__stat-value">4</span>
+                <span class="progress-widget__stat-label">niveles</span>
+              </div>
+            </div>
           </div>
         </section>
 
-        <ul class="levels">
-          <li class="level-card" data-aprende-card="01-chats">
-            <span class="level-card__meta">
-              <span>Nivel 1</span>
-              <span class="level-card__status" data-aprende-status>Pendiente</span>
-            </span>
-            <h3><a href="/aprende/01-chats.html">Chats con IA</a></h3>
-            <p>
-              Usar ChatGPT, Claude, Gemini o Copilot como ayudante personal en tareas concretas
-              del día a día. El primer escalón.
-            </p>
-          </li>
-          <li class="level-card" data-aprende-card="02-automatizaciones">
-            <span class="level-card__meta">
-              <span>Nivel 2</span>
-              <span class="level-card__status" data-aprende-status>Pendiente</span>
-            </span>
-            <h3><a href="/aprende/02-automatizaciones.html">Automatizaciones</a></h3>
-            <p>
-              Flujos sin humano que conectan tus herramientas — Make, Zapier, n8n, Power
-              Automate — y opcionalmente meten un paso de IA.
-            </p>
-          </li>
-          <li class="level-card" data-aprende-card="03-agentes">
-            <span class="level-card__meta">
-              <span>Nivel 3</span>
-              <span class="level-card__status" data-aprende-status>Pendiente</span>
-            </span>
-            <h3><a href="/aprende/03-agentes.html">Agentes</a></h3>
-            <p>
-              Un LLM con acceso a herramientas que decide qué pasos dar para cumplir un objetivo.
-              Sustituye procesos completos, no sólo tareas sueltas.
-            </p>
-          </li>
-          <li class="level-card" data-aprende-card="04-orquestadores">
-            <span class="level-card__meta">
-              <span>Nivel 4</span>
-              <span class="level-card__status" data-aprende-status>Pendiente</span>
-            </span>
-            <h3><a href="/aprende/04-orquestadores.html">Orquestadores</a></h3>
-            <p>
-              Una empresa entera de agentes con jerarquía, presupuesto, aprobaciones y
-              auditoría. Aquí vive AutonomIA, Paperclip e Ironclip.
-            </p>
-          </li>
-        </ul>
+        <!-- ── Ruta de aprendizaje ── -->
+        <section class="learn-path" aria-labelledby="ruta-title">
+          <div class="learn-section__header">
+            <h2 id="ruta-title">Ruta de aprendizaje</h2>
+            <span class="tag">4 niveles · lee en orden</span>
+          </div>
 
+          <ol class="path-steps">
+
+            <!-- Nivel 1 -->
+            <li class="path-step" data-aprende-card="01-chats">
+              <div class="path-step__num" aria-hidden="true">01</div>
+              <div class="path-step__card">
+                <div class="level-card__meta">
+                  <div class="tags">
+                    <span class="tag tag--level">Nivel 1 · Fundacional</span>
+                    <span class="tag">~30 min</span>
+                  </div>
+                  <span class="level-card__status" data-aprende-status aria-live="polite">Pendiente</span>
+                </div>
+                <h3 class="path-step__title">
+                  <a href="/aprende/01-chats.html">Chats con IA</a>
+                </h3>
+                <p class="path-step__desc">
+                  Usar ChatGPT, Claude, Gemini o Copilot como ayudante personal en tareas
+                  concretas del día a día. El primer escalón — necesario aunque ya uses IA.
+                </p>
+                <p class="path-step__outcome">
+                  Saldrás sabiendo construir prompts que funcionan, evitar alucinaciones y
+                  aplicar un chat a tres procesos reales de tu empresa.
+                </p>
+                <a class="path-step__cta" href="/aprende/01-chats.html">
+                  Empezar el nivel 1 →
+                </a>
+              </div>
+            </li>
+
+            <!-- Nivel 2 -->
+            <li class="path-step" data-aprende-card="02-automatizaciones">
+              <div class="path-step__num" aria-hidden="true">02</div>
+              <div class="path-step__card">
+                <div class="level-card__meta">
+                  <div class="tags">
+                    <span class="tag tag--level">Nivel 2 · Operacional</span>
+                    <span class="tag">~45 min</span>
+                  </div>
+                  <span class="level-card__status" data-aprende-status aria-live="polite">Pendiente</span>
+                </div>
+                <h3 class="path-step__title">
+                  <a href="/aprende/02-automatizaciones.html">Automatizaciones</a>
+                </h3>
+                <p class="path-step__desc">
+                  Flujos sin humano que conectan tus herramientas — Make, Zapier, n8n,
+                  Power Automate — y opcionalmente meten un paso de IA en el medio.
+                </p>
+                <p class="path-step__outcome">
+                  Saldrás con el mapa de los 3 procesos más automatizables de tu empresa y
+                  la lógica para construir el primero sin escribir código.
+                </p>
+                <a class="path-step__cta" href="/aprende/02-automatizaciones.html">
+                  Continuar al nivel 2 →
+                </a>
+              </div>
+            </li>
+
+            <!-- Nivel 3 -->
+            <li class="path-step" data-aprende-card="03-agentes">
+              <div class="path-step__num" aria-hidden="true">03</div>
+              <div class="path-step__card">
+                <div class="level-card__meta">
+                  <div class="tags">
+                    <span class="tag tag--level">Nivel 3 · Avanzado</span>
+                    <span class="tag">~60 min</span>
+                  </div>
+                  <span class="level-card__status" data-aprende-status aria-live="polite">Pendiente</span>
+                </div>
+                <h3 class="path-step__title">
+                  <a href="/aprende/03-agentes.html">Agentes de IA</a>
+                </h3>
+                <p class="path-step__desc">
+                  Un LLM con acceso a herramientas que decide qué pasos dar para cumplir
+                  un objetivo. Sustituye procesos completos, no sólo tareas sueltas.
+                </p>
+                <p class="path-step__outcome">
+                  Saldrás entendiendo cómo un agente razona, actúa y se corrige, y qué
+                  tipo de proceso de tu empresa puede delegar ya.
+                </p>
+                <a class="path-step__cta" href="/aprende/03-agentes.html">
+                  Continuar al nivel 3 →
+                </a>
+              </div>
+            </li>
+
+            <!-- Nivel 4 -->
+            <li class="path-step" data-aprende-card="04-orquestadores">
+              <div class="path-step__num" aria-hidden="true">04</div>
+              <div class="path-step__card">
+                <div class="level-card__meta">
+                  <div class="tags">
+                    <span class="tag tag--level">Nivel 4 · Estratégico</span>
+                    <span class="tag">~90 min</span>
+                  </div>
+                  <span class="level-card__status" data-aprende-status aria-live="polite">Pendiente</span>
+                </div>
+                <h3 class="path-step__title">
+                  <a href="/aprende/04-orquestadores.html">Orquestadores</a>
+                </h3>
+                <p class="path-step__desc">
+                  Una empresa entera de agentes con jerarquía, presupuesto, aprobaciones
+                  y auditoría. Aquí vive AutonomIA, Paperclip e Ironclip.
+                </p>
+                <p class="path-step__outcome">
+                  Saldrás con una imagen clara de cómo funciona una organización
+                  gobernada por IA y qué pasos concretos te separan de ese modelo.
+                </p>
+                <a class="path-step__cta" href="/aprende/04-orquestadores.html">
+                  Ir al nivel 4 →
+                </a>
+              </div>
+            </li>
+
+          </ol>
+        </section>
+
+        <!-- ── Artículos ── -->
         <section class="aprende__extras" aria-labelledby="articulos-title">
-          <h2 id="articulos-title">Artículos</h2>
+          <div class="learn-section__header">
+            <h2 id="articulos-title">Artículos</h2>
+            <span class="tag">lectura independiente</span>
+          </div>
           <p class="aprende__intro">
-            Lecturas independientes sobre automatización y IA aplicada a empresas
-            españolas. No siguen un orden — elige la que más encaje con tu situación.
+            Lecturas que no siguen un orden. Elige la que encaje con el problema de tu empresa
+            ahora mismo.
           </p>
+
+          <!-- Category filter -->
+          <div class="articles-filters" role="group" aria-label="Filtrar artículos por tema">
+            <span class="articles-filters__label" id="filter-label">Tema:</span>
+            <button
+              class="tag tag--filter"
+              aria-pressed="true"
+              data-filter="all"
+              aria-describedby="filter-label"
+            >Todos</button>
+            <button class="tag tag--filter" aria-pressed="false" data-filter="automatizacion">Automatización</button>
+            <button class="tag tag--filter" aria-pressed="false" data-filter="roi">ROI</button>
+            <button class="tag tag--filter" aria-pressed="false" data-filter="sectores">Sectores regulados</button>
+            <button class="tag tag--filter" aria-pressed="false" data-filter="proceso">Proceso</button>
+          </div>
+
           <ul class="levels">
-            <li class="level-card">
-              <span class="level-card__meta">
-                <span>Automatización</span>
-                <span class="level-card__status">Nuevo</span>
-              </span>
+            <li class="level-card article-card" data-category="automatizacion">
+              <div class="tags">
+                <span class="tag">Automatización</span>
+                <span class="tag">5 min</span>
+              </div>
               <h3>
                 <a href="/aprende/05-senales-automatizar.html">
                   Las 5 señales de que tu empresa necesita automatizar ya
@@ -149,14 +488,14 @@
                 horas? Descubre las señales claras y qué hacer al respecto.
               </p>
             </li>
-            <li class="level-card">
-              <span class="level-card__meta">
-                <span>ROI</span>
-                <span class="level-card__status">Nuevo</span>
-              </span>
+            <li class="level-card article-card" data-category="roi">
+              <div class="tags">
+                <span class="tag">ROI</span>
+                <span class="tag">8 min</span>
+              </div>
               <h3>
                 <a href="/aprende/06-coste-procesos-manuales.html">
-                  ¿Cuánto cuesta un proceso manual? Cálculo real para empresas españolas
+                  ¿Cuánto cuesta un proceso manual? Cálculo real
                 </a>
               </h3>
               <p>
@@ -164,55 +503,58 @@
                 ejemplos reales y los 3 costes invisibles que nadie cuenta.
               </p>
             </li>
-            <li class="level-card">
-              <span class="level-card__meta">
-                <span>Sectores regulados</span>
-                <span class="level-card__status">Nuevo</span>
-              </span>
+            <li class="level-card article-card" data-category="sectores">
+              <div class="tags">
+                <span class="tag">Sectores regulados</span>
+                <span class="tag">10 min</span>
+              </div>
               <h3>
                 <a href="/aprende/07-automatizacion-fintech-legaltech.html">
                   Automatización con IA en fintech y legaltech
                 </a>
               </h3>
               <p>
-                Guía práctica para equipos de ops: los 4 procesos más automatizables,
-                el modelo HITL para entornos regulados y las preguntas que hacer a
-                cualquier proveedor.
+                Los 4 procesos más automatizables, el modelo HITL para entornos regulados
+                y las preguntas que hacer a cualquier proveedor.
               </p>
             </li>
-            <li class="level-card">
-              <span class="level-card__meta">
-                <span>Proceso de trabajo</span>
-                <span class="level-card__status">Nuevo</span>
-              </span>
+            <li class="level-card article-card" data-category="proceso">
+              <div class="tags">
+                <span class="tag">Proceso</span>
+                <span class="tag">7 min</span>
+              </div>
               <h3>
                 <a href="/aprende/08-primeras-6-semanas.html">
-                  De consulta a automatizado: las primeras 6 semanas con itera.es
+                  De consulta a automatizado: las primeras 6 semanas
                 </a>
               </h3>
               <p>
-                Descripción honesta del proceso real de automatización, semana a semana:
-                diagnóstico, prototipo, pruebas y producción.
+                Descripción honesta del proceso real semana a semana: diagnóstico,
+                prototipo, pruebas y producción con itera.es.
               </p>
             </li>
           </ul>
         </section>
 
+        <!-- ── Temas complementarios ── -->
         <section class="aprende__extras" aria-labelledby="extras-title">
-          <h2 id="extras-title">Temas complementarios</h2>
+          <div class="learn-section__header">
+            <h2 id="extras-title">Temas complementarios</h2>
+            <span class="tag">transversal</span>
+          </div>
           <p class="aprende__intro">
-            No son escalones de adopción, sino lecturas transversales que vas a necesitar
-            antes o después según el nivel en el que te muevas.
+            No son escalones de adopción, sino lecturas que van a necesitar antes o después
+            según el nivel en el que te muevas.
           </p>
           <ul class="levels">
             <li class="level-card">
-              <span class="level-card__meta">
-                <span>Talento y cultura</span>
-                <span class="level-card__status">Complementario</span>
-              </span>
+              <div class="tags">
+                <span class="tag">Talento y cultura</span>
+                <span class="tag">12 min</span>
+              </div>
               <h3>
                 <a href="/aprende/contratar-en-la-era-agente.html">
-                  Contratar y habilidades en la era de los agentes
+                  Contratar en la era de los agentes
                 </a>
               </h3>
               <p>
@@ -223,14 +565,17 @@
           </ul>
         </section>
 
-        <aside class="post__next" aria-label="Siguiente paso">
-          <h2>¿No sabes por dónde empezar?</h2>
+        <!-- ── CTA ── -->
+        <aside class="post__next" aria-label="¿Por dónde empezar?">
+          <h2>¿No sabes en qué nivel estás?</h2>
           <p>
-            Contesta el cuestionario de madurez (5 minutos) y te decimos qué nivel deberías leer
-            primero según el estado actual de tu empresa.
+            Contesta el diagnóstico de madurez en 5 minutos. Te decimos qué nivel del
+            currículo deberías leer primero según el estado real de tu empresa — y qué
+            automatizar antes de que acabe el trimestre.
           </p>
-          <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico</a>
+          <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico →</a>
         </aside>
+
       </div>
     </main>
 
@@ -241,5 +586,51 @@
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
     <script src="/assets/aprende.js" defer></script>
+
+    <!-- ── Article category filter (inline, no deps) ── -->
+    <script>
+      (function () {
+        var filters = document.querySelectorAll("[data-filter]");
+        var cards = document.querySelectorAll(".article-card[data-category]");
+        if (!filters.length || !cards.length) return;
+
+        filters.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var cat = btn.getAttribute("data-filter");
+            filters.forEach(function (b) {
+              b.setAttribute("aria-pressed", "false");
+            });
+            btn.setAttribute("aria-pressed", "true");
+            cards.forEach(function (card) {
+              if (cat === "all" || card.getAttribute("data-category") === cat) {
+                card.classList.remove("hidden");
+              } else {
+                card.classList.add("hidden");
+              }
+            });
+          });
+        });
+      })();
+    </script>
+
+    <!-- ── Enhance progress widget with done-count ── -->
+    <script>
+      (function () {
+        function updateDoneCount() {
+          var el = document.querySelector('[data-aprende-progress="done-count"]');
+          if (!el) return;
+          var done = document.querySelectorAll(".path-step.level-card--done").length;
+          el.textContent = String(done);
+        }
+        // Poll briefly after aprende.js runs (it marks done cards on DOMContentLoaded)
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(updateDoneCount, 50);
+          });
+        } else {
+          setTimeout(updateDoneCount, 50);
+        }
+      })();
+    </script>
   </body>
 </html>
