@@ -78,109 +78,251 @@
       }
     </script>
 
+    <!-- ===== IR-page: layout-only CSS, all tokens from design system ===== -->
     <style>
-      .sample {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 2rem 1rem 4rem;
-      }
-      .sample__notice {
-        background: #fff8e1;
-        border-left: 4px solid #f6b73c;
-        padding: 0.9rem 1.1rem;
-        border-radius: 6px;
+      .ir-wrap { max-width: 800px; margin: 0 auto; padding: 2rem clamp(1rem,4vw,2rem) 5rem; }
+
+      .ir-notice {
+        border-left: 3px solid var(--accent);
+        padding: 0.8rem 1rem;
+        background: rgba(129,140,248,0.06);
+        border-radius: 0 8px 8px 0;
         margin-bottom: 2rem;
-        font-size: 0.95rem;
+        font-size: 0.92rem;
+        color: var(--muted);
       }
-      .sample__score-card {
-        background: #f5f8ff;
-        border: 1px solid #d8e1f3;
-        border-radius: 12px;
-        padding: 1.4rem 1.5rem;
-        margin: 1.5rem 0;
-        display: grid;
-        gap: 0.4rem;
+      .ir-notice strong { color: var(--fg); }
+
+      .ir-cover {
+        background: var(--card);
+        border: 1px solid rgba(99,102,241,0.25);
+        border-radius: 16px;
+        padding: 1.75rem 2rem 1.5rem;
+        margin-bottom: 2.5rem;
       }
-      .sample__score-num {
-        font-size: 2.4rem;
-        font-weight: 700;
-        margin: 0;
-      }
-      .sample__score-level {
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: #2540a0;
-        margin: 0;
-      }
-      .sample__dims {
-        display: grid;
-        gap: 0.7rem;
-        margin: 1.2rem 0 2rem;
-      }
-      .sample__dim {
-        display: grid;
-        grid-template-columns: 11rem 1fr 3rem;
-        align-items: center;
-        gap: 0.6rem;
-        font-size: 0.95rem;
-      }
-      .sample__bar {
-        background: #e9eef9;
-        height: 0.7rem;
+      .ir-cover__badge {
+        display: inline-block;
+        background: rgba(129,140,248,0.12);
+        border: 1px solid rgba(129,140,248,0.3);
         border-radius: 999px;
-        overflow: hidden;
+        padding: 0.28rem 0.8rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.9rem;
       }
-      .sample__bar > span {
-        display: block;
-        height: 100%;
-        background: linear-gradient(90deg, #5a76e3, #2540a0);
-      }
-      .sample__opp {
-        background: #fff;
-        border: 1px solid #e5e8f0;
-        border-left: 4px solid #2540a0;
-        border-radius: 8px;
-        padding: 1.1rem 1.3rem;
-        margin: 1rem 0;
-      }
-      .sample__opp h4 {
-        margin: 0 0 0.3rem;
-      }
-      .sample__opp-meta {
+      .ir-cover h1 { margin: 0 0 0.5rem; font-size: clamp(1.5rem,4vw,2.1rem); line-height: 1.2; }
+      .ir-cover__meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0;
         display: flex;
         flex-wrap: wrap;
-        gap: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-        color: #4a546b;
-        margin: 0.3rem 0 0.6rem;
+        gap: 0.3rem 1rem;
       }
-      .sample__opp-meta strong { color: #2540a0; }
-      .sample__plan {
-        background: #f9fafd;
-        border: 1px solid #e5e8f0;
-        border-radius: 12px;
+      .ir-cover__tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.1rem; }
+      .ir-tag {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 6px;
+        padding: 0.22rem 0.6rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .ir-section-label {
+        font-size: 0.73rem;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--accent);
+        font-weight: 700;
+        margin: 2.25rem 0 0.65rem;
+      }
+
+      .ir-kpis {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px,1fr));
+        gap: 0.9rem;
+        margin: 0.5rem 0 2rem;
+      }
+      .ir-kpi {
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 14px;
+        padding: 1.1rem 1.2rem 0.9rem;
+      }
+      .ir-kpi__label {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        margin: 0 0 0.4rem;
+      }
+      .ir-kpi__value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--accent);
+        line-height: 1;
+        margin: 0 0 0.2rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .ir-kpi__sub { font-size: 0.82rem; color: var(--muted); margin: 0; }
+
+      .ir-opps { display: grid; gap: 1.1rem; margin: 0.75rem 0 1.5rem; }
+      .ir-opp {
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 14px 14px 0;
         padding: 1.2rem 1.4rem;
-        margin: 1.5rem 0;
       }
-      .sample__plan ol { padding-left: 1.2rem; }
-      .sample__plan li { margin: 0.6rem 0; }
-      .sample__pkg {
-        background: #fff;
-        border: 2px solid #2540a0;
+      .ir-opp__header {
+        display: flex;
+        gap: 0.9rem;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 0.7rem;
+      }
+      .ir-opp__num {
+        font-size: 0.73rem;
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        flex-shrink: 0;
+        margin-top: 0.2rem;
+        white-space: nowrap;
+      }
+      .ir-opp h3 {
+        font-size: 1.02rem;
+        font-weight: 600;
+        color: var(--fg);
+        margin: 0;
+        line-height: 1.35;
+      }
+      .ir-opp__pills { display: flex; flex-wrap: wrap; gap: 0.35rem 0.65rem; margin-bottom: 0.7rem; }
+      .ir-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        background: rgba(129,140,248,0.1);
+        border: 1px solid rgba(129,140,248,0.2);
+        border-radius: 999px;
+        padding: 0.18rem 0.65rem;
+        font-size: 0.82rem;
+        color: var(--fg);
+      }
+      .ir-pill strong { color: var(--accent); }
+      .ir-pill--dim {
+        background: rgba(255,255,255,0.03);
+        border-color: rgba(255,255,255,0.08);
+        color: var(--muted);
+      }
+      .ir-opp__body { color: var(--muted); font-size: 0.93rem; margin: 0 0 0.55rem; line-height: 1.6; }
+      .ir-opp__body strong { color: var(--fg); }
+      .ir-opp__stack { font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 0; opacity: 0.85; }
+
+      .ir-total {
+        background: rgba(129,140,248,0.07);
+        border: 1px solid rgba(129,140,248,0.22);
         border-radius: 12px;
-        padding: 1.3rem 1.5rem;
-        margin: 1.6rem 0;
+        padding: 1rem 1.25rem;
+        margin: 0.25rem 0 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 2rem;
+        align-items: baseline;
       }
-      .sample__pkg p { margin: 0.3rem 0; }
-      .sample__cta {
+      .ir-total__big { font-size: 1.25rem; font-weight: 700; color: var(--fg); }
+      .ir-total__sub { color: var(--muted); font-size: 0.88rem; }
+
+      .ir-timeline { display: grid; gap: 0.9rem; margin: 0.75rem 0 2rem; }
+      .ir-step {
+        display: grid;
+        grid-template-columns: 5rem 1fr;
+        gap: 1rem;
+        align-items: start;
+      }
+      .ir-step__tag {
+        background: rgba(129,140,248,0.1);
+        border: 1px solid rgba(129,140,248,0.22);
+        border-radius: 8px;
+        padding: 0.45rem 0.5rem;
         text-align: center;
-        padding: 2rem 1rem;
-        background: #f5f8ff;
-        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        line-height: 1.3;
+      }
+      .ir-step__content {
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 10px;
+        padding: 0.85rem 1.05rem;
+      }
+      .ir-step__title { font-weight: 700; color: var(--fg); margin: 0 0 0.3rem; font-size: 0.95rem; }
+      .ir-step__body { color: var(--muted); font-size: 0.91rem; margin: 0; line-height: 1.55; }
+
+      .ir-pkg {
+        background: linear-gradient(160deg, rgba(99,102,241,0.1), rgba(99,102,241,0.04));
+        border: 1px solid rgba(99,102,241,0.38);
+        border-radius: 16px;
+        padding: 1.5rem 1.75rem;
+        margin: 2rem 0;
+      }
+      .ir-pkg__eyebrow {
+        font-size: 0.73rem;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--accent);
+        font-weight: 700;
+        margin: 0 0 0.4rem;
+      }
+      .ir-pkg h2 { font-size: 1.35rem; font-weight: 700; margin: 0 0 0.7rem; }
+      .ir-pkg__body { color: var(--muted); font-size: 0.96rem; margin: 0 0 1.25rem; line-height: 1.6; }
+      .ir-pkg__body strong { color: var(--fg); }
+
+      .ir-products { display: grid; gap: 0.7rem; margin: 0.75rem 0 2rem; }
+      .ir-product {
+        display: grid;
+        grid-template-columns: 1.5rem 1fr;
+        gap: 0.8rem;
+        align-items: start;
+        background: rgba(255,255,255,0.025);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 10px;
+        padding: 0.85rem 1rem;
+      }
+      .ir-product__icon { color: var(--accent); font-size: 1rem; line-height: 1.5; }
+      .ir-product__title { font-weight: 600; color: var(--fg); margin: 0 0 0.18rem; font-size: 0.93rem; }
+      .ir-product__desc { color: var(--muted); font-size: 0.88rem; margin: 0; line-height: 1.5; }
+
+      .ir-cta {
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 16px;
+        padding: 2.25rem 2rem;
+        text-align: center;
         margin-top: 2.5rem;
       }
-      .sample__cta h2 { margin-top: 0; }
+      .ir-cta h2 { margin: 0 0 0.7rem; font-size: 1.45rem; }
+      .ir-cta p { color: var(--muted); margin: 0 auto 1.2rem; max-width: 32rem; font-size: 0.95rem; line-height: 1.6; }
+      .ir-cta p strong { color: var(--fg); }
+      .ir-cta__links { margin-top: 1rem; font-size: 0.86rem; color: var(--muted); }
+      .ir-cta__links a { color: var(--accent); }
+
+      @media (max-width: 580px) {
+        .ir-step { grid-template-columns: 4rem 1fr; gap: 0.65rem; }
+        .ir-kpi__value { font-size: 1.5rem; }
+        .ir-cover { padding: 1.25rem 1.25rem 1rem; }
+        .ir-pkg { padding: 1.25rem 1.25rem; }
+      }
     </style>
+    <!-- ===== end IR-page ===== -->
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
@@ -194,200 +336,241 @@
       </nav>
     </header>
 
-    <main id="main-content" tabindex="-1" class="sample">
-      <p class="sample__notice">
-        <strong>Ejemplo ilustrativo.</strong> Esta página muestra el tipo de informe que
-        recibe una clínica dental tras completar el diagnóstico gratuito de IA en
-        <a href="/cuestionario.html">ia.itera.es/cuestionario</a>. Los datos corresponden
-        a un caso compuesto (clínica dental española de 4 sillones, 1.500 pacientes activos)
-        y se han anonimizado. Tu informe se genera con tus respuestas reales en menos de 5 minutos.
+    <main id="main-content" tabindex="-1" class="ir-wrap">
+
+      <p class="ir-notice">
+        <strong>Ejemplo ilustrativo.</strong> Muestra el tipo de informe que recibe una clínica dental tras completar el diagnóstico gratuito de IA en <a href="/cuestionario.html">ia.itera.es/cuestionario</a>. Datos de un caso compuesto (clínica dental española de 4 sillones, 1.500 pacientes activos), anonimizados. Tu informe se genera con tus respuestas reales en menos de 5 minutos.
       </p>
 
-      <header>
-        <h1>Informe de diagnóstico — Clínica dental de 4 sillones</h1>
-        <p style="color:#4a546b;font-size:0.95rem;">
-          Sector: clínica dental general · Tamaño: 6 personas (1 titular, 2 odontólogos
-          colaboradores, 1 higienista, 2 recepción) · 4 sillones · 1.500 pacientes activos
-          · 80 citas/semana · Herramientas: software clínico (tipo Dentalink/Klinikare),
-          WhatsApp Business, Outlook
+      <!-- Report cover -->
+      <div class="ir-cover">
+        <p class="ir-cover__badge">Informe de diagnóstico IA</p>
+        <h1>Clínica dental — 4 sillones</h1>
+        <p class="ir-cover__meta">
+          <span>Sector: clínica dental general</span>
+          <span>6 personas (1 titular, 2 odontólogos, 1 higienista, 2 recepción)</span>
+          <span>1.500 pacientes activos · 80 citas/semana</span>
+          <span>31 mayo 2026</span>
         </p>
-      </header>
-
-      <section class="sample__score-card" aria-label="Puntuación de madurez">
-        <p class="sample__score-num">22<small>/100</small></p>
-        <p class="sample__score-level">Nivel: Sin adopción real</p>
-        <p style="margin:0;color:#4a546b;">
-          Tu software clínico está ordenado y los pacientes bien fichados — eso es un
-          activo enorme que la mayoría no tiene. Pero ese histórico no se usa para
-          recuperar pacientes, reducir no-shows ni cerrar presupuestos abiertos. Hay
-          mucho dinero ya generado que se está dejando sobre la mesa.
-        </p>
-      </section>
-
-      <h2>Madurez por dimensión</h2>
-      <div class="sample__dims" aria-label="Madurez por dimensión">
-        <div class="sample__dim"><span>Uso de chats IA</span><div class="sample__bar"><span style="width:25%"></span></div><span>25</span></div>
-        <div class="sample__dim"><span>Automatizaciones</span><div class="sample__bar"><span style="width:15%"></span></div><span>15</span></div>
-        <div class="sample__dim"><span>Agentes</span><div class="sample__bar"><span style="width:5%"></span></div><span>5</span></div>
-        <div class="sample__dim"><span>Gobernanza</span><div class="sample__bar"><span style="width:15%"></span></div><span>15</span></div>
-        <div class="sample__dim"><span>Datos y procesos</span><div class="sample__bar"><span style="width:55%"></span></div><span>55</span></div>
+        <div class="ir-cover__tags">
+          <span class="ir-tag">Dentalink / Klinikare / Klinet</span>
+          <span class="ir-tag">WhatsApp Business</span>
+          <span class="ir-tag">Outlook</span>
+          <span class="ir-tag">4 sillones</span>
+        </div>
       </div>
-      <p style="color:#4a546b;font-size:0.93rem;">
-        Punto fuerte: software clínico funcional + base de pacientes bien estructurada.
-        Puntos débiles: nada conectado a WhatsApp/email automatizado, no hay
-        segmentación de la base, los recordatorios se envían a mano o no se envían.
+
+      <!-- Score -->
+      <p class="ir-section-label">Madurez IA</p>
+      <div class="result__score" aria-label="Puntuación de madurez IA">
+        <div
+          class="result__score-circle"
+          style="background:conic-gradient(var(--accent) 0 22%,rgba(255,255,255,0.08) 0 100%);"
+          aria-hidden="true"
+        ></div>
+        <div class="result__score-text">
+          <p class="result__score-number">22<small>/100</small></p>
+          <p class="result__level">Sin adopción real</p>
+          <p class="result__pitch">
+            Tu software clínico está ordenado y los pacientes bien fichados — eso es un activo enorme que la mayoría no tiene. Pero ese histórico no se usa para recuperar pacientes, reducir no-shows ni cerrar presupuestos abiertos. Hay mucho dinero ya generado que se está dejando sobre la mesa.
+          </p>
+        </div>
+      </div>
+
+      <!-- Dimension bars -->
+      <h2 style="margin:2rem 0 0.75rem;font-size:1.15rem;">Madurez por dimensión</h2>
+      <div class="result__chart" aria-label="Madurez por dimensión">
+        <div class="result__bar-row">
+          <span class="result__bar-label">Uso de chats IA</span>
+          <span class="result__bar-track"><span class="result__bar-fill" style="width:25%"></span></span>
+          <span class="result__bar-value">25</span>
+        </div>
+        <div class="result__bar-row">
+          <span class="result__bar-label">Automatizaciones</span>
+          <span class="result__bar-track"><span class="result__bar-fill" style="width:15%"></span></span>
+          <span class="result__bar-value">15</span>
+        </div>
+        <div class="result__bar-row">
+          <span class="result__bar-label">Agentes</span>
+          <span class="result__bar-track"><span class="result__bar-fill" style="width:5%"></span></span>
+          <span class="result__bar-value">5</span>
+        </div>
+        <div class="result__bar-row">
+          <span class="result__bar-label">Gobernanza</span>
+          <span class="result__bar-track"><span class="result__bar-fill" style="width:15%"></span></span>
+          <span class="result__bar-value">15</span>
+        </div>
+        <div class="result__bar-row">
+          <span class="result__bar-label">Datos y procesos</span>
+          <span class="result__bar-track"><span class="result__bar-fill" style="width:55%"></span></span>
+          <span class="result__bar-value">55</span>
+        </div>
+      </div>
+      <p style="color:var(--muted);font-size:0.88rem;margin:0.7rem 0 0;">
+        <strong style="color:var(--fg);">Punto fuerte:</strong> software clínico funcional + base de pacientes bien estructurada.
+        <strong style="color:var(--fg);">Puntos débiles:</strong> nada conectado a WhatsApp/email automatizado, no hay segmentación de la base, los recordatorios se envían a mano o no se envían.
       </p>
 
-      <h2>Tus 3 mejores oportunidades de automatización</h2>
-      <p style="color:#4a546b;">
-        Ordenadas por € recuperados al mes / facilidad. Las estimaciones vienen del
-        cuestionario (volumen de citas, tasa de no-show declarada, presupuestos abiertos
-        y pacientes inactivos &gt;12 meses).
-      </p>
+      <!-- KPI strip -->
+      <p class="ir-section-label">Oportunidad total identificada</p>
+      <div class="ir-kpis">
+        <div class="ir-kpi">
+          <p class="ir-kpi__label">Margen recuperable</p>
+          <p class="ir-kpi__value">5.450 €</p>
+          <p class="ir-kpi__sub">por mes</p>
+        </div>
+        <div class="ir-kpi">
+          <p class="ir-kpi__label">Potencial anual</p>
+          <p class="ir-kpi__value">65.400 €</p>
+          <p class="ir-kpi__sub">al año</p>
+        </div>
+        <div class="ir-kpi">
+          <p class="ir-kpi__label">Horas/sem ahorradas</p>
+          <p class="ir-kpi__value">13</p>
+          <p class="ir-kpi__sub">entre las 3 automatizaciones</p>
+        </div>
+        <div class="ir-kpi">
+          <p class="ir-kpi__label">Inversión estimada</p>
+          <p class="ir-kpi__value">7–11k €</p>
+          <p class="ir-kpi__sub">puesta en marcha</p>
+        </div>
+      </div>
 
-      <article class="sample__opp" aria-label="Oportunidad 1">
-        <h4>1 · Agente anti no-show: confirmación, reagendado y lista de espera dinámica</h4>
-        <p class="sample__opp-meta">
-          <span><strong>Sillón recuperado/mes:</strong> ≈ 2.250 €</span>
-          <span><strong>Horas/sem ahorradas:</strong> 6</span>
-          <span><strong>Dificultad:</strong> baja</span>
-          <span><strong>Plazo:</strong> 3–4 semanas</span>
-        </p>
-        <p>
-          Hoy pierdes ~14 sillones a la semana por no-shows y cancelaciones tardías
-          (18 % sobre 80 citas). Un agente conectado a tu software clínico y a WhatsApp
-          Business envía recordatorios personalizados a 48 h y 4 h, recoge la
-          confirmación, ofrece reagendado en un click y, si liberas hueco, ofrece
-          automáticamente el slot a pacientes de tu lista de espera. Recuperando solo
-          la mitad de esos huecos: ≈ 7 sillones/semana × 75 €/h ≈ <strong>2.250 €/mes</strong>.
-        </p>
-        <p style="margin-bottom:0;color:#4a546b;font-size:0.92rem;">
-          Pila típica: n8n / Make + API de tu software clínico + WhatsApp Business API
-          + LLM (Claude / GPT-4o-mini) para personalizar el mensaje según historial.
-        </p>
-      </article>
+      <!-- Opportunities -->
+      <p class="ir-section-label">Tus 3 mejores oportunidades</p>
+      <p style="color:var(--muted);font-size:0.9rem;margin:0 0 0.9rem;">Ordenadas por € recuperados al mes y facilidad. Estimaciones basadas en tus respuestas: volumen de citas, tasa de no-show declarada, presupuestos abiertos y pacientes inactivos &gt;12 meses.</p>
 
-      <article class="sample__opp" aria-label="Oportunidad 2">
-        <h4>2 · Campaña de reactivación de pacientes inactivos &gt;12 meses</h4>
-        <p class="sample__opp-meta">
-          <span><strong>Margen recuperado/mes:</strong> ≈ 1.500 €</span>
-          <span><strong>Horas/sem ahorradas:</strong> 4</span>
-          <span><strong>Dificultad:</strong> baja</span>
-          <span><strong>Plazo:</strong> 4 semanas</span>
-        </p>
-        <p>
-          ~620 pacientes de tus 1.500 no han vuelto en más de 12 meses. Un agente
-          segmenta tu base por motivo real (revisión anual pendiente, limpieza, tratamiento
-          interrumpido, presupuesto abierto) y envía un mensaje personal por WhatsApp con
-          el motivo concreto. No es "spam de marketing": referencia su última visita y
-          el tratamiento pendiente. Conversión típica 4–6 % a cita en el primer trimestre:
-          ≈ 8 pacientes nuevos/mes × 280 € de ticket medio × 70 % margen ≈ <strong>1.500 €/mes</strong>.
-        </p>
-        <p style="margin-bottom:0;color:#4a546b;font-size:0.92rem;">
-          Pila típica: extracción de inactivos del software clínico + LLM para
-          segmentación clínica + WhatsApp Business + opt-out automático.
-        </p>
-      </article>
+      <div class="ir-opps">
+        <article class="ir-opp" aria-label="Oportunidad 1">
+          <div class="ir-opp__header">
+            <span class="ir-opp__num">Opp #1</span>
+            <h3>Agente anti no-show: confirmación, reagendado y lista de espera dinámica</h3>
+          </div>
+          <div class="ir-opp__pills">
+            <span class="ir-pill"><strong>≈ 2.250 €/mes</strong> recuperados</span>
+            <span class="ir-pill ir-pill--dim">6 h/sem ahorradas</span>
+            <span class="ir-pill ir-pill--dim">Dificultad: baja</span>
+            <span class="ir-pill ir-pill--dim">3–4 semanas</span>
+          </div>
+          <p class="ir-opp__body">
+            Pierdes ~14 sillones a la semana por no-shows y cancelaciones tardías (18 % sobre 80 citas). Un agente conectado a tu software clínico y a WhatsApp Business envía recordatorios personalizados a 48 h y 4 h, recoge la confirmación, ofrece reagendado en un click y, si libera hueco, lo ofrece automáticamente a pacientes en lista de espera. Recuperando sólo la mitad de esos huecos: ≈ 7 sillones/semana × 75 €/h ≈ <strong>2.250 €/mes</strong>.
+          </p>
+          <p class="ir-opp__stack">Pila típica: n8n/Make + API software clínico + WhatsApp Business API + LLM (Claude/GPT-4o-mini) para personalizar según historial</p>
+        </article>
 
-      <article class="sample__opp" aria-label="Oportunidad 3">
-        <h4>3 · Seguimiento automático de presupuestos abiertos sin cita</h4>
-        <p class="sample__opp-meta">
-          <span><strong>Margen recuperado/mes:</strong> ≈ 1.700 €</span>
-          <span><strong>Horas/sem ahorradas:</strong> 3</span>
-          <span><strong>Dificultad:</strong> media</span>
-          <span><strong>Plazo:</strong> 4–6 semanas</span>
-        </p>
-        <p>
-          Generas ~40 presupuestos al mes y aceptas el 60 %, pero ~20 % se quedan
-          dormidos sin cita programada. Un agente crea un pipeline visible de presupuestos
-          (igual que un CRM) y hace 3 toques personalizados (texto + opción de financiación
-          + propuesta de slot concreto). Recuperando ~30 % de los dormidos: ≈ 2,4
-          presupuestos/mes × 1.200 € medio × 60 % margen ≈ <strong>1.700 €/mes</strong>.
-        </p>
-        <p style="margin-bottom:0;color:#4a546b;font-size:0.92rem;">
-          Pila típica: extracción de presupuestos del software clínico + tablero Airtable
-          / Notion + LLM para redactar el toque + WhatsApp / email.
-        </p>
-      </article>
+        <article class="ir-opp" aria-label="Oportunidad 2">
+          <div class="ir-opp__header">
+            <span class="ir-opp__num">Opp #2</span>
+            <h3>Campaña de reactivación de pacientes inactivos &gt;12 meses</h3>
+          </div>
+          <div class="ir-opp__pills">
+            <span class="ir-pill"><strong>≈ 1.500 €/mes</strong> recuperados</span>
+            <span class="ir-pill ir-pill--dim">4 h/sem ahorradas</span>
+            <span class="ir-pill ir-pill--dim">Dificultad: baja</span>
+            <span class="ir-pill ir-pill--dim">4 semanas</span>
+          </div>
+          <p class="ir-opp__body">
+            ~620 pacientes de tus 1.500 no han vuelto en más de 12 meses. Un agente segmenta tu base por motivo real (revisión anual pendiente, limpieza, tratamiento interrumpido, presupuesto abierto) y envía un mensaje personal por WhatsApp con el motivo concreto. No es spam de marketing: referencia su última visita y el tratamiento pendiente. Conversión típica 4–6 % a cita en el primer trimestre: ≈ 8 pacientes/mes × 280 € × 70 % margen ≈ <strong>1.500 €/mes</strong>.
+          </p>
+          <p class="ir-opp__stack">Pila típica: extracción de inactivos del software clínico + LLM para segmentación clínica + WhatsApp Business + opt-out automático</p>
+        </article>
 
-      <p style="background:#eef3ff;padding:1rem 1.2rem;border-radius:8px;margin:1.5rem 0;">
-        <strong>Suma de oportunidades:</strong> ≈ 5.450 € de margen recuperado al mes
-        ≈ <strong>65.400 € al año</strong>, con una inversión típica de 7.000–11.000 €
-        de puesta en marcha y 300–500 €/mes de operación (incluye coste de WhatsApp
-        Business API y modelo LLM).
-      </p>
+        <article class="ir-opp" aria-label="Oportunidad 3">
+          <div class="ir-opp__header">
+            <span class="ir-opp__num">Opp #3</span>
+            <h3>Seguimiento automático de presupuestos abiertos sin cita</h3>
+          </div>
+          <div class="ir-opp__pills">
+            <span class="ir-pill"><strong>≈ 1.700 €/mes</strong> recuperados</span>
+            <span class="ir-pill ir-pill--dim">3 h/sem ahorradas</span>
+            <span class="ir-pill ir-pill--dim">Dificultad: media</span>
+            <span class="ir-pill ir-pill--dim">4–6 semanas</span>
+          </div>
+          <p class="ir-opp__body">
+            Generas ~40 presupuestos al mes y aceptas el 60 %, pero ~20 % se quedan dormidos sin cita programada. Un agente crea un pipeline visible de presupuestos y hace 3 toques personalizados (texto + opción de financiación + propuesta de slot concreto). Recuperando ~30 % de los dormidos: ≈ 2,4 presupuestos/mes × 1.200 € medio × 60 % margen ≈ <strong>1.700 €/mes</strong>.
+          </p>
+          <p class="ir-opp__stack">Pila típica: extracción de presupuestos del software clínico + tablero Airtable/Notion + LLM para redactar el toque + WhatsApp/email</p>
+        </article>
+      </div>
 
-      <section class="sample__plan" aria-label="Plan 30/60/90">
-        <h2 style="margin-top:0;">Tu plan a 30 / 60 / 90 días</h2>
-        <ol>
-          <li>
-            <strong>En 30 días — primer quick win.</strong> Lanzar el agente anti-no-show
-            (oportunidad 1) en una sola línea de citas para empezar (p.ej. higienes).
-            Medir tasa de no-show antes / después durante 4 semanas. Acompañar de un
-            protocolo escrito de 1 página: qué hace el agente, qué decide la recepción.
-          </li>
-          <li>
-            <strong>En 60 días — extensión y campaña.</strong> Extender el anti-no-show
-            a todas las líneas y arrancar la primera campaña de reactivación
-            (oportunidad 2) sobre un segmento concreto (p.ej. limpiezas pendientes
-            &gt;12 m). Empezar a llevar KPI semanal: sillón recuperado, pacientes
-            reactivados, satisfacción.
-          </li>
-          <li>
-            <strong>En 90 días — pipeline comercial y gobierno.</strong> Activar el
-            seguimiento de presupuestos (oportunidad 3) con tablero visible en recepción.
-            Designar a una persona como "responsable de seguimiento" (4 h/semana).
-            Revisión trimestral: € recuperados, ROI real, próximos casos (rx con IA,
-            ficha clínica por voz, etc.).
-          </li>
-        </ol>
-      </section>
+      <div class="ir-total">
+        <span class="ir-total__big">≈ 5.450 €/mes · 65.400 €/año recuperados</span>
+        <span class="ir-total__sub">Inversión típica: 7.000–11.000 € de puesta en marcha + 300–500 €/mes de operación</span>
+      </div>
 
-      <aside class="sample__pkg" aria-label="Paquete recomendado">
-        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;color:#4a546b;margin:0;">Paquete recomendado</p>
-        <h3 style="margin:0.3rem 0;">Diagnóstico express dental</h3>
-        <p>
-          En 2 semanas mapeamos contigo el flujo completo de tu clínica (agenda,
-          recepción, presupuestos, seguimiento) y dejamos priorizadas las 3 automatizaciones
-          con mayor € recuperado. Sales con un plan ejecutable y presupuesto firme para el
-          piloto anti-no-show. Desde 1.500 €.
+      <!-- 30/60/90 -->
+      <p class="ir-section-label">Tu plan a 30 / 60 / 90 días</p>
+      <div class="ir-timeline">
+        <div class="ir-step">
+          <div class="ir-step__tag">30<br>días</div>
+          <div class="ir-step__content">
+            <p class="ir-step__title">Primer quick win — agente anti-no-show</p>
+            <p class="ir-step__body">Lanzar el agente en una sola línea de citas (p.ej. higienes) para empezar. Medir tasa de no-show antes/después durante 4 semanas. Acompañar de un protocolo escrito de 1 página: qué hace el agente, qué decide recepción.</p>
+          </div>
+        </div>
+        <div class="ir-step">
+          <div class="ir-step__tag">60<br>días</div>
+          <div class="ir-step__content">
+            <p class="ir-step__title">Extensión y primera campaña de reactivación</p>
+            <p class="ir-step__body">Extender el anti-no-show a todas las líneas y arrancar la primera campaña de reactivación (oportunidad 2) sobre un segmento concreto (limpiezas pendientes &gt;12 m). Empezar a llevar KPI semanal: sillón recuperado, pacientes reactivados, satisfacción.</p>
+          </div>
+        </div>
+        <div class="ir-step">
+          <div class="ir-step__tag">90<br>días</div>
+          <div class="ir-step__content">
+            <p class="ir-step__title">Pipeline comercial y gobierno</p>
+            <p class="ir-step__body">Activar el seguimiento de presupuestos (oportunidad 3) con tablero visible en recepción. Designar a una persona como "responsable de seguimiento" (4 h/semana). Revisión trimestral: € recuperados, ROI real, próximos casos (rx con IA, ficha clínica por voz, etc.).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Package recommendation -->
+      <div class="ir-pkg" aria-label="Paquete recomendado">
+        <p class="ir-pkg__eyebrow">Paquete recomendado</p>
+        <h2>Diagnóstico express dental</h2>
+        <p class="ir-pkg__body">
+          En 2 semanas mapeamos contigo el flujo completo de tu clínica (agenda, recepción, presupuestos, seguimiento) y dejamos priorizadas las 3 automatizaciones con mayor € recuperado. Sales con un plan ejecutable y presupuesto firme para el piloto anti-no-show. Desde <strong>1.500 €</strong>.
         </p>
-        <p>
-          <a class="cta cta--primary" href="/servicios.html#diagnostico-express">Ver el diagnóstico express →</a>
-        </p>
-      </aside>
+        <a class="cta cta--primary" href="/servicios.html#diagnostico-express" style="margin-top:0;">Ver el diagnóstico express →</a>
+      </div>
 
-      <h2>Productos / herramientas que encajan contigo</h2>
-      <ul>
-        <li>
-          <strong>Tu software clínico actual</strong> (Dentalink, Klinikare, Klinet o
-          similar) es la base. Antes de añadir IA, conviene confirmar qué endpoints / API
-          ofrece y qué exportes podemos automatizar. Es tu activo más valioso.
-        </li>
-        <li>
-          <strong>Ficha.es</strong> — para estructurar protocolos clínicos y administrativos
-          antes de meter IA encima. El suelo sin el que ninguna automatización aguanta.
-          <a href="https://ficha.es" rel="noopener">ficha.es</a>
-        </li>
-        <li>
-          <strong>WhatsApp Business API</strong> — canal con &gt;95 % de apertura. Es el
-          medio por el que tu paciente realmente lee. Imprescindible para anti-no-show y
-          reactivación. (No el WhatsApp Business app — la API, gestionada por un BSP.)
-        </li>
-      </ul>
+      <!-- Products -->
+      <h2 style="margin:2rem 0 0.75rem;font-size:1.15rem;">Herramientas que encajan contigo</h2>
+      <div class="ir-products">
+        <div class="ir-product">
+          <span class="ir-product__icon">◈</span>
+          <div>
+            <p class="ir-product__title">Tu software clínico (Dentalink, Klinikare, Klinet…)</p>
+            <p class="ir-product__desc">Es tu activo más valioso. Antes de añadir IA, conviene confirmar qué API/exportes ofrece y qué podemos automatizar sobre él.</p>
+          </div>
+        </div>
+        <div class="ir-product">
+          <span class="ir-product__icon">◈</span>
+          <div>
+            <p class="ir-product__title"><a href="https://ficha.es" rel="noopener">Ficha.es</a></p>
+            <p class="ir-product__desc">Para estructurar protocolos clínicos y administrativos antes de meter IA encima. El suelo sin el que ninguna automatización aguanta.</p>
+          </div>
+        </div>
+        <div class="ir-product">
+          <span class="ir-product__icon">◈</span>
+          <div>
+            <p class="ir-product__title">WhatsApp Business API</p>
+            <p class="ir-product__desc">Canal con &gt;95 % de apertura. Imprescindible para anti-no-show y reactivación. (No la app — la API, gestionada por un BSP.)</p>
+          </div>
+        </div>
+      </div>
 
-      <section class="sample__cta">
+      <!-- CTA -->
+      <section class="ir-cta">
         <h2>¿Quieres tu informe igual de concreto?</h2>
-        <p>
-          Tu diagnóstico se genera con <strong>tus</strong> respuestas (tipo de clínica,
-          tamaño, volumen de citas, dolores reales). En menos de 5 minutos verás tus 3
-          oportunidades, tu plan a 90 días y el paquete que más encaja. Sin registro
-          para verlo.
-        </p>
-        <p>
-          <a class="cta cta--primary" href="/cuestionario.html" onclick="window.autonomia&&window.autonomia.track('sample_report_cta_click',{from:'clinica_dental'})">Hacer mi diagnóstico gratis →</a>
-        </p>
-        <p style="font-size:0.85rem;color:#4a546b;">
+        <p>Tu diagnóstico se genera con <strong>tus</strong> respuestas (tipo de clínica, tamaño, volumen de citas, dolores reales). En menos de 5 minutos verás tus 3 oportunidades, tu plan a 90 días y el paquete que más encaja. Sin registro para verlo.</p>
+        <a
+          class="cta cta--primary"
+          href="/cuestionario.html"
+          style="margin-top:0;"
+          onclick="window.autonomia&&window.autonomia.track('sample_report_cta_click',{from:'clinica_dental'})"
+        >Hacer mi diagnóstico gratis →</a>
+        <p class="ir-cta__links">
           También disponible: <a href="/calculadora.html">calculadora de ROI</a> ·
           <a href="/herramienta/madurez.html">test de madurez</a> ·
           <a href="/ejemplo-informe/asesoria.html">ejemplo informe asesoría</a>
