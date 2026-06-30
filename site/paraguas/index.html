@@ -59,11 +59,12 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 
 <nav class="nav">
   <a href="/paraguas/" class="nav-logo">Autono<span>IA</span></a>
-  <button class="nav-toggle" aria-label="Menú">☰</button>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-label="Menú" aria-controls="primary-nav" aria-expanded="false">☰</button>
+  <ul class="nav-links" id="primary-nav">
     <li><a href="#ecosistema">Ecosistema</a></li>
     <li><a href="#productos">Productos</a></li>
     <li><a href="#gobernanza">Gobernanza IA</a></li>
@@ -71,6 +72,8 @@
     <li><a href="#contacto" class="nav-cta">Diagnóstico gratuito</a></li>
   </ul>
 </nav>
+
+<main id="main-content" tabindex="-1">
 
 <!-- HERO -->
 <header class="hero">
@@ -260,24 +263,26 @@
       <h2 style="margin:1rem 0">¿Qué proceso repetitivo te roba <span class="grad">más tiempo cada semana?</span></h2>
       <p class="lead" style="margin:0 auto 2rem">Cuéntanoslo. En 48 horas te decimos si podemos automatizarlo y qué retorno esperar. Sin compromiso.</p>
       <form class="form" data-lead-form>
-        <input type="text" name="name" placeholder="Tu nombre" required>
-        <input type="email" name="email" placeholder="Email de empresa" required>
-        <select name="sector">
+        <input type="text" name="name" placeholder="Tu nombre" aria-label="Tu nombre" required>
+        <input type="email" name="email" placeholder="Email de empresa" aria-label="Email de empresa" required>
+        <select name="sector" aria-label="Sector de tu empresa (opcional)">
           <option value="">Sector de tu empresa (opcional)</option>
           <option>Consultoría / Asesoría</option><option>Salud</option><option>Legal</option>
           <option>Logística</option><option>Manufactura</option><option>Retail / E-commerce</option>
           <option>Hostelería</option><option>Construcción</option><option>Otro</option>
         </select>
-        <textarea name="message" placeholder="Describe el proceso que más tiempo te consume (ej: 'revisamos 200 facturas al mes a mano')" required></textarea>
-        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <textarea name="message" placeholder="Describe el proceso que más tiempo te consume (ej: 'revisamos 200 facturas al mes a mano')" aria-label="Describe el proceso que más tiempo te consume" required></textarea>
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off">
         <input type="hidden" name="source" value="paraguas">
         <button type="submit" class="btn btn-primary" style="justify-content:center;width:100%">Solicitar diagnóstico gratuito →</button>
-        <p class="hint" data-hint hidden></p>
+        <p class="hint" data-hint role="status" aria-live="polite" hidden></p>
         <p class="fineprint">Sin compromiso · Sin spam · Cumplimiento RGPD</p>
       </form>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="footer">
   <div class="container">

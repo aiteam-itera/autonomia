@@ -75,10 +75,11 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 <nav class="nav">
   <a href="/paraguas/" class="nav-logo">Autono<span>IA</span></a>
-  <button class="nav-toggle" aria-label="Menú">☰</button>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-label="Menú" aria-controls="primary-nav" aria-expanded="false">☰</button>
+  <ul class="nav-links" id="primary-nav">
     <li><a href="/paraguas/ficha.html">Ficha</a></li>
     <li><a href="/paraguas/bpac.html">BPAC</a></li>
     <li><a href="/paraguas/ironbrain.html">IronBrain</a></li>
@@ -86,6 +87,7 @@
     <li><a href="/paraguas/#contacto" class="nav-cta">Diagnóstico gratuito</a></li>
   </ul>
 </nav>
+<main id="main-content" tabindex="-1">
 
 <header class="hero">
   <div class="aurora"></div>
@@ -200,6 +202,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="footer">
   <div class="container">

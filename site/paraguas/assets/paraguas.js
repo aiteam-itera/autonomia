@@ -16,9 +16,15 @@
     var toggle = nav.querySelector(".nav-toggle");
     var links = nav.querySelector(".nav-links");
     if (toggle && links) {
-      toggle.addEventListener("click", function () { links.classList.toggle("open"); });
+      toggle.addEventListener("click", function () {
+        links.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", links.classList.contains("open") ? "true" : "false");
+      });
       links.addEventListener("click", function (e) {
-        if (e.target.tagName === "A") links.classList.remove("open");
+        if (e.target.tagName === "A") {
+          links.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+        }
       });
     }
   }
