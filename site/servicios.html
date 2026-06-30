@@ -43,8 +43,93 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://ia.itera.es/servicios.html#webpage",
+          "url": "https://ia.itera.es/servicios.html",
+          "name": "Servicios y precios — AutonomIA",
+          "description": "Tres paquetes contratables para adoptar IA en tu pyme: diagnóstico express, piloto de automatización y acompañamiento gobernado.",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "AutonomIA",
+            "url": "https://ia.itera.es/"
+          },
+          "provider": {
+            "@type": "Organization",
+            "name": "Itera",
+            "url": "https://itera.es/"
+          }
+        },
+        {
+          "@type": "OfferCatalog",
+          "@id": "https://ia.itera.es/servicios.html#catalogo-paquetes",
+          "name": "Paquetes AutonomIA",
+          "url": "https://ia.itera.es/servicios.html",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Diagnóstico express",
+              "url": "https://ia.itera.es/servicios.html#diagnostico-express",
+              "price": 1500,
+              "priceCurrency": "EUR",
+              "availability": "https://schema.org/InStock",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Diagnóstico express de IA para pymes",
+                "description": "2 semanas. Mapa de procesos, matriz de oportunidad y tres casos priorizados con ahorro estimado."
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": 1500,
+                "priceCurrency": "EUR",
+                "unitText": "pago unico"
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "Piloto de automatización",
+              "url": "https://ia.itera.es/servicios.html#piloto",
+              "price": 6000,
+              "priceCurrency": "EUR",
+              "availability": "https://schema.org/InStock",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Piloto de automatización IA",
+                "description": "4-6 semanas. Un proceso automatizado en producción, con humano en el loop, dashboard y 30 días de garantía."
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": 6000,
+                "priceCurrency": "EUR",
+                "unitText": "proyecto"
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "Acompañamiento gobernado",
+              "url": "https://ia.itera.es/servicios.html#acompanamiento",
+              "price": 3500,
+              "priceCurrency": "EUR",
+              "availability": "https://schema.org/InStock",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Acompañamiento gobernado de IA",
+                "description": "Servicio mensual sin permanencia para operar agentes, gobernanza, mantenimiento, formación y mejora continua."
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": 3500,
+                "priceCurrency": "EUR",
+                "unitText": "mes"
+              }
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://ia.itera.es/servicios.html#faq",
+          "mainEntity": [
         {
           "@type": "Question",
           "name": "¿Por qué los precios son \"desde\" y no cerrados?",
@@ -93,6 +178,8 @@
             "text": "Cuéntanoslo. Si tu caso necesita algo a medida, te lo decimos abiertamente y, si no es lo nuestro, te recomendamos a quien sí pueda ayudarte."
           }
         }
+          ]
+        }
       ]
     }
     </script>
@@ -111,21 +198,66 @@
       <div class="hero__content">
         <h1>Tres formas de empezar.</h1>
         <p>
-          Diagnóstico express, piloto y acompañamiento. Cada paquete dice exactamente
-          qué llevas, en cuánto tiempo y por cuánto. Si no encaja, te lo decimos antes
-          de cobrar nada.
+          Diagnóstico express, piloto y acompañamiento. No compras "IA" en abstracto:
+          compras una decisión mejor, un proceso funcionando o un equipo externo que
+          lo mantiene con límites, métricas y revisión humana.
         </p>
+        <div class="hero__actions">
+          <a class="cta cta--primary" href="#comparativa-title">Comparar paquetes</a>
+          <a class="cta cta--ghost" href="/cuestionario.html">Diagnóstico en 5 min</a>
+        </div>
       </div>
     </header>
 
     <main id="main-content" tabindex="-1">
+      <section class="section section--alt" aria-labelledby="decision-title">
+        <div class="section__head section__head--center">
+          <p class="eyebrow">Antes de elegir</p>
+          <h2 class="section__title" id="decision-title">El precio depende del riesgo que quieres quitarte.</h2>
+          <p class="section__lead">
+            La pregunta no es "cuánto cuesta hacer IA". La pregunta útil es qué coste
+            quieres dejar de pagar: semanas decidiendo por intuición, horas manuales
+            repetidas o automatizaciones sin dueño que acaban rompiéndose.
+          </p>
+        </div>
+        <div class="value-stack" aria-label="Tres razones de valor por paquete">
+          <article class="value-card">
+            <p class="value-card__kicker">1.500 €</p>
+            <h3>Evita apostar al primer caso que suena bien.</h3>
+            <p>
+              El diagnóstico paga su sitio cuando evita un piloto equivocado o convierte
+              una idea difusa en una lista priorizada por ahorro, riesgo y dificultad.
+            </p>
+          </article>
+          <article class="value-card value-card--featured">
+            <p class="value-card__kicker">6.000 €</p>
+            <h3>Compra una prueba en producción, no una presentación.</h3>
+            <p>
+              El piloto se mide contra el coste de seguir haciendo el proceso a mano:
+              tiempo del equipo, errores, esperas y oportunidades que no llegan al CRM.
+            </p>
+          </article>
+          <article class="value-card">
+            <p class="value-card__kicker">3.500 €/mes</p>
+            <h3>Menos fricción que contratar un equipo interno completo.</h3>
+            <p>
+              El acompañamiento tiene sentido cuando ya hay varios flujos vivos y necesitas
+              operación, gobierno, formación y mejora continua sin permanencia.
+            </p>
+          </article>
+        </div>
+      </section>
+
       <section class="section" aria-labelledby="paquetes-title">
-        <h2 id="paquetes-title">Paquetes contratables</h2>
-        <p class="packages__intro">
-          Si dudas cuál te toca, haz primero el
-          <a href="/cuestionario.html">diagnóstico de madurez</a>: te recomendamos el
-          paquete según tu puntuación.
-        </p>
+        <div class="section__head section__head--center">
+          <p class="eyebrow">Oferta cerrada</p>
+          <h2 class="section__title" id="paquetes-title">Paquetes contratables</h2>
+          <p class="section__lead">
+            Si dudas cuál te toca, haz primero el
+            <a href="/cuestionario.html">diagnóstico de madurez</a>: te recomendamos el
+            paquete según tu puntuación y el riesgo real de tu operación.
+          </p>
+        </div>
 
         <div class="packages">
           <!-- 1. DIAGNÓSTICO EXPRESS -->
@@ -135,7 +267,7 @@
               <h3 class="package__title" id="pkg1-title">Diagnóstico express</h3>
               <p class="package__pitch">
                 Mapeamos tu operación, identificamos los 3 procesos donde la IA
-                paga su coste primero y te lo entregamos por escrito.
+                paga su coste primero y descartamos lo que todavía no merece presupuesto.
               </p>
             </header>
 
@@ -151,6 +283,7 @@
               <li>Top 3 casos priorizados con ahorro estimado y esfuerzo.</li>
               <li>Recomendación de stack (chats empresariales, automatizaciones, agentes).</li>
               <li>Documento entregable (15–25 páginas) y sesión de cierre con preguntas.</li>
+              <li>Si luego haces el piloto con nosotros, descontamos este importe.</li>
             </ul>
 
             <h4 class="package__section-title">Qué NO incluye</h4>
@@ -192,12 +325,13 @@
 
           <!-- 2. PILOTO DE AUTOMATIZACIÓN -->
           <article class="package package--featured" id="piloto" aria-labelledby="pkg2-title">
+            <span class="anchor-alias" id="piloto-automatizacion" aria-hidden="true"></span>
             <header class="package__header">
               <p class="package__eyebrow">El más contratado</p>
               <h3 class="package__title" id="pkg2-title">Piloto de automatización</h3>
               <p class="package__pitch">
                 Tomamos un proceso tuyo concreto y lo dejamos automatizado en
-                producción, con humano en el loop y métricas de ROI.
+                producción, con humano en el loop, tablero de control y métricas de ROI.
               </p>
             </header>
 
@@ -214,6 +348,7 @@
               <li>Dashboard de monitoreo: ejecuciones, errores, tiempo ahorrado.</li>
               <li>Formación al equipo que lo va a operar (1 sesión grabada).</li>
               <li>30 días de garantía: si rompe, lo arreglamos sin coste extra.</li>
+              <li>Presupuesto cerrado por escrito antes de construir.</li>
             </ul>
 
             <h4 class="package__section-title">Qué NO incluye</h4>
@@ -280,6 +415,7 @@
               <li>Reunión mensual de revisión con métricas de impacto (€, horas, errores).</li>
               <li>Canal directo (Slack/Teams) con tiempo de respuesta de un día hábil.</li>
               <li>Formación recurrente al equipo (1 sesión al mes).</li>
+              <li>Sin permanencia: cancelas el mes siguiente si no compensa.</li>
             </ul>
 
             <h4 class="package__section-title">Qué NO incluye</h4>
@@ -321,6 +457,85 @@
               Quiero acompañamiento
             </a>
           </article>
+        </div>
+      </section>
+
+      <section class="section section--alt" aria-labelledby="comparativa-title">
+        <div class="section__head section__head--center">
+          <p class="eyebrow">Decisión rápida</p>
+          <h2 class="section__title" id="comparativa-title">Comparativa sin letra pequeña</h2>
+          <p class="section__lead">
+            Tres niveles de compromiso. Empieza por el menor que responda a tu duda
+            actual y sube sólo cuando el siguiente riesgo sea real.
+          </p>
+        </div>
+        <div class="scenarios comparison">
+          <table class="scenarios__table">
+            <caption class="scenarios__caption">
+              Todos los precios son netos (IVA aparte). Licencias y APIs de terceros no
+              incluidas salvo que se indique por escrito en la propuesta.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Criterio</th>
+                <th scope="col">Diagnóstico</th>
+                <th scope="col">Piloto</th>
+                <th scope="col">Acompañamiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" data-label="Criterio">Mejor cuando</th>
+                <td data-label="Diagnóstico">Tienes varias ideas y no sabes cuál paga antes.</td>
+                <td data-label="Piloto">Ya hay un proceso candidato y necesitas verlo funcionando.</td>
+                <td data-label="Acompañamiento">Hay varios flujos vivos o una operación IA que mantener.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Criterio">Entregable que compras</th>
+                <td data-label="Diagnóstico">Informe accionable + roadmap priorizado.</td>
+                <td data-label="Piloto">Un proceso en producción con dashboard.</td>
+                <td data-label="Acompañamiento">Equipo externo mensual de operación y gobierno.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Criterio">Riesgo que reduce</th>
+                <td data-label="Diagnóstico">Invertir en el caso equivocado.</td>
+                <td data-label="Piloto">Quedarse en demos sin impacto real.</td>
+                <td data-label="Acompañamiento">Que la IA viva sin dueño, logs ni mejora continua.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Criterio">Compromiso</th>
+                <td data-label="Diagnóstico">Pago único. Sin continuidad obligatoria.</td>
+                <td data-label="Piloto">Pago por hitos. 30 días de garantía.</td>
+                <td data-label="Acompañamiento">Mensual. Sin permanencia.</td>
+              </tr>
+              <tr>
+                <th scope="row" data-label="Criterio">Precio base</th>
+                <td data-label="Diagnóstico">desde 1.500 €</td>
+                <td data-label="Piloto">desde 6.000 €</td>
+                <td data-label="Acompañamiento">desde 3.500 €/mes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="riesgo-title">
+        <div class="assurance">
+          <div>
+            <p class="eyebrow">Riesgo controlado</p>
+            <h2 id="riesgo-title">No te pedimos fe: cerramos alcance, precio y salida.</h2>
+            <p>
+              Antes de construir firmamos qué entra, qué no entra y cómo se mide. Si el
+              piloto rompe durante los primeros 30 días, lo corregimos sin coste extra.
+              Si el acompañamiento deja de compensar, no hay permanencia.
+            </p>
+          </div>
+          <ul class="assurance__list" aria-label="Condiciones comerciales">
+            <li>Presupuesto fijo antes de empezar.</li>
+            <li>Diagnóstico descontable del piloto.</li>
+            <li>30 días de garantía en piloto.</li>
+            <li>Acompañamiento mes a mes, sin permanencia.</li>
+          </ul>
         </div>
       </section>
 
@@ -367,7 +582,7 @@
             </p>
           </article>
         </div>
-        <p style="text-align: center; margin-top: 1.5rem;">
+        <p class="section-action">
           <a class="cta" href="/aprende/04-orquestadores.html#paperclip-ironclip">
             Cómo funciona por dentro →
           </a>
@@ -485,7 +700,7 @@
             </tbody>
           </table>
         </div>
-        <p class="packages__intro" style="margin-top: 1.25rem;">
+        <p class="packages__intro packages__intro--after">
           ¿Tu caso se parece a alguno?
           <a href="/?paquete=consulta#contacto">Cuéntanos los detalles</a>
           y te devolvemos un presupuesto fijo por escrito en 48 horas.

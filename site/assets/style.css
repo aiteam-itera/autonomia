@@ -1574,6 +1574,74 @@ body.intro-open {
   color: var(--muted);
 }
 
+.packages__intro--after {
+  margin-top: 1.25rem;
+}
+
+.hero__actions,
+.section-action {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero__actions {
+  margin-top: 1.5rem;
+}
+
+.hero__actions .cta {
+  margin-top: 0;
+}
+
+.section-action {
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.value-stack {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.value-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem;
+  min-height: 100%;
+}
+
+.value-card--featured {
+  border-color: var(--accent-line);
+  background: linear-gradient(180deg, rgba(129, 140, 248, 0.1), var(--card));
+  box-shadow: var(--shadow);
+}
+
+.value-card__kicker {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.value-card h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.value-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .packages {
   display: grid;
   gap: 1.25rem;
@@ -1581,6 +1649,12 @@ body.intro-open {
   max-width: var(--max);
   margin: 0 auto;
   align-items: stretch;
+}
+
+.anchor-alias {
+  display: block;
+  height: 0;
+  overflow: hidden;
 }
 
 .package {
@@ -1807,7 +1881,82 @@ body.intro-open {
   white-space: nowrap;
 }
 
+.comparison .scenarios__table th:not(:first-child),
+.comparison .scenarios__table td:not(:first-child) {
+  width: 24%;
+}
+
+.assurance {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+  gap: 1.5rem;
+  align-items: center;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: radial-gradient(120% 120% at 0% 0%, rgba(129, 140, 248, 0.14), transparent 45%),
+    var(--card);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.assurance h2 {
+  margin: 0 0 0.75rem;
+  max-width: 36rem;
+}
+
+.assurance p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 44rem;
+}
+
+.assurance__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.assurance__list li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--fg);
+  line-height: 1.45;
+}
+
+.assurance__list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #4ade80;
+  font-weight: 800;
+}
+
 @media (max-width: 640px) {
+  .hero__actions,
+  .section-action {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero__actions .cta,
+  .section-action .cta {
+    width: 100%;
+  }
+
+  .value-stack,
+  .assurance {
+    grid-template-columns: 1fr;
+  }
+
+  .assurance {
+    padding: 1.1rem;
+  }
+
   .scenarios {
     background: transparent;
     border: none;
