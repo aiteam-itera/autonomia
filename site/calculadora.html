@@ -129,6 +129,27 @@
         gap: 0.75rem;
         margin-top: 1.25rem;
       }
+      .calc__pilot {
+        margin-top: 1.25rem;
+        background: rgba(129, 140, 248, 0.1);
+        border: 1px solid rgba(129, 140, 248, 0.4);
+        border-radius: 10px;
+        padding: 1rem 1.15rem;
+      }
+      .calc__pilot h3 {
+        margin: 0 0 0.4rem;
+        font-size: 1.05rem;
+      }
+      .calc__pilot p {
+        margin: 0;
+        color: var(--fg);
+      }
+      .calc__pilot small {
+        display: block;
+        margin-top: 0.5rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
     </style>
   </head>
   <body>
@@ -224,6 +245,12 @@
             <h3 style="margin: 1rem 0 0.5rem">Por dónde empezaríamos en tu sector</h3>
             <ul class="calc__suggestions" id="calc-suggestions"></ul>
 
+            <div class="calc__pilot" id="calc-pilot" hidden>
+              <h3>Tu primer piloto recomendado</h3>
+              <p id="calc-pilot-text"></p>
+              <small id="calc-pilot-payback"></small>
+            </div>
+
             <details class="calc__formula">
               <summary>Cómo se calcula esto (sin trucos)</summary>
               <p>
@@ -248,7 +275,7 @@
             </details>
 
             <div class="calc__cta-row">
-              <a class="cta cta--primary" href="/cuestionario.html"
+              <a class="cta cta--primary" id="calc-cta-primary" href="/cuestionario.html"
                 >Quiero un plan personalizado (5 min) →</a
               >
               <a class="cta cta--ghost" href="/servicios.html">Ver paquetes y precios</a>
@@ -386,6 +413,57 @@
           li.textContent = text;
           list.appendChild(li);
         });
+
+        updatePilot({ hEmail, hReports, hSupport, hoursMonth, eurMonth });
+      }
+
+      // Recomendación dinámica de primer piloto + enrutado de CTA según ROI.
+      const PILOTS = {
+        email:
+          "Empieza por asistencia en email y mensajes: borradores y plantillas con tu tono. " +
+          "Es el piloto más rápido de montar y el equipo lo nota en la primera semana.",
+        reports:
+          "Empieza por generación asistida de informes y documentos: resúmenes, propuestas y actas. " +
+          "Es donde más horas recuperas por euro invertido.",
+        support:
+          "Empieza por una FAQ / atención asistida: descarga al equipo de las preguntas que se repiten " +
+          "casi de inmediato y mejora el tiempo de respuesta.",
+      };
+
+      function updatePilot({ hEmail, hReports, hSupport, hoursMonth, eurMonth }) {
+        const pilot = $("calc-pilot");
+        const cta = $("calc-cta-primary");
+        if (!(hoursMonth > 0)) {
+          pilot.hidden = true;
+          cta.href = "/cuestionario.html";
+          cta.textContent = "Quiero un plan personalizado (5 min) →";
+          return;
+        }
+
+        // Bloque dominante por horas ya ponderadas con su factor de reducción.
+        const weighted = {
+          email: hEmail * FACTORS.email,
+          reports: hReports * FACTORS.reports,
+          support: hSupport * FACTORS.support,
+        };
+        const top = Object.keys(weighted).reduce((a, b) =>
+          weighted[b] > weighted[a] ? b : a
+        );
+
+        pilot.hidden = false;
+        $("calc-pilot-text").textContent = PILOTS[top];
+        $("calc-pilot-payback").textContent =
+          "Nuestros primeros pilotos se diseñan para recuperar su coste en 1–3 meses: " +
+          "con el ahorro que estimas arriba, el caso de negocio se sostiene solo.";
+
+        // ROI alto → ruta directa al diagnóstico express (siguiente paso comercial).
+        if (eurMonth >= 1500) {
+          cta.href = "/servicios.html#diagnostico-express";
+          cta.textContent = "Reservar un diagnóstico express →";
+        } else {
+          cta.href = "/cuestionario.html";
+          cta.textContent = "Quiero un plan personalizado (5 min) →";
+        }
       }
 
       function sectorLabel(s) {

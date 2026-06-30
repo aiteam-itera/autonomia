@@ -34,6 +34,23 @@
     <meta name="twitter:image:alt" content="Herramienta de madurez IA — AutonomIA." />
 
     <link rel="stylesheet" href="/assets/style.css" />
+    <style>
+      /* Plan de acción del resultado (vainilla, reutiliza variables del :root). */
+      .result__plan {
+        margin: 0.5rem 0 0;
+        padding-left: 1.3rem;
+        display: grid;
+        gap: 0.5rem;
+      }
+      .result__plan li {
+        color: var(--fg);
+        line-height: 1.5;
+      }
+      .result__plan li::marker {
+        color: var(--accent);
+        font-weight: 700;
+      }
+    </style>
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
       data-cf-beacon='{"token":"FILL_CWA_TOKEN"}'></script>
@@ -208,6 +225,9 @@
         <h3>Tu puntuación por dimensión</h3>
         <div class="result__chart" id="result-chart"></div>
 
+        <h3>Tu plan de acción</h3>
+        <ol class="result__plan" id="result-plan"></ol>
+
         <!-- EMAIL GATE -->
         <div id="email-gate">
           <h3>Recibe tu plan de acción personalizado</h3>
@@ -319,6 +339,11 @@
               name: "Explorador",
               pitch:
                 "Estás en el punto de partida ideal. Los primeros 3 procesos que automatices generarán el mayor retorno: una victoria rápida construye la cultura y libera recursos para los siguientes pasos.",
+              plan: [
+                "Mapea las 3 tareas más repetitivas y caras de tu semana, con horas estimadas.",
+                "Elige una con resultado medible y monta un piloto acotado de 2–4 semanas.",
+                "Mide horas antes y después para tener el caso de negocio del siguiente paso.",
+              ],
             };
           }
           if (total <= 7) {
@@ -326,12 +351,22 @@
               name: "En transición",
               pitch:
                 "Ya tienes las bases. El siguiente paso es estructurar un roadmap de automatización con prioridades claras, para pasar de experimentos aislados a impacto sistemático.",
+              plan: [
+                "Prioriza tus candidatos en un roadmap por impacto y esfuerzo.",
+                "Estandariza la supervisión humana (HITL) y el registro auditable de decisiones.",
+                "Escala el piloto que mejor funcionó a un segundo proceso del roadmap.",
+              ],
             };
           }
           return {
             name: "Listo para escalar",
             pitch:
               "Tienes la madurez para proyectos de automatización ambiciosos. Ahora el objetivo es acelerar: más procesos, más integración, más gobernanza sin más headcount.",
+            plan: [
+              "Integra los procesos automatizados en tu stack API-first, sin islas.",
+              "Refuerza la gobernanza y las métricas de ROI por proceso automatizado.",
+              "Acelera a más procesos en paralelo sin sumar headcount.",
+            ],
           };
         }
 
@@ -355,6 +390,14 @@
           document.getElementById("score-number").textContent = total;
           document.getElementById("result-level").textContent = level.name;
           document.getElementById("result-pitch").textContent = level.pitch;
+
+          var planEl = document.getElementById("result-plan");
+          planEl.innerHTML = "";
+          (level.plan || []).forEach(function (stepText) {
+            var li = document.createElement("li");
+            li.textContent = stepText;
+            planEl.appendChild(li);
+          });
 
           var pct = Math.round((total / 10) * 100);
           var circle = document.getElementById("score-circle");
