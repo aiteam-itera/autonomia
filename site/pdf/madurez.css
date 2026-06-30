@@ -1,0 +1,348 @@
+/* =====================================================================
+   AutonomIA maturity PDF system
+   Shared print styles for site/pdf/madurez-*.html. Keep per-template
+   files content-only unless a level truly needs new document components.
+   ===================================================================== */
+
+:root {
+  --pdf-fg: #111827;
+  --pdf-body: #334155;
+  --pdf-muted: #64748b;
+  --pdf-faint: #94a3b8;
+  --pdf-border: #e2e8f0;
+  --pdf-surface: #f8fafc;
+  --pdf-accent: #6366f1;
+  --pdf-accent-strong: #4f46e5;
+  --pdf-accent-soft: #eef2ff;
+  --pdf-warn: #ca8a04;
+  --pdf-warn-soft: #fefce8;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 20mm 18mm;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.55;
+  color: var(--pdf-fg);
+  background: #fff;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.page {
+  page-break-after: always;
+  min-height: 247mm;
+  position: relative;
+  padding-bottom: 16mm;
+}
+
+.page:last-child {
+  page-break-after: avoid;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--pdf-accent);
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+}
+
+.header-brand {
+  font-weight: 800;
+  font-size: 13pt;
+  color: var(--pdf-accent);
+  letter-spacing: 0;
+}
+
+.header-tag {
+  font-size: 9pt;
+  color: var(--pdf-muted);
+}
+
+.page-title {
+  font-size: 22pt;
+  font-weight: 800;
+  color: var(--pdf-fg);
+  margin-bottom: 6px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.page-subtitle {
+  font-size: 13pt;
+  color: var(--pdf-accent);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.level-badge {
+  display: inline-block;
+  background: var(--pdf-accent);
+  color: #fff;
+  font-weight: 800;
+  font-size: 10pt;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.score-line {
+  font-size: 14pt;
+  font-weight: 800;
+  color: var(--pdf-fg);
+  margin-bottom: 20px;
+}
+
+.score-line span {
+  color: var(--pdf-accent);
+}
+
+.intro-text {
+  font-size: 11pt;
+  color: var(--pdf-body);
+  margin-bottom: 20px;
+  line-height: 1.65;
+}
+
+h2 {
+  font-size: 14pt;
+  font-weight: 800;
+  color: var(--pdf-fg);
+  margin-bottom: 12px;
+  margin-top: 24px;
+  letter-spacing: 0;
+}
+
+h3 {
+  font-size: 12pt;
+  font-weight: 800;
+  color: var(--pdf-accent);
+  margin-bottom: 8px;
+  margin-top: 18px;
+  letter-spacing: 0;
+}
+
+ul,
+ol {
+  padding-left: 20px;
+  margin-bottom: 14px;
+}
+
+li {
+  margin-bottom: 5px;
+  color: var(--pdf-body);
+}
+
+.highlight-box {
+  background: var(--pdf-accent-soft);
+  border-left: 4px solid var(--pdf-accent);
+  padding: 14px 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 18px 0;
+}
+
+.highlight-box p {
+  color: #312e81;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.step-card,
+.service-block,
+.phase-block,
+.level-card {
+  background: var(--pdf-surface);
+  border: 1px solid var(--pdf-border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.step-card h3,
+.service-block h3,
+.phase-block h3,
+.level-card h3 {
+  margin-top: 0;
+}
+
+.step-card p,
+.service-block p,
+.phase-block p,
+.level-card p {
+  color: #475569;
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.step-card .tool,
+.step-card .format,
+.stat,
+.investment {
+  font-size: 9.5pt;
+  color: var(--pdf-muted);
+  font-style: italic;
+}
+
+.investment {
+  margin-top: 8px;
+}
+
+.level-card.active {
+  border-color: var(--pdf-accent);
+  background: var(--pdf-accent-soft);
+}
+
+.level-card ul {
+  margin-top: 6px;
+}
+
+.checklist,
+.roi-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.checklist li,
+.roi-list li {
+  position: relative;
+  color: var(--pdf-body);
+}
+
+.checklist li {
+  padding-left: 22px;
+  margin-bottom: 6px;
+}
+
+.checklist li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: var(--pdf-accent);
+  font-weight: 800;
+}
+
+.roi-list {
+  counter-reset: roi;
+}
+
+.roi-list li {
+  counter-increment: roi;
+  padding-left: 28px;
+  margin-bottom: 8px;
+}
+
+.roi-list li::before {
+  content: counter(roi) ".";
+  position: absolute;
+  left: 0;
+  font-weight: 800;
+  color: var(--pdf-accent);
+}
+
+.timeline {
+  margin-top: 6px;
+}
+
+.timeline li,
+.pricing li {
+  color: #475569;
+}
+
+.pricing {
+  margin-top: 16px;
+}
+
+.pricing strong {
+  color: var(--pdf-fg);
+}
+
+.case-study {
+  background: var(--pdf-warn-soft);
+  border-left: 4px solid var(--pdf-warn);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 14px 0;
+  font-size: 10pt;
+  color: #713f12;
+  line-height: 1.6;
+}
+
+.cta-section {
+  background: var(--pdf-accent);
+  color: #fff;
+  padding: 24px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.cta-section h2 {
+  color: #fff;
+  font-size: 16pt;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.cta-section p {
+  color: #e0e7ff;
+  font-size: 10.5pt;
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.cta-section .cta-link {
+  display: inline-block;
+  margin-top: 12px;
+  background: #fff;
+  color: var(--pdf-accent-strong);
+  font-weight: 800;
+  font-size: 11pt;
+  padding: 10px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 8.5pt;
+  color: var(--pdf-faint);
+  padding-top: 10px;
+  border-top: 1px solid var(--pdf-border);
+}
+
+.footer a {
+  color: var(--pdf-accent);
+  text-decoration: none;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .page {
+    page-break-after: always;
+  }
+
+  .page:last-child {
+    page-break-after: avoid;
+  }
+}

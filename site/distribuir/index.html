@@ -8,184 +8,428 @@
     <meta name="referrer" content="no-referrer" />
     <link rel="stylesheet" href="/assets/style.css" />
     <style>
-      .kit { max-width: 880px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-      .kit h1 { margin-bottom: 0.25rem; }
-      .kit__lead { color: #4a546b; margin-top: 0; }
-      .kit__block { border: 1px solid #d6dbe5; border-radius: 12px; padding: 1.25rem 1.25rem 1rem; margin: 1rem 0 1.5rem; background: #fff; }
-      .kit__block h2 { margin: 0 0 0.5rem; font-size: 1.15rem; }
-      .kit__meta { font-size: 0.85rem; color: #4a546b; margin: 0 0 0.75rem; }
-      .kit__btns { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 0.5rem; }
-      .kit__btn { display: inline-block; padding: 0.5rem 0.9rem; border-radius: 8px; background: #1f3a93; color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
-      .kit__btn--alt { background: #25d366; }
-      .kit__btn--ghost { background: #fff; color: #1f3a93; border: 1px solid #1f3a93; }
-      .kit__copy { background: #f5f6f9; border: 1px dashed #c4cad6; border-radius: 8px; padding: 0.85rem 1rem; white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85rem; line-height: 1.45; color: #1d2333; max-height: 280px; overflow: auto; }
-      .kit__copy-row { display: flex; gap: 0.5rem; align-items: flex-start; margin: 0.5rem 0 0; }
-      .kit__copy-btn { background: #1d2333; color: #fff; border: 0; border-radius: 6px; padding: 0.45rem 0.75rem; font-size: 0.8rem; cursor: pointer; }
-      .kit__copy-btn:active { background: #0c1019; }
-      .kit__list { margin: 0.5rem 0 0; padding-left: 1.25rem; }
-      .kit__list li { margin: 0.25rem 0; }
-      .kit__warn { background: #fff7e6; border: 1px solid #f0c36d; border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.92rem; margin: 0 0 1.25rem; }
-      .kit__targets { font-size: 0.85rem; color: #2b3045; background: #eef1f7; padding: 0.6rem 0.9rem; border-radius: 8px; margin: 0.5rem 0 0; }
-      code { background: #eef1f7; padding: 0.1rem 0.3rem; border-radius: 4px; }
+      /* --- P9 distribution kit: page-specific layout, reusing design-system tokens/classes. --- */
+      .kit-hero .hero__content {
+        max-width: var(--max-wide);
+      }
+
+      .kit-hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+        gap: clamp(1.5rem, 5vw, 4rem);
+        align-items: end;
+      }
+
+      .kit-status {
+        padding: 1.1rem;
+        box-shadow: var(--shadow);
+      }
+
+      .kit-status p {
+        margin: 0.45rem 0 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .kit-status__num {
+        display: block;
+        color: var(--fg);
+        font-size: var(--step-4);
+        line-height: 1;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .kit-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-5);
+        max-width: var(--max-wide);
+        margin-inline: auto;
+      }
+
+      .kit-channel {
+        display: grid;
+        grid-template-columns: minmax(0, 0.72fr) minmax(280px, 0.28fr);
+        gap: var(--space-5);
+        padding: clamp(1rem, 3vw, 1.6rem);
+      }
+
+      .kit-channel__head {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: flex-start;
+        margin-bottom: 0.85rem;
+      }
+
+      .kit-channel h2,
+      .kit-side h2 {
+        margin: 0;
+        font-size: var(--step-1);
+      }
+
+      .kit-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0.2rem 0 0;
+      }
+
+      .kit-copy {
+        margin: 0;
+        max-height: 22rem;
+        overflow: auto;
+        white-space: pre-wrap;
+        color: var(--fg);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px dashed var(--border-strong);
+        border-radius: var(--radius);
+        padding: 1rem;
+        font: 0.9rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .kit-side {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        min-width: 0;
+      }
+
+      .kit-side p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .kit-actions {
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .kit-actions .cta {
+        width: 100%;
+      }
+
+      .kit-links {
+        display: grid;
+        gap: 0.65rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .kit-links li {
+        display: grid;
+        gap: 0.25rem;
+        padding: 0.85rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .kit-links strong {
+        color: var(--fg);
+      }
+
+      .kit-links code,
+      .kit-command code {
+        color: var(--muted);
+        overflow-wrap: anywhere;
+      }
+
+      .kit-command {
+        display: grid;
+        gap: 1rem;
+        padding: clamp(1rem, 3vw, 1.6rem);
+      }
+
+      .kit-command__head {
+        margin: 0;
+      }
+
+      .kit-command pre {
+        margin: 0;
+      }
+
+      .kit-copy-btn {
+        cursor: pointer;
+        font: inherit;
+      }
+
+      @media (max-width: 820px) {
+        .kit-hero-grid,
+        .kit-channel {
+          grid-template-columns: 1fr;
+        }
+
+        .kit-channel__head {
+          flex-direction: column;
+        }
+      }
     </style>
   </head>
   <body>
-    <main class="kit">
-      <h1>Kit de distribución — AutonomIA</h1>
-      <p class="kit__lead">
-        Una página, un click por canal. Todos los enlaces ya llevan
-        <code>utm_source</code> y verás el efecto en
-        <code>tools/analytics-baseline.mjs</code> en 24 h.
-      </p>
-
-      <div class="kit__warn">
-        <strong>Por qué esta página existe.</strong> El funnel está completo (cuestionario, informes
-        de ejemplo, paquetes con precio, captura de leads, email). Lo que falta es
-        <strong>visitantes humanos</strong>. Wave 1 lleva 11 días esperando que se accione
-        <em>un</em> canal humano. Esta página existe para que activar uno cueste
-        <em>un click</em>.
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <header class="hero hero--compact kit-hero">
+      <nav class="nav">
+        <a class="brand" href="/">AutonomIA</a>
+        <span class="nav__links">
+          <a class="cta cta--ghost" href="/herramienta/madurez.html">Test de madurez</a>
+          <a class="cta" href="/cuestionario.html">Cuestionario</a>
+        </span>
+      </nav>
+      <div class="hero__content kit-hero-grid">
+        <div>
+          <p class="hero__eyebrow eyebrow">Wave 1</p>
+          <h1>Kit de distribución</h1>
+          <p>
+            Activa un canal humano hoy: LinkedIn, email directo o WhatsApp. Todos los enlaces
+            llevan UTM para medir inicios del cuestionario y visitas al test de madurez.
+          </p>
+          <div class="cta-row">
+            <a class="cta cta--primary" href="#linkedin">Publicar LinkedIn</a>
+            <a class="cta cta--ghost" href="#email">Enviar email</a>
+          </div>
+        </div>
+        <aside class="surface kit-status" aria-label="Estado de distribución">
+          <span class="pill">Prioridad operativa</span>
+          <span class="kit-status__num">50</span>
+          <p>visitas únicas y 5 inicios del cuestionario en 14 días.</p>
+        </aside>
       </div>
+    </header>
 
-      <!-- ====================== LINKEDIN ====================== -->
-      <section class="kit__block">
-        <h2>1. LinkedIn — publicar un post (canal con mayor palanca)</h2>
-        <p class="kit__meta">Tiempo: 2 minutos · Alcance esperado: red del fundador · UTM: <code>linkedin</code></p>
+    <main id="main-content" tabindex="-1">
+      <section class="section" aria-labelledby="channels-title">
+        <div class="section__head">
+          <p class="eyebrow">Canales listos</p>
+          <h2 class="section__title" id="channels-title">Un bloque de copy por canal.</h2>
+          <p class="section__lead">
+            El funnel ya existe. Este kit reduce la distribución a copiar, publicar y revisar
+            el log de atribución 24 horas después.
+          </p>
+        </div>
 
-        <p><strong>Texto listo para pegar:</strong></p>
-        <div class="kit__copy" id="copy-li">¿Sabes cuál sería la PRIMERA tarea que tu empresa debería automatizar con IA?
+        <div class="kit-grid">
+          <article class="surface kit-channel" id="linkedin">
+            <div>
+              <div class="kit-channel__head">
+                <div>
+                  <h2>LinkedIn — post desde perfil fundador o Itera</h2>
+                  <div class="kit-meta">
+                    <span class="pill">2 minutos</span>
+                    <span class="pill pill--muted">utm_source=linkedin</span>
+                  </div>
+                </div>
+                <button class="cta kit-copy-btn" type="button" data-copy="#copy-li">
+                  Copiar texto
+                </button>
+              </div>
+              <pre class="kit-copy" id="copy-li">¿Sabes cuál sería la primera tarea que tu empresa debería automatizar con IA?
 
-Hemos montado un diagnóstico gratuito de 3 minutos: respondes 6 preguntas sobre tu negocio y te dice tus 3 mejores oportunidades de automatización, el € ahorrado/mes estimado y por dónde empezar (30/60/90 días).
+Hemos montado un diagnóstico gratuito de 3 minutos: respondes 6 preguntas sobre tu negocio y te dice tus 3 mejores oportunidades de automatización, el ahorro mensual estimado y por dónde empezar en 30/60/90 días.
 
 Sin registro para verlo. Dos ejemplos reales del informe que recibe cada sector:
 
-🦷 Clínica dental → https://ia.itera.es/ejemplo-informe/clinica-dental.html?utm_source=linkedin
-📁 Asesoría / gestoría → https://ia.itera.es/ejemplo-informe/asesoria.html?utm_source=linkedin
+Clínica dental: https://ia.itera.es/ejemplo-informe/clinica-dental.html?utm_source=linkedin
+Asesoría / gestoría: https://ia.itera.es/ejemplo-informe/asesoria.html?utm_source=linkedin
 
-Haz el tuyo aquí 👉 https://ia.itera.es/cuestionario.html?utm_source=linkedin
+Haz el tuyo aquí: https://ia.itera.es/cuestionario.html?utm_source=linkedin
 
-#IA #PYME #automatización</div>
-        <div class="kit__copy-row">
-          <button class="kit__copy-btn" data-copy="#copy-li">Copiar texto</button>
-        </div>
+#IA #PYME #automatizacion</pre>
+            </div>
+            <aside class="kit-side" aria-label="Acciones LinkedIn">
+              <h2>Acción</h2>
+              <p>LinkedIn suele ser el primer canal con alcance humano real para este dominio.</p>
+              <div class="kit-actions">
+                <a
+                  class="cta cta--primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fia.itera.es%2Fcuestionario.html%3Futm_source%3Dlinkedin"
+                  >Abrir LinkedIn</a
+                >
+                <a
+                  class="cta cta--ghost"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.linkedin.com/feed/?shareActive=true&text=%C2%BFSabes%20cu%C3%A1l%20ser%C3%ADa%20la%20primera%20tarea%20que%20tu%20empresa%20deber%C3%ADa%20automatizar%20con%20IA%3F%20Diagn%C3%B3stico%20gratuito%20de%203%20min%20%E2%86%92%20https%3A%2F%2Fia.itera.es%2Fcuestionario.html%3Futm_source%3Dlinkedin"
+                  >Post pre-rellenado</a
+                >
+              </div>
+            </aside>
+          </article>
 
-        <div class="kit__btns">
-          <a class="kit__btn" target="_blank" rel="noopener noreferrer"
-             href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fia.itera.es%2Fcuestionario.html%3Futm_source%3Dlinkedin">
-             Abrir LinkedIn con el enlace →
-          </a>
-          <a class="kit__btn kit__btn--ghost" target="_blank" rel="noopener noreferrer"
-             href="https://www.linkedin.com/feed/?shareActive=true&text=%C2%BFSabes%20cu%C3%A1l%20ser%C3%ADa%20la%20PRIMERA%20tarea%20que%20tu%20empresa%20deber%C3%ADa%20automatizar%20con%20IA%3F%20Diagn%C3%B3stico%20gratuito%20de%203%20min%20%E2%86%92%20https%3A%2F%2Fia.itera.es%2Fcuestionario.html%3Futm_source%3Dlinkedin">
-             Crear post pre-rellenado →
-          </a>
-        </div>
-      </section>
+          <article class="surface kit-channel" id="email">
+            <div>
+              <div class="kit-channel__head">
+                <div>
+                  <h2>Email directo — clientes y red existente</h2>
+                  <div class="kit-meta">
+                    <span class="pill">5 contactos</span>
+                    <span class="pill pill--muted">utm_source=email-red</span>
+                  </div>
+                </div>
+                <button class="cta kit-copy-btn" type="button" data-copy="#copy-mail">
+                  Copiar cuerpo
+                </button>
+              </div>
+              <pre class="kit-copy" id="copy-mail">Asunto: Tu primer paso de IA, en 3 minutos
 
-      <!-- ====================== EMAIL DIRECTO ====================== -->
-      <section class="kit__block">
-        <h2>2. Email directo a la red (clientes Itera/Ficha)</h2>
-        <p class="kit__meta">Tiempo: 5 minutos para 5 contactos · UTM: <code>email-red</code></p>
-
-        <p><strong>Asunto:</strong> Tu primer paso de IA, en 3 minutos</p>
-        <p><strong>Cuerpo (listo para pegar):</strong></p>
-        <div class="kit__copy" id="copy-mail">Hola [NOMBRE],
+Hola [NOMBRE],
 
 Estamos ayudando a PYMEs a dar su primer paso real con IA sin humo.
 
 Hicimos una herramienta gratuita: en 3 minutos te dice qué deberías automatizar primero en [EMPRESA] y cuánto te ahorraría al mes. Sin registro para verlo.
 
-Para que veas el formato antes de probarlo, este es el informe que recibe (por ejemplo) una clínica dental:
+Para que veas el formato antes de probarlo, este es el informe que recibe una clínica dental:
 https://ia.itera.es/ejemplo-informe/clinica-dental.html?utm_source=email-red
 
 Y este el de una asesoría:
 https://ia.itera.es/ejemplo-informe/asesoria.html?utm_source=email-red
 
 ¿Le echas un vistazo y me dices si tiene sentido para vosotros?
-👉 https://ia.itera.es/cuestionario.html?utm_source=email-red
+https://ia.itera.es/cuestionario.html?utm_source=email-red
 
 Gracias,
-[FIRMA]</div>
-        <div class="kit__copy-row">
-          <button class="kit__copy-btn" data-copy="#copy-mail">Copiar cuerpo</button>
-        </div>
+[FIRMA]</pre>
+            </div>
+            <aside class="kit-side" aria-label="Acciones email">
+              <h2>Lista corta</h2>
+              <p>2 asesorías, 1 clínica dental, 1 ecommerce pequeño y 1 despacho legal.</p>
+              <div class="kit-actions">
+                <a
+                  class="cta cta--primary"
+                  href="mailto:?subject=Tu%20primer%20paso%20de%20IA%2C%20en%203%20minutos&body=Hola%20%5BNOMBRE%5D%2C%0A%0AEstamos%20ayudando%20a%20PYMEs%20a%20dar%20su%20primer%20paso%20real%20con%20IA%20sin%20humo.%0A%0AHicimos%20una%20herramienta%20gratuita%3A%20en%203%20minutos%20te%20dice%20qu%C3%A9%20deber%C3%ADas%20automatizar%20primero%20en%20%5BEMPRESA%5D%20y%20cu%C3%A1nto%20te%20ahorrar%C3%ADa%20al%20mes.%20Sin%20registro%20para%20verlo.%0A%0APara%20que%20veas%20el%20formato%20antes%20de%20probarlo%2C%20este%20es%20el%20informe%20que%20recibe%20una%20cl%C3%ADnica%20dental%3A%0Ahttps%3A%2F%2Fia.itera.es%2Fejemplo-informe%2Fclinica-dental.html%3Futm_source%3Demail-red%0A%0AY%20este%20el%20de%20una%20asesor%C3%ADa%3A%0Ahttps%3A%2F%2Fia.itera.es%2Fejemplo-informe%2Fasesoria.html%3Futm_source%3Demail-red%0A%0A%C2%BFLe%20echas%20un%20vistazo%20y%20me%20dices%20si%20tiene%20sentido%20para%20vosotros%3F%0Ahttps%3A%2F%2Fia.itera.es%2Fcuestionario.html%3Futm_source%3Demail-red%0A%0AGracias%2C%0A%5BFIRMA%5D"
+                  >Abrir email</a
+                >
+              </div>
+            </aside>
+          </article>
 
-        <div class="kit__btns">
-          <a class="kit__btn"
-             href="mailto:?subject=Tu%20primer%20paso%20de%20IA%2C%20en%203%20minutos&body=Hola%20%5BNOMBRE%5D%2C%0A%0AEstamos%20ayudando%20a%20PYMEs%20a%20dar%20su%20primer%20paso%20real%20con%20IA%20sin%20humo.%0A%0AHicimos%20una%20herramienta%20gratuita%3A%20en%203%20minutos%20te%20dice%20qu%C3%A9%20deber%C3%ADas%20automatizar%20primero%20en%20%5BEMPRESA%5D%20y%20cu%C3%A1nto%20te%20ahorrar%C3%ADa%20al%20mes.%20Sin%20registro%20para%20verlo.%0A%0APara%20que%20veas%20el%20formato%20antes%20de%20probarlo%2C%20este%20es%20el%20informe%20que%20recibe%20una%20cl%C3%ADnica%20dental%3A%0Ahttps%3A%2F%2Fia.itera.es%2Fejemplo-informe%2Fclinica-dental.html%3Futm_source%3Demail-red%0A%0AY%20este%20el%20de%20una%20asesor%C3%ADa%3A%0Ahttps%3A%2F%2Fia.itera.es%2Fejemplo-informe%2Fasesoria.html%3Futm_source%3Demail-red%0A%0A%C2%BFLe%20echas%20un%20vistazo%20y%20me%20dices%20si%20tiene%20sentido%20para%20vosotros%3F%0A%F0%9F%91%89%20https%3A%2F%2Fia.itera.es%2Fcuestionario.html%3Futm_source%3Demail-red%0A%0AGracias%2C%0A%5BFIRMA%5D">
-             Abrir mi cliente de email →
-          </a>
+          <article class="surface kit-channel" id="whatsapp">
+            <div>
+              <div class="kit-channel__head">
+                <div>
+                  <h2>WhatsApp — contacto PYME directo</h2>
+                  <div class="kit-meta">
+                    <span class="pill">1 minuto</span>
+                    <span class="pill pill--muted">utm_source=whatsapp</span>
+                  </div>
+                </div>
+                <button class="cta kit-copy-btn" type="button" data-copy="#copy-wa">
+                  Copiar mensaje
+                </button>
+              </div>
+              <pre class="kit-copy" id="copy-wa">Hola [NOMBRE], hemos hecho un diagnóstico gratis de IA para PYMEs. En 3 min te dice qué automatizar primero en [EMPRESA] y cuánto ahorrarías. Sin registro. ¿Le echas un ojo? https://ia.itera.es/cuestionario.html?utm_source=whatsapp</pre>
+            </div>
+            <aside class="kit-side" aria-label="Acciones WhatsApp">
+              <h2>Acción</h2>
+              <p>Úsalo sólo con contactos donde exista relación previa.</p>
+              <div class="kit-actions">
+                <a
+                  class="cta cta--primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://wa.me/?text=Hola%20%5BNOMBRE%5D%2C%20hemos%20hecho%20un%20diagn%C3%B3stico%20gratis%20de%20IA%20para%20PYMEs.%20En%203%20min%20te%20dice%20qu%C3%A9%20automatizar%20primero%20en%20%5BEMPRESA%5D%20y%20cu%C3%A1nto%20ahorrar%C3%ADas.%20Sin%20registro.%20%C2%BFLe%20echas%20un%20ojo%3F%20https%3A%2F%2Fia.itera.es%2Fcuestionario.html%3Futm_source%3Dwhatsapp"
+                  >Abrir WhatsApp</a
+                >
+              </div>
+            </aside>
+          </article>
         </div>
-        <p class="kit__targets">
-          <strong>Sugerencia rápida (5 contactos hoy):</strong> 2 gestorías/asesorías existentes en
-          la red de Itera + 1 clínica dental + 1 ecommerce pequeño + 1 despacho legal.
-          5 mensajes en 10 min, no es marketing masivo.
-        </p>
       </section>
 
-      <!-- ====================== WHATSAPP ====================== -->
-      <section class="kit__block">
-        <h2>3. WhatsApp a contactos PYME directos</h2>
-        <p class="kit__meta">Tiempo: 1 minuto por contacto · UTM: <code>whatsapp</code></p>
-
-        <p><strong>Mensaje corto (≤ 280 caracteres):</strong></p>
-        <div class="kit__copy" id="copy-wa">Hola [NOMBRE], hemos hecho un diagnóstico gratis de IA para PYMEs. En 3 min te dice qué automatizar primero en [EMPRESA] y cuánto ahorrarías. Sin registro. ¿Le echas un ojo? https://ia.itera.es/cuestionario.html?utm_source=whatsapp</div>
-        <div class="kit__copy-row">
-          <button class="kit__copy-btn" data-copy="#copy-wa">Copiar mensaje</button>
+      <section class="section section--alt" aria-labelledby="links-title">
+        <div class="section__head">
+          <p class="eyebrow">Enlaces UTM</p>
+          <h2 class="section__title" id="links-title">URLs de campaña para reutilizar.</h2>
         </div>
-
-        <div class="kit__btns">
-          <a class="kit__btn kit__btn--alt" target="_blank" rel="noopener noreferrer"
-             href="https://wa.me/?text=Hola%20%5BNOMBRE%5D%2C%20hemos%20hecho%20un%20diagn%C3%B3stico%20gratis%20de%20IA%20para%20PYMEs.%20En%203%20min%20te%20dice%20qu%C3%A9%20automatizar%20primero%20en%20%5BEMPRESA%5D%20y%20cu%C3%A1nto%20ahorrar%C3%ADas.%20Sin%20registro.%20%C2%BFLe%20echas%20un%20ojo%3F%20https%3A%2F%2Fia.itera.es%2Fcuestionario.html%3Futm_source%3Dwhatsapp">
-             Abrir WhatsApp con el mensaje →
-          </a>
-        </div>
-      </section>
-
-      <!-- ====================== ENLACES UTM ====================== -->
-      <section class="kit__block">
-        <h2>4. Enlaces sueltos (con UTM) — copia y usa donde quieras</h2>
-        <p class="kit__meta">Cualquier visita con estos enlaces queda atribuida al canal en <code>a.log</code>.</p>
-        <ul class="kit__list">
-          <li><strong>Cuestionario · LinkedIn:</strong> <code>https://ia.itera.es/cuestionario.html?utm_source=linkedin</code></li>
-          <li><strong>Cuestionario · Email a red:</strong> <code>https://ia.itera.es/cuestionario.html?utm_source=email-red</code></li>
-          <li><strong>Cuestionario · WhatsApp:</strong> <code>https://ia.itera.es/cuestionario.html?utm_source=whatsapp</code></li>
-          <li><strong>Informe ejemplo · Dental:</strong> <code>https://ia.itera.es/ejemplo-informe/clinica-dental.html?utm_source=linkedin</code></li>
-          <li><strong>Informe ejemplo · Asesoría:</strong> <code>https://ia.itera.es/ejemplo-informe/asesoria.html?utm_source=linkedin</code></li>
-          <li><strong>Paquetes con precio:</strong> <code>https://ia.itera.es/servicios.html?utm_source=linkedin</code></li>
+        <ul class="kit-links container container--wide">
+          <li>
+            <strong>Cuestionario · LinkedIn</strong>
+            <code>https://ia.itera.es/cuestionario.html?utm_source=linkedin</code>
+          </li>
+          <li>
+            <strong>Cuestionario · Email a red</strong>
+            <code>https://ia.itera.es/cuestionario.html?utm_source=email-red</code>
+          </li>
+          <li>
+            <strong>Cuestionario · WhatsApp</strong>
+            <code>https://ia.itera.es/cuestionario.html?utm_source=whatsapp</code>
+          </li>
+          <li>
+            <strong>Test de madurez · LinkedIn</strong>
+            <code>https://ia.itera.es/herramienta/madurez.html?utm_source=linkedin</code>
+          </li>
+          <li>
+            <strong>Informe ejemplo · Dental</strong>
+            <code>https://ia.itera.es/ejemplo-informe/clinica-dental.html?utm_source=linkedin</code>
+          </li>
+          <li>
+            <strong>Informe ejemplo · Asesoría</strong>
+            <code>https://ia.itera.es/ejemplo-informe/asesoria.html?utm_source=linkedin</code>
+          </li>
+          <li>
+            <strong>Paquetes con precio</strong>
+            <code>https://ia.itera.es/servicios.html?utm_source=linkedin</code>
+          </li>
         </ul>
       </section>
 
-      <section class="kit__block" style="border-color:#1f3a93;background:#f5f7fc;">
-        <h2>Mañana, en 24 h, abrí esto:</h2>
-        <p class="kit__meta">Para ver qué canal funcionó.</p>
-        <pre class="kit__copy" id="copy-cmd">curl -s -k --user "acc736162435:$ionosftpaccess" \
+      <section class="section" aria-labelledby="measure-title">
+        <div class="surface kit-command container container--wide">
+          <div class="section__head kit-command__head">
+            <p class="eyebrow">Medición</p>
+            <h2 class="section__title" id="measure-title">Revisión a las 24 horas.</h2>
+            <p class="section__lead">
+              Ejecuta el baseline con el log descargado de IONOS para ver visitas e inicios por UTM.
+            </p>
+          </div>
+          <pre class="kit-copy" id="copy-cmd">curl -s -k --user "acc736162435:$ionosftpaccess" \
   "sftp://access878577274.webspace-data.io:22/_analytics/a.log" -o a.log \
   &amp;&amp; node tools/analytics-baseline.mjs a.log</pre>
-        <div class="kit__copy-row">
-          <button class="kit__copy-btn" data-copy="#copy-cmd">Copiar comando</button>
+          <div class="cta-row">
+            <button class="cta cta--primary kit-copy-btn" type="button" data-copy="#copy-cmd">
+              Copiar comando
+            </button>
+            <a class="cta cta--ghost" href="/herramienta/madurez.html?utm_source=distribuir">
+              Probar test de madurez
+            </a>
+          </div>
         </div>
       </section>
     </main>
 
+    <footer class="footer">AutonomIA · Kit interno de distribución</footer>
+
     <script>
-      document.querySelectorAll(".kit__copy-btn").forEach(function (btn) {
+      document.querySelectorAll(".kit-copy-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
           var target = document.querySelector(btn.getAttribute("data-copy"));
           if (!target) return;
           var text = target.innerText;
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(function () {
-              var prev = btn.textContent;
-              btn.textContent = "Copiado ✓";
-              setTimeout(function () { btn.textContent = prev; }, 1400);
-            });
-          } else {
-            var ta = document.createElement("textarea");
-            ta.value = text;
-            document.body.appendChild(ta);
-            ta.select();
-            try { document.execCommand("copy"); } catch (e) {}
-            document.body.removeChild(ta);
+          function showCopied() {
+            var prev = btn.textContent;
+            btn.textContent = "Copiado";
+            setTimeout(function () {
+              btn.textContent = prev;
+            }, 1400);
           }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(showCopied);
+            return;
+          }
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand("copy");
+            showCopied();
+          } catch (e) {}
+          document.body.removeChild(ta);
         });
       });
     </script>
