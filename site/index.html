@@ -286,7 +286,7 @@
 
     <main id="main-content" tabindex="-1">
       <section class="section" id="transformacion" aria-labelledby="transformacion-title">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <p class="eyebrow">Antes → método → después</p>
           <h2 class="section__title" id="transformacion-title">
             No necesitas "hacer IA". Necesitas sacar un proceso del atasco.
@@ -298,7 +298,7 @@
           </p>
         </div>
         <div class="arc" aria-label="Arco de transformación">
-          <article class="arc__phase">
+          <article class="arc__phase" data-reveal data-reveal-dir="left">
             <span class="badge badge--danger">Antes</span>
             <h3>Horas invisibles en tareas manuales</h3>
             <p>
@@ -307,7 +307,7 @@
             </p>
           </article>
           <span class="arc__arrow" aria-hidden="true">-></span>
-          <article class="arc__phase arc__phase--now">
+          <article class="arc__phase arc__phase--now" data-reveal data-reveal-delay="1">
             <span class="badge badge--accent">Método AutonomIA</span>
             <h3>Diagnóstico, piloto y acompañamiento gobernado</h3>
             <p>
@@ -316,7 +316,7 @@
             </p>
           </article>
           <span class="arc__arrow" aria-hidden="true">-></span>
-          <article class="arc__phase">
+          <article class="arc__phase" data-reveal data-reveal-dir="right">
             <span class="badge badge--ok">Después</span>
             <h3>Un proceso funcionando, no una demo</h3>
             <p>
@@ -328,7 +328,7 @@
       </section>
 
       <section class="section section--alt" id="informes" aria-labelledby="informes-title">
-        <div class="section__head section__head--center">
+        <div class="section__head section__head--center" data-reveal>
           <p class="eyebrow">Prueba temprana</p>
           <h2 class="section__title" id="informes-title">El diagnóstico devuelve un informe accionable.</h2>
           <p class="section__lead">
@@ -336,8 +336,8 @@
             priorizada, estimación de ahorro y una ruta de implantación sin jerga.
           </p>
         </div>
-        <div class="card-grid home-report-grid">
-          <article class="card card--feature">
+        <div class="card-grid home-report-grid" data-reveal-stagger>
+          <article class="card card--feature" data-reveal>
             <p class="home-card-meta">Asesoría / gestoría · 8 personas</p>
             <p class="home-score"><strong>38</strong><span>/100</span></p>
             <p class="badge badge--warn">Adopción inicial</p>
@@ -355,7 +355,7 @@
               >
             </div>
           </article>
-          <article class="card">
+          <article class="card" data-reveal>
             <p class="home-card-meta">Clínica dental · 4 sillones</p>
             <p class="home-score"><strong>22</strong><span>/100</span></p>
             <p class="badge badge--danger">Sin adopción real</p>
@@ -386,7 +386,7 @@
       </section>
 
       <section class="section" id="metodo" aria-labelledby="metodo-title">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <p class="eyebrow">Método</p>
           <h2 class="section__title" id="metodo-title">Tres pasos para pasar de idea a producción.</h2>
           <p class="section__lead">
@@ -395,7 +395,7 @@
           </p>
         </div>
         <ol class="steps steps--flow">
-          <li class="step">
+          <li class="step" data-reveal data-reveal-delay="1">
             <span class="step__num" aria-hidden="true"></span>
             <span class="step__body">
               <a class="step__title" href="/servicios.html#diagnostico-express">Diagnóstico express</a>
@@ -405,7 +405,7 @@
               </span>
             </span>
           </li>
-          <li class="step">
+          <li class="step" data-reveal data-reveal-delay="2">
             <span class="step__num" aria-hidden="true"></span>
             <span class="step__body">
               <a class="step__title" href="/servicios.html#piloto">Piloto de automatización</a>
@@ -415,7 +415,7 @@
               </span>
             </span>
           </li>
-          <li class="step">
+          <li class="step" data-reveal data-reveal-delay="3">
             <span class="step__num" aria-hidden="true"></span>
             <span class="step__body">
               <a class="step__title" href="/servicios.html#acompanamiento">Acompañamiento gobernado</a>
@@ -432,7 +432,7 @@
       </section>
 
       <section class="section section--alt" id="gobernanza" aria-labelledby="gobernanza-title">
-        <div class="section__head section__head--center">
+        <div class="section__head section__head--center" data-reveal>
           <p class="eyebrow">Gobernanza</p>
           <h2 class="section__title" id="gobernanza-title">Tu IA trabaja con límites, aprobaciones y registro.</h2>
           <p class="section__lead">
@@ -441,8 +441,8 @@
             última palabra a una persona y registra todo.
           </p>
         </div>
-        <div class="card-grid">
-          <article class="card">
+        <div class="card-grid" data-reveal-stagger>
+          <article class="card" data-reveal>
             <span class="card__icon" aria-hidden="true">
               <svg class="icon icon--xl icon--accent" aria-hidden="true"><use href="/assets/icons.svg#icon-lock"/></svg>
             </span>
@@ -453,7 +453,7 @@
               hace cumplir antes de cada acción.
             </p>
           </article>
-          <article class="card card--feature">
+          <article class="card card--feature" data-reveal>
             <span class="card__icon" aria-hidden="true">
               <svg class="icon icon--xl icon--accent" aria-hidden="true"><use href="/assets/icons.svg#icon-approval"/></svg>
             </span>
@@ -463,7 +463,7 @@
               esperan tu visto bueno. Tú apruebas o rechazas; el agente no avanza solo.
             </p>
           </article>
-          <article class="card">
+          <article class="card" data-reveal>
             <span class="card__icon" aria-hidden="true">
               <svg class="icon icon--xl icon--accent" aria-hidden="true"><use href="/assets/icons.svg#icon-trace"/></svg>
             </span>
@@ -488,7 +488,7 @@
       </section>
 
       <section class="section" id="aprende" aria-labelledby="aprende-title">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <p class="eyebrow">Aprendizaje</p>
           <h2 class="section__title" id="aprende-title">Aprende la ruta completa, paso a paso.</h2>
           <p class="section__lead">
@@ -496,23 +496,23 @@
             gobernadas por agentes.
           </p>
         </div>
-        <div class="card-grid">
-          <a class="card card--link" href="/aprende/01-chats.html">
+        <div class="card-grid" data-reveal-stagger>
+          <a class="card card--link" href="/aprende/01-chats.html" data-reveal>
             <span class="badge badge--accent">Nivel 1</span>
             <h3 class="card__title">Chats con IA</h3>
             <p class="card__text">ChatGPT, Claude, Gemini o Copilot como ayudante diario.</p>
           </a>
-          <a class="card card--link" href="/aprende/02-automatizaciones.html">
+          <a class="card card--link" href="/aprende/02-automatizaciones.html" data-reveal>
             <span class="badge badge--accent">Nivel 2</span>
             <h3 class="card__title">Automatizaciones</h3>
             <p class="card__text">Flujos que conectan tus herramientas y meten IA donde aporta.</p>
           </a>
-          <a class="card card--link" href="/aprende/03-agentes.html">
+          <a class="card card--link" href="/aprende/03-agentes.html" data-reveal>
             <span class="badge badge--accent">Nivel 3</span>
             <h3 class="card__title">Agentes</h3>
             <p class="card__text">Un LLM con herramientas que decide pasos para cumplir un objetivo.</p>
           </a>
-          <a class="card card--link" href="/aprende/04-orquestadores.html">
+          <a class="card card--link" href="/aprende/04-orquestadores.html" data-reveal>
             <span class="badge badge--accent">Nivel 4</span>
             <h3 class="card__title">Orquestadores</h3>
             <p class="card__text">Jerarquía, presupuesto, aprobaciones y auditoría entre agentes.</p>
@@ -524,7 +524,7 @@
       </section>
 
       <section class="section" id="tutoriales" aria-labelledby="tutoriales-title">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <p class="eyebrow">Guías prácticas</p>
           <h2 class="section__title" id="tutoriales-title">Cuando quieras profundizar, entra por un caso concreto.</h2>
           <p class="section__lead">
@@ -532,8 +532,8 @@
             y errores comunes antes de invertir.
           </p>
         </div>
-        <div class="card-grid">
-          <article class="card">
+        <div class="card-grid" data-reveal-stagger>
+          <article class="card" data-reveal>
             <h3 class="card__title">
               <a href="/blog/que-puede-hacer-la-ia-en-mi-pyme.html"
                 >¿Qué puede hacer la IA en mi pyme?</a
@@ -541,19 +541,19 @@
             </h3>
             <p class="card__text">Casos reales por sector: comercio, despachos, clínicas, talleres y servicios.</p>
           </article>
-          <article class="card">
+          <article class="card" data-reveal>
             <h3 class="card__title">
               <a href="/calculadora.html">Calculadora de ahorro con IA</a>
             </h3>
             <p class="card__text">Estima en 1 minuto cuántas horas y euros liberaría la IA en tu equipo. Sin email.</p>
           </article>
-          <article class="card">
+          <article class="card" data-reveal>
             <h3 class="card__title">
               <a href="/herramienta/madurez.html">Test de madurez de automatización</a>
             </h3>
             <p class="card__text">5 preguntas para saber si tu empresa está lista, con plan según tu nivel.</p>
           </article>
-          <a class="card card--link" href="/blog/">
+          <a class="card card--link" href="/blog/" data-reveal>
             <span class="badge badge--accent">Blog</span>
             <h3 class="card__title">Ver todos los tutoriales</h3>
             <p class="card__text">El archivo completo con guías nuevas para pymes.</p>
@@ -563,8 +563,8 @@
 
       <section class="section section--feed" id="cambios" aria-labelledby="cambios-title">
         <div class="feed">
-          <h2 id="cambios-title">Detrás de cada cambio</h2>
-          <p class="feed__intro">
+          <h2 id="cambios-title" data-reveal>Detrás de cada cambio</h2>
+          <p class="feed__intro" data-reveal data-reveal-delay="1">
             Esto no es marketing. Cada commit, deploy y validación que ves abajo lo dispara
             un agente sobre el repositorio público
             <a href="https://github.com/aiteam-itera/autonomia" rel="noopener">aiteam-itera/autonomia</a>.
@@ -595,14 +595,14 @@
       </section>
 
       <section class="section" id="faq" aria-labelledby="faq-title">
-        <h2 id="faq-title">Preguntas frecuentes</h2>
-        <p>
+        <h2 id="faq-title" data-reveal>Preguntas frecuentes</h2>
+        <p data-reveal data-reveal-delay="1">
           Las dudas reales que nos plantean las pymes antes de empezar.
           Si tienes otra,
           <a href="#contacto">cuéntanosla abajo</a>.
         </p>
-        <div class="grid">
-          <article>
+        <div class="grid" data-reveal-stagger>
+          <article data-reveal>
             <h3>¿Cuál es el primer proceso que debería automatizar con IA en mi pyme?</h3>
             <p>
               El que más horas repetitivas consume y depende poco de juicio humano: facturas,
@@ -612,7 +612,7 @@
               según tu sector y tamaño.
             </p>
           </article>
-          <article>
+          <article data-reveal>
             <h3>¿Cuánto cuesta automatizar un proceso en una pyme?</h3>
             <p>
               Un piloto en producción con métricas y 30 días de garantía cuesta 6.000 €.
@@ -621,7 +621,7 @@
               para validar dónde la IA paga su coste antes.
             </p>
           </article>
-          <article>
+          <article data-reveal>
             <h3>¿Necesito conocimientos técnicos para empezar?</h3>
             <p>
               No. El cuestionario y la recomendación inicial no requieren saber nada de IA.
@@ -629,14 +629,14 @@
               castellano; tu equipo solo aprueba el resultado.
             </p>
           </article>
-          <article>
+          <article data-reveal>
             <h3>¿Cuánto tiempo tarda un piloto en ver resultados?</h3>
             <p>
               Entre 4 y 6 semanas desde la firma. La primera medición real (horas ahorradas,
               tasa de error) sale al final de la segunda semana de producción.
             </p>
           </article>
-          <article>
+          <article data-reveal>
             <h3>¿No pierdo el control si la IA actúa sola?</h3>
             <p>
               No. Cada agente corre sobre una <a href="#gobernanza">capa de gobernanza</a> con
@@ -645,7 +645,7 @@
               el agente no se sale de ahí.
             </p>
           </article>
-          <article>
+          <article data-reveal>
             <h3>¿Y si mis datos son sensibles? ¿Cumplís RGPD?</h3>
             <p>
               Sí. Tratamos los datos del cuestionario solo para generarte la recomendación y
@@ -654,7 +654,7 @@
               proveedor del LLM.
             </p>
           </article>
-          <article>
+          <article data-reveal>
             <h3>¿En qué se diferencia AutonomIA de usar ChatGPT directamente?</h3>
             <p>
               ChatGPT es una herramienta general. AutonomIA convierte la IA en procesos
@@ -668,8 +668,8 @@
 
       <section class="section section--alt" id="contacto">
         <div class="contact">
-          <h2>Hablemos</h2>
-          <p class="contact__intro">
+          <h2 data-reveal>Hablemos</h2>
+          <p class="contact__intro" data-reveal data-reveal-delay="1">
             Cuéntanos qué quieres automatizar y te respondemos en menos de 24h. Sin
             compromisos: si no te encaja, te decimos qué tendrías que hacer por tu cuenta.
           </p>
@@ -755,6 +755,7 @@
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
+    <script src="/assets/reveal.js" defer></script>
     <script src="/assets/intro.js" defer></script>
     <script src="/assets/agent-feed.js" defer></script>
     <script src="/assets/contact.js" defer></script>

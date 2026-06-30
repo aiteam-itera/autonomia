@@ -39,6 +39,16 @@
   const codeNode = overlay.querySelector("[data-intro-code] code");
   const skipBtn = overlay.querySelector("[data-intro-skip]");
 
+  // Progress bar — injected via JS so no-JS never sees it.
+  const progressEl = document.createElement("div");
+  progressEl.className = "intro__progress";
+  progressEl.setAttribute("aria-hidden", "true");
+  overlay.appendChild(progressEl);
+
+  function setProgress(pct) {
+    overlay.style.setProperty("--intro-p", pct + "%");
+  }
+
   const message =
     "Crea una página web con tutoriales y mejores prácticas del uso de IA en PYMES, con un cuestionario de madurez y un blog.";
 
@@ -77,30 +87,38 @@
     overlay.dataset.introState = "chat";
     for (let i = 0; i < message.length && !cancelled; i++) {
       textNode.textContent = message.slice(0, i + 1);
+      // Progress: 0 → 48% as message types
+      setProgress(Math.round((i / message.length) * 48));
       const ch = message[i];
       // Slight cadence variation: pause longer on punctuation
       const base = 18 + Math.random() * 22;
       const punct = /[.,…]/.test(ch) ? 160 : /[\s]/.test(ch) ? 10 : 0;
       await delay(base + punct);
     }
+    setProgress(50);
   }
 
   async function streamCode() {
     if (cancelled) return;
     overlay.dataset.introState = "code";
     codeNode.innerHTML = "";
-    for (const line of codeLines) {
+    for (let i = 0; i < codeLines.length; i++) {
       if (cancelled) return;
+      const line = codeLines[i];
       const lineEl = document.createElement("div");
       lineEl.innerHTML = line.html;
       codeNode.appendChild(lineEl);
+      // Progress: 50 → 92% across code lines
+      setProgress(50 + Math.round(((i + 1) / codeLines.length) * 42));
       await delay(line.delay);
     }
+    setProgress(95);
   }
 
   function leave() {
     if (overlay.dataset.introState === "leaving") return;
     overlay.dataset.introState = "leaving";
+    setProgress(100);
     cancel();
     try {
       sessionStorage.setItem(STORAGE_KEY, "1");

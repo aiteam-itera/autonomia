@@ -2906,12 +2906,21 @@ a.card:hover {
 /* ---------- Motion primitives (sober, no-JS-safe) ----------
    Content is fully visible by default. reveal.js adds `js-reveal` to
    <html>, only then do [data-reveal] elements start hidden and animate
-   in via IntersectionObserver (.is-in). No JS → no hidden content. */
+   in via IntersectionObserver (.is-in). No JS → no hidden content.
+
+   X4 extensions:
+   - data-reveal-dir="left|right"  directional slide-in
+   - data-reveal-stagger on parent → reveal.js sets --stagger-i on children
+   - --stagger-i CSS custom property → auto-computed delay
+   - .feed__item--enter           staggered entrance for feed items
+   - .intro__progress             animated progress bar in intro overlay
+*/
 
 .js-reveal [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out);
+  transition-delay: calc(var(--stagger-i, 0) * 55ms);
   will-change: opacity, transform;
 }
 
@@ -2920,6 +2929,19 @@ a.card:hover {
   transform: none;
 }
 
+/* Directional variants — override default translateY */
+.js-reveal [data-reveal][data-reveal-dir="left"] {
+  transform: translateX(-22px);
+}
+.js-reveal [data-reveal][data-reveal-dir="right"] {
+  transform: translateX(22px);
+}
+.js-reveal [data-reveal][data-reveal-dir="left"].is-in,
+.js-reveal [data-reveal][data-reveal-dir="right"].is-in {
+  transform: none;
+}
+
+/* Fixed delays (higher specificity → override stagger calc) */
 .js-reveal [data-reveal][data-reveal-delay="1"] {
   transition-delay: 0.08s;
 }
@@ -2930,17 +2952,98 @@ a.card:hover {
   transition-delay: 0.24s;
 }
 
+/* ---------- Feed item entrance (X4) ---------- */
+
+@keyframes feed-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.feed__item--enter {
+  animation: feed-enter 0.38s var(--ease-out) calc(var(--feed-i, 0) * 70ms) both;
+}
+
+/* Subtle pulse on the loading placeholder while waiting for GitHub API */
+@keyframes feed-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+.feed__loading {
+  animation: feed-pulse 1.5s ease-in-out infinite;
+}
+
+/* ---------- Intro overlay enhancements (X4) ---------- */
+
+/* Thin progress bar at the bottom of the overlay */
+.intro__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: var(--intro-p, 0%);
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(129, 140, 248, 0.55);
+  transition: width 0.12s linear;
+  border-radius: 0 1px 1px 0;
+}
+
+/* Avatar thinking pulse while message is being typed */
+@keyframes avatar-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50%       { box-shadow: 0 0 0 7px rgba(129, 140, 248, 0.22); }
+}
+
+.intro[data-intro-state="chat"] .intro__avatar {
+  animation: avatar-pulse 1.6s ease-in-out infinite;
+}
+
+/* Each code line slides in from the left as it's appended */
+@keyframes code-line-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.intro__code div {
+  animation: code-line-in 0.18s var(--ease-out) both;
+}
+
+/* ---------- prefers-reduced-motion: disable all X4 animations ---------- */
+
 @media (prefers-reduced-motion: reduce) {
   .js-reveal [data-reveal] {
     opacity: 1;
     transform: none;
     transition: none;
+    transition-delay: 0s;
+  }
+  .js-reveal [data-reveal][data-reveal-dir="left"],
+  .js-reveal [data-reveal][data-reveal-dir="right"] {
+    transform: none;
   }
   .cta,
   .card,
   .grid article,
   .lift {
     transition: none;
+  }
+  .feed__item--enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .feed__loading {
+    animation: none;
+    opacity: 1;
+  }
+  .intro__progress {
+    transition: none;
+  }
+  .intro__avatar {
+    animation: none;
+  }
+  .intro__code div {
+    animation: none;
   }
 }
 

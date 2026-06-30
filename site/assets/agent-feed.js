@@ -122,11 +122,19 @@
     return li;
   }
 
+  var reducedMotion =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   function renderItems(items) {
     list.innerHTML = '';
     list.setAttribute('aria-busy', 'false');
-    items.forEach(function (it) {
-      list.appendChild(buildItem(it));
+    items.forEach(function (it, idx) {
+      var li = buildItem(it);
+      if (!reducedMotion) {
+        li.classList.add('feed__item--enter');
+        li.style.setProperty('--feed-i', idx);
+      }
+      list.appendChild(li);
     });
   }
 
