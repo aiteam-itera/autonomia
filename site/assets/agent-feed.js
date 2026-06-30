@@ -146,11 +146,17 @@
     fallbackEl.hidden = false;
   }
 
-  Promise.allSettled([
-    fetchJson('/commits/main'),
-    fetchJson('/actions/runs?per_page=20&branch=main'),
-  ])
-    .then(function (results) {
+  var hasLoaded = false;
+
+  function loadFeed() {
+    if (hasLoaded) return;
+    hasLoaded = true;
+
+    Promise.allSettled([
+      fetchJson('/commits/main'),
+      fetchJson('/actions/runs?per_page=20&branch=main'),
+    ])
+      .then(function (results) {
       var commitRes = results[0];
       var runsRes = results[1];
 
@@ -238,8 +244,43 @@
         return (new Date(b.iso).getTime() || 0) - (new Date(a.iso).getTime() || 0);
       });
       renderItems(items);
-    })
-    .catch(function () {
-      showFallback('No pudimos cargar los últimos eventos, mira el historial en GitHub:');
-    });
+      })
+      .catch(function () {
+        showFallback('No pudimos cargar los últimos eventos, mira el historial en GitHub:');
+      });
+  }
+
+  function scheduleLoad() {
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              io.disconnect();
+              loadFeed();
+            }
+          });
+        },
+        { rootMargin: '640px 0px', threshold: 0 }
+      );
+      io.observe(list);
+      return;
+    }
+
+    var run = function () {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadFeed, { timeout: 2500 });
+      } else {
+        window.setTimeout(loadFeed, 1200);
+      }
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+  }
+
+  scheduleLoad();
 })();
