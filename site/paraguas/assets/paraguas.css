@@ -109,6 +109,30 @@ h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; }
 .stat-num { font-size: 1.9rem; font-weight: 800; color: var(--accent-light); }
 .stat-label { font-size: .82rem; color: var(--muted); margin-top: .25rem; }
 
+/* ── CASE STORY EXTENSIONS (ITEA-3296) ──
+   Scoped components for paraguas result-story pages.
+   Keep this block bounded until the shared design-system from ITEA-3292 lands. */
+.case-stats { margin-top: 3rem; }
+.proof-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.proof-list li {
+  color: var(--muted);
+  font-size: .95rem;
+  display: flex;
+  gap: .65rem;
+}
+.proof-list li::before {
+  content: "✓";
+  color: var(--accent-light);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.proof-list strong { color: var(--text); }
+
 /* ── GENERIC CARDS / GRIDS ── */
 .grid { display: grid; gap: 1.4rem; }
 .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); }
