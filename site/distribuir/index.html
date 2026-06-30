@@ -53,6 +53,7 @@
         grid-template-columns: minmax(0, 0.72fr) minmax(280px, 0.28fr);
         gap: var(--space-5);
         padding: clamp(1rem, 3vw, 1.6rem);
+        overflow: hidden;
       }
 
       .kit-channel__head {
@@ -77,10 +78,14 @@
       }
 
       .kit-copy {
+        width: 100%;
+        max-width: 100%;
         margin: 0;
         max-height: 22rem;
         overflow: auto;
         white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
         color: var(--fg);
         background: rgba(255, 255, 255, 0.04);
         border: 1px dashed var(--border-strong);
@@ -108,7 +113,13 @@
       }
 
       .kit-actions .cta {
+        box-sizing: border-box;
+        max-width: 100%;
+        min-width: 0;
         width: 100%;
+        margin-top: 0;
+        white-space: normal;
+        overflow-wrap: anywhere;
       }
 
       .kit-links {
@@ -165,6 +176,11 @@
 
         .kit-channel__head {
           flex-direction: column;
+        }
+
+        .kit-channel,
+        .kit-command {
+          padding-inline: 1rem;
         }
       }
     </style>
