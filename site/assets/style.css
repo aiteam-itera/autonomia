@@ -1,12 +1,89 @@
+/* =====================================================================
+   AutonomIA Design System  ·  v2 (ITEA-3292)
+   Foundation: tokens → base → shared chrome → component library → motion.
+   Single action accent. Pages REUSE these classes; per-page CSS only in
+   a delimited section. Backward-compat aliases preserve legacy rules.
+   ===================================================================== */
+
 :root {
-  --bg: #0b0d12;
-  --fg: #f5f6fa;
-  --muted: #b4bccd;
+  /* --- Surfaces & depth (dark, layered) --- */
+  --bg: #0a0c11;
+  --surface-1: #11141d;
+  --surface-2: #161a25;
+  --surface-3: #1d2230;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+
+  /* --- Text --- */
+  --fg: #f5f7fb;
+  --muted: #aab3c5;
+  --faint: rgba(245, 247, 251, 0.62);
+
+  /* --- Single action accent (indigo) + soft/strong stops --- */
   --accent: #818cf8;
-  --accent-deep: #6366f1;
-  --accent-fg: #0b0d12;
-  --card: #141823;
-  --max: 960px;
+  --accent-strong: #6366f1;
+  --accent-soft: rgba(129, 140, 248, 0.12);
+  --accent-line: rgba(129, 140, 248, 0.32);
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --accent-fg: #0a0c11;
+
+  /* --- Semantic states --- */
+  --ok: #4ade80;
+  --ok-soft: rgba(74, 222, 128, 0.12);
+  --warn: #fbbf24;
+  --warn-soft: rgba(251, 191, 36, 0.12);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.12);
+
+  /* --- Fluid typographic scale (clamp, modular ~1.25) --- */
+  --step--1: clamp(0.83rem, 0.8rem + 0.14vw, 0.9rem);
+  --step-0: clamp(1rem, 0.97rem + 0.18vw, 1.0625rem);
+  --step-1: clamp(1.2rem, 1.12rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.45rem, 1.31rem + 0.7vw, 1.85rem);
+  --step-3: clamp(1.75rem, 1.5rem + 1.2vw, 2.4rem);
+  --step-4: clamp(2.1rem, 1.72rem + 1.9vw, 3.1rem);
+  --step-5: clamp(2.5rem, 1.95rem + 2.8vw, 4rem);
+
+  /* --- Spacing scale (vertical rhythm) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* --- Radii --- */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 999px;
+
+  /* --- Elevation --- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 0 1px var(--accent-line), 0 12px 40px -16px var(--accent-glow);
+
+  /* --- Motion primitives (sober) --- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-1: 0.15s;
+  --dur-2: 0.3s;
+  --dur-3: 0.6s;
+
+  /* --- Layout containers & gutters --- */
+  --max: 1080px;
+  --max-wide: 1200px;
+  --max-prose: 720px;
+  --pad: clamp(1rem, 4vw, 3rem);
+
+  /* --- Backward-compat aliases (legacy rules below depend on these) --- */
+  --card: var(--surface-1);
+  --accent-deep: var(--accent-strong);
 }
 
 /* ---------- Skip link (WCAG 2.4.1 Bypass Blocks) ---------- */
@@ -37,58 +114,143 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.55;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Global heading rhythm (component rules may override) */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+h2 {
+  font-size: var(--step-3);
+}
+h3 {
+  font-size: var(--step-1);
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
   color: var(--accent);
   text-decoration: none;
+  transition: color var(--dur-1) var(--ease);
 }
 
 a:hover {
   text-decoration: underline;
 }
 
+::selection {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--space-7) auto;
+  max-width: var(--max);
+}
+
 .hero {
-  background: radial-gradient(circle at 20% 0%, rgba(99, 102, 241, 0.35), transparent 50%),
-    var(--bg);
-  padding: 1.5rem clamp(1rem, 4vw, 3rem) 6rem;
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(120% 80% at 15% -10%, var(--accent-glow), transparent 55%),
+    radial-gradient(90% 60% at 95% 0%, rgba(129, 140, 248, 0.14), transparent 60%), var(--bg);
+  padding: var(--space-5) var(--pad) var(--space-9);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  z-index: -1;
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-4);
   max-width: var(--max);
   margin: 0 auto;
 }
 
 .brand {
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 1.1rem;
 }
 
 .nav__links {
   display: inline-flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   border: 1px solid var(--accent);
   color: var(--accent);
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
+  padding: 0.55rem 1.05rem;
+  border-radius: var(--radius-pill);
   font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.cta:hover {
+  text-decoration: none;
+  background: var(--accent-soft);
 }
 
 .cta:focus-visible,
@@ -102,42 +264,58 @@ summary:focus-visible {
 
 .cta--primary {
   background: var(--accent);
+  border-color: var(--accent);
   color: var(--accent-fg);
   margin-top: 1.5rem;
   padding: 0.75rem 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 10px 30px -12px var(--accent-glow);
+}
+
+.cta--primary:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px -14px var(--accent-glow);
+}
+
+.cta--lg {
+  padding: 0.9rem 1.7rem;
+  font-size: 1.05rem;
 }
 
 .hero__content {
   max-width: var(--max);
-  margin: 4rem auto 0;
+  margin: var(--space-8) auto 0;
   text-align: left;
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-  margin: 0 0 1rem;
-  line-height: 1.1;
+  font-size: var(--step-5);
+  margin: 0 0 1.1rem;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
 }
 
 .hero p {
-  font-size: 1.15rem;
+  font-size: clamp(1.1rem, 1.02rem + 0.4vw, 1.28rem);
   color: var(--muted);
-  max-width: 36rem;
+  max-width: 38rem;
+  line-height: 1.55;
 }
 
 .section {
-  padding: 4rem clamp(1rem, 4vw, 3rem);
+  padding: var(--space-8) var(--pad);
 }
 
 .section--alt {
-  background: var(--card);
+  background: var(--surface-1);
 }
 
 .section h2 {
   max-width: var(--max);
   margin: 0 auto 1.5rem;
-  font-size: 1.6rem;
+  font-size: var(--step-3);
 }
 
 .section p {
@@ -148,20 +326,29 @@ summary:focus-visible {
 .grid {
   display: grid;
   gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   max-width: var(--max);
   margin: 0 auto;
 }
 
 .grid article {
-  background: var(--card);
-  padding: 1.25rem;
-  border-radius: 12px;
+  background: var(--surface-1);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: border-color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease);
+}
+
+.grid article:hover {
+  border-color: var(--accent-line);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
 }
 
 .grid h3 {
   margin: 0 0 0.5rem;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .grid p {
@@ -170,10 +357,11 @@ summary:focus-visible {
 }
 
 .footer {
-  padding: 2rem;
+  padding: var(--space-7) var(--pad);
   text-align: center;
-  color: var(--muted);
+  color: var(--faint);
   font-size: 0.85rem;
+  border-top: 1px solid var(--border);
 }
 
 /* ---------- Questionnaire ---------- */
@@ -1861,5 +2049,538 @@ body.intro-open {
 @media (max-width: 640px) {
   .result__plan {
     padding: 1.1rem 1rem 1rem;
+  }
+}
+
+/* =====================================================================
+   DESIGN SYSTEM v2 — reusable component library (ITEA-3292)
+   Pages P1–P9 and transversals REUSE these classes. Do not duplicate;
+   per-page CSS belongs in a delimited <style> block on that page only.
+   ===================================================================== */
+
+/* ---------- Layout containers & section heads ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+}
+
+.container--wide {
+  max-width: var(--max-wide);
+}
+
+.container--prose {
+  max-width: var(--max-prose);
+}
+
+.section__head {
+  max-width: var(--max);
+  margin: 0 auto var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.section__head--center {
+  text-align: center;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.6rem;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+.section__head--center .eyebrow {
+  justify-content: center;
+}
+
+.section__title {
+  margin: 0;
+  font-size: var(--step-3);
+  line-height: 1.12;
+}
+
+.section__lead,
+.lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.18rem);
+  line-height: 1.6;
+  max-width: 42rem;
+}
+
+.section__head--center .section__lead {
+  margin-inline: auto;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+/* Gradient text for hero emphasis (sober, single accent) */
+.text-gradient {
+  background: linear-gradient(100deg, var(--fg) 10%, var(--accent) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Button row helper ---------- */
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* ---------- Cards ---------- */
+
+.card-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  max-width: var(--max);
+  margin-inline: auto;
+}
+
+.card-grid--wide {
+  max-width: var(--max-wide);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: border-color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease), background var(--dur-2) var(--ease);
+}
+
+.card--link:hover,
+a.card:hover {
+  border-color: var(--accent-line);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+}
+
+.card--feature {
+  border-color: var(--accent-line);
+  background: linear-gradient(180deg, var(--accent-soft), var(--surface-1));
+  box-shadow: var(--shadow-glow);
+}
+
+.card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: var(--fg);
+}
+
+.card__text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+.card__foot {
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+
+/* ---------- Pills, tags & badges ---------- */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.pill--muted {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--fg);
+}
+
+.badge--accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.badge--ok {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+.badge--warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.badge--danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* ---------- Stats ---------- */
+
+.stats {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  max-width: var(--max);
+  margin-inline: auto;
+}
+
+.stat {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.stat__num {
+  font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__num .accent,
+.stat--accent .stat__num {
+  color: var(--accent);
+}
+
+.stat__label {
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ---------- Steps / timeline (narrativa de transformación) ---------- */
+
+.steps {
+  display: grid;
+  gap: 1.1rem;
+  max-width: var(--max);
+  margin-inline: auto;
+  list-style: none;
+  padding: 0;
+  counter-reset: step;
+}
+
+.steps--flow {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.step {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.5rem;
+}
+
+.step__num {
+  counter-increment: step;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.step__num::before {
+  content: counter(step);
+}
+
+.step__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.step__title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--fg);
+}
+
+.step__text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+/* ---------- Transformation arc (antes → método → después) ---------- */
+
+.arc {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: stretch;
+  max-width: var(--max);
+  margin-inline: auto;
+}
+
+.arc__phase {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.5rem;
+}
+
+.arc__phase--now {
+  border-color: var(--accent-line);
+  background: linear-gradient(180deg, var(--accent-soft), var(--surface-1));
+}
+
+.arc__arrow {
+  align-self: center;
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .arc {
+    grid-template-columns: 1fr;
+  }
+  .arc__arrow {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+}
+
+/* ---------- CTA banner (conversión en cada scroll) ---------- */
+
+.cta-banner {
+  max-width: var(--max);
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--accent-line);
+  background: radial-gradient(120% 140% at 50% -20%, var(--accent-soft), transparent 60%),
+    var(--surface-1);
+  box-shadow: var(--shadow-glow);
+}
+
+.cta-banner__title {
+  margin: 0;
+  font-size: var(--step-3);
+  line-height: 1.15;
+}
+
+.cta-banner__text {
+  margin: 0;
+  color: var(--muted);
+  max-width: 38rem;
+  line-height: 1.6;
+}
+
+.cta-banner .cta-row {
+  justify-content: center;
+}
+
+/* ---------- Trust row (señales de confianza) ---------- */
+
+.trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.5rem;
+  max-width: var(--max);
+  margin-inline: auto;
+  color: var(--faint);
+  font-size: 0.9rem;
+}
+
+.trust-row__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.trust-row__item::before {
+  content: "✓";
+  color: var(--ok);
+  font-weight: 700;
+}
+
+/* ---------- Hero variants ---------- */
+
+.hero--xl {
+  padding-block: var(--space-7) clamp(4rem, 8vw, 7rem);
+}
+
+.hero--center .hero__content {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.hero--center .hero p {
+  margin-inline: auto;
+}
+
+.hero__eyebrow {
+  margin: 0 0 1rem;
+}
+
+/* ---------- Utilities ---------- */
+
+.lift {
+  transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+}
+.lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.divider {
+  height: 1px;
+  border: 0;
+  max-width: var(--max);
+  margin: var(--space-7) auto;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+
+.surface {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+/* ---------- Motion primitives (sober, no-JS-safe) ----------
+   Content is fully visible by default. reveal.js adds `js-reveal` to
+   <html>, only then do [data-reveal] elements start hidden and animate
+   in via IntersectionObserver (.is-in). No JS → no hidden content. */
+
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.js-reveal [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.js-reveal [data-reveal][data-reveal-delay="1"] {
+  transition-delay: 0.08s;
+}
+.js-reveal [data-reveal][data-reveal-delay="2"] {
+  transition-delay: 0.16s;
+}
+.js-reveal [data-reveal][data-reveal-delay="3"] {
+  transition-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .cta,
+  .card,
+  .grid article,
+  .lift {
+    transition: none;
   }
 }
