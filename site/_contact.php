@@ -43,6 +43,13 @@ if ($email === '' || strlen($email) > 254 || !filter_var($email, FILTER_VALIDATE
     exit;
 }
 
+$message = trim((string) ($data['message'] ?? ''));
+if ($message === '' || strlen($message) > 4000) {
+    http_response_code(400);
+    echo json_encode(['ok' => false, 'error' => 'message']);
+    exit;
+}
+
 $s = static function ($v, int $max): string {
     return substr(trim((string) $v), 0, $max);
 };
@@ -53,7 +60,7 @@ $record = [
     'name'    => $s($data['name'] ?? '', 120),
     'email'   => $email,
     'sector'  => $s($data['sector'] ?? '', 64),
-    'message' => $s($data['message'] ?? '', 4000),
+    'message' => $s($message, 4000),
     'paquete' => $s($data['paquete'] ?? '', 64),
     'level'   => isset($data['level']) ? $s($data['level'], 64) : null,
     'score'   => isset($data['score']) ? $s($data['score'], 16) : null,

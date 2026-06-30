@@ -74,6 +74,38 @@ test.describe("contact form", () => {
     await expect(page.locator('[data-contact-form] [data-contact-submit]')).toBeDisabled();
   });
 
+  test("contact can be submitted without optional name", async ({ page }) => {
+    await injectApiBase(page);
+
+    let captured = null;
+    await page.route(`${FAKE_API}/api/contact`, async (route) => {
+      captured = JSON.parse(route.request().postData() || "{}");
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ ok: true }),
+      });
+    });
+
+    await page.goto("/index.html");
+    await dismissIntro(page);
+    await page.locator("#contacto").scrollIntoViewIfNeeded();
+
+    await page.locator('[data-contact-form] input[name="email"]').fill("lead@example.com");
+    await page
+      .locator('[data-contact-form] textarea[name="message"]')
+      .fill("Queremos priorizar un primer piloto de automatización.");
+
+    await page.locator('[data-contact-form] [data-contact-submit]').click();
+
+    await expect(page.locator('[data-contact-form] [data-contact-hint]')).toContainText("Recibido");
+    expect(captured).toMatchObject({
+      name: "",
+      email: "lead@example.com",
+      source: "home",
+    });
+  });
+
   test("honeypot field is sent so the worker can short-circuit bots", async ({ page }) => {
     await injectApiBase(page);
 

@@ -736,9 +736,15 @@
         <div class="contact">
           <h2 data-reveal>Hablemos</h2>
           <p class="contact__intro" data-reveal data-reveal-delay="1">
-            Cuéntanos qué quieres automatizar y te respondemos en menos de 24h. Sin
-            compromisos: si no te encaja, te decimos qué tendrías que hacer por tu cuenta.
+            Deja tu email y el proceso que quieres mejorar. Te respondemos en menos de 24h
+            con el siguiente paso más sensato: hacerlo por tu cuenta, empezar por diagnóstico
+            o acotar un piloto.
           </p>
+          <div class="trust-row contact__trust" aria-label="Garantías del primer contacto">
+            <span class="trust-row__item">Sin llamada obligatoria</span>
+            <span class="trust-row__item">Sin newsletter automática</span>
+            <span class="trust-row__item">Presupuesto fijo antes de construir</span>
+          </div>
 
           <p class="contact__paquete" data-contact-paquete hidden></p>
 
@@ -746,8 +752,8 @@
             <input type="hidden" name="paquete" value="" data-contact-paquete-input />
 
             <label>
-              <span>Nombre</span>
-              <input type="text" name="name" autocomplete="name" required maxlength="100" />
+              <span>Nombre <small>(opcional)</small></span>
+              <input type="text" name="name" autocomplete="name" maxlength="100" />
             </label>
 
             <label>
@@ -801,7 +807,7 @@
             </div>
 
             <button type="submit" class="cta cta--primary" data-contact-submit>
-              Enviar mensaje
+              Pedir respuesta en 24h
             </button>
 
             <p class="contact__hint" data-contact-hint hidden></p>

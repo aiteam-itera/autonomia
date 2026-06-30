@@ -32,6 +32,12 @@
       messageLine:
         "Me interesa el paquete \"Acompañamiento gobernado\" (mensual, desde 3.500 €/mes).",
     },
+    consulta: {
+      label: "Consulta a medida",
+      anchor: "/servicios.html#escenarios-title",
+      messageLine:
+        "Mi caso no encaja del todo en los paquetes. Quiero contaros el contexto para recibir una orientación concreta.",
+    },
   };
 
   function readPaqueteParam() {
@@ -174,8 +180,8 @@
         website: (data.get("website") || "").toString(),
       };
 
-      if (!payload.name || !payload.email || !payload.message) {
-        setHint(form, "Completa nombre, email y mensaje antes de enviar.", "warn");
+      if (!payload.email || !payload.message) {
+        setHint(form, "Completa email y proceso antes de enviar.", "warn");
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
@@ -209,7 +215,7 @@
           if (res.ok) {
             setHint(
               form,
-              "<strong>¡Recibido!</strong> Te responderemos en menos de 24h. Revisa tu email; te hemos mandado una copia.",
+              "<strong>Recibido.</strong> Te responderemos en menos de 24h con el siguiente paso más sensato.",
               "ok"
             );
             window.autonomia && window.autonomia.track("contact_form_submit", { paquete: payload.paquete || "" });
