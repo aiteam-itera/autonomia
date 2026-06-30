@@ -2943,3 +2943,70 @@ a.card:hover {
     transition: none;
   }
 }
+
+/* =====================================================================
+   X5 · Responsive & Mobile Excellence (ITEA-3306)
+   Touch targets · mobile nav collapse · CTA-row stacking · XS layout
+   ===================================================================== */
+
+/* --- Touch targets: WCAG 2.5.5 requires ≥ 44 × 44 px tap area --- */
+.cta {
+  min-height: 44px;
+}
+
+/* Ensure nav links & FAQ toggles also meet 44 px */
+.faq__item summary {
+  min-height: 44px;
+}
+
+/* --- Mobile nav: collapse ghost links, keep one primary CTA visible --- */
+@media (max-width: 639px) {
+  /* Hide secondary ghost links so the nav doesn't wrap into 2+ rows */
+  .nav__links .cta--ghost {
+    display: none;
+  }
+
+  /* Brand + remaining CTA stay on one line */
+  .nav {
+    flex-wrap: nowrap;
+  }
+}
+
+/* --- CTA row: stack to full-width column on XS phones --- */
+@media (max-width: 639px) {
+  .cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta-row .cta {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0;
+  }
+}
+
+/* --- Section padding: tighten vertical rhythm on very small screens --- */
+@media (max-width: 479px) {
+  .section {
+    padding-block: var(--space-7);
+  }
+
+  /* Hero: slightly less bottom padding on XS so content isn't too far */
+  .hero {
+    padding-bottom: var(--space-7);
+  }
+}
+
+/* --- Stats component: 1-col on very small phones --- */
+@media (max-width: 399px) {
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Card grids with high min-width: force single column on 320-399px */
+  .card-grid,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

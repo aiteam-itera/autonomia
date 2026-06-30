@@ -249,8 +249,18 @@ html.js .reveal.d1 { transition-delay: .08s; } html.js .reveal.d2 { transition-d
 @media (max-width: 720px) {
   .nav-links { position: fixed; inset: 56px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0; background: rgba(10,14,26,.98); border-bottom: 1px solid var(--border); padding: .5rem 1rem 1rem; display: none; }
   .nav-links.open { display: flex; }
-  .nav-links a { padding: .8rem; }
-  .nav-toggle { display: block; }
+  .nav-links a { padding: .8rem; min-height: 44px; display: flex; align-items: center; }
+  .nav-toggle { display: block; min-height: 44px; min-width: 44px; }
+}
+@media (max-width: 479px) {
+  /* Stats: stay 2-col but let sections breathe less on phones */
+  section { padding: 3.5rem 0; }
+  .hero { padding-top: 6rem; }
+  /* Hero CTAs stack on XS */
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { justify-content: center; }
+  /* Buttons: touch targets */
+  .btn { min-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
