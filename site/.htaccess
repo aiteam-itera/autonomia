@@ -1,3 +1,11 @@
+# Stale legacy URL: /paraguas.html no longer exists as a file (canonical is the
+# /paraguas/ directory). Without this, Apache content negotiation returns a
+# 300 Multiple Choices for old inbound/search-index links. mod_alias runs in
+# the translate phase (before negotiation), so this 301 wins cleanly.
+<IfModule mod_alias.c>
+  Redirect 301 /paraguas.html /paraguas/
+</IfModule>
+
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/ld+json image/svg+xml
 </IfModule>
