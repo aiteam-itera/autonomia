@@ -6,7 +6,7 @@
     <title>Blog — AutonomIA</title>
     <meta
       name="description"
-      content="Tutoriales en español sobre cómo aplicar IA y agentes en una pyme: casos de uso por sector, automatizaciones y guías prácticas."
+      content="Artículos prácticos en español sobre cómo aplicar IA en una pyme: casos reales, errores frecuentes y planes accionables."
     />
     <link rel="canonical" href="https://ia.itera.es/blog/" />
 
@@ -16,7 +16,7 @@
     <meta property="og:title" content="Blog AutonomIA — IA aplicada a la pyme" />
     <meta
       property="og:description"
-      content="Tutoriales prácticos para entender y empezar con IA en tu empresa, sin tecnicismos."
+      content="Artículos prácticos para entender y empezar con IA en tu empresa, sin tecnicismos ni pilotos eternos."
     />
     <meta property="og:url" content="https://ia.itera.es/blog/" />
     <meta property="og:image" content="https://ia.itera.es/assets/og-default.png" />
@@ -28,7 +28,7 @@
     <meta name="twitter:title" content="Blog AutonomIA — IA aplicada a la pyme" />
     <meta
       name="twitter:description"
-      content="Tutoriales prácticos para entender y empezar con IA en tu empresa, sin tecnicismos."
+      content="Artículos prácticos para entender y empezar con IA en tu empresa, sin tecnicismos."
     />
     <meta name="twitter:image" content="https://ia.itera.es/assets/og-default.png" />
     <meta name="twitter:image:alt" content="AutonomIA — IA que entiende tu negocio." />
@@ -39,6 +39,85 @@
       data-cf-beacon='{"token":"FILL_CWA_TOKEN"}'></script>
     <!-- End Cloudflare Web Analytics -->
     <script src="/assets/analytics.js" defer></script>
+
+    <!-- ============================================================
+         Blog index — editorial additions (page-only)
+         ============================================================ -->
+    <style>
+      .blog__card--featured {
+        grid-column: 1 / -1;
+        padding: 2rem 2.25rem 2rem;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.14) 0%, var(--card) 55%);
+        border-color: rgba(99, 102, 241, 0.3);
+        gap: 0.75rem;
+      }
+      .blog__card--featured h3 {
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        line-height: 1.25;
+      }
+      .blog__card--featured p {
+        font-size: 1.05rem;
+        max-width: 46rem;
+      }
+      .blog__card--featured .blog__card-cta {
+        display: inline-block;
+        margin-top: 0.75rem;
+        font-size: 0.95rem;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .blog__card--featured .blog__card-cta:hover { text-decoration: underline; }
+
+      .blog__tag {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 0.2em 0.7em;
+        border-radius: 999px;
+        border: 1px solid rgba(129, 140, 248, 0.35);
+        color: var(--accent);
+        background: rgba(129, 140, 248, 0.09);
+      }
+
+      .blog__divider {
+        max-width: var(--max);
+        margin: 2rem auto 1.5rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .blog__divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .blog__strip {
+        max-width: var(--max);
+        margin: 3rem auto 0;
+        padding: 1.75rem 2rem;
+        background: rgba(99, 102, 241, 0.09);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .blog__strip-text { flex: 1; min-width: 200px; }
+      .blog__strip-text strong { display: block; font-size: 1.1rem; margin-bottom: 0.3rem; }
+      .blog__strip-text p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+      .blog__strip .cta { margin-top: 0; flex-shrink: 0; }
+    </style>
+    <!-- ============================================================ -->
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
@@ -51,29 +130,20 @@
         </span>
       </nav>
       <div class="hero__content">
-        <h1>Tutoriales</h1>
+        <h1>IA práctica para tu pyme</h1>
         <p>
-          Guías prácticas en español para entender qué puede hacer la IA en tu empresa y cómo
-          empezar sin marearte con la teoría.
+          Artículos, guías y casos reales — sin jerga, sin pilotos eternos. Todo lo que lees
+          aquí puedes aplicarlo la semana que viene.
         </p>
       </div>
     </header>
 
     <main id="main-content" tabindex="-1" class="section">
       <div class="blog">
-        <p class="blog__intro">
-          Cada post está pensado para alguien que dirige una pyme y quiere decisiones, no jerga.
-          Si después de leer quieres un plan específico para tu negocio, hay un cuestionario de
-          5 minutos al final de cada artículo.
-        </p>
-        <p class="blog__intro">
-          ¿Prefieres aprender en orden? El blog son posts sueltos. Si buscas un currículo
-          guiado por nivel de adopción —chats, automatizaciones, agentes, orquestadores— vete
-          a <a href="/aprende/">la sección Aprende</a>.
-        </p>
-
+        <!-- Featured: most recent article -->
         <ul class="blog__list">
-          <li class="blog__card">
+          <li class="blog__card blog__card--featured">
+            <span class="blog__tag">Método</span>
             <span class="blog__card-meta">
               <time datetime="2026-05-14">14 de mayo de 2026</time> · 9 min
             </span>
@@ -83,12 +153,17 @@
               >
             </h3>
             <p>
-              El método exacto que usa el cuestionario para convertir un diagnóstico de cinco
-              minutos en un plan en tres bloques: 30 días para un quick win, 60 para escalar
-              dentro del equipo y 90 para institucionalizar.
+              El método exacto que usamos para convertir un diagnóstico de cinco minutos en
+              un plan en tres bloques: 30 días para un quick win, 60 para escalar y 90 para
+              institucionalizar la IA en tu equipo.
             </p>
+            <a class="blog__card-cta" href="/blog/plan-ia-30-60-90-dias-pyme.html"
+              >Leer el artículo →</a
+            >
           </li>
+
           <li class="blog__card">
+            <span class="blog__tag">Guía práctica</span>
             <span class="blog__card-meta">
               <time datetime="2026-05-12">12 de mayo de 2026</time> · 9 min
             </span>
@@ -98,12 +173,13 @@
               >
             </h3>
             <p>
-              Checklist práctica antes de pagar tu primera licencia o lanzar tu primer agente:
-              los siete errores que vemos repetir en pymes españolas y el antídoto concreto
-              para cada uno.
+              Checklist práctica antes de pagar tu primera licencia: los siete errores que
+              vemos repetir en pymes españolas y el antídoto concreto para cada uno.
             </p>
           </li>
+
           <li class="blog__card">
+            <span class="blog__tag">Sectores</span>
             <span class="blog__card-meta">
               <time datetime="2026-05-09">9 de mayo de 2026</time> · 8 min
             </span>
@@ -114,11 +190,23 @@
             </h3>
             <p>
               Un repaso honesto a lo que la IA ya está haciendo hoy en comercios, despachos,
-              clínicas, talleres y empresas de servicios — con ejemplos concretos que puedes
-              copiar la semana que viene.
+              clínicas, talleres y servicios — con ejemplos que puedes copiar.
             </p>
           </li>
         </ul>
+
+        <p class="blog__divider">¿No sabes por dónde empezar?</p>
+
+        <!-- Mid-page diagnostic CTA -->
+        <div class="blog__strip">
+          <div class="blog__strip-text">
+            <strong>Descubre qué automatizar primero en tu empresa</strong>
+            <p>
+              5 preguntas. Un plan concreto. Sin spam. Te llega por email en minutos.
+            </p>
+          </div>
+          <a class="cta cta--primary" href="/cuestionario.html">Hacer el diagnóstico</a>
+        </div>
       </div>
     </main>
 

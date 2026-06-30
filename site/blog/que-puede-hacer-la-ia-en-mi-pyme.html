@@ -72,8 +72,163 @@
         "inLanguage": "es"
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "AutonomIA", "item": "https://ia.itera.es/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ia.itera.es/blog/" },
+          { "@type": "ListItem", "position": 3, "name": "¿Qué puede hacer la IA en mi pyme? Casos reales por sector", "item": "https://ia.itera.es/blog/que-puede-hacer-la-ia-en-mi-pyme.html" }
+        ]
+      }
+    </script>
+
+    <!-- ============================================================
+         Post editorial — additions (page-only, complementa style.css)
+         ============================================================ -->
+    <style>
+      .post__progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: var(--accent);
+        z-index: 9999;
+        transition: width 0.1s linear;
+      }
+      .post__breadcrumb {
+        max-width: 720px;
+        margin: 1.25rem auto 0;
+        padding: 0 clamp(1rem, 4vw, 3rem);
+      }
+      .post__breadcrumb ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 0.4rem;
+        font-size: 0.83rem;
+        color: var(--muted);
+        flex-wrap: wrap;
+      }
+      .post__breadcrumb li + li::before {
+        content: "/";
+        margin-right: 0.4rem;
+        opacity: 0.45;
+      }
+      .post__breadcrumb a { color: var(--muted); text-decoration: none; }
+      .post__breadcrumb a:hover { color: var(--fg); }
+      .post__breadcrumb [aria-current] { color: var(--fg); }
+
+      .post__category {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 0.2em 0.75em;
+        border-radius: 999px;
+        border: 1px solid rgba(129, 140, 248, 0.35);
+        color: var(--accent);
+        background: rgba(129, 140, 248, 0.09);
+        margin-bottom: 0.8rem;
+      }
+      .post__toc {
+        margin-bottom: 2.5rem;
+        padding: 1.25rem 1.5rem;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
+      }
+      .post__toc-heading {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 0.75rem;
+      }
+      .post__toc ol {
+        margin: 0;
+        padding-left: 1.25rem;
+        display: grid;
+        gap: 0.3rem;
+      }
+      .post__toc li { font-size: 0.93rem; }
+      .post__toc a { color: var(--fg); text-decoration: none; opacity: 0.85; }
+      .post__toc a:hover { color: var(--accent); opacity: 1; }
+
+      .post__inline-cta {
+        margin: 2.5rem 0;
+        padding: 1.25rem 1.5rem;
+        background: rgba(99, 102, 241, 0.08);
+        border-left: 3px solid var(--accent);
+        border-radius: 0 12px 12px 0;
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+      }
+      .post__inline-cta p { margin: 0; flex: 1; min-width: 180px; font-size: 0.97rem; color: var(--muted); }
+      .post__inline-cta .cta { margin-top: 0; flex-shrink: 0; }
+
+      .post__author {
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      .post__author-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(99, 102, 241, 0.2);
+        border: 1px solid rgba(99, 102, 241, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--accent);
+        flex-shrink: 0;
+        line-height: 1;
+      }
+      .post__author-bio strong { display: block; margin-bottom: 0.3rem; font-size: 0.95rem; }
+      .post__author-bio p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+
+      .post__related { margin-top: 3rem; }
+      .post__related-heading {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 1rem;
+      }
+      .blog__tag {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 0.2em 0.7em;
+        border-radius: 999px;
+        border: 1px solid rgba(129, 140, 248, 0.35);
+        color: var(--accent);
+        background: rgba(129, 140, 248, 0.09);
+      }
+    </style>
+    <!-- ============================================================ -->
   </head>
   <body>
+    <div class="post__progress" id="post-progress" role="progressbar"
+         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+         aria-label="Progreso de lectura"></div>
+
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <header class="hero hero--compact">
       <nav class="nav">
@@ -85,8 +240,17 @@
       </nav>
     </header>
 
+    <nav class="post__breadcrumb" aria-label="Ruta de navegación">
+      <ol>
+        <li><a href="/">AutonomIA</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li aria-current="page">¿Qué puede hacer la IA en mi pyme?</li>
+      </ol>
+    </nav>
+
     <main id="main-content" tabindex="-1" class="post">
       <header class="post__hero">
+        <span class="post__category">Sectores</span>
         <h1>¿Qué puede hacer la IA en mi pyme? Casos reales por sector</h1>
         <div class="post__meta">
           <span><time datetime="2026-05-09">9 de mayo de 2026</time></span>
@@ -94,6 +258,12 @@
           <span>Equipo AutonomIA</span>
         </div>
       </header>
+
+      <!-- Table of contents — populated by JS -->
+      <nav class="post__toc" id="post-toc" aria-label="Índice del artículo" hidden>
+        <p class="post__toc-heading">En este artículo</p>
+        <ol id="toc-list"></ol>
+      </nav>
 
       <article class="post__body">
         <p>
@@ -119,7 +289,7 @@
           pueda hacer al menos la primera versión.
         </blockquote>
 
-        <h2>1. Comercio y retail (tienda física + online pequeño)</h2>
+        <h2 id="sector-comercio">1. Comercio y retail (tienda física + online pequeño)</h2>
 
         <p>
           Si tienes una tienda con presencia online, aunque sea modesta, tres frentes te están
@@ -155,7 +325,7 @@
           después.
         </p>
 
-        <h2>2. Despachos profesionales (gestoría, abogacía, ingeniería)</h2>
+        <h2 id="sector-despachos">2. Despachos profesionales (gestoría, abogacía, ingeniería)</h2>
 
         <p>
           Aquí el patrón es siempre el mismo: <strong>mucho documento, poca capacidad para
@@ -192,7 +362,7 @@
           metas en producción todavía.
         </p>
 
-        <h2>3. Clínicas y centros de salud (dental, fisio, óptica)</h2>
+        <h2 id="sector-clinicas">3. Clínicas y centros de salud (dental, fisio, óptica)</h2>
 
         <p>
           La pyme sanitaria pequeña vive de dos cosas: <strong>agenda llena</strong> y
@@ -229,7 +399,15 @@
           clínica fuera por ahora.
         </p>
 
-        <h2>4. Talleres, instaladores y oficios técnicos</h2>
+        <!-- Inline CTA — mitad del artículo -->
+        <div class="post__inline-cta">
+          <p>
+            ¿Ya sabes qué proceso de tu empresa sería el candidato ideal para automatizar?
+          </p>
+          <a class="cta" href="/cuestionario.html">Diagnóstico en 5 min</a>
+        </div>
+
+        <h2 id="sector-talleres">4. Talleres, instaladores y oficios técnicos</h2>
 
         <p>
           Sector tradicionalmente "alérgico" al software, pero con un dolor universal:
@@ -258,7 +436,7 @@
           </li>
         </ul>
 
-        <h2>5. Servicios profesionales y consultoría pequeña</h2>
+        <h2 id="sector-servicios">5. Servicios profesionales y consultoría pequeña</h2>
 
         <p>
           Si tu negocio es vender tiempo experto (consultoría, formación, agencia), tu enemigo
@@ -285,7 +463,7 @@
           </li>
         </ul>
 
-        <h2>El patrón común: empieza por una sola tarea repetitiva</h2>
+        <h2 id="patron-comun">El patrón común: empieza por una sola tarea repetitiva</h2>
 
         <p>
           Si has leído los cinco bloques con cabeza, habrás notado que la lista de casos no es
@@ -302,7 +480,7 @@
           parte realmente diferenciadora de tu negocio. Esa es tu primera tarea para automatizar.
         </p>
 
-        <h2>Tres errores que vemos repetir</h2>
+        <h2 id="errores-frecuentes">Tres errores que vemos repetir</h2>
 
         <ol>
           <li>
@@ -322,7 +500,7 @@
           </li>
         </ol>
 
-        <h2>¿Y a qué tipo de proveedor llamo?</h2>
+        <h2 id="que-proveedor">¿Y a qué tipo de proveedor llamo?</h2>
 
         <p>
           Una pregunta que aparece siempre que un dueño de pyme termina de leer una lista como
@@ -362,7 +540,7 @@
           al final del artículo. Está pensado exactamente para eso.
         </p>
 
-        <h2>Y entonces, ¿qué haces tú esta semana?</h2>
+        <h2 id="accion-esta-semana">¿Y qué haces tú esta semana?</h2>
 
         <p>
           La acción concreta que recomendamos a cualquier pyme que está empezando es esta:
@@ -378,6 +556,17 @@
           a qué tipo de proveedor o herramienta acudir según tu nivel actual.
         </p>
       </article>
+
+      <footer class="post__author" aria-label="Sobre el autor">
+        <div class="post__author-avatar" aria-hidden="true">IA</div>
+        <div class="post__author-bio">
+          <strong>Equipo AutonomIA</strong>
+          <p>
+            Itera ayuda a pequeñas y medianas empresas a adoptar la IA de forma práctica y
+            gobernada — sin pilotos eternos. Más en <a href="/">ia.itera.es</a>.
+          </p>
+        </div>
+      </footer>
 
       <aside class="post__next" aria-label="Siguiente paso">
         <h2>Tu siguiente paso</h2>
@@ -421,6 +610,34 @@
         </form>
       </section>
 
+      <section class="post__related" aria-label="También te puede interesar">
+        <p class="post__related-heading">También te puede interesar</p>
+        <ul class="blog__list">
+          <li class="blog__card">
+            <span class="blog__tag">Guía práctica</span>
+            <span class="blog__card-meta">
+              <time datetime="2026-05-12">12 de mayo de 2026</time> · 9 min
+            </span>
+            <h3>
+              <a href="/blog/errores-caros-al-empezar-con-ia-pyme.html"
+                >Los 7 errores más caros al empezar con IA en una pyme</a
+              >
+            </h3>
+          </li>
+          <li class="blog__card">
+            <span class="blog__tag">Método</span>
+            <span class="blog__card-meta">
+              <time datetime="2026-05-14">14 de mayo de 2026</time> · 9 min
+            </span>
+            <h3>
+              <a href="/blog/plan-ia-30-60-90-dias-pyme.html"
+                >Tu plan de IA en 30, 60 y 90 días: el método de AutonomIA</a
+              >
+            </h3>
+          </li>
+        </ul>
+      </section>
+
       <a class="post__back" href="/blog/">← Volver al blog</a>
     </main>
 
@@ -431,5 +648,39 @@
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
     <script src="/assets/comments.js" defer></script>
+    <script>
+      (function () {
+        var bar = document.getElementById("post-progress");
+        var articleBody = document.querySelector(".post__body");
+        if (bar && articleBody) {
+          var update = function () {
+            var bodyEnd = articleBody.offsetTop + articleBody.offsetHeight;
+            var scrolled = window.scrollY;
+            var winH = window.innerHeight;
+            var total = bodyEnd - winH;
+            var pct = total > 0 ? Math.max(0, Math.min(100, (scrolled / total) * 100)) : 0;
+            bar.style.width = pct.toFixed(1) + "%";
+            bar.setAttribute("aria-valuenow", Math.round(pct));
+          };
+          window.addEventListener("scroll", update, { passive: true });
+          update();
+        }
+        var tocEl = document.getElementById("post-toc");
+        var tocList = document.getElementById("toc-list");
+        var headings = document.querySelectorAll(".post__body h2");
+        if (tocEl && tocList && headings.length >= 3) {
+          headings.forEach(function (h, i) {
+            if (!h.id) h.id = "section-" + (i + 1);
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            a.href = "#" + h.id;
+            a.textContent = h.textContent;
+            li.appendChild(a);
+            tocList.appendChild(li);
+          });
+          tocEl.hidden = false;
+        }
+      })();
+    </script>
   </body>
 </html>
