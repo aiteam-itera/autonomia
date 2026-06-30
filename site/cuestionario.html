@@ -45,6 +45,36 @@
       Until then, the form falls back to a mailto: draft.
     -->
 
+    <!-- ===== P7 page CSS (scope: cuestionario) ===== -->
+    <style>
+      /* Trust box before email capture */
+      .quiz__trust-box {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        background: rgba(99, 102, 241, 0.08);
+        border: 1px solid rgba(99, 102, 241, 0.25);
+        border-radius: 10px;
+        padding: 0.75rem 0.9rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--fg);
+      }
+      .quiz__trust-icon {
+        color: var(--accent);
+        font-weight: 700;
+        flex-shrink: 0;
+        line-height: 1.5;
+      }
+      /* Email capture block spacing */
+      .quiz__email-capture {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 1.5rem;
+        margin-top: 0.5rem;
+      }
+    </style>
+    <!-- ===== /P7 page CSS ===== -->
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -157,20 +187,15 @@
         <a class="brand" href="/">AutonomIA</a>
         <span class="nav__links">
           <a class="cta cta--ghost" href="/aprende/">Aprende</a>
-          <a class="cta" href="/">Volver a la home</a>
+          <a class="cta" href="/">Inicio</a>
         </span>
       </nav>
       <div class="hero__content">
-        <h1>¿En qué punto está tu empresa con la IA?</h1>
+        <p class="eyebrow">Diagnóstico de IA · Gratis · 5 minutos</p>
+        <h1>Descubre qué deberías automatizar primero en tu empresa</h1>
         <p>
-          Responde a este cuestionario (5 minutos) y recibirás tu Diagnóstico de IA y un
-          plan de siguientes pasos adaptado a tu sector y tamaño.
-        </p>
-        <p style="margin-top:0.6rem;font-size:0.95rem;">
-          ¿Quieres ver primero un ejemplo de informe? Mira el de una
-          <a href="/ejemplo-informe/asesoria.html" onclick="window.autonomia&&window.autonomia.track('sample_report_view',{from:'cuestionario_hero',icp:'asesoria'})">asesoría</a>
-          o el de una
-          <a href="/ejemplo-informe/clinica-dental.html" onclick="window.autonomia&&window.autonomia.track('sample_report_view',{from:'cuestionario_hero',icp:'clinica_dental'})">clínica dental</a>.
+          6 preguntas cortas sobre cómo usas la IA hoy → plan personalizado a tu
+          sector y tamaño, al instante. Sin registro previo.
         </p>
       </div>
     </header>
@@ -311,6 +336,10 @@
         <!-- STEP 3: Automatizaciones -->
         <fieldset class="quiz__step" data-step="3" data-step-title="Automatizaciones" hidden>
           <legend>3. Automatizaciones</legend>
+          <p class="quiz__intro">
+            Flujos en Zapier, Make, n8n o scripts que ya corren solos sin que nadie
+            los toque. No cuenta como automatización tener una herramienta que "podría hacerlo".
+          </p>
 
           <div class="quiz__question" data-dim="auto" data-weight="1">
             <p class="quiz__q">¿Qué automatizaciones tenéis funcionando hoy (Zapier, Make, n8n, scripts)?</p>
@@ -405,6 +434,10 @@
         <!-- STEP 5: Gobernanza & datos -->
         <fieldset class="quiz__step" data-step="5" data-step-title="Gobernanza y datos" hidden>
           <legend>5. Gobernanza y datos</legend>
+          <p class="quiz__intro">
+            La IA solo es tan buena como los procesos y datos que la alimentan. Esta dimensión
+            mide si tu empresa está preparada para escalar más allá de los primeros pilotos.
+          </p>
 
           <div class="quiz__question" data-dim="gobernanza" data-weight="1">
             <p class="quiz__q">¿Tenéis algún sistema para coordinar varios agentes o automatizaciones a la vez?</p>
@@ -469,10 +502,10 @@
 
         <!-- STEP 6: Preguntas abiertas + email -->
         <fieldset class="quiz__step" data-step="6" data-step-title="Tus retos" hidden>
-          <legend>6. Tus retos en tus palabras</legend>
+          <legend>6. Cuéntanos tu caso</legend>
           <p class="quiz__intro">
-            Estas respuestas alimentan al asistente que te enviará el plan. Cuanto más concreto,
-            mejor.
+            Estas tres preguntas son la materia prima del plan. Cuanto más concreto, más útil
+            será la recomendación.
           </p>
 
           <div class="quiz__question">
@@ -481,17 +514,21 @@
           </div>
 
           <div class="quiz__question">
-            <label class="quiz__q" for="open_freno">¿Qué te impide adoptar IA hoy?</label>
+            <label class="quiz__q" for="open_freno">¿Qué te frena para adoptar IA hoy?</label>
             <textarea id="open_freno" name="open_freno" rows="3" placeholder="Ej.: no sé qué hacer con datos sensibles, miedo a equivocarme delante de clientes…" required></textarea>
           </div>
 
           <div class="quiz__question">
-            <label class="quiz__q" for="open_objetivo">¿Qué resultado tangible querrías en 90 días?</label>
+            <label class="quiz__q" for="open_objetivo">¿Qué resultado concreto querrías en 90 días?</label>
             <textarea id="open_objetivo" name="open_objetivo" rows="3" placeholder="Ej.: ahorrar 5h/semana al equipo de soporte, reducir errores de facturación a la mitad…" required></textarea>
           </div>
 
-          <div class="quiz__question">
-            <label class="quiz__q" for="open_email">Email para enviarte el plan personalizado</label>
+          <div class="quiz__question quiz__email-capture">
+            <div class="quiz__trust-box">
+              <span class="quiz__trust-icon" aria-hidden="true">✓</span>
+              <span>Tu diagnóstico se calcula al instante con lo que has respondido. El informe completo con el plan a 30/60/90 días llega por email — <strong>solo ese email, nada más</strong>.</span>
+            </div>
+            <label class="quiz__q" for="open_email">¿Dónde te enviamos el informe?</label>
             <input
               id="open_email"
               name="open_email"
@@ -500,12 +537,7 @@
               placeholder="tu@empresa.com"
               required
             />
-            <p class="quiz__hint">No spam. Te enviamos un email para confirmar la dirección y, tras
-              tu confirmación, un único correo con tu plan personalizado.</p>
-            <p class="quiz__hint quiz__hint--privacy">
-              Al enviar aceptas que procesemos tus respuestas para generar una recomendación.
-              Las almacenamos un máximo de 90 días y puedes pedir su borrado en cualquier momento.
-            </p>
+            <p class="quiz__hint">Sin newsletter. Sin llamadas comerciales. Puedes pedir el borrado de tus datos en cualquier momento.</p>
           </div>
         </fieldset>
 
@@ -549,7 +581,7 @@
           </section>
 
           <aside class="result__package" id="result-package" hidden aria-live="polite">
-            <p class="package__eyebrow" id="result-package-eyebrow">Paquete recomendado</p>
+            <p class="package__eyebrow" id="result-package-eyebrow">Próximo paso sugerido</p>
             <h3 id="result-package-title">—</h3>
             <p id="result-package-pitch">—</p>
             <a class="cta cta--primary" id="result-package-cta" href="/servicios.html">
@@ -559,9 +591,9 @@
 
           <div class="result__cta">
             <button type="button" class="cta cta--primary" id="cta-email">
-              Recibir mi informe por email
+              Enviarme el plan completo
             </button>
-            <button type="button" class="cta" id="cta-restart">Volver a empezar</button>
+            <button type="button" class="cta cta--ghost" id="cta-restart">Reiniciar diagnóstico</button>
             <p class="quiz__hint" id="cta-hint" hidden></p>
           </div>
         </section>
@@ -571,7 +603,7 @@
         <nav class="quiz__nav" id="quiz-nav" aria-label="Navegación del cuestionario">
           <button type="button" class="cta" id="btn-prev" disabled>← Anterior</button>
           <button type="button" class="cta cta--primary" id="btn-next">Siguiente →</button>
-          <button type="button" class="cta cta--primary" id="btn-finish" hidden>Ver mi diagnóstico</button>
+          <button type="button" class="cta cta--primary" id="btn-finish" hidden>Ver mi Diagnóstico de IA →</button>
         </nav>
       </form>
     </main>
@@ -736,7 +768,8 @@
         // ---------- navigation ----------
         function showStep(n) {
           steps.forEach((s) => (s.hidden = Number(s.dataset.step) !== n));
-          stepIndicator.textContent = "Paso " + n + " de " + TOTAL_STEPS;
+          var stepTitle = steps[n - 1] && steps[n - 1].dataset.stepTitle ? " — " + steps[n - 1].dataset.stepTitle : "";
+          stepIndicator.textContent = "Paso " + n + " de " + TOTAL_STEPS + stepTitle;
           progressBar.style.width = ((n / TOTAL_STEPS) * 100).toFixed(0) + "%";
           btnPrev.disabled = n === 1;
           btnNext.hidden = n === TOTAL_STEPS;
@@ -763,7 +796,32 @@
         });
 
         // save on every change
-        form.addEventListener("change", saveState);
+        form.addEventListener("change", function (e) {
+          saveState();
+          // Auto-advance: when user picks a radio and every required group on the
+          // current step is now answered, move forward automatically after a short
+          // pause so they can see their selection before the transition.
+          if (e.target.type !== "radio") return;
+          if (current >= TOTAL_STEPS) return;
+          var step = steps[current - 1];
+          var required = step.querySelectorAll("[required]");
+          var allDone = Array.from(required).every(function (field) {
+            if (field.type !== "radio") return field.value.trim() !== "";
+            var group = form.querySelectorAll('[name="' + field.name + '"]');
+            return Array.from(group).some(function (g) { return g.checked; });
+          });
+          if (allDone) {
+            setTimeout(function () {
+              // Guard: user may have clicked Next manually in the interval.
+              if (current < TOTAL_STEPS) {
+                current = Math.min(TOTAL_STEPS, current + 1);
+                saveState();
+                showStep(current);
+                window.autonomia && window.autonomia.track("quiz_step_complete", { step: current, via: "auto" });
+              }
+            }, 500);
+          }
+        });
         form.addEventListener("input", saveState);
 
         // ---------- scoring ----------
@@ -1204,8 +1262,14 @@
             const metaEl = document.getElementById("result-plan-meta");
             if (metaEl) {
               metaEl.textContent =
-                "Te enviamos el informe completo a " + _d.open_email +
-                " en menos de 24 h. Revisa también la carpeta de spam.";
+                "Enviamos el informe completo a " + _d.open_email +
+                ". Si no llega en 24 h, revisa la carpeta de spam.";
+            }
+            // Update the CTA button to reflect the auto-submit state immediately.
+            const ctaEmailBtn = document.getElementById("cta-email");
+            if (ctaEmailBtn) {
+              ctaEmailBtn.textContent = "Informe en camino…";
+              ctaEmailBtn.disabled = true;
             }
             submitToBackend(getSubmitUrl(), payload, mailtoHref);
             leadAutoSubmitted = true;
